@@ -1,0 +1,1523 @@
+{
+  "days": 14,
+  "elapsed": 20160,
+  "routes": [
+    {
+      "id": "cafe",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "library",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "studio",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "square",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "park",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "hotel",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "shop",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "clinic",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "garden",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "orchard",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "commons",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "nursery",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "picnic",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-player",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-lin",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-xu",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-chen",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-tang",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-zhou",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-su",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-lu",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-wen",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-a",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-shen",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "home-gu",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "riverbank",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "gazebo",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "market",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "playground",
+      "walkable": true,
+      "route": true
+    },
+    {
+      "id": "allotment",
+      "walkable": true,
+      "route": true
+    }
+  ],
+  "visitors": 141,
+  "stayPayments": 28,
+  "businesses": {
+    "cafe": {
+      "cash": 63963,
+      "sales": 118150,
+      "stock": {
+        "bread": 2,
+        "coffee": 5,
+        "beans": 0,
+        "flour": 0
+      }
+    },
+    "library": {
+      "cash": 26854,
+      "sales": 45300,
+      "stock": {
+        "book": 2,
+        "paper": 0
+      }
+    },
+    "shop": {
+      "cash": 46214,
+      "sales": 49200,
+      "stock": {
+        "provisions": 0,
+        "flour": 3,
+        "beans": 5,
+        "wood": 7,
+        "paper": 4,
+        "seed": 1,
+        "cloth": 8
+      }
+    },
+    "studio": {
+      "cash": 31642,
+      "sales": 48300,
+      "stock": {
+        "souvenir": 1,
+        "bed": 1,
+        "lamp": 1,
+        "desk": 1,
+        "armchair": 1,
+        "sofa": 1,
+        "shelf": 1,
+        "rug": 1,
+        "wood": 0
+      }
+    },
+    "garden": {
+      "cash": 33764,
+      "sales": 71100,
+      "stock": {
+        "bouquet": 4,
+        "pot": 0,
+        "seed": 0
+      }
+    },
+    "clinic": {
+      "cash": 22450,
+      "sales": 17500,
+      "stock": {}
+    },
+    "photo": {
+      "cash": 26896,
+      "sales": 23200,
+      "stock": {}
+    },
+    "music": {
+      "cash": 16600,
+      "sales": 10000,
+      "stock": {}
+    },
+    "hotel": {
+      "cash": 72880,
+      "sales": 67200,
+      "stock": {}
+    }
+  },
+  "residents": [
+    {
+      "id": "lin",
+      "cash": 19278,
+      "hunger": 4,
+      "energy": 100,
+      "activities": 136
+    },
+    {
+      "id": "xu",
+      "cash": 13196,
+      "hunger": 35.599999999999596,
+      "energy": 100,
+      "activities": 104
+    },
+    {
+      "id": "chen",
+      "cash": 12268,
+      "hunger": 84.59999999999941,
+      "energy": 100,
+      "activities": 94
+    },
+    {
+      "id": "tang",
+      "cash": 10776,
+      "hunger": 1.6,
+      "energy": 100,
+      "activities": 144
+    },
+    {
+      "id": "zhou",
+      "cash": 12556,
+      "hunger": 0.8,
+      "energy": 100,
+      "activities": 93
+    },
+    {
+      "id": "su",
+      "cash": 6300,
+      "hunger": 38.59999999999928,
+      "energy": 100,
+      "activities": 100
+    },
+    {
+      "id": "lu",
+      "cash": 4184,
+      "hunger": 57.199999999999754,
+      "energy": 100,
+      "activities": 124
+    },
+    {
+      "id": "wen",
+      "cash": 11844,
+      "hunger": 13.799999999999812,
+      "energy": 100,
+      "activities": 109
+    },
+    {
+      "id": "a",
+      "cash": 5550,
+      "hunger": 73.59999999999987,
+      "energy": 100,
+      "activities": 133
+    },
+    {
+      "id": "shen",
+      "cash": 10738,
+      "hunger": 1.6,
+      "energy": 100,
+      "activities": 104
+    },
+    {
+      "id": "gu",
+      "cash": 3222,
+      "hunger": 1.6,
+      "energy": 100,
+      "activities": 105
+    }
+  ],
+  "wages": 158062,
+  "workShifts": 124,
+  "activityKinds": [
+    "observe",
+    "read",
+    "rest",
+    "garden",
+    "tea",
+    "write",
+    "walk",
+    "study",
+    "music",
+    "watch",
+    "play",
+    "craft",
+    "sketch",
+    "exercise",
+    "harvest"
+  ],
+  "touristPurchaseKinds": [
+    "souvenir",
+    "photo",
+    "provisions",
+    "book",
+    "bouquet",
+    "coffee",
+    "pot",
+    "bread",
+    "care",
+    "music",
+    "reading"
+  ],
+  "conservation": {
+    "cash": 548570,
+    "initial": 295000,
+    "externalIn": 294650,
+    "externalOut": 41080,
+    "error": 0
+  },
+  "samples": [
+    {
+      "day": 1.9895833333333335,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 5200,
+          "hunger": 0.8,
+          "work": 120
+        },
+        {
+          "id": "xu",
+          "cash": 5950,
+          "hunger": 70.39999999999988,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 5500,
+          "hunger": 26.9999999999999,
+          "work": 45
+        },
+        {
+          "id": "tang",
+          "cash": 5550,
+          "hunger": 27.799999999999873,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 5650,
+          "hunger": 30.19999999999989,
+          "work": 20
+        },
+        {
+          "id": "su",
+          "cash": 6010,
+          "hunger": 72.79999999999987,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4546,
+          "hunger": 27.79999999999998,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 5360,
+          "hunger": 30.199999999999907,
+          "work": 70
+        },
+        {
+          "id": "a",
+          "cash": 5900,
+          "hunger": 64.7999999999999,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 5314,
+          "hunger": 25.39999999999988,
+          "work": 20
+        },
+        {
+          "id": "gu",
+          "cash": 4510,
+          "hunger": 29.39999999999987,
+          "work": 0
+        }
+      ],
+      "town": 47844,
+      "businesses": {
+        "cafe": 25420,
+        "library": 21740,
+        "shop": 23460,
+        "studio": 22690,
+        "garden": 22181,
+        "clinic": 19590,
+        "photo": 19824,
+        "music": 19200,
+        "hotel": 20620
+      }
+    },
+    {
+      "day": 2.989583333333333,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 6146,
+          "hunger": 4,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 6250,
+          "hunger": 12.19999999999974,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 6650,
+          "hunger": 58.79999999999978,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 5704,
+          "hunger": 14.599999999999746,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 6400,
+          "hunger": 16.99999999999978,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 5380,
+          "hunger": 14.59999999999971,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4634,
+          "hunger": 59.59999999999985,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 6278,
+          "hunger": 18.19999999999995,
+          "work": 165
+        },
+        {
+          "id": "a",
+          "cash": 5742,
+          "hunger": 51.5999999999998,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 5394,
+          "hunger": 12.599999999999937,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 4520,
+          "hunger": 16.59999999999994,
+          "work": 45
+        }
+      ],
+      "town": 46599,
+      "businesses": {
+        "cafe": 28396,
+        "library": 22400,
+        "shop": 25680,
+        "studio": 22860,
+        "garden": 21212,
+        "clinic": 19570,
+        "photo": 20896,
+        "music": 19648,
+        "hotel": 24640
+      }
+    },
+    {
+      "day": 3.9895833333333335,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 7926,
+          "hunger": 35.79999999999984,
+          "work": 50
+        },
+        {
+          "id": "xu",
+          "cash": 8100,
+          "hunger": 88.99999999999956,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 6934,
+          "hunger": 1.6,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 6312,
+          "hunger": 46.39999999999996,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 6122,
+          "hunger": 3.799999999999714,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 5360,
+          "hunger": 46.39999999999965,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 5022,
+          "hunger": 46.39999999999996,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 6168,
+          "hunger": 4.999999999999872,
+          "work": 155
+        },
+        {
+          "id": "a",
+          "cash": 6290,
+          "hunger": 83.39999999999964,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 6272,
+          "hunger": 0.8,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 4500,
+          "hunger": 3.399999999999862,
+          "work": 0
+        }
+      ],
+      "town": 46334,
+      "businesses": {
+        "cafe": 29426,
+        "library": 21590,
+        "shop": 28038,
+        "studio": 22956,
+        "garden": 21861,
+        "clinic": 19940,
+        "photo": 21968,
+        "music": 19160,
+        "hotel": 28660
+      }
+    },
+    {
+      "day": 4.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 8562,
+          "hunger": 22.599999999999728,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 8050,
+          "hunger": 30.799999999999407,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 8334,
+          "hunger": 33.399999999999864,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 6574,
+          "hunger": 1.6,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 7130,
+          "hunger": 35.59999999999959,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 5640,
+          "hunger": 33.19999999999949,
+          "work": 60
+        },
+        {
+          "id": "lu",
+          "cash": 4014,
+          "hunger": 33.19999999999993,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 7448,
+          "hunger": 36.79999999999974,
+          "work": 105
+        },
+        {
+          "id": "a",
+          "cash": 6088,
+          "hunger": 70.19999999999948,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 6672,
+          "hunger": 32.59999999999987,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 5020,
+          "hunger": 35.19999999999973,
+          "work": 0
+        }
+      ],
+      "town": 46152,
+      "businesses": {
+        "cafe": 33055,
+        "library": 21940,
+        "shop": 28920,
+        "studio": 24706,
+        "garden": 22779,
+        "clinic": 20310,
+        "photo": 22416,
+        "music": 18672,
+        "hotel": 32680
+      }
+    },
+    {
+      "day": 5.989583333333333,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 9594,
+          "hunger": 9.399999999999633,
+          "work": 120
+        },
+        {
+          "id": "xu",
+          "cash": 8336,
+          "hunger": 62.59999999999926,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 8084,
+          "hunger": 20.199999999999704,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 7028,
+          "hunger": 0.8,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 7388,
+          "hunger": 22.39999999999948,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 6160,
+          "hunger": 64.99999999999935,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4452,
+          "hunger": 29.399999999999984,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 7876,
+          "hunger": 23.59999999999965,
+          "work": 70
+        },
+        {
+          "id": "a",
+          "cash": 5688,
+          "hunger": 56.999999999999346,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 7640,
+          "hunger": 19.39999999999974,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 4530,
+          "hunger": 21.999999999999613,
+          "work": 105
+        }
+      ],
+      "town": 45185,
+      "businesses": {
+        "cafe": 37460,
+        "library": 21524,
+        "shop": 30392,
+        "studio": 25186,
+        "garden": 22772,
+        "clinic": 20290,
+        "photo": 23488,
+        "music": 17872,
+        "hotel": 36700
+      }
+    },
+    {
+      "day": 6.989583333333333,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 10936,
+          "hunger": 41.19999999999946,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 8172,
+          "hunger": 49.399999999999174,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 8834,
+          "hunger": 51.99999999999961,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 7886,
+          "hunger": 32.59999999999985,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 7674,
+          "hunger": 10.999999999999932,
+          "work": 0
+        },
+        {
+          "id": "su",
+          "cash": 6090,
+          "hunger": 51.79999999999925,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4536,
+          "hunger": 72.79999999999987,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 7536,
+          "hunger": 10.399999999999556,
+          "work": 95
+        },
+        {
+          "id": "a",
+          "cash": 5434,
+          "hunger": 43.79999999999929,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 8040,
+          "hunger": 6.199999999999653,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 4260,
+          "hunger": 8.79999999999952,
+          "work": 0
+        }
+      ],
+      "town": 44357,
+      "businesses": {
+        "cafe": 39923,
+        "library": 23578,
+        "shop": 32016,
+        "studio": 25986,
+        "garden": 23564,
+        "clinic": 20660,
+        "photo": 25184,
+        "music": 17696,
+        "hotel": 40720
+      }
+    },
+    {
+      "day": 7.989583333333333,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 11736,
+          "hunger": 27.99999999999935,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 8772,
+          "hunger": 36.199999999999136,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 9984,
+          "hunger": 38.79999999999954,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 8186,
+          "hunger": 19.399999999999718,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 8610,
+          "hunger": 2.4000000000000004,
+          "work": 0
+        },
+        {
+          "id": "su",
+          "cash": 5770,
+          "hunger": 38.599999999999206,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4824,
+          "hunger": 59.59999999999973,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 8156,
+          "hunger": 4,
+          "work": 155
+        },
+        {
+          "id": "a",
+          "cash": 6030,
+          "hunger": 75.59999999999914,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 8034,
+          "hunger": 37.99999999999961,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 4434,
+          "hunger": 1.6,
+          "work": 0
+        }
+      ],
+      "town": 43586,
+      "businesses": {
+        "cafe": 42368,
+        "library": 22458,
+        "shop": 34020,
+        "studio": 27426,
+        "garden": 25446,
+        "clinic": 21030,
+        "photo": 26256,
+        "music": 17520,
+        "hotel": 44740
+      }
+    },
+    {
+      "day": 8.989583333333332,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 12874,
+          "hunger": 15.799999999999937,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 9844,
+          "hunger": 24.599999999999888,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 10034,
+          "hunger": 25.599999999999433,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 8648,
+          "hunger": 6.199999999999637,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 9696,
+          "hunger": 34.199999999999875,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 5890,
+          "hunger": 27.799999999999883,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4320,
+          "hunger": 46.39999999999996,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 9006,
+          "hunger": 35.79999999999987,
+          "work": 165
+        },
+        {
+          "id": "a",
+          "cash": 5276,
+          "hunger": 62.399999999999,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 8568,
+          "hunger": 25.399999999999892,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 4694,
+          "hunger": 33.39999999999987,
+          "work": 0
+        }
+      ],
+      "town": 42622,
+      "businesses": {
+        "cafe": 46105,
+        "library": 22966,
+        "shop": 34734,
+        "studio": 26956,
+        "garden": 27985,
+        "clinic": 21010,
+        "photo": 26080,
+        "music": 17344,
+        "hotel": 48760
+      }
+    },
+    {
+      "day": 9.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 14192,
+          "hunger": 4,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 10116,
+          "hunger": 56.39999999999977,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 10584,
+          "hunger": 57.39999999999932,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 9102,
+          "hunger": 38.39999999999999,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 10082,
+          "hunger": 20.99999999999974,
+          "work": 0
+        },
+        {
+          "id": "su",
+          "cash": 5930,
+          "hunger": 59.59999999999975,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4816,
+          "hunger": 78.19999999999982,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 9280,
+          "hunger": 22.599999999999742,
+          "work": 155
+        },
+        {
+          "id": "a",
+          "cash": 5520,
+          "hunger": 49.1999999999989,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 8552,
+          "hunger": 12.199999999999786,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 3704,
+          "hunger": 20.199999999999726,
+          "work": 0
+        }
+      ],
+      "town": 42203,
+      "businesses": {
+        "cafe": 49138,
+        "library": 24174,
+        "shop": 36958,
+        "studio": 26806,
+        "garden": 31102,
+        "clinic": 21770,
+        "photo": 25904,
+        "music": 17480,
+        "hotel": 52780
+      }
+    },
+    {
+      "day": 10.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 14284,
+          "hunger": 4,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 10566,
+          "hunger": 43.19999999999968,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 10068,
+          "hunger": 2.4000000000000004,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 9806,
+          "hunger": 25.399999999999885,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 10368,
+          "hunger": 7.79999999999967,
+          "work": 0
+        },
+        {
+          "id": "su",
+          "cash": 5810,
+          "hunger": 1.3999999999996717,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4504,
+          "hunger": 64.99999999999967,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 9892,
+          "hunger": 10.4,
+          "work": 165
+        },
+        {
+          "id": "a",
+          "cash": 5414,
+          "hunger": 35.99999999999887,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 9420,
+          "hunger": 43.999999999999716,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 3374,
+          "hunger": 6.999999999999644,
+          "work": 0
+        }
+      ],
+      "town": 42208,
+      "businesses": {
+        "cafe": 52604,
+        "library": 24984,
+        "shop": 38482,
+        "studio": 28452,
+        "garden": 30900,
+        "clinic": 22140,
+        "photo": 26976,
+        "music": 17616,
+        "hotel": 56800
+      }
+    },
+    {
+      "day": 11.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 15818,
+          "hunger": 4,
+          "work": 25
+        },
+        {
+          "id": "xu",
+          "cash": 11866,
+          "hunger": 30.199999999999868,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 10968,
+          "hunger": 34.19999999999986,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 9760,
+          "hunger": 12.19999999999979,
+          "work": 60
+        },
+        {
+          "id": "zhou",
+          "cash": 11440,
+          "hunger": 39.59999999999951,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 6390,
+          "hunger": 33.19999999999955,
+          "work": 60
+        },
+        {
+          "id": "lu",
+          "cash": 4600,
+          "hunger": 51.79999999999958,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 10070,
+          "hunger": 7.199999999999999,
+          "work": 130
+        },
+        {
+          "id": "a",
+          "cash": 5410,
+          "hunger": 67.79999999999873,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 9524,
+          "hunger": 30.799999999999592,
+          "work": 60
+        },
+        {
+          "id": "gu",
+          "cash": 3998,
+          "hunger": 38.799999999999486,
+          "work": 105
+        }
+      ],
+      "town": 41747,
+      "businesses": {
+        "cafe": 56122,
+        "library": 24404,
+        "shop": 39950,
+        "studio": 28942,
+        "garden": 28993,
+        "clinic": 22510,
+        "photo": 26800,
+        "music": 17440,
+        "hotel": 60820
+      }
+    },
+    {
+      "day": 12.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 17116,
+          "hunger": 1.6,
+          "work": 25
+        },
+        {
+          "id": "xu",
+          "cash": 11696,
+          "hunger": 61.99999999999973,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 12118,
+          "hunger": 65.99999999999972,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 10310,
+          "hunger": 1.6,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 11912,
+          "hunger": 26.3999999999994,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 6130,
+          "hunger": 19.999999999999407,
+          "work": 60
+        },
+        {
+          "id": "lu",
+          "cash": 4000,
+          "hunger": 38.59999999999952,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 11102,
+          "hunger": 38.999999999999964,
+          "work": 60
+        },
+        {
+          "id": "a",
+          "cash": 5156,
+          "hunger": 54.59999999999862,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 10068,
+          "hunger": 17.599999999999447,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 4368,
+          "hunger": 70.59999999999934,
+          "work": 45
+        }
+      ],
+      "town": 41231,
+      "businesses": {
+        "cafe": 58207,
+        "library": 26314,
+        "shop": 42998,
+        "studio": 29112,
+        "garden": 31194,
+        "clinic": 23270,
+        "photo": 26000,
+        "music": 17264,
+        "hotel": 64840
+      }
+    },
+    {
+      "day": 13.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 18356,
+          "hunger": 0.8,
+          "work": 120
+        },
+        {
+          "id": "xu",
+          "cash": 11896,
+          "hunger": 48.799999999999635,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 11818,
+          "hunger": 7.799999999999571,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 10018,
+          "hunger": 0.8,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 12270,
+          "hunger": 13.199999999999317,
+          "work": 60
+        },
+        {
+          "id": "su",
+          "cash": 6140,
+          "hunger": 51.799999999999315,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4884,
+          "hunger": 70.39999999999988,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 11332,
+          "hunger": 26.99999999999992,
+          "work": 70
+        },
+        {
+          "id": "a",
+          "cash": 5352,
+          "hunger": 41.59999999999998,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 10048,
+          "hunger": 4.399999999999381,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 4052,
+          "hunger": 57.3999999999992,
+          "work": 60
+        }
+      ],
+      "town": 41134,
+      "businesses": {
+        "cafe": 61667,
+        "library": 26354,
+        "shop": 44010,
+        "studio": 29902,
+        "garden": 33377,
+        "clinic": 22860,
+        "photo": 27696,
+        "music": 17088,
+        "hotel": 68860
+      }
+    },
+    {
+      "day": 14.989583333333334,
+      "residents": [
+        {
+          "id": "lin",
+          "cash": 19278,
+          "hunger": 4,
+          "work": 60
+        },
+        {
+          "id": "xu",
+          "cash": 13196,
+          "hunger": 35.599999999999596,
+          "work": 0
+        },
+        {
+          "id": "chen",
+          "cash": 12268,
+          "hunger": 84.59999999999941,
+          "work": 0
+        },
+        {
+          "id": "tang",
+          "cash": 10776,
+          "hunger": 1.6,
+          "work": 0
+        },
+        {
+          "id": "zhou",
+          "cash": 12556,
+          "hunger": 0.8,
+          "work": 0
+        },
+        {
+          "id": "su",
+          "cash": 6300,
+          "hunger": 38.59999999999928,
+          "work": 0
+        },
+        {
+          "id": "lu",
+          "cash": 4184,
+          "hunger": 57.199999999999754,
+          "work": 0
+        },
+        {
+          "id": "wen",
+          "cash": 11844,
+          "hunger": 13.799999999999812,
+          "work": 95
+        },
+        {
+          "id": "a",
+          "cash": 5550,
+          "hunger": 73.59999999999987,
+          "work": 0
+        },
+        {
+          "id": "shen",
+          "cash": 10738,
+          "hunger": 1.6,
+          "work": 0
+        },
+        {
+          "id": "gu",
+          "cash": 3222,
+          "hunger": 1.6,
+          "work": 0
+        }
+      ],
+      "town": 40644,
+      "businesses": {
+        "cafe": 63963,
+        "library": 26854,
+        "shop": 46214,
+        "studio": 31642,
+        "garden": 33764,
+        "clinic": 22450,
+        "photo": 26896,
+        "music": 16600,
+        "hotel": 72880
+      }
+    }
+  ],
+  "events": 4355
+}

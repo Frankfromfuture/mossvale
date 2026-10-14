@@ -1,0 +1,12 @@
+{
+  "backupIdentical": true,
+  "balancePreserved": 37.5,
+  "inventoryPreserved": true,
+  "archivedMemories": true,
+  "chatsPreserved": true,
+  "oldStoryArchived": true,
+  "residents": 11,
+  "realServerRestartPreservesAccounts": true,
+  "restartDoesNotRepeatInitialCapital": true,
+  "retryAfterRestartDoesNotBuyTwice": true
+}

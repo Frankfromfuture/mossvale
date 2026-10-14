@@ -1,0 +1,61 @@
+{
+  "at": "2026-10-13T05:57:58.943Z",
+  "environment": "Local Mac; production Jev endpoint and encrypted Mossvale credential; isolated in-memory towns",
+  "scope": "Server request and applied task/encounter. Browser polling and visual movement are not included.",
+  "rounds": [
+    {
+      "round": 1,
+      "scenario": "idle",
+      "durationMs": 1690,
+      "decisions": 2,
+      "encounterRecorded": false,
+      "dialogue": []
+    }
+  ],
+  "decisions": [
+    {
+      "round": 1,
+      "scenario": "idle",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "http-401",
+      "selected": "library",
+      "requestMs": 1679,
+      "applied": true,
+      "observedAfterTriggerMs": 1688,
+      "action": "前往安静阅读",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "安静阅读",
+        "phase": "walking",
+        "routeSteps": 23
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "idle",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "http-401",
+      "selected": "square",
+      "requestMs": 1682,
+      "applied": true,
+      "observedAfterTriggerMs": 1690,
+      "action": "前往散步放松",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "散步放松",
+        "phase": "walking",
+        "routeSteps": 13
+      }
+    }
+  ],
+  "speech": [],
+  "error": "credential-rejected"
+}

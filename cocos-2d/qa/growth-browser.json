@@ -1,0 +1,1049 @@
+{
+  "at": "2026-10-13T23:44:15.865Z",
+  "environment": "Headless Chrome, isolated in-memory town",
+  "scenarios": [
+    {
+      "kind": "news",
+      "requests": [
+        {
+          "name": "许知远",
+          "firstTextMs": 1645,
+          "completeMs": 1982,
+          "mode": "deepseek"
+        },
+        {
+          "name": "唐桃",
+          "firstTextMs": 928,
+          "completeMs": 1459,
+          "mode": "deepseek"
+        }
+      ],
+      "events": [
+        {
+          "id": "e31",
+          "text": "许知远对唐桃说：“刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平时会看这类东西吗？”",
+          "news": {
+            "id": "7db7adc856d449144d9b",
+            "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+            "source": "BBC",
+            "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+            "publishedAt": "2026-10-13T23:26:54.000Z"
+          },
+          "mode": "deepseek"
+        },
+        {
+          "id": "e32",
+          "text": "唐桃对许知远说：“我平时看花多过看野生动物，不过安静的摄影我挺好奇的，那些照片是在野外蹲很久才拍到的吧？”",
+          "replyTo": "e31",
+          "news": {
+            "id": "7db7adc856d449144d9b",
+            "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+            "source": "BBC",
+            "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+            "publishedAt": "2026-10-13T23:26:54.000Z"
+          },
+          "mode": "deepseek"
+        }
+      ],
+      "ui": {
+        "frames": [
+          {
+            "at": 1791935058255,
+            "frames": []
+          },
+          {
+            "at": 1791935059944,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060058,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060089,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060123,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060157,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条",
+                "font": 11,
+                "width": 84,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060191,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野",
+                "font": 11,
+                "width": 96,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060225,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060256,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060288,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物",
+                "font": 11,
+                "width": 120,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060305,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄",
+                "font": 11,
+                "width": 132,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060338,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影",
+                "font": 11,
+                "width": 144,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060374,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖",
+                "font": 11,
+                "width": 156,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060405,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的",
+                "font": 11,
+                "width": 168,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060442,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报",
+                "font": 11,
+                "width": 180,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935060473,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060506,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060539,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060556,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060589,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060622,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060655,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060691,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060723,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060757,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060774,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060808,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060842,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935060874,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935063407,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063439,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063474,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063510,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063540,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类",
+                "font": 11,
+                "width": 84,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063572,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东",
+                "font": 11,
+                "width": 96,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063605,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063638,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西吗",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935063671,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西吗？",
+                "font": 11,
+                "width": 120,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066176,
+            "frames": [
+              {
+                "id": "tang",
+                "text": "我",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          }
+        ],
+        "live": true,
+        "layout": {
+          "minX": -44,
+          "maxX": 60,
+          "minZ": -44,
+          "maxZ": 36
+        }
+      }
+    },
+    {
+      "kind": "failure",
+      "requests": [
+        {
+          "name": "许知远"
+        },
+        {
+          "name": "唐桃"
+        }
+      ],
+      "events": [
+        {
+          "id": "e31",
+          "text": "许知远对唐桃说：“在苔间咖啡馆走走，读书时卡住的地方有时就想通了。”",
+          "mode": "rules"
+        },
+        {
+          "id": "e32",
+          "text": "唐桃对许知远说：“你家门前的花最近怎么样？”",
+          "replyTo": "e31",
+          "mode": "rules"
+        }
+      ],
+      "ui": {
+        "frames": [
+          {
+            "at": 1791935066255,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066287,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066322,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066354,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066387,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066422,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条",
+                "font": 11,
+                "width": 84,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066455,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野",
+                "font": 11,
+                "width": 96,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066488,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066523,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066540,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物",
+                "font": 11,
+                "width": 120,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066573,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄",
+                "font": 11,
+                "width": 132,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066606,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影",
+                "font": 11,
+                "width": 144,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066639,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖",
+                "font": 11,
+                "width": 156,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066673,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的",
+                "font": 11,
+                "width": 168,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066705,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报",
+                "font": 11,
+                "width": 180,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935066740,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066773,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066790,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066824,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066856,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066890,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066924,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066956,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935066990,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935067023,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935067040,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935067073,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935067106,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935067140,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平",
+                "font": 11,
+                "width": 182,
+                "height": 44
+              }
+            ]
+          },
+          {
+            "at": 1791935069673,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069705,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069738,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069770,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069804,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类",
+                "font": 11,
+                "width": 84,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069837,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东",
+                "font": 11,
+                "width": 96,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069870,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069903,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西吗",
+                "font": 11,
+                "width": 108,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935069937,
+            "frames": [
+              {
+                "id": "xu",
+                "text": "时会看这类东西吗？",
+                "font": 11,
+                "width": 120,
+                "height": 29
+              }
+            ]
+          },
+          {
+            "at": 1791935072441,
+            "frames": [
+              {
+                "id": "tang",
+                "text": "我",
+                "font": 11,
+                "width": 74,
+                "height": 29
+              }
+            ]
+          }
+        ],
+        "live": true,
+        "layout": {
+          "minX": -44,
+          "maxX": 60,
+          "minZ": -44,
+          "maxZ": 36
+        }
+      }
+    }
+  ],
+  "canvas": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 844
+  },
+  "passed": true,
+  "errors": [],
+  "playerDialogue": {
+    "input": true,
+    "bodyFont": 15
+  },
+  "mobile": {
+    "width": 182,
+    "height": 44,
+    "font": 11,
+    "inFront": true,
+    "text": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平"
+  },
+  "desktop": {
+    "width": 182,
+    "height": 44,
+    "font": 11,
+    "inFront": true
+  }
+}

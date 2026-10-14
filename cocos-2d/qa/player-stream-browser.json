@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T15:31:02.447Z",
+  "environment": "Headless Chrome 390x844; isolated fixture save; production interaction route",
+  "scenarios": [
+    {
+      "kind": "chat",
+      "firstTextMs": 749,
+      "completeMs": 1313,
+      "characters": 44,
+      "partialUpdates": 27,
+      "historyPreserved": true
+    },
+    {
+      "kind": "followup",
+      "firstTextMs": 800,
+      "completeMs": 1262,
+      "characters": 50,
+      "partialUpdates": 29,
+      "historyPreserved": true
+    },
+    {
+      "kind": "interruption-and-retry",
+      "draftRestored": true,
+      "previousReplyRestored": true,
+      "noPartialHistory": true,
+      "longReplyCharacters": 134,
+      "pagePreserved": 1,
+      "duplicateRetryCreatesNoCallOrEvent": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,22 @@
+{
+  "environment": "Headless Chrome, isolated 100-entry fixture; desktop wheel and CDP mobile touch, not a physical phone test",
+  "formalBuilds": 1,
+  "checks": {
+    "desktopWheel": true,
+    "continuous100Entries": true,
+    "fullDecisionDetails": true,
+    "noPagingControls": true,
+    "mapUnaffected": true,
+    "residentSelection": true,
+    "pollKeepsPosition": true,
+    "newEntryKeepsVisibleRecord": true,
+    "mobileSwipe": true,
+    "closeStillWorks": true
+  },
+  "screenshots": [
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/journal-scroll-desktop.png",
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/journal-scroll-phone.png"
+  ],
+  "pageErrors": [],
+  "cocosExitCode": 36
+}

@@ -1,0 +1,258 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3",
+  "files": [
+    "__original-animation-0.bin",
+    "__original-animation-1.bin",
+    "__original-animation-2.bin"
+  ],
+  "subMetas": {
+    "73e25": {
+      "importer": "gltf-mesh",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@73e25",
+      "displayName": "",
+      "id": "73e25",
+      "name": "characterMedium.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1604
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.0416666269302368
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 1,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.6666666865348816
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "1e57b": {
+      "importer": "gltf-animation",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@1e57b",
+      "displayName": "",
+      "id": "1e57b",
+      "name": "sit.animation",
+      "userData": {
+        "gltfIndex": 2,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 45
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e39f7": {
+      "importer": "texture",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@e39f7",
+      "displayName": "",
+      "id": "e39f7",
+      "name": "UnnamedTexture.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/people/skaterMaleA.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dc44b": {
+      "importer": "gltf-material",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@dc44b",
+      "displayName": "",
+      "id": "dc44b",
+      "name": "skin.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3d55f": {
+      "importer": "gltf-scene",
+      "uuid": "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@3d55f",
+      "displayName": "",
+      "id": "3d55f",
+      "name": "townsfolk.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "uri": "db://assets/resources/people/skaterMaleA.png"
+      }
+    ],
+    "animationImportSettings": [
+      {
+        "name": "idle",
+        "duration": 1.0416666269302368,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 1.0416666269302368,
+            "wrapMode": 2,
+            "previousId": "1f586"
+          }
+        ]
+      },
+      {
+        "name": "run",
+        "duration": 0.6666666865348816,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "run",
+            "from": 0,
+            "to": 0.6666666865348816,
+            "wrapMode": 2,
+            "previousId": "cf5ee"
+          }
+        ]
+      },
+      {
+        "name": "sit",
+        "duration": 1,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "sit",
+            "from": 0,
+            "to": 1,
+            "wrapMode": 2,
+            "previousId": "1e57b"
+          }
+        ]
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@73e25"
+      ],
+      "skeletons": [
+        "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@438fe"
+      ],
+      "textures": [
+        "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@e39f7"
+      ],
+      "materials": [
+        "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@dc44b"
+      ],
+      "scenes": [
+        "ac8a0e0e-2302-4653-b10e-d4c13914c7c3@3d55f"
+      ]
+    }
+  }
+}

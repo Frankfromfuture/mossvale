@@ -1,0 +1,20 @@
+{
+  "people": 12,
+  "businesses": 9,
+  "npcAges": true,
+  "habits": true,
+  "lin": {
+    "age": 27,
+    "job": "咖啡馆经营与饮品",
+    "ledgerIncome": 11884,
+    "reportIncomeBefore": 11884,
+    "balanceBefore": 12584,
+    "after": {
+      "balance": 12684,
+      "income": 11984
+    },
+    "repeatIncome": 11984
+  },
+  "externalNet": 64400,
+  "reportDoesNotCreateLedgerEntries": true
+}

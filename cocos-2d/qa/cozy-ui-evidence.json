@@ -1,0 +1,47 @@
+{
+  "environment": "Headless Chrome, 390×844 touch simulation; not physical phone testing",
+  "api": "Isolated intercepted fixture; no model requests or user-save writes",
+  "imagegen": {
+    "pngFiles": 6,
+    "icons": 36,
+    "skinPieces": 6,
+    "largePanels": 4,
+    "runtimeBytes": 3162727
+  },
+  "grid": {
+    "panels": [
+      "economy",
+      "villagers",
+      "journal",
+      "map"
+    ],
+    "assetsLoaded": true,
+    "dialogueSend": {
+      "composer": true,
+      "draft": "",
+      "reply": "好呀，今天一起去河边走走吧。"
+    },
+    "contextMenu": {
+      "open": true,
+      "bubbleHidden": true,
+      "inputHidden": true,
+      "icons": 2
+    },
+    "journalScroll": {
+      "from": 0,
+      "to": 90
+    },
+    "mapLabelsSeparated": true
+  },
+  "pixel": {
+    "newArtLoaded": false,
+    "newDialogue": false,
+    "bubbleSize": {
+      "width": 322,
+      "height": 170
+    }
+  },
+  "scriptErrors": [],
+  "consoleErrors": [],
+  "build": "One Cocos Web project build. Component output aligned with existing journal engine; final layout and Set conversion corrected in source and bundle. TypeScript check passed."
+}

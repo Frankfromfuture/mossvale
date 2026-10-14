@@ -1,0 +1,29 @@
+{
+  "Mossvale2D": {
+    "missing_methods": []
+  },
+  "TownHud": {
+    "missing_methods": []
+  },
+  "EconomyHud": {
+    "missing_methods": []
+  },
+  "TownApi": {
+    "missing_methods": []
+  },
+  "object-catalog.json": {
+    "same": true
+  },
+  "town-layout.json": {
+    "same": true
+  },
+  "4319": {
+    "http": 200
+  },
+  "4321": {
+    "http": 200
+  },
+  "4322": {
+    "http": 200
+  }
+}

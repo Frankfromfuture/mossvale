@@ -1,0 +1,382 @@
+{
+  "minute": 548,
+  "autonomy": {
+    "version": 1,
+    "enabled": true,
+    "visitId": "autonomy-qa-1791726444280",
+    "requestedAt": 540,
+    "requested": 12,
+    "completed": 12,
+    "applied": 12,
+    "fallback": 0,
+    "stale": 0,
+    "pending": 0,
+    "conversations": 3
+  },
+  "usage": {
+    "day": "2026-10-11",
+    "calls": 19,
+    "input": 36074,
+    "output": 1079,
+    "failures": 0,
+    "autoCalls": 19
+  },
+  "plans": [
+    {
+      "name": "林夏",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 541,
+        "mode": "deepseek",
+        "action": "talk",
+        "target": "wen",
+        "evidence": [
+          "e14"
+        ]
+      },
+      "thought": "她就在这儿喝茶，正好问问，别自己硬扛了。",
+      "action": "和温婉聊聊天"
+    },
+    {
+      "name": "许知远",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 541,
+        "mode": "deepseek",
+        "action": "talk",
+        "target": "shen",
+        "evidence": [
+          "e3"
+        ]
+      },
+      "thought": "沈砚就在旁边，安静问一句书里的事，应该不会太唐突。",
+      "action": "和沈砚聊聊天"
+    },
+    {
+      "name": "陈默",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 541,
+        "mode": "deepseek",
+        "action": "stay",
+        "target": "studio",
+        "evidence": [
+          "e4"
+        ]
+      },
+      "thought": "趁手头木料状态正好，先把它打磨扎实，下午再去公园看那张长椅。",
+      "action": "在工坊打磨木料"
+    },
+    {
+      "name": "唐桃",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 542,
+        "mode": "deepseek",
+        "action": "stay",
+        "target": "park",
+        "evidence": [
+          "e5"
+        ]
+      },
+      "thought": "先把这丛花浇完，再去苗圃看新芽，今天不急着答应别的事。",
+      "action": "在花园照料花圃"
+    },
+    {
+      "name": "周叔",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 542,
+        "mode": "deepseek",
+        "action": "talk",
+        "target": "ye",
+        "evidence": []
+      },
+      "thought": "摊子刚理出头绪，顺便看看她那边货摆得对不对。",
+      "action": "和叶小满聊聊天"
+    },
+    {
+      "name": "苏晴",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 542,
+        "mode": "deepseek",
+        "action": "move",
+        "target": "lookout",
+        "evidence": []
+      },
+      "thought": "趁天气好去观景地坐一会儿，把工作从脑子里放下来。",
+      "action": "前往观景地"
+    },
+    {
+      "name": "陆野",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 542,
+        "mode": "deepseek",
+        "action": "move",
+        "target": "lookout",
+        "evidence": [
+          "e8"
+        ]
+      },
+      "thought": "趁天好去观景地，换个角度看看镇子，也许能碰上值得记录的日常。",
+      "action": "前往观景地"
+    },
+    {
+      "name": "温婉",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 543,
+        "mode": "deepseek",
+        "action": "stay",
+        "target": "cafe",
+        "evidence": [
+          "e9",
+          "e14"
+        ]
+      },
+      "thought": "先问清楚时间，别又一口答应下来，把自己累着。",
+      "action": "和林夏聊聊天"
+    },
+    {
+      "name": "阿澈",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 543,
+        "mode": "deepseek",
+        "action": "move",
+        "target": "meadow",
+        "evidence": [
+          "e10"
+        ]
+      },
+      "thought": "趁早上人少去北草坪练节奏，免得在广场吵到别人。",
+      "action": "在广场练习小曲"
+    },
+    {
+      "name": "沈砚",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 543,
+        "mode": "deepseek",
+        "action": "move",
+        "target": "nursery",
+        "evidence": [
+          "e11"
+        ]
+      },
+      "thought": "他读得慢，可能真在意内容，可以聊两句。",
+      "action": "和许知远聊聊天"
+    },
+    {
+      "name": "叶小满",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 543,
+        "mode": "deepseek",
+        "action": "talk",
+        "target": "zhou",
+        "evidence": [
+          "e12"
+        ]
+      },
+      "thought": "被这么说有点不服气，但我确实该先把旧货盘清楚再谈别的。",
+      "action": "和周叔聊聊天"
+    },
+    {
+      "name": "顾奶奶",
+      "decision": {
+        "visitId": "autonomy-qa-1791726444280",
+        "at": 544,
+        "mode": "deepseek",
+        "action": "talk",
+        "target": "tang",
+        "evidence": [
+          "e13"
+        ]
+      },
+      "thought": "唐桃也在园里忙活，过去搭把手，顺道聊聊种苗的事。",
+      "action": "在花园照料花圃"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "e15",
+      "type": "encounter",
+      "text": "许知远在书屋主动和沈砚搭话。",
+      "at": 544,
+      "day": 1,
+      "time": "09:04",
+      "participants": [
+        "xu",
+        "shen"
+      ],
+      "importance": 6,
+      "place": "library",
+      "activity": "talk",
+      "autonomous": true,
+      "mode": "deepseek"
+    },
+    {
+      "id": "e16",
+      "type": "dialogue",
+      "text": "许知远对沈砚说：“你也在读这本？我刚翻到一半，觉得有些句子要慢慢看。”",
+      "at": 544,
+      "day": 1,
+      "time": "09:04",
+      "participants": [
+        "xu",
+        "shen"
+      ],
+      "importance": 5,
+      "place": "library",
+      "autonomous": true,
+      "speaker": "xu",
+      "listener": "shen",
+      "mode": "deepseek",
+      "evidence": [
+        "e15"
+      ]
+    },
+    {
+      "id": "e20",
+      "type": "dialogue",
+      "text": "沈砚对许知远说：“我还没读到一半，正想找个安静角落。你翻到的部分，有没有值得我提前留意的句子？”",
+      "at": 545,
+      "day": 1,
+      "time": "09:05",
+      "participants": [
+        "xu",
+        "shen"
+      ],
+      "importance": 5,
+      "place": "library",
+      "autonomous": true,
+      "speaker": "shen",
+      "listener": "xu",
+      "mode": "deepseek",
+      "evidence": [
+        "e15"
+      ]
+    },
+    {
+      "id": "e21",
+      "type": "encounter",
+      "text": "林夏在咖啡馆主动和温婉搭话。",
+      "at": 546,
+      "day": 1,
+      "time": "09:06",
+      "participants": [
+        "lin",
+        "wen"
+      ],
+      "importance": 6,
+      "place": "cafe",
+      "activity": "talk",
+      "autonomous": true,
+      "mode": "deepseek"
+    },
+    {
+      "id": "e22",
+      "type": "dialogue",
+      "text": "林夏对温婉说：“温婉，黑板还挂着缺帮手的事。你下午有空来搭把手吗？”",
+      "at": 546,
+      "day": 1,
+      "time": "09:06",
+      "participants": [
+        "lin",
+        "wen"
+      ],
+      "importance": 5,
+      "place": "cafe",
+      "autonomous": true,
+      "speaker": "lin",
+      "listener": "wen",
+      "mode": "deepseek",
+      "evidence": [
+        "e21"
+      ]
+    },
+    {
+      "id": "e23",
+      "type": "dialogue",
+      "text": "温婉对林夏说：“下午我确实有点时间，不过我想先确认一下，大概需要我帮到几点？我早上起得早，太晚的话怕撑不住。”",
+      "at": 546,
+      "day": 1,
+      "time": "09:06",
+      "participants": [
+        "lin",
+        "wen"
+      ],
+      "importance": 5,
+      "place": "cafe",
+      "autonomous": true,
+      "speaker": "wen",
+      "listener": "lin",
+      "mode": "deepseek",
+      "evidence": [
+        "e21"
+      ]
+    },
+    {
+      "id": "e26",
+      "type": "encounter",
+      "text": "周叔在集市主动和叶小满搭话。",
+      "at": 547,
+      "day": 1,
+      "time": "09:07",
+      "participants": [
+        "zhou",
+        "ye"
+      ],
+      "importance": 6,
+      "place": "shop",
+      "activity": "talk",
+      "autonomous": true,
+      "mode": "deepseek"
+    },
+    {
+      "id": "e27",
+      "type": "dialogue",
+      "text": "周叔对叶小满说：“小满，货摆得差不多了吧？先看看旧的还剩多少，别一高兴又进一箱。”",
+      "at": 547,
+      "day": 1,
+      "time": "09:07",
+      "participants": [
+        "zhou",
+        "ye"
+      ],
+      "importance": 5,
+      "place": "shop",
+      "autonomous": true,
+      "speaker": "zhou",
+      "listener": "ye",
+      "mode": "deepseek",
+      "evidence": [
+        "e26"
+      ]
+    },
+    {
+      "id": "e28",
+      "type": "dialogue",
+      "text": "叶小满对周叔说：“周叔，旧的我都数过一遍了，心里有数，不会乱进货的。”",
+      "at": 547,
+      "day": 1,
+      "time": "09:07",
+      "participants": [
+        "zhou",
+        "ye"
+      ],
+      "importance": 5,
+      "place": "shop",
+      "autonomous": true,
+      "speaker": "ye",
+      "listener": "zhou",
+      "mode": "deepseek",
+      "evidence": [
+        "e26"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "environment": "Headless Chrome 390×844, independent cloud town, valid public HTTPS",
+  "invitationRequired": true,
+  "inviteExchange": true,
+  "ownerMigration": {
+    "events": 21754,
+    "ledger": 13001,
+    "chats": 78
+  },
+  "originCheck": true,
+  "client": {
+    "grid": true,
+    "residents": 11,
+    "places": 31,
+    "paused": true,
+    "model": "deepseek",
+    "privateMemory": true
+  },
+  "realtime": {
+    "status": 200,
+    "type": "text/event-stream; charset=utf-8",
+    "initialData": true
+  },
+  "passed": true,
+  "chat": {
+    "mode": "deepseek",
+    "characters": 37,
+    "parts": 29,
+    "firstMs": 1299,
+    "elapsedMs": 1485,
+    "pager": 1,
+    "nameFont": 15,
+    "bodyFont": 15
+  },
+  "clientErrors": [],
+  "reloaded": {
+    "chat": true,
+    "paused": true
+  },
+  "cloudDisk": {
+    "chatSaved": true,
+    "receiptSaved": true
+  },
+  "jev": {
+    "status": 200,
+    "complete": false,
+    "errors": [
+      {
+        "type": "error",
+        "message": "本轮测试未完成，请稍后重试。"
+      }
+    ],
+    "samples": [
+      {
+        "kind": "encounter",
+        "mode": "rules",
+        "reason": "http-451",
+        "requestMs": 489,
+        "confidence": null,
+        "applied": true
+      },
+      {
+        "kind": "encounter",
+        "mode": "rules",
+        "reason": "http-451",
+        "requestMs": 559,
+        "confidence": null,
+        "applied": true
+      },
+      {
+        "kind": "speech",
+        "mode": "deepseek",
+        "reason": null,
+        "requestMs": 867,
+        "confidence": null,
+        "applied": true
+      },
+      {
+        "kind": "speech",
+        "mode": "deepseek",
+        "reason": null,
+        "requestMs": 995,
+        "confidence": null,
+        "applied": true
+      }
+    ],
+    "available": false,
+    "fallbackVerified": true
+  },
+  "jevNetwork": {
+    "status": 451,
+    "server": "cloudflare",
+    "body": "{\"title\":\"Typesafe is not available in your region.\",\"status\":451}"
+  },
+  "ownerMigrationFinal": {
+    "events": 21825,
+    "ledger": 13086,
+    "chats": 78
+  },
+  "websiteUnchanged": true,
+  "deploymentPassed": true,
+  "cloudOnly": true,
+  "runtime": "[\"node\",\"server/cloud-entry.mjs\"] unless-stopped"
+}

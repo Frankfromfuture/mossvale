@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-13T14:27:12.912Z",
+  "phase": "before",
+  "environment": "Mac headless Electron; isolated in-memory worlds; real configured DeepSeek; fixed Jev reactions",
+  "scenarios": [
+    {
+      "reaction": "chat",
+      "calls": [
+        {
+          "speaker": "许知远",
+          "heard": null,
+          "ms": 2005,
+          "speech": "你整理花材的样子很安静。我不太擅长热闹，但这样一对一说话，倒觉得挺好。"
+        },
+        {
+          "speaker": "唐桃",
+          "heard": {
+            "eventId": "e31",
+            "speaker": "许知远",
+            "text": "你整理花材的样子很安静。我不太擅长热闹，但这样一对一说话，倒觉得挺好。"
+          },
+          "ms": 1659,
+          "speech": "那你今天算来对地方了，这儿现在就咱俩最安静。我不太会安静，但整理花的时候刚好能闭嘴。"
+        }
+      ],
+      "firstPublishedMs": 2007,
+      "replyPublishedMs": 3667,
+      "replyVisible": [
+        "xu",
+        "tang"
+      ],
+      "sequential": true,
+      "replyTo": true
+    },
+    {
+      "reaction": "continue",
+      "calls": [
+        {
+          "speaker": "许知远",
+          "heard": null,
+          "ms": 1224,
+          "speech": "你整理花材的样子很安静。我在这儿坐一会儿，不会打扰你吧？"
+        },
+        {
+          "speaker": "唐桃",
+          "heard": {
+            "eventId": "e31",
+            "speaker": "许知远",
+            "text": "你整理花材的样子很安静。我在这儿坐一会儿，不会打扰你吧？"
+          },
+          "ms": 1727,
+          "speech": "当然不会，你坐。我这儿正好还有几枝没修完，你随意就好。"
+        }
+      ],
+      "firstPublishedMs": 1226,
+      "replyPublishedMs": 2954,
+      "replyVisible": [
+        "xu",
+        "tang"
+      ],
+      "sequential": true,
+      "replyTo": true
+    }
+  ],
+  "requests": [
+    {
+      "ms": 1993,
+      "inputChars": 7014,
+      "inputTokens": 2645,
+      "outputTokens": 58
+    },
+    {
+      "ms": 1658,
+      "inputChars": 7100,
+      "inputTokens": 2706,
+      "outputTokens": 66
+    },
+    {
+      "ms": 1224,
+      "inputChars": 7019,
+      "inputTokens": 2647,
+      "outputTokens": 53
+    },
+    {
+      "ms": 1726,
+      "inputChars": 7095,
+      "inputTokens": 2698,
+      "outputTokens": 62
+    }
+  ],
+  "model": "deepseek-v4-flash"
+}

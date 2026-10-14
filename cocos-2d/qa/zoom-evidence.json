@@ -1,0 +1,13 @@
+{
+  "environment": "Background Chrome 390×844 touch viewport; fixed API responses",
+  "zoomRange": [
+    0.5,
+    2
+  ],
+  "limitsHold": true,
+  "noTapThrough": true,
+  "fixed44pxButtons": true,
+  "worldCoordinateRoundTrip": true,
+  "zoomedWalkAndConversation": true,
+  "scriptErrors": []
+}

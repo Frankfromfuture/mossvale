@@ -1,0 +1,94 @@
+{
+  "at": "2026-10-13T14:29:24.090Z",
+  "phase": "after",
+  "environment": "Mac headless Electron; isolated in-memory worlds; real configured DeepSeek; fixed Jev reactions",
+  "scenarios": [
+    {
+      "reaction": "chat",
+      "calls": [
+        {
+          "speaker": "许知远",
+          "heard": null,
+          "ms": 1651,
+          "speech": "你整理花材的样子很安静，我在这儿坐会儿，不打扰你吧？"
+        },
+        {
+          "speaker": "唐桃",
+          "heard": {
+            "eventId": "e31",
+            "speaker": "许知远",
+            "text": "你整理花材的样子很安静，我在这儿坐会儿，不打扰你吧？"
+          },
+          "ms": 1400,
+          "speech": "不打扰，你坐吧。我正好理着这些花，你想聊什么？"
+        }
+      ],
+      "firstPublishedMs": 1653,
+      "replyPublishedMs": 3054,
+      "replyVisible": [
+        "tang"
+      ],
+      "sequential": true,
+      "replyTo": true
+    },
+    {
+      "reaction": "continue",
+      "calls": [
+        {
+          "speaker": "许知远",
+          "heard": null,
+          "ms": 1458,
+          "speech": "晚上好。你整理花材，我坐这边看看书，不打扰你。"
+        },
+        {
+          "speaker": "唐桃",
+          "heard": {
+            "eventId": "e31",
+            "speaker": "许知远",
+            "text": "晚上好。你整理花材，我坐这边看看书，不打扰你。"
+          },
+          "ms": 1139,
+          "speech": "晚上好，你坐吧，我把这几枝理完就好。"
+        }
+      ],
+      "firstPublishedMs": 1459,
+      "replyPublishedMs": 2598,
+      "replyVisible": [
+        "tang"
+      ],
+      "sequential": true,
+      "replyTo": true
+    }
+  ],
+  "requests": [
+    {
+      "ms": 1641,
+      "inputChars": 3719,
+      "inputTokens": 1468,
+      "outputTokens": 30
+    },
+    {
+      "ms": 1400,
+      "inputChars": 3743,
+      "inputTokens": 1487,
+      "outputTokens": 30
+    },
+    {
+      "ms": 1458,
+      "inputChars": 3724,
+      "inputTokens": 1470,
+      "outputTokens": 33
+    },
+    {
+      "ms": 1138,
+      "inputChars": 3746,
+      "inputTokens": 1489,
+      "outputTokens": 26
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "failureRecovery": {
+    "replyFailurePreservesFirst": true,
+    "unrecognizedEvidenceFiltered": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "failure",
+  "done": true,
+  "startedAt": 1791904233253,
+  "calls": [
+    {
+      "resident": "许知远",
+      "atMs": 3,
+      "firstTextMs": 761,
+      "completeMs": 1150,
+      "speech": "你在整理花材啊。要是方便，我想在旁边坐一会儿，安安静静聊几句就好。",
+      "thought": "她手上有事，我不该站得太近，也别让她觉得我在催。"
+    },
+    {
+      "resident": "唐桃",
+      "atMs": 1153,
+      "firstTextMs": 1154
+    }
+  ],
+  "publications": [
+    {
+      "atMs": 761,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你在",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 865,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你在整理花材啊。要是方便，我想在旁边坐",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1154,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你在整理花材啊。要是方便，我想在旁边坐一会儿，安安静静聊几句就好。",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "这句会在断流后撤回",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1154,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你在整理花材啊。要是方便，我想在旁边坐一会儿，安安静静聊几句就好。",
+          "status": "complete"
+        }
+      ]
+    }
+  ],
+  "parserChecked": true,
+  "samples": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 758,
+      "elapsedMs": 1147,
+      "applied": true
+    }
+  ],
+  "events": [
+    {
+      "id": "e31",
+      "text": "许知远对唐桃说：“你在整理花材啊。要是方便，我想在旁边坐一会儿，安安静静聊几句就好。”"
+    }
+  ],
+  "passed": true
+}

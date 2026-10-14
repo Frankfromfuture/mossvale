@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-13",
+  "environment": "Headless Chromium, local 2D service, isolated paused QA town",
+  "viewports": [[1280, 800], [390, 844]],
+  "formalBuilds": 1,
+  "cocosExitCode": 36,
+  "sceneIncluded": "CafeStreet",
+  "activityBubblesVisible": true,
+  "walkingShowsDestinationIcon": true,
+  "bubbleTapSelected": "wen",
+  "profileAndDailyHabitsReadable": true,
+  "impressionAndSourcePagesReadable": true,
+  "consoleErrors": [],
+  "listenAddress": "127.0.0.1:4321",
+  "screenshots": [
+    "output/playwright/reflection-desktop.png",
+    "output/playwright/reflection-daily.png",
+    "output/playwright/reflection-impressions.png",
+    "output/playwright/reflection-narrow-impressions.png",
+    "output/playwright/reflection-narrow-evidence.png",
+    "output/playwright/reflection-narrow-town.png"
+  ],
+  "limitations": "Browser viewport checks only; no physical phone frame-rate measurement."
+}

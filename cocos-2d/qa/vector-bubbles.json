@@ -1,0 +1,81 @@
+{
+  "short": [
+    {
+      "font": 13,
+      "width": 33,
+      "height": 31,
+      "lines": 1,
+      "bitmap": false
+    },
+    {
+      "font": 13,
+      "width": 33,
+      "height": 31,
+      "lines": 1,
+      "bitmap": false
+    }
+  ],
+  "playback": {
+    "pages": 2,
+    "maxLines": 3,
+    "complete": true,
+    "preserved": true,
+    "draftRemoved": true
+  },
+  "conversation": [
+    {
+      "visitor": false,
+      "small": {
+        "font": 15,
+        "width": 35,
+        "height": 34
+      },
+      "maxLines": 3,
+      "pages": 3,
+      "height": 78,
+      "bitmap": false
+    },
+    {
+      "visitor": true,
+      "small": {
+        "font": 15,
+        "width": 35,
+        "height": 34
+      },
+      "maxLines": 3,
+      "pages": 3,
+      "height": 78,
+      "bitmap": false
+    }
+  ],
+  "environment": "Headless Chrome 390x844; isolated paused town; source preview",
+  "errors": [],
+  "passed": true,
+  "buildSmoke": {
+    "passed": true,
+    "result": [
+      {
+        "font": 13,
+        "width": 33,
+        "height": 31,
+        "lines": 1,
+        "bitmap": false
+      },
+      {
+        "font": 13,
+        "width": 33,
+        "height": 31,
+        "lines": 1,
+        "bitmap": false
+      }
+    ],
+    "errors": []
+  },
+  "pixelRegression": {
+    "passed": true,
+    "residentFont": 11,
+    "residentLine": 15,
+    "visitorFont": 13,
+    "errors": []
+  }
+}

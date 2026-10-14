@@ -1,0 +1,59 @@
+{
+  "weather": "rain",
+  "playerReply": {
+    "speech": "想回家听一会儿雨。 我们可以慢慢聊。",
+    "thought": "想回家听一会儿雨。",
+    "delta": 0,
+    "mode": "rules",
+    "evidence": [],
+    "notice": "DeepSeek 本次未完成，已使用规则回应"
+  },
+  "calls": 24,
+  "autonomy": {
+    "version": 1,
+    "enabled": true,
+    "visitId": "autonomy-weather-1791726595706",
+    "requestedAt": 616,
+    "requested": 12,
+    "completed": 1,
+    "applied": 0,
+    "fallback": 0,
+    "stale": 1,
+    "pending": 11,
+    "conversations": 4
+  },
+  "completed": {
+    "version": 1,
+    "enabled": true,
+    "visitId": "autonomy-weather-1791726595706",
+    "requestedAt": 616,
+    "requested": 12,
+    "completed": 12,
+    "applied": 7,
+    "fallback": 2,
+    "stale": 3,
+    "pending": 0,
+    "conversations": 6
+  },
+  "afterPromptCorrection": {
+    "persistedConversations": 7,
+    "playerReply": {
+      "speech": "下雨了，先去书屋坐一会儿。手头那把公园的长椅还松着，等天好了再去看看。",
+      "thought": "雨天适合安静待着，长椅的事不急在这一时。",
+      "delta": 0,
+      "mode": "deepseek",
+      "evidence": [
+        "e43",
+        "e59",
+        "e32"
+      ]
+    },
+    "providerState": {
+      "mode": "deepseek",
+      "label": "DeepSeek · 已连接",
+      "model": "deepseek-v4-flash",
+      "connected": true,
+      "lastError": null
+    }
+  }
+}

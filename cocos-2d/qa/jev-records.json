@@ -1,0 +1,37 @@
+{
+  "environment": "Isolated in-memory towns; deterministic API fixtures, not a live latency benchmark",
+  "checks": {
+    "currentChoiceVisible": true,
+    "readOnlyProjection": true,
+    "completionRetainsDecision": true,
+    "ownEncounterDecision": true,
+    "timeoutReasonAndDuration": true,
+    "legacyEntriesPreserved": true
+  },
+  "formalBuilds": 1,
+  "cocosExitCode": 36,
+  "ui": {
+    "environment": "Headless Chrome; mocked API responses from isolated server fixtures",
+    "viewports": [
+      [
+        1280,
+        800
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "currentDecision": true,
+    "timeoutFallback": true,
+    "reasonPagination": true,
+    "oldRecords": true,
+    "errors": [],
+    "screenshots": [
+      "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/jev-records-idle.png",
+      "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/jev-records-idle-basis.png",
+      "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/jev-records-timeout.png",
+      "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/jev-records-legacy.png"
+    ]
+  }
+}

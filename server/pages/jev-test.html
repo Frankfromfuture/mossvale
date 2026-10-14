@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>村民反应测试 · 苔溪镇</title>
+<style>
+:root{color-scheme:light;--paper:#f5f4ee;--ink:#283b32;--muted:#65736a;--line:#d7ddd2;--green:#315e48;--wash:#e8eee3;--amber:#8d5c25}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.65}button,select{font:inherit}button,select,a{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}a{color:var(--green);text-underline-offset:4px}button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #9cbb83;outline-offset:4px}
+main{max-width:1120px;margin:auto;padding:30px 40px 50px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;font-size:13px}.brand{font-weight:650;letter-spacing:.13em}header a{text-decoration:none}.intro{padding:36px 0 28px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--muted);margin:0 0 8px}h1{font-size:clamp(28px,4vw,40px);letter-spacing:-.045em;font-weight:580;line-height:1.25;margin:0 0 12px}p{margin:0}.intro p:last-child{color:var(--muted);max-width:680px}.controls{display:flex;align-items:end;gap:18px;flex-wrap:wrap;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}select{appearance:auto;min-width:160px;padding:10px 30px 10px 12px;border:1px solid #bfcabf;border-radius:5px;background:#fffef8;color:var(--ink);height:46px}.rounds{min-width:122px}button{border:0;border-radius:5px;padding:11px 20px;min-height:46px;font-weight:550}.primary{background:var(--green);color:white;min-width:158px}.primary:hover:not(:disabled){background:#264d39}.secondary{background:transparent;color:var(--muted);border:1px solid var(--line)}.control-note{margin-left:auto;font-size:12px;color:var(--muted);max-width:215px;padding-bottom:2px}.progress{display:flex;align-items:center;gap:10px;min-height:64px;font-size:13px}.dot{width:7px;height:7px;border-radius:50%;background:#8b9b89;flex-shrink:0}.running .dot{background:#3f7c53;animation:pulse 1s infinite}.error .dot{background:#a84932}.duration{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}.stage{background:var(--wash);padding:24px 28px 28px;border-radius:7px}.stage-head{display:flex;justify-content:space-between;gap:16px;align-items:baseline;margin-bottom:20px}.stage-head h2{font-size:15px;font-weight:600;margin:0}.stage-head p{font-size:12px;color:var(--muted)}.people{display:grid;grid-template-columns:1fr 1fr;gap:36px}.person+.person{border-left:1px solid #cbd7c7;padding-left:36px}.identity{display:flex;gap:12px;align-items:center}.avatar{width:42px;height:42px;display:grid;place-items:center;background:#d4dfd0;border:1px solid #b8c9b2;border-radius:50%;font-family:serif;font-size:20px}.person:last-child .avatar{background:#ebdbc7;border-color:#d3bfa6}.name{font-size:17px;font-weight:600}.traits{font-size:12px;color:var(--muted)}.action{font-size:20px;font-weight:500;line-height:1.5;margin:22px 0 6px;min-height:30px}.source{font-size:12px;color:var(--muted);min-height:40px}.bubble{font-size:14px;line-height:1.85;border-top:1px solid #cbd7c7;margin-top:12px;padding-top:14px;min-height:66px}.bubble.waiting{color:var(--muted)}.person details{font-size:12px;margin-top:12px}.person summary{cursor:pointer;color:var(--green)}.basis{white-space:pre-line;color:var(--muted);padding-top:8px}.summary{display:grid;grid-template-columns:repeat(4,1fr);padding:27px 0;border-bottom:1px solid var(--line);gap:20px}.metric label{margin-bottom:3px}.value{font-size:28px;line-height:1.5;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.unit{font-size:12px;letter-spacing:0;margin-left:6px;color:var(--muted)}.caption{font-size:11px;color:var(--muted)}.records{padding-top:26px}.records-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.records h2{font-size:16px;margin:0;font-weight:600}.records-title button{font-size:12px;padding:6px 12px;min-height:34px}.table-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}th{font-size:11px;color:var(--muted);font-weight:500;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:12px 12px 12px 0;border-bottom:1px solid #e3e6dd;vertical-align:top}td:nth-child(4),td:nth-child(5){font-variant-numeric:tabular-nums;white-space:nowrap}.fallback{color:var(--amber)}.empty{padding:25px 0;color:var(--muted);font-size:13px}.notes{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.85}.notes p+p{margin-top:6px}.failures{font-size:13px;color:#923e2c;margin:12px 0}.hidden{display:none!important}footer{font-size:11px;color:var(--muted);border-top:1px solid var(--line);margin-top:28px;padding-top:18px}.mono{font-variant-numeric:tabular-nums}@keyframes pulse{50%{opacity:.25}}@media(prefers-reduced-motion:reduce){.running .dot{animation:none}}@media(max-width:680px){main{padding:20px 20px 30px}.intro{padding-top:28px}.controls{gap:12px}.control-note{margin-left:0;max-width:none;width:100%}.controls>div{flex:1}select{width:100%;min-width:0}.primary{width:100%}.stage{padding:20px}.stage-head{display:block}.stage-head p{margin-top:5px}.people{grid-template-columns:1fr;gap:24px}.person+.person{border-left:0;padding-left:0;border-top:1px solid #cbd7c7;padding-top:24px}.action{margin-top:14px}.source{min-height:0}.bubble{min-height:0}.summary{grid-template-columns:1fr 1fr;gap:16px}.duration{font-size:11px}.progress{align-items:flex-start;padding:18px 0;min-height:64px}.dot{margin-top:8px}table{min-width:660px}h1{letter-spacing:-.035em}}
+</style>
+</head>
+<body><main>
+<header><span class="brand">苔溪镇 / MOSSVALE</span><a href="/">返回小镇 ↗</a></header>
+<section class="intro"><p class="eyebrow">JEV · LIVE TEST</p><h1>村民反应测试</h1><p>让许知远和唐桃决定下一步，看看他们多久作出选择、如何回应邻居。</p></section>
+<form id="controls" class="controls">
+ <div><label for="scenario">测试场景</label><select id="scenario"><option value="both">空闲选择 + 邻居相遇</option><option value="idle">空闲选择</option><option value="encounter">邻居相遇</option></select></div>
+ <div><label for="rounds">重复次数</label><select id="rounds" class="rounds"><option value="1">跑一轮</option><option value="3">连测三轮</option></select></div>
+ <button id="run" class="primary" type="submit">开始测试 →</button>
+ <p class="control-note" id="cost">每轮 4 次 Jev 判断，相遇后最多生成 2 句台词。</p>
+</form>
+<div id="progress" class="progress" role="status" aria-live="polite"><span class="dot"></span><span id="status">准备就绪，点击开始。</span><span id="elapsed" class="duration"></span></div>
+<section class="stage" aria-label="两位村民的最新反应">
+ <div class="stage-head"><h2 id="scene-title">咖啡馆 · 傍晚的片刻空闲</h2><p>固定条件：19:00 · 晴天 · 精力充足</p></div>
+ <div class="people">
+  <article class="person" id="xu"><div class="identity"><span class="avatar" aria-hidden="true">许</span><div><div class="name">许知远</div><div class="traits">书店店员 · 慢热、细心</div></div></div><p class="action">等待开始</p><p class="source">结果返回后显示选择与耗时。</p><p class="bubble waiting">相遇后的台词会显示在这里。</p><details class="hidden"><summary>查看判断依据</summary><p class="basis"></p></details></article>
+  <article class="person" id="tang"><div class="identity"><span class="avatar" aria-hidden="true">唐</span><div><div class="name">唐桃</div><div class="traits">花艺师 · 活泼、好奇</div></div></div><p class="action">等待开始</p><p class="source">结果返回后显示选择与耗时。</p><p class="bubble waiting">相遇后的台词会显示在这里。</p><details class="hidden"><summary>查看判断依据</summary><p class="basis"></p></details></article>
+ </div>
+</section>
+<section class="summary" aria-label="本次测试统计">
+ <div class="metric"><label>Jev 请求中位数</label><div class="value"><span id="median">—</span><span class="unit">ms</span></div><p class="caption" id="count">等待本次实测</p></div>
+ <div class="metric"><label>采用 Jev 选择</label><div class="value"><span id="accepted">—</span><span class="unit">次</span></div><p class="caption">通过服务器检查</p></div>
+ <div class="metric"><label>规则接管</label><div class="value"><span id="fallback">—</span><span class="unit">次</span></div><p class="caption">具体原因见下方记录</p></div>
+ <div class="metric"><label>台词请求中位数</label><div class="value"><span id="speech-time">—</span><span class="unit">ms</span></div><p class="caption">DeepSeek 单独计时</p></div>
+</section>
+<section class="records"><div class="records-title"><h2>逐次记录</h2><button id="download" class="secondary" disabled>下载结果</button></div>
+ <div id="failures" class="failures hidden" role="alert"></div>
+ <div class="table-scroll"><table><thead><tr><th>轮次 / 场景</th><th>居民</th><th>处理方式</th><th>请求耗时</th><th>触发后观察到</th><th>实际结果</th></tr></thead><tbody id="rows"></tbody></table></div>
+ <p id="empty" class="empty">还没有测试记录。开始后，结果会逐条出现。</p>
+ <div class="notes"><p>每轮使用独立内存小镇，保留人物既有人格与初始经历，正式存档不参与测试。点击开始才会调用模型。</p><p>“触发后观察到”从当前场景启动计时，到服务器保存动作或台词为止。测试页和本机 2D 游戏均即时接收结果；游戏断线时以约 2 秒轮询兜底。</p><p>判断依据中的“输入摘要”是送给 Jev 的人物资料，并非模型返回的解释。页面刷新后清空记录，可先下载保存。</p></div>
+</section><footer>本机 2D 测试 · Jev 负责选择，DeepSeek 负责台词 · 首次请求可能包含连接建立时间</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id),form=$('controls');
+const reasons={uncertain:'置信度不足',timeout:'请求超时',configuration:'服务尚未配置',rules:'服务尚未配置',budget:'今日调用额度已用完',busy:'服务正忙',backoff:'短暂退避中',changed:'人物状态已变化','invalid-choice':'响应选项无效',unavailable:'请求未完成','http-401':'密钥认证失败','http-403':'接口拒绝访问','http-429':'接口限流'};
+const why=value=>reasons[value]||(value?.startsWith('http-')?'接口返回 '+value.slice(5):value?'规则接管':'');
+const scene=value=>value==='idle'?'空闲选择':'邻居相遇';
+let records=[],samples=[],started=0,timer=null,running=false,finished=false;
+function status(text,type=''){$('status').textContent=text;$('progress').className='progress '+type;}
+function median(rows){if(!rows.length)return '—';const a=rows.map(r=>r.requestMs).sort((a,b)=>a-b),mid=Math.floor(a.length/2);return Math.round(a.length%2?a[mid]:(a[mid-1]+a[mid])/2);}
+function summary(){const d=samples.filter(r=>r.kind!=='speech'),s=samples.filter(r=>r.kind==='speech');$('median').textContent=median(d);$('count').textContent=d.length?d.length+' 次判断，含规则接管请求':'等待本次实测';$('accepted').textContent=d.filter(r=>r.mode==='jev').length;$('fallback').textContent=d.filter(r=>r.mode!=='jev').length;$('speech-time').textContent=median(s);}
+function failure(message){$('failures').classList.remove('hidden');const p=document.createElement('p');p.textContent=message;$('failures').append(p);}
+function receive(row){
+ records.push(row);
+ if(row.type==='scenario'){
+  $('scene-title').textContent='第 '+row.round+' 轮 · '+scene(row.scenario);status('正在测试：第 '+row.round+' 轮 · '+scene(row.scenario),'running');
+  for(const id of ['xu','tang']){const person=$(id);person.querySelector('.action').textContent='正在判断…';person.querySelector('.source').textContent='等待 Jev 返回';const bubble=person.querySelector('.bubble');bubble.textContent=row.scenario==='idle'?'此场景只作行动选择，不生成台词。':'先作出反应，再生成台词。';bubble.classList.add('waiting');person.querySelector('details').classList.add('hidden');person.querySelector('details').open=false;}
+ }else if(row.type==='sample'){
+  samples.push(row);summary();$('empty').classList.add('hidden');const person=$(row.resident),speech=row.kind==='speech',source=speech?'DeepSeek':row.mode==='jev'?'Jev':'规则 · '+why(row.reason);
+  const tr=document.createElement('tr');for(const value of [row.round+' / '+(speech?'相遇台词':scene(row.scenario)),row.name,source,row.requestMs+' ms',row.observedAfterTriggerMs+' ms',speech?row.speech:(row.selection||row.action)+(row.applied?'':'（未执行）')]){const td=document.createElement('td');td.textContent=value;tr.append(td);}if(row.mode==='rules')tr.classList.add('fallback');$('rows').append(tr);
+  if(person){
+   if(speech){const bubble=person.querySelector('.bubble');bubble.textContent='“'+row.speech+'”';bubble.classList.remove('waiting');}
+   else{person.querySelector('.action').textContent=(row.selection||row.action)+(row.applied?'':'（未执行）');person.querySelector('.source').textContent=source+' · '+row.requestMs+' ms'+(row.confidence!==null?' · 置信度 '+Math.round(row.confidence*100)+'%':'');if(row.basis){person.querySelector('details').classList.remove('hidden');person.querySelector('.basis').textContent=(row.basisKind==='input'?'输入摘要：\n':'规则依据：\n')+row.basis;}if(row.scenario==='encounter')status('反应已返回，正在等待台词…','running');}
+  }
+ }else if(row.type==='speech-delta'){const bubble=$(row.resident)?.querySelector('.bubble');if(bubble){bubble.textContent=row.text+'…';bubble.classList.remove('waiting');}}
+ else if(row.type==='speech-error'){const bubble=$(row.resident)?.querySelector('.bubble');if(bubble)bubble.textContent='这句话未完成。';failure('第 '+row.round+' 轮有一句台词未生成：'+why(row.reason)+'（'+row.elapsedMs+' ms）。');}
+ else if(row.type==='scenario-complete'){
+  if(row.scenario==='encounter')for(const id of ['xu','tang']){const p=$(id).querySelector('.bubble');if(p.classList.contains('waiting'))p.textContent=row.speechCount?'本次没有收到这位居民的台词。':'本次没有生成台词，请结合反应和错误记录查看。';}
+ }else if(row.type==='complete'){finished=true;status('测试完成 · '+samples.filter(r=>r.kind!=='speech').length+' 次判断，'+samples.filter(r=>r.kind==='speech').length+' 句台词');}
+ else if(row.type==='error'){throw Error(row.message);}
+}
+function cost(){const s=$('scenario').value,n=Number($('rounds').value);$('cost').textContent='本次 '+((s==='both'?4:2)*n)+' 次 Jev 判断'+(s==='idle'?'。':'，相遇后最多生成 '+(2*n)+' 句台词。');}
+$('scenario').addEventListener('change',cost);$('rounds').addEventListener('change',cost);
+form.addEventListener('submit',async event=>{
+ event.preventDefault();if(running)return;running=true;finished=false;records=[];samples=[];$('rows').replaceChildren();$('empty').classList.remove('hidden');$('failures').replaceChildren();$('failures').classList.add('hidden');$('download').disabled=true;
+ const options={scenario:$('scenario').value,rounds:Number($('rounds').value)};for(const e of form.querySelectorAll('select,button'))e.disabled=true;$('run').textContent='测试进行中…';started=performance.now();summary();status('正在连接测试服务…','running');
+ const tick=()=>{$('elapsed').textContent='页面用时 '+((performance.now()-started)/1000).toFixed(1)+' s';};tick();timer=setInterval(tick,100);
+ try{
+  const response=await fetch('/api/jev-test',{method:'POST',headers:{'Content-Type':'application/json','X-Mossvale':'1'},body:JSON.stringify(options)});
+  if(!response.ok){const error=await response.json();throw Error(error.error||'测试服务暂不可用');}
+  const reader=response.body.getReader(),decoder=new TextDecoder();let pending='';
+  while(true){const {done,value}=await reader.read();pending+=decoder.decode(value,{stream:!done});let index;while((index=pending.indexOf('\n'))!==-1){const line=pending.slice(0,index);pending=pending.slice(index+1);if(line.trim())receive(JSON.parse(line));}if(done)break;}
+  if(!finished)throw Error('连接中断，本次记录可能不完整。');
+ }catch(error){status(error.message||'连接失败，请检查本机服务后重试。','error');}
+ finally{clearInterval(timer);tick();running=false;for(const e of form.querySelectorAll('select,button'))e.disabled=false;$('run').textContent='重新测试 →';$('download').disabled=!records.length;}
+});
+$('download').addEventListener('click',()=>{
+ const blob=new Blob([JSON.stringify({scope:'独立内存小镇；不含游戏画面同步延迟',complete:finished,records},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='mossvale-jev-test-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+fetch('/api/jev-test').then(r=>r.json()).then(s=>{if(running||records.length)return;if(!s.configured)status('Jev 尚未配置，测试将显示规则接管。');else if(s.running)status('另一页正在测试，请稍后开始。');}).catch(()=>{if(!running)status('暂时连不上本机服务。','error');});
+</script></body></html>

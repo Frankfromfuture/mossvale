@@ -1,0 +1,157 @@
+{
+  "dayMinutes": 1440,
+  "residents": 11,
+  "habitsCompleted": {
+    "lin": [
+      "lin-2",
+      "lin-3",
+      "lin-1"
+    ],
+    "xu": [
+      "xu-1",
+      "xu-2",
+      "xu-3",
+      "xu-1"
+    ],
+    "chen": [
+      "chen-2",
+      "chen-3",
+      "chen-1"
+    ],
+    "tang": [
+      "tang-2",
+      "tang-3",
+      "tang-1"
+    ],
+    "zhou": [
+      "zhou-2",
+      "zhou-3",
+      "zhou-1"
+    ],
+    "su": [
+      "su-2",
+      "su-3",
+      "su-1"
+    ],
+    "lu": [
+      "lu-1",
+      "lu-2",
+      "lu-3"
+    ],
+    "wen": [
+      "wen-2",
+      "wen-3",
+      "wen-1"
+    ],
+    "a": [
+      "a-1",
+      "a-2",
+      "a-3"
+    ],
+    "shen": [
+      "shen-2",
+      "shen-3",
+      "shen-1"
+    ],
+    "gu": [
+      "gu-2",
+      "gu-3",
+      "gu-1"
+    ]
+  },
+  "impressionChangesAction": {
+    "resident": "tang",
+    "before": "square",
+    "after": "park",
+    "evidence": [
+      "e232",
+      "e234",
+      "e235"
+    ]
+  },
+  "sourceValidation": true,
+  "privateMemoriesIsolated": true,
+  "revisionHistory": true,
+  "duplicateSafe": true,
+  "persistedAfterReload": true,
+  "personalityAndLedgerUnchangedByReflection": true,
+  "continuousEqualsChunked": true,
+  "hotelPayments": true,
+  "cashConserved": true,
+  "activityIcons": [
+    {
+      "id": "lin",
+      "icon": "tea",
+      "label": "照看苔间咖啡馆",
+      "phase": "doing",
+      "activityIcon": "tea"
+    },
+    {
+      "id": "xu",
+      "icon": "rest",
+      "label": "稍作休息",
+      "phase": "doing"
+    },
+    {
+      "id": "chen",
+      "icon": "rest",
+      "label": "稍作休息",
+      "phase": "doing"
+    },
+    {
+      "id": "tang",
+      "icon": "meal",
+      "label": "吃点面包",
+      "phase": "doing",
+      "activityIcon": "meal"
+    },
+    {
+      "id": "zhou",
+      "icon": "walk",
+      "label": "前往打扫酒店盆栽",
+      "phase": "walking",
+      "activityIcon": "clean"
+    },
+    {
+      "id": "su",
+      "icon": "walk",
+      "label": "前往照看社区诊所",
+      "phase": "walking",
+      "activityIcon": "care"
+    },
+    {
+      "id": "lu",
+      "icon": "observe",
+      "label": "看看街边的晨光",
+      "phase": "doing",
+      "activityIcon": "observe"
+    },
+    {
+      "id": "wen",
+      "icon": "rest",
+      "label": "稍作休息",
+      "phase": "doing"
+    },
+    {
+      "id": "a",
+      "icon": "sleep",
+      "label": "回去睡觉",
+      "phase": "doing",
+      "activityIcon": "sleep"
+    },
+    {
+      "id": "shen",
+      "icon": "walk",
+      "label": "前往照看花圃苗圃",
+      "phase": "walking",
+      "activityIcon": "garden"
+    },
+    {
+      "id": "gu",
+      "icon": "garden",
+      "label": "照看花圃苗圃",
+      "phase": "doing",
+      "activityIcon": "garden"
+    }
+  ]
+}

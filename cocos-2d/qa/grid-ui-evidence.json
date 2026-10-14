@@ -1,0 +1,26 @@
+{
+  "environment": "Headless Chrome 390×844, simulated viewport",
+  "api": "Intercepted public world fixture; no model requests or save writes",
+  "grid": {
+    "compactDialog": [
+      148,
+      44
+    ],
+    "actualName": "林夏",
+    "longDialoguePaging": true,
+    "inputRetainedAfterSend": true,
+    "headerMenuWorks": true,
+    "closeWorks": true,
+    "consistentVillagerPanel": true
+  },
+  "pixel": {
+    "newDialogApplied": false,
+    "oldDialogSize": {
+      "width": 322,
+      "height": 170
+    },
+    "clockPaper": false
+  },
+  "scriptErrors": [],
+  "build": "One Cocos Web build; final TownHud corrections compiled into that build; TypeScript check passed"
+}

@@ -1,0 +1,63 @@
+{
+  "bounds": {
+    "minX": -32,
+    "maxX": 48,
+    "minZ": -36,
+    "maxZ": 28
+  },
+  "homes": 12,
+  "places": 26,
+  "objects": 1995,
+  "hotelAreaBefore": 480,
+  "hotelAreaAfter": 320,
+  "freshRooms": [
+    {
+      "id": "room-1",
+      "ready": true,
+      "reason": "可以入住"
+    },
+    {
+      "id": "room-2",
+      "ready": true,
+      "reason": "可以入住"
+    },
+    {
+      "id": "room-3",
+      "ready": false,
+      "reason": "缺少床"
+    },
+    {
+      "id": "room-4",
+      "ready": false,
+      "reason": "缺少床"
+    }
+  ],
+  "overnightAtHome": 12,
+  "migration": {
+    "eventsPreserved": 10216,
+    "accountsAndLedgerUnchanged": true,
+    "privateMemoriesUnchanged": true,
+    "bookParentPreserved": true,
+    "stored": [],
+    "idempotent": true,
+    "otherOwnersSupportedItemsPreserved": true
+  },
+  "unreachable": [],
+  "ui": {
+    "viewport": "390×844, desktop headless Chrome",
+    "homeTabTouch": true,
+    "homeRouteSteps": 84,
+    "residentAddress": true,
+    "hotelRooms": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "propsTotal": 715,
+    "propsDrawnSample": 71,
+    "runtimeErrors": 0,
+    "formalBuilds": 1,
+    "mobileHardwareTest": false
+  }
+}

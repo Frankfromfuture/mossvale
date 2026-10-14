@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+process.env.MOSSVALE_SCENE='cafe-2d';process.env.MOSSVALE_LAYOUT=new URL('growth-source/town-layout-v6.json',import.meta.url).pathname;process.env.MOSSVALE_OBJECT_CATALOG=new URL('growth-source/object-catalog-v4.json',import.meta.url).pathname;
+const {seed,record}=await import('../../server/engine.mjs'),{initializeLife,initializeGridResidents,layout}=await import('../../server/life.mjs'),{initializeObjects,patchObject,resolveObject}=await import('../../server/objects.mjs'),{initializeEconomy}=await import('../../server/economy.mjs'),{installLongMemory}=await import('../../server/long-memory.mjs'),{installTownMind}=await import('../../server/calendar.mjs');
+const w=seed();initializeLife(w,seed(),record);initializeObjects(w);initializeGridResidents(w,seed(),record);initializeEconomy(w);installLongMemory(w);installTownMind(w);w.neighborhoodVersion=1;w.layoutVersion=6;
+record(w,'secret','迁移验收私事，仅本人知道。',['gu'],9,{private:true});
+const r=w.residents.find(r=>r.id==='gu'),home=layout.places.find(p=>p.ownerId==='gu');Object.assign(r.life,{x:home.x,z:home.z,phase:'doing'});r.location=home.id;
+w.economy.tasks.gu={actor:'gu',kind:'rest',phase:'doing',point:{x:home.x,z:home.z},place:home.id,due:w.minute+90,duration:90,started:w.minute,route:[],label:'回家睡觉'};
+patchObject(w,resolveObject(w,'library-book'),{state:{lastRead:83}});
+w.economy.hotel.rooms['room-1'].guest='migration-booking';
+fs.writeFileSync(new URL('growth-legacy-fixture.json',import.meta.url),JSON.stringify(w));

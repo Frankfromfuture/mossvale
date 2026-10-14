@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "style": "cozy-village",
+  "regions": {
+    "read": {
+      "texture": "icons",
+      "rect": [
+        9,
+        40,
+        127,
+        101
+      ]
+    },
+    "write": {
+      "texture": "icons",
+      "rect": [
+        142,
+        37,
+        104,
+        107
+      ]
+    },
+    "tea": {
+      "texture": "icons",
+      "rect": [
+        266,
+        48,
+        108,
+        92
+      ]
+    },
+    "garden": {
+      "texture": "icons",
+      "rect": [
+        392,
+        34,
+        126,
+        112
+      ]
+    },
+    "music": {
+      "texture": "icons",
+      "rect": [
+        529,
+        17,
+        107,
+        134
+      ]
+    },
+    "craft": {
+      "texture": "icons",
+      "rect": [
+        655,
+        37,
+        101,
+        105
+      ]
+    },
+    "shop": {
+      "texture": "icons",
+      "rect": [
+        14,
+        162,
+        114,
+        117
+      ]
+    },
+    "camera": {
+      "texture": "icons",
+      "rect": [
+        137,
+        177,
+        118,
+        94
+      ]
+    },
+    "care": {
+      "texture": "icons",
+      "rect": [
+        276,
+        178,
+        101,
+        89
+      ]
+    },
+    "clean": {
+      "texture": "icons",
+      "rect": [
+        403,
+        156,
+        85,
+        123
+      ]
+    },
+    "key": {
+      "texture": "icons",
+      "rect": [
+        535,
+        164,
+        77,
+        111
+      ]
+    },
+    "meal": {
+      "texture": "icons",
+      "rect": [
+        646,
+        163,
+        114,
+        114
+      ]
+    },
+    "sleep": {
+      "texture": "icons",
+      "rect": [
+        12,
+        299,
+        118,
+        105
+      ]
+    },
+    "walk": {
+      "texture": "icons",
+      "rect": [
+        138,
+        302,
+        115,
+        104
+      ]
+    },
+    "chat": {
+      "texture": "icons",
+      "rect": [
+        266,
+        294,
+        114,
+        106
+      ]
+    },
+    "rest": {
+      "texture": "icons",
+      "rect": [
+        387,
+        289,
+        122,
+        114
+      ]
+    },
+    "gift": {
+      "texture": "icons",
+      "rect": [
+        526,
+        292,
+        109,
+        114
+      ]
+    },
+    "inspect": {
+      "texture": "icons",
+      "rect": [
+        652,
+        291,
+        98,
+        116
+      ]
+    },
+    "move": {
+      "texture": "icons",
+      "rect": [
+        15,
+        417,
+        114,
+        120
+      ]
+    },
+    "rotate": {
+      "texture": "icons",
+      "rect": [
+        151,
+        429,
+        98,
+        95
+      ]
+    },
+    "pack": {
+      "texture": "icons",
+      "rect": [
+        257,
+        426,
+        127,
+        107
+      ]
+    },
+    "open": {
+      "texture": "icons",
+      "rect": [
+        395,
+        409,
+        113,
+        128
+      ]
+    },
+    "sun": {
+      "texture": "icons",
+      "rect": [
+        516,
+        420,
+        121,
+        117
+      ]
+    },
+    "rain": {
+      "texture": "icons",
+      "rect": [
+        646,
+        427,
+        111,
+        110
+      ]
+    },
+    "economy": {
+      "texture": "icons",
+      "rect": [
+        17,
+        551,
+        111,
+        103
+      ]
+    },
+    "villagers": {
+      "texture": "icons",
+      "rect": [
+        134,
+        549,
+        128,
+        104
+      ]
+    },
+    "journal": {
+      "texture": "icons",
+      "rect": [
+        279,
+        543,
+        101,
+        115
+      ]
+    },
+    "map": {
+      "texture": "icons",
+      "rect": [
+        397,
+        549,
+        115,
+        104
+      ]
+    },
+    "help": {
+      "texture": "icons",
+      "rect": [
+        527,
+        546,
+        102,
+        106
+      ]
+    },
+    "send": {
+      "texture": "icons",
+      "rect": [
+        646,
+        559,
+        108,
+        85
+      ]
+    },
+    "close": {
+      "texture": "icons",
+      "rect": [
+        33,
+        676,
+        72,
+        71
+      ]
+    },
+    "prev": {
+      "texture": "icons",
+      "rect": [
+        153,
+        681,
+        87,
+        67
+      ]
+    },
+    "next": {
+      "texture": "icons",
+      "rect": [
+        280,
+        677,
+        88,
+        71
+      ]
+    },
+    "plus": {
+      "texture": "icons",
+      "rect": [
+        407,
+        671,
+        81,
+        80
+      ]
+    },
+    "minus": {
+      "texture": "icons",
+      "rect": [
+        532,
+        693,
+        89,
+        38
+      ]
+    },
+    "more": {
+      "texture": "icons",
+      "rect": [
+        652,
+        692,
+        97,
+        35
+      ]
+    },
+    "paper": {
+      "texture": "skin",
+      "rect": [
+        17,
+        114,
+        374,
+        143
+      ],
+      "insets": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "scale": 0.25
+    },
+    "badge": {
+      "texture": "skin",
+      "rect": [
+        410,
+        124,
+        337,
+        126
+      ],
+      "insets": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "scale": 0.25
+    },
+    "tail": {
+      "texture": "skin",
+      "rect": [
+        96,
+        348,
+        220,
+        116
+      ]
+    },
+    "round": {
+      "texture": "skin",
+      "rect": [
+        471,
+        298,
+        208,
+        206
+      ]
+    },
+    "selected": {
+      "texture": "skin",
+      "rect": [
+        22,
+        551,
+        358,
+        117
+      ],
+      "insets": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "scale": 0.25
+    },
+    "action": {
+      "texture": "skin",
+      "rect": [
+        407,
+        550,
+        342,
+        119
+      ],
+      "insets": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "scale": 0.25
+    },
+    "ledger-frame": {
+      "texture": "ledger",
+      "rect": [
+        0,
+        0,
+        512,
+        768
+      ],
+      "insets": [
+        70,
+        58,
+        82,
+        84
+      ],
+      "scale": 0.42
+    },
+    "residents-frame": {
+      "texture": "residents",
+      "rect": [
+        0,
+        0,
+        512,
+        768
+      ],
+      "insets": [
+        48,
+        48,
+        90,
+        48
+      ],
+      "scale": 0.42
+    },
+    "journal-frame": {
+      "texture": "journal",
+      "rect": [
+        0,
+        0,
+        512,
+        768
+      ],
+      "insets": [
+        70,
+        58,
+        82,
+        84
+      ],
+      "scale": 0.42
+    },
+    "map-frame": {
+      "texture": "map",
+      "rect": [
+        0,
+        0,
+        512,
+        768
+      ],
+      "insets": [
+        70,
+        58,
+        82,
+        84
+      ],
+      "scale": 0.42
+    }
+  },
+  "aliases": {
+    "study": "read",
+    "observe": "camera",
+    "water": "garden",
+    "prune": "garden",
+    "harvest": "gift",
+    "repair": "craft",
+    "browse": "read",
+    "drink": "tea",
+    "brew": "tea",
+    "water-fill": "tea",
+    "take": "gift",
+    "store": "pack",
+    "collect": "gift",
+    "sit": "rest",
+    "memory": "journal",
+    "toggle": "open",
+    "经济": "economy",
+    "村民": "villagers",
+    "pick": "gift",
+    "work": "craft"
+  }
+}

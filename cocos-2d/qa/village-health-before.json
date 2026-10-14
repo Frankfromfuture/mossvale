@@ -1,0 +1,181 @@
+{
+  "days": 14,
+  "walk": 1.425,
+  "visitors": 113,
+  "stayPayments": 27,
+  "visitsPerDay": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    1
+  ],
+  "businesses": {
+    "cafe": {
+      "cash": 52111,
+      "sales": 75750,
+      "stock": {
+        "bread": 3,
+        "coffee": 5,
+        "beans": 0,
+        "flour": 0
+      }
+    },
+    "library": {
+      "cash": 18268,
+      "sales": 18000,
+      "stock": {
+        "book": 5,
+        "paper": 0
+      }
+    },
+    "shop": {
+      "cash": 22958,
+      "sales": 21600,
+      "stock": {
+        "provisions": 4,
+        "flour": 2,
+        "beans": 5,
+        "wood": 3,
+        "paper": 6,
+        "seed": 5,
+        "cloth": 8
+      }
+    },
+    "studio": {
+      "cash": 15000,
+      "sales": 6300,
+      "stock": {
+        "souvenir": 5,
+        "bed": 1,
+        "lamp": 1,
+        "desk": 1,
+        "armchair": 1,
+        "sofa": 1,
+        "shelf": 1,
+        "rug": 1,
+        "wood": 0
+      }
+    },
+    "garden": {
+      "cash": 15535,
+      "sales": 9450,
+      "stock": {
+        "bouquet": 5,
+        "pot": 1,
+        "seed": 0
+      }
+    },
+    "clinic": {
+      "cash": 24790,
+      "sales": 20500,
+      "stock": {}
+    },
+    "photo": {
+      "cash": 15000,
+      "sales": 5600,
+      "stock": {}
+    },
+    "music": {
+      "cash": 15000,
+      "sales": 5600,
+      "stock": {}
+    },
+    "hotel": {
+      "cash": 70870,
+      "sales": 64800,
+      "stock": {}
+    }
+  },
+  "residents": [
+    {
+      "id": "lin",
+      "cash": 20586,
+      "hunger": 60.59999999999998,
+      "energy": 100,
+      "activities": 164
+    },
+    {
+      "id": "xu",
+      "cash": 14902,
+      "hunger": 100,
+      "energy": 100,
+      "activities": 126
+    },
+    {
+      "id": "chen",
+      "cash": 6920,
+      "hunger": 58.999999999999986,
+      "energy": 100,
+      "activities": 124
+    },
+    {
+      "id": "tang",
+      "cash": 9632,
+      "hunger": 56.599999999999994,
+      "energy": 100,
+      "activities": 170
+    },
+    {
+      "id": "zhou",
+      "cash": 14752,
+      "hunger": 61.39999999999998,
+      "energy": 100,
+      "activities": 116
+    },
+    {
+      "id": "su",
+      "cash": 13260,
+      "hunger": 57.39999999999999,
+      "energy": 100,
+      "activities": 139
+    },
+    {
+      "id": "lu",
+      "cash": 8640,
+      "hunger": 100,
+      "energy": 100,
+      "activities": 171
+    },
+    {
+      "id": "wen",
+      "cash": 3718,
+      "hunger": 62.99999999999997,
+      "energy": 100,
+      "activities": 138
+    },
+    {
+      "id": "a",
+      "cash": 7690,
+      "hunger": 84.39999999999978,
+      "energy": 100,
+      "activities": 188
+    },
+    {
+      "id": "shen",
+      "cash": 8,
+      "hunger": 100,
+      "energy": 100,
+      "activities": 125
+    },
+    {
+      "id": "gu",
+      "cash": 170,
+      "hunger": 100,
+      "energy": 100,
+      "activities": 138
+    }
+  ],
+  "wages": 88092,
+  "events": 4545
+}

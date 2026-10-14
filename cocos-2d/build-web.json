@@ -1,0 +1,22 @@
+{
+  "name": "web-mobile",
+  "platform": "web-mobile",
+  "buildPath": "project://build",
+  "debug": false,
+  "md5Cache": true,
+  "startScene": "b1dcc3fe-f746-4d5b-9768-37b3a0d001d9",
+  "scenes": [
+    {
+      "url": "db://assets/scenes/CafeStreet.scene",
+      "uuid": "b1dcc3fe-f746-4d5b-9768-37b3a0d001d9"
+    }
+  ],
+  "packages": {
+    "web-mobile": {
+      "orientation": "auto",
+      "embedWebDebugger": false
+    }
+  },
+  "engineModulesConfigKey": "townLite",
+  "mainBundleCompressionType": "merge_dep"
+}

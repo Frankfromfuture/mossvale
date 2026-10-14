@@ -1,0 +1,7 @@
+{
+  "name": "mossvale-import-ready",
+  "version": "1.0.0",
+  "package_version": 2,
+  "description": "Cocos 3.8.8 CLI importer startup guard",
+  "main": "./main.js"
+}

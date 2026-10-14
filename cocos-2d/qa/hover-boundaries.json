@@ -1,0 +1,65 @@
+{
+  "environment": "Headless Chrome 1000x800, paused isolated memory town",
+  "hover": [
+    {
+      "text": "I1 · 陶杯 · 在木圆桌上",
+      "font": 12
+    },
+    {
+      "text": "C1 · 木圆桌 · 苔间咖啡馆",
+      "font": 12
+    },
+    {
+      "text": "木墙 · 苔间咖啡馆",
+      "font": 12
+    },
+    {
+      "text": "木地板 · 苔间咖啡馆",
+      "font": 12
+    },
+    {
+      "text": "A1 村长",
+      "font": 12
+    },
+    {
+      "text": "小镇地图"
+    },
+    {
+      "text": "C1 · 木圆桌 · 苔间咖啡馆",
+      "font": 12
+    },
+    {
+      "text": "C1 · 木圆桌 · 苔间咖啡馆",
+      "font": 12
+    },
+    {
+      "text": "C1 · 木圆桌 · 苔间咖啡馆",
+      "font": 12
+    }
+  ],
+  "scales": [
+    {
+      "zoom": 0.5,
+      "objectScreenStroke": 1.7,
+      "wallScreenStroke": 2
+    },
+    {
+      "zoom": 1,
+      "objectScreenStroke": 1.7,
+      "wallScreenStroke": 2
+    },
+    {
+      "zoom": 2,
+      "objectScreenStroke": 1.7,
+      "wallScreenStroke": 2
+    }
+  ],
+  "zoomButton": 1.75,
+  "passed": true,
+  "errors": [],
+  "caption": {
+    "text": "C1 · 木圆桌 · 苔间咖啡馆",
+    "font": 12,
+    "outline": false
+  }
+}

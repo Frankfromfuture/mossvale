@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-13T23:39:51.274Z",
+  "migration": {
+    "preserved": [
+      "ledger",
+      "cash",
+      "memories",
+      "chats",
+      "room booking",
+      "remaining rest",
+      "book state"
+    ],
+    "idempotent": true
+  },
+  "offline": {
+    "continuousAnd96Chunks": "identical transactions, balances and visits"
+  },
+  "news": {
+    "calls": 2,
+    "committedLines": 2,
+    "replyLinked": true,
+    "draftRemoved": true
+  },
+  "failure": {
+    "calls": 2,
+    "committedLines": 2,
+    "replyLinked": true,
+    "draftRemoved": true
+  },
+  "cancel": {
+    "calls": 1,
+    "committedLines": 0,
+    "replyLinked": false,
+    "draftRemoved": true
+  },
+  "stock": {
+    "reservedMealProtectedFromGift": true,
+    "mealPaidOnCompletion": true
+  },
+  "passed": true
+}

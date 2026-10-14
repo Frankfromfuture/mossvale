@@ -1,0 +1,26 @@
+{
+  "environment": "Headless Chrome, isolated mocked town; desktop wheel and CDP mobile touch (not physical devices)",
+  "formalBuilds": 1,
+  "checks": {
+    "desktopEconomyScroll": true,
+    "desktopRefreshKeepsPosition": true,
+    "desktopPeriodAndNavigation": true,
+    "desktopDirectorySwipeDoesNotSelect": true,
+    "desktopVillagerFullTextScroll": true,
+    "newTransactionKeepsVisibleRow": true,
+    "lifeRecordDetailsRetained": true,
+    "phoneEconomyScroll": true,
+    "phoneRefreshKeepsPosition": true,
+    "phonePeriodAndNavigation": true,
+    "phoneDirectorySwipeDoesNotSelect": true,
+    "phoneVillagerFullTextScroll": true,
+    "mobileClose": true
+  },
+  "screenshots": [
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/economy-scroll-desktop.png",
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/villager-scroll-desktop.png",
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/economy-scroll-phone.png",
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/villager-scroll-phone.png"
+  ],
+  "pageErrors": []
+}

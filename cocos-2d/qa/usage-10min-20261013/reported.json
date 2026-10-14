@@ -1,0 +1,24 @@
+{
+  "reportedAt": "2026-10-13T14:11:49.034Z",
+  "automationId": "token",
+  "resultFile": "result.json",
+  "startedAt": "2026-10-13T14:01:10.808Z",
+  "observedEndAt": "2026-10-13T14:11:10.824Z",
+  "deepseek": {
+    "calls": 27,
+    "input": 78080,
+    "output": 3155,
+    "failures": 0,
+    "autoCalls": 27,
+    "reflectionCalls": 11,
+    "resets": [],
+    "total": 81235
+  },
+  "jev": {
+    "calls": 40,
+    "input": 59898,
+    "failures": 0,
+    "resets": []
+  },
+  "jevOutputTokens": "not recorded by current integration"
+}

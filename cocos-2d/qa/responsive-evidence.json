@@ -1,0 +1,169 @@
+{
+  "environment": "Background Chrome; desktop DPR 1 and touch phone DPR 2; fixed API responses",
+  "snapshots": [
+    {
+      "name": "desktop",
+      "screen": [
+        1440,
+        900
+      ],
+      "canvas": [
+        0,
+        0,
+        1440,
+        900
+      ],
+      "frame": [
+        0,
+        0,
+        1440,
+        900
+      ],
+      "logical": [
+        960,
+        600
+      ],
+      "zoomRight": 36,
+      "mapRight": 40,
+      "weatherLeft": 37,
+      "coordinate": {
+        "x": -5.5,
+        "z": -10.5
+      },
+      "draft": "",
+      "dpr": 1
+    },
+    {
+      "name": "desktop-resized",
+      "screen": [
+        1000,
+        700
+      ],
+      "canvas": [
+        0,
+        0,
+        1000,
+        700
+      ],
+      "frame": [
+        0,
+        0,
+        1000,
+        700
+      ],
+      "logical": [
+        857.1428571428571,
+        600
+      ],
+      "zoomRight": 36,
+      "mapRight": 40,
+      "weatherLeft": 37,
+      "coordinate": {
+        "x": -5.5,
+        "z": -10.5
+      },
+      "draft": "",
+      "dpr": 1
+    },
+    {
+      "name": "phone-portrait",
+      "screen": [
+        390,
+        844
+      ],
+      "canvas": [
+        0,
+        0,
+        390,
+        844
+      ],
+      "frame": [
+        0,
+        0,
+        390,
+        844
+      ],
+      "logical": [
+        390,
+        844
+      ],
+      "zoomRight": 36,
+      "mapRight": 40,
+      "weatherLeft": 37,
+      "coordinate": {
+        "x": -5.5,
+        "z": -10.5
+      },
+      "draft": "",
+      "dpr": 2
+    },
+    {
+      "name": "phone-keyboard-height",
+      "screen": [
+        390,
+        430
+      ],
+      "canvas": [
+        0,
+        0,
+        390,
+        430
+      ],
+      "frame": [
+        0,
+        0,
+        390,
+        430
+      ],
+      "logical": [
+        390,
+        430
+      ],
+      "zoomRight": 36,
+      "mapRight": 40,
+      "weatherLeft": 37,
+      "coordinate": {
+        "x": -5.5,
+        "z": -10.5
+      },
+      "draft": "窗口变化后保留这句话",
+      "dpr": 2
+    },
+    {
+      "name": "phone-landscape",
+      "screen": [
+        844,
+        390
+      ],
+      "canvas": [
+        0,
+        0,
+        844,
+        390
+      ],
+      "frame": [
+        0,
+        0,
+        844,
+        390
+      ],
+      "logical": [
+        1298.4615384615383,
+        600
+      ],
+      "zoomRight": 36,
+      "mapRight": 40,
+      "weatherLeft": 37,
+      "coordinate": {
+        "x": -5.5,
+        "z": -10.5
+      },
+      "draft": "",
+      "dpr": 2
+    }
+  ],
+  "resizeWalkAccurate": true,
+  "zoomAnchored": true,
+  "phoneConversationAndDraftPreserved": true,
+  "scriptErrors": []
+}

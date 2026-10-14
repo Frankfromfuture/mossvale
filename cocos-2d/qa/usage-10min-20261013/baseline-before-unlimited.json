@@ -1,0 +1,50 @@
+{
+  "at": 1791899636371,
+  "iso": "2026-10-13T13:53:56.371Z",
+  "saveModifiedAt": "2026-10-13T13:53:55.032Z",
+  "minute": 43791,
+  "speed": 3,
+  "paused": false,
+  "deepseek": {
+    "day": "2026-10-13",
+    "calls": 63,
+    "input": 177153,
+    "output": 6376,
+    "failures": 0,
+    "autoCalls": 56,
+    "reflectionCalls": 16
+  },
+  "jev": {
+    "day": "2026-10-13",
+    "calls": 145,
+    "input": 215935,
+    "failures": 1,
+    "consecutiveFailures": 0,
+    "retryAfter": 0
+  },
+  "jevCounts": {
+    "encounter": 54,
+    "speech": 30,
+    "idle": 90
+  },
+  "recentJev": [
+    {
+      "at": 43695,
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null
+    },
+    {
+      "at": 43695,
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null
+    },
+    {
+      "at": 43714,
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "uncertain"
+    }
+  ]
+}

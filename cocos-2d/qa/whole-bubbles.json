@@ -1,0 +1,109 @@
+{
+  "environment": "Headless Chrome 390×844, isolated paused town",
+  "sourcePreview": true,
+  "dialogue": [
+    {
+      "visitor": false,
+      "short": {
+        "width": 62,
+        "height": 54,
+        "lines": 1,
+        "font": 15,
+        "nameFont": 15,
+        "nameCenter": 27,
+        "top": 27,
+        "paddingX": 16,
+        "paddingY": 16
+      },
+      "full": {
+        "width": 227,
+        "height": 208,
+        "lines": 8,
+        "font": 15,
+        "nameFont": 15,
+        "nameCenter": 104,
+        "top": 104,
+        "paddingX": 16,
+        "paddingY": 16
+      },
+      "complete": true,
+      "pages": 1,
+      "pagerNode": false,
+      "input": true
+    },
+    {
+      "visitor": true,
+      "short": {
+        "width": 62,
+        "height": 54,
+        "lines": 1,
+        "font": 15,
+        "nameFont": 15,
+        "nameCenter": 27,
+        "top": 27,
+        "paddingX": 16,
+        "paddingY": 16
+      },
+      "full": {
+        "width": 227,
+        "height": 208,
+        "lines": 8,
+        "font": 15,
+        "nameFont": 15,
+        "nameCenter": 104,
+        "top": 104,
+        "paddingX": 16,
+        "paddingY": 16
+      },
+      "complete": true,
+      "pages": 1,
+      "pagerNode": false,
+      "input": true
+    }
+  ],
+  "ambient": [
+    {
+      "id": "xu",
+      "font": 13,
+      "lines": 8,
+      "height": 184,
+      "complete": true,
+      "paddingY": 16
+    },
+    {
+      "id": "visitor:qa",
+      "font": 13,
+      "lines": 8,
+      "height": 184,
+      "complete": true,
+      "paddingY": 16
+    }
+  ],
+  "streaming": {
+    "draftPrefix": true,
+    "fullAmbient": true,
+    "withdrawn": true,
+    "playerPart": true,
+    "playerFull": true,
+    "failureRestored": true
+  },
+  "pixel": {
+    "residentFont": 11,
+    "visitorFont": 13,
+    "pages": 3,
+    "compact": false
+  },
+  "passed": true,
+  "errors": [],
+  "formalBuild": {
+    "passed": true,
+    "bundle": "index.64e8f.js",
+    "modules": [
+      "VillageUi",
+      "TownHud",
+      "SpeechPlayback",
+      "Mossvale2D"
+    ],
+    "sceneVerified": true
+  }
+}

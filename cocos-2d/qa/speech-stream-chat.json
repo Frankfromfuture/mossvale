@@ -1,0 +1,131 @@
+{
+  "kind": "chat",
+  "done": true,
+  "startedAt": 1791904224337,
+  "calls": [
+    {
+      "resident": "许知远",
+      "atMs": 5,
+      "firstTextMs": 625,
+      "completeMs": 997,
+      "speech": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？",
+      "thought": "她愿意聊一会儿，那就慢慢说，不急着找话题。"
+    },
+    {
+      "resident": "唐桃",
+      "atMs": 1000,
+      "firstTextMs": 1438,
+      "completeMs": 1832,
+      "speech": "今天还行，就是答应了三件事，已经有点绕晕了。你书里夹的是什么花？说不定我这儿正好有。",
+      "thought": "他记得我整理花材的样子，还提到干花，想多听两句。"
+    }
+  ],
+  "publications": [
+    {
+      "atMs": 625,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 741,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子，让我想起书里夹干花",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1438,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "今天",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1567,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "今天还行，就是答应了三件事，已经有点绕晕",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1711,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "今天还行，就是答应了三件事，已经有点绕晕了。你书里夹的是什么花？说不定我这儿",
+          "status": "streaming"
+        }
+      ]
+    }
+  ],
+  "parserChecked": true,
+  "samples": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 620,
+      "elapsedMs": 993,
+      "applied": true
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 439,
+      "elapsedMs": 833,
+      "applied": true
+    }
+  ],
+  "events": [
+    {
+      "id": "e31",
+      "text": "许知远对唐桃说：“你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？”"
+    },
+    {
+      "id": "e32",
+      "replyTo": "e31",
+      "text": "唐桃对许知远说：“今天还行，就是答应了三件事，已经有点绕晕了。你书里夹的是什么花？说不定我这儿正好有。”"
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,836 @@
+{
+  "at": "2026-10-13T15:10:22.011Z",
+  "environment": "Headless Chrome 390x844; isolated in-memory world; real DeepSeek stream",
+  "scenarios": [
+    {
+      "kind": "chat",
+      "firstTextMs": [
+        620,
+        439
+      ],
+      "completeMs": [
+        993,
+        833
+      ],
+      "ui": {
+        "frames": [
+          {
+            "at": 1791904224332,
+            "visible": [],
+            "recorded": 0
+          },
+          {
+            "at": 1791904224967,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225099,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225132,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225166,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225199,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225232,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225266,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225299,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225316,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904225349,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225382,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225416,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225449,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225483,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225516,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225550,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225565,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225599,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225632,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225666,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225698,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225732,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225766,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225799,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。今"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225816,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225849,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225883,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904225916,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子，让我想起书里夹干花的那一页。今天忙吗？"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904228451,
+            "visible": [
+              {
+                "resident": "tang",
+                "text": "今"
+              }
+            ],
+            "recorded": 2
+          }
+        ],
+        "messages": 10,
+        "live": true
+      }
+    },
+    {
+      "kind": "decline",
+      "firstTextMs": [
+        611,
+        436
+      ],
+      "completeMs": [
+        1043,
+        878
+      ],
+      "ui": {
+        "frames": [
+          {
+            "at": 1791904228516,
+            "visible": [],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229135,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229249,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229283,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229316,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229350,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229383,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229416,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229450,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229466,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229499,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229532,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904229565,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229598,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229632,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229666,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229699,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229717,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229749,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229783,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229816,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229850,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229884,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229917,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229951,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904229968,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230000,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230033,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230066,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230101,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230133,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230166,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230200,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904230216,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗？"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904233199,
+            "visible": [
+              {
+                "resident": "tang",
+                "text": "干"
+              }
+            ],
+            "recorded": 2
+          }
+        ],
+        "messages": 11,
+        "live": true
+      }
+    },
+    {
+      "kind": "failure",
+      "firstTextMs": [
+        758
+      ],
+      "completeMs": [
+        1147
+      ],
+      "ui": {
+        "frames": [
+          {
+            "at": 1791904233264,
+            "visible": [],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234032,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234066,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234149,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234182,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234216,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234249,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234283,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234316,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234349,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。要"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234383,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。要是"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234399,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。要是方"
+              }
+            ],
+            "recorded": 0
+          },
+          {
+            "at": 1791904234433,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。要是方便"
+              }
+            ],
+            "recorded": 1
+          },
+          {
+            "at": 1791904234466,
+            "visible": [
+              {
+                "resident": "xu",
+                "text": "你在整理花材啊。要是方便，"
+              }
+            ],
+            "recorded": 1
+          }
+        ],
+        "messages": 9,
+        "live": true
+      }
+    }
+  ],
+  "pagination": {
+    "first": true,
+    "second": true,
+    "finished": true
+  },
+  "passed": true
+}

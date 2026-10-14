@@ -1,0 +1,115 @@
+{
+  "at": "2026-10-13T12:40:04.504Z",
+  "environment": "Headless Chrome, 390x844; isolated local service on 4323; actual Jev and DeepSeek",
+  "scenarios": [
+    {
+      "kind": "idle",
+      "samples": [
+        {
+          "kind": "idle",
+          "resident": "tang",
+          "mode": "rules",
+          "reason": "uncertain",
+          "modelMs": 618,
+          "selected": "square",
+          "applied": true,
+          "applyMs": 1,
+          "phase": "walking",
+          "action": "前往散步放松",
+          "frameMs": 42,
+          "hudUpdated": true,
+          "nodeExists": true
+        },
+        {
+          "kind": "idle",
+          "resident": "xu",
+          "mode": "jev",
+          "reason": null,
+          "modelMs": 629,
+          "selected": "library",
+          "applied": true,
+          "applyMs": 1,
+          "phase": "walking",
+          "action": "前往安静阅读",
+          "frameMs": 30,
+          "hudUpdated": true,
+          "nodeExists": true
+        }
+      ],
+      "live": true,
+      "healthyWorldPolls": 0,
+      "fallbackPolls": 1,
+      "reconnected": true,
+      "staleRejected": true,
+      "walkClockPreserved": true,
+      "actorMoved": true,
+      "sessionIsolated": true
+    },
+    {
+      "kind": "encounter",
+      "samples": [
+        {
+          "kind": "encounter",
+          "resident": "xu",
+          "mode": "jev",
+          "reason": null,
+          "modelMs": 311,
+          "selected": "greet",
+          "applied": true,
+          "applyMs": 1,
+          "phase": "social",
+          "action": "向邻居打招呼",
+          "frameMs": 29,
+          "hudUpdated": true,
+          "nodeExists": true
+        },
+        {
+          "kind": "encounter",
+          "resident": "tang",
+          "mode": "rules",
+          "reason": "uncertain",
+          "modelMs": 754,
+          "selected": "chat",
+          "applied": true,
+          "applyMs": 1,
+          "phase": "doing",
+          "action": "稍作休息",
+          "frameMs": 29,
+          "hudUpdated": true,
+          "nodeExists": true
+        },
+        {
+          "kind": "speech",
+          "resident": "xu",
+          "mode": "deepseek",
+          "reason": null,
+          "modelMs": 1982,
+          "applied": true,
+          "applyMs": 1,
+          "phase": "social",
+          "action": "向邻居打招呼",
+          "frameMs": 27,
+          "hudUpdated": true,
+          "nodeExists": true
+        },
+        {
+          "kind": "speech",
+          "resident": "tang",
+          "mode": "deepseek",
+          "reason": null,
+          "modelMs": 1349,
+          "applied": true,
+          "applyMs": 1,
+          "phase": "doing",
+          "action": "稍作休息",
+          "frameMs": 25,
+          "hudUpdated": true,
+          "nodeExists": true
+        }
+      ],
+      "live": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

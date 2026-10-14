@@ -1,0 +1,163 @@
+{
+  "kind": "news",
+  "done": true,
+  "requests": [
+    {
+      "name": "许知远",
+      "cue": {
+        "kind": "news",
+        "scene": {
+          "place": "苔间咖啡馆",
+          "time": "晚上",
+          "weather": "晴天",
+          "activity": "和唐桃聊聊天",
+          "visible": [
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "木圆桌",
+              "condition": "可用"
+            },
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "旧书",
+              "condition": "可用"
+            }
+          ],
+          "newPlaces": [
+            "东篱果园",
+            "西风草坪",
+            "溪畔苗圃",
+            "林间茶歇",
+            "溪湾栈道",
+            "溪东凉亭",
+            "西街集市",
+            "槐荫活动场",
+            "邻里菜园"
+          ]
+        },
+        "news": {
+          "id": "7db7adc856d449144d9b",
+          "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+          "source": "BBC",
+          "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-10-13T23:26:54.000Z"
+        },
+        "interest": [
+          "books",
+          "culture",
+          "science"
+        ]
+      },
+      "firstTextMs": 1645,
+      "completeMs": 1982,
+      "speech": "刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平时会看这类东西吗？",
+      "mode": "deepseek"
+    },
+    {
+      "name": "唐桃",
+      "cue": {
+        "kind": "news",
+        "scene": {
+          "place": "苔间咖啡馆",
+          "time": "晚上",
+          "weather": "晴天",
+          "activity": "在咖啡馆歇脚",
+          "visible": [
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "木圆桌",
+              "condition": "可用"
+            },
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "旧书",
+              "condition": "可用"
+            }
+          ],
+          "newPlaces": [
+            "东篱果园",
+            "西风草坪",
+            "溪畔苗圃",
+            "林间茶歇",
+            "溪湾栈道",
+            "溪东凉亭",
+            "西街集市",
+            "槐荫活动场",
+            "邻里菜园"
+          ]
+        },
+        "news": {
+          "id": "7db7adc856d449144d9b",
+          "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+          "source": "BBC",
+          "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-10-13T23:26:54.000Z"
+        }
+      },
+      "firstTextMs": 928,
+      "completeMs": 1459,
+      "speech": "我平时看花多过看野生动物，不过安静的摄影我挺好奇的，那些照片是在野外蹲很久才拍到的吧？",
+      "mode": "deepseek"
+    }
+  ],
+  "events": [
+    {
+      "id": "e31",
+      "text": "许知远对唐桃说：“刚看到一条野生动物摄影奖的报道，那些照片应该很安静。你平时会看这类东西吗？”",
+      "news": {
+        "id": "7db7adc856d449144d9b",
+        "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+        "source": "BBC",
+        "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+        "publishedAt": "2026-10-13T23:26:54.000Z"
+      },
+      "mode": "deepseek"
+    },
+    {
+      "id": "e32",
+      "text": "唐桃对许知远说：“我平时看花多过看野生动物，不过安静的摄影我挺好奇的，那些照片是在野外蹲很久才拍到的吧？”",
+      "replyTo": "e31",
+      "news": {
+        "id": "7db7adc856d449144d9b",
+        "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+        "source": "BBC",
+        "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+        "publishedAt": "2026-10-13T23:26:54.000Z"
+      },
+      "mode": "deepseek"
+    }
+  ],
+  "samples": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 1645,
+      "elapsedMs": 1982,
+      "applied": true
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 928,
+      "elapsedMs": 1459,
+      "applied": true
+    }
+  ],
+  "passed": true
+}

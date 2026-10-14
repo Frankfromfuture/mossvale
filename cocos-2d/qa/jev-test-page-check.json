@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-13T10:56:17.507Z",
+  "environment": "Headless desktop Chrome; mobile viewport emulation",
+  "page": "http://127.0.0.1:4321/jev-test",
+  "streamedWhileRunning": true,
+  "decisions": 4,
+  "speech": 2,
+  "status": "测试完成 · 4 次判断，2 句台词",
+  "pageErrors": [],
+  "sessionCookies": 0,
+  "newSaveFiles": [],
+  "missingHeaderStatus": 403,
+  "gameStatus": 200,
+  "downloadValid": true,
+  "mobileFits": true
+}

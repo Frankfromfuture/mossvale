@@ -1,0 +1,269 @@
+{
+  "realDeepSeek": true,
+  "reflectionCalls": 1,
+  "failures": 0,
+  "resident": "许知远",
+  "impressions": [
+    {
+      "key": "place:library",
+      "kind": "place",
+      "id": "library",
+      "name": "风页书屋",
+      "summary": "风页书屋是我一天里反复回到的地方，独自阅读和整理摘记让我安定。",
+      "strength": 3,
+      "evidence": [
+        "e16",
+        "e41",
+        "e103",
+        "e190",
+        "e227",
+        "e318"
+      ],
+      "sources": [
+        {
+          "eventId": "e16",
+          "kind": "fact",
+          "text": "许知远在风页书屋读书。",
+          "at": 540,
+          "importance": 3,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        },
+        {
+          "eventId": "e41",
+          "kind": "fact",
+          "text": "许知远在风页书屋完成了晨间独自阅读。",
+          "at": 640,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        },
+        {
+          "eventId": "e103",
+          "kind": "fact",
+          "text": "许知远在风页书屋完成了整理阅读摘记。",
+          "at": 906,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        },
+        {
+          "eventId": "e190",
+          "kind": "fact",
+          "text": "许知远在风页书屋完成了安静阅读。",
+          "at": 1150,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        },
+        {
+          "eventId": "e227",
+          "kind": "fact",
+          "text": "许知远在风页书屋完成了安静阅读。",
+          "at": 1286,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        },
+        {
+          "eventId": "e318",
+          "kind": "fact",
+          "text": "许知远在风页书屋完成了晨间独自阅读。",
+          "at": 1979,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library"
+          ]
+        }
+      ],
+      "private": false,
+      "updatedAt": 1983,
+      "revision": 1,
+      "mode": "deepseek",
+      "sourceAt": 1983
+    },
+    {
+      "key": "person:su",
+      "kind": "person",
+      "id": "su",
+      "name": "苏晴",
+      "summary": "苏晴几次在书屋和我安静碰面，我开始把她的出现当作一种安稳的熟悉。",
+      "strength": 3,
+      "evidence": [
+        "e183",
+        "e184",
+        "e191",
+        "e192",
+        "e228",
+        "e229"
+      ],
+      "sources": [
+        {
+          "eventId": "e183",
+          "kind": "fact",
+          "text": "苏晴和许知远碰面，聊了聊今天的生活。",
+          "at": 1136,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library",
+            "person:su"
+          ]
+        },
+        {
+          "eventId": "e184",
+          "kind": "reported",
+          "text": "苏晴对许知远说：“今天想在这儿安静坐一会儿。”",
+          "at": 1136,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "person:su"
+          ]
+        },
+        {
+          "eventId": "e191",
+          "kind": "fact",
+          "text": "许知远和苏晴碰面，聊了聊今天的生活。",
+          "at": 1150,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library",
+            "person:su"
+          ]
+        },
+        {
+          "eventId": "e192",
+          "kind": "reported",
+          "text": "许知远对苏晴说：“今天想在这儿安静坐一会儿。”",
+          "at": 1150,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "person:su"
+          ]
+        },
+        {
+          "eventId": "e228",
+          "kind": "fact",
+          "text": "许知远和苏晴碰面，聊了聊今天的生活。",
+          "at": 1286,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:library",
+            "person:su"
+          ]
+        },
+        {
+          "eventId": "e229",
+          "kind": "reported",
+          "text": "许知远对苏晴说：“今天想在这儿安静坐一会儿。”",
+          "at": 1286,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "person:su"
+          ]
+        }
+      ],
+      "private": false,
+      "updatedAt": 1983,
+      "revision": 1,
+      "mode": "deepseek",
+      "sourceAt": 1983
+    },
+    {
+      "key": "place:park",
+      "kind": "place",
+      "id": "park",
+      "name": "喷泉花园",
+      "summary": "喷泉花园的散步让我恢复精力，也偶尔遇到愿意一起走走的人。",
+      "strength": 0,
+      "evidence": [
+        "e147",
+        "e169",
+        "e208",
+        "e235",
+        "e247"
+      ],
+      "sources": [
+        {
+          "eventId": "e147",
+          "kind": "fact",
+          "text": "许知远完成给雏菊浇水，获得 1.50 镇币。",
+          "at": 1029,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:park"
+          ]
+        },
+        {
+          "eventId": "e169",
+          "kind": "fact",
+          "text": "许知远完成给果树浇水，获得 1.50 镇币。",
+          "at": 1087,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:park"
+          ]
+        },
+        {
+          "eventId": "e208",
+          "kind": "fact",
+          "text": "许知远在喷泉花园完成了傍晚短暂散步。",
+          "at": 1212,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:park"
+          ]
+        },
+        {
+          "eventId": "e235",
+          "kind": "fact",
+          "text": "唐桃和许知远碰面，聊了聊今天的生活。",
+          "at": 1314,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:park",
+            "person:tang"
+          ]
+        },
+        {
+          "eventId": "e247",
+          "kind": "fact",
+          "text": "许知远在喷泉花园完成了散步放松。",
+          "at": 1361,
+          "importance": 5,
+          "private": false,
+          "subjects": [
+            "place:park"
+          ]
+        }
+      ],
+      "private": false,
+      "updatedAt": 1983,
+      "revision": 1,
+      "mode": "deepseek",
+      "sourceAt": 1983
+    }
+  ],
+  "backupCreated": true,
+  "paused": true
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "assets/scripts/**/*.ts"
+  ],
+  "compilerOptions": {
+    "types": [
+      "./temp/declarations/cc.custom-macro",
+      "./temp/declarations/cc",
+      "./temp/declarations/jsb",
+      "./temp/declarations/cc.env"
+    ]
+  }
+}

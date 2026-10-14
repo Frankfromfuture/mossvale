@@ -1,0 +1,31 @@
+{
+  "at": 1791900070808,
+  "iso": "2026-10-13T14:01:10.808Z",
+  "saveModifiedAt": "2026-10-13T14:01:10.432Z",
+  "minute": 44313,
+  "speed": 3,
+  "paused": false,
+  "online": true,
+  "deepseek": {
+    "day": "2026-10-13",
+    "calls": 65,
+    "input": 183235,
+    "output": 6479,
+    "failures": 0,
+    "autoCalls": 58,
+    "reflectionCalls": 16
+  },
+  "jev": {
+    "day": "2026-10-13",
+    "calls": 152,
+    "input": 226851,
+    "failures": 1,
+    "consecutiveFailures": 0,
+    "retryAfter": 0
+  },
+  "jevCounts": {
+    "encounter": 56,
+    "speech": 32,
+    "idle": 95
+  }
+}

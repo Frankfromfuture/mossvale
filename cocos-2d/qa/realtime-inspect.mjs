@@ -1,0 +1,7 @@
+import {chromium} from '/Users/frankfan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import fs from 'node:fs';const browser=await chromium.launch({headless:true,channel:'chrome',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const ctx=await browser.newContext({viewport:{width:390,height:844}});await ctx.addCookies([{name:'mossvale2d',value:JSON.parse(fs.readFileSync('cocos-2d/qa/realtime-fixtures.json')).idle,url:'http://127.0.0.1:4323'}]);
+const page=await ctx.newPage();let logs=[];page.on('console',m=>{if(['error','warn'].includes(m.type()))logs.push(m.text().slice(0,300))});page.on('requestfailed',r=>logs.push(new URL(r.url()).pathname+': '+r.failure()?.errorText));
+await page.goto('http://127.0.0.1:4323/?view=grid');await page.waitForTimeout(8000);
+console.log(JSON.stringify(await page.evaluate(async()=>{const cc=await System.import('cc');const scene=cc.director.getScene();return{scene:scene?.name,components:scene?.getComponentsInChildren(cc.Component).map(c=>({name:c.constructor.name,className:cc.js.getClassName(c),state:!!c.state,api:c.api?{live:c.api.liveConnected,stream:!!c.api.stream,ready:c.api.streamReady,base:c.api.base}:null})).filter(c=>c.state||c.api),globals:Object.keys(window).filter(k=>/cocos|cc$|System/.test(k)),body:document.body.textContent.slice(0,150)}})));
+console.log(JSON.stringify(logs));await page.screenshot({path:'cocos-2d/qa/realtime-inspect.png'});await browser.close();

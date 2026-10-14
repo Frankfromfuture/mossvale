@@ -1,0 +1,115 @@
+{
+  "at": "2026-10-13T12:24:58.575Z",
+  "environment": "Local Mac; isolated in-memory towns; real DeepSeek for normal exchange, fixed Jev reactions; no browser or user-save access",
+  "before": {
+    "maxConcurrentSpeechCalls": 2,
+    "secondHeard": null
+  },
+  "scenarios": [
+    {
+      "name": "normal-reply-with-memory-isolation",
+      "mode": "live-deepseek",
+      "requests": 2,
+      "maxConcurrentSpeechCalls": 1,
+      "timeline": [
+        "request-1",
+        "response-1",
+        "request-2",
+        "response-2"
+      ],
+      "checks": {
+        "firstSavedBeforeReply": true,
+        "ownPersonalityAndMemory": true,
+        "privateDataFiltered": true,
+        "orderedAndLinked": true,
+        "speakerEvidenceIsolated": true
+      },
+      "heard": {
+        "eventId": "e36",
+        "speaker": "许知远",
+        "text": "今天书屋里读到一段话，忽然想起你上次说的那本书。最近还好吗？"
+      },
+      "dialogue": [
+        {
+          "id": "e36",
+          "speaker": "xu",
+          "text": "许知远对唐桃说：“今天书屋里读到一段话，忽然想起你上次说的那本书。最近还好吗？”",
+          "replyTo": null,
+          "mode": "deepseek"
+        },
+        {
+          "id": "e37",
+          "speaker": "tang",
+          "text": "唐桃对许知远说：“还不错，就是今天在咖啡馆歇脚，脑子还惦记着花圃那几盆。你读的那段话是什么？”",
+          "replyTo": "e36",
+          "mode": "deepseek"
+        }
+      ]
+    },
+    {
+      "name": "polite-refusal",
+      "mode": "controlled-local",
+      "requests": 2,
+      "maxConcurrentSpeechCalls": 1,
+      "timeline": [
+        "request-1",
+        "response-1",
+        "request-2",
+        "response-2"
+      ],
+      "checks": {
+        "firstSavedBeforeReply": true,
+        "ownPersonalityAndMemory": true,
+        "privateDataFiltered": true,
+        "orderedAndLinked": true,
+        "speakerEvidenceIsolated": true,
+        "refusalStillRespondsToOpening": true
+      },
+      "heard": {
+        "eventId": "e36",
+        "speaker": "许知远",
+        "text": "唐桃，要一起坐一会儿吗？"
+      },
+      "dialogue": [
+        {
+          "id": "e36",
+          "speaker": "xu",
+          "text": "许知远对唐桃说：“唐桃，要一起坐一会儿吗？”",
+          "replyTo": null,
+          "mode": "rules"
+        },
+        {
+          "id": "e37",
+          "speaker": "tang",
+          "text": "唐桃对许知远说：“谢谢你叫我，我今天想先自己待一会儿。”",
+          "replyTo": "e36",
+          "mode": "rules"
+        }
+      ]
+    },
+    {
+      "name": "opening-failure",
+      "mode": "controlled-local",
+      "requests": 1,
+      "maxConcurrentSpeechCalls": 1,
+      "timeline": [
+        "request-1"
+      ],
+      "checks": {
+        "noOrphanReply": true
+      },
+      "heard": null,
+      "dialogue": []
+    }
+  ],
+  "passed": true,
+  "validation": {
+    "serverSyntax": "passed",
+    "frontendRebuild": "not required; server JavaScript only",
+    "local2dRestartCount": 1,
+    "diagnosticReady": true
+  },
+  "observations": [
+    "The real opening mentioned an unrecorded previous book conversation. Sequential replies and memory isolation passed; sentence-level factuality remains enforced only by the existing prompt."
+  ]
+}

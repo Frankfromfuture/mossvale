@@ -1,0 +1,10 @@
+{
+  "environment": "Background Chrome, 390×844 touch simulation",
+  "api": "Fixed local responses for UI verification; no user save writes",
+  "automaticInput": true,
+  "noExtraConversationLabels": true,
+  "inputRemainsAfterSend": true,
+  "outsideDismisses": true,
+  "failedDraftRetained": true,
+  "scriptErrors": []
+}

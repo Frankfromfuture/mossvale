@@ -1,0 +1,83 @@
+{
+  "build": "Cocos success code 36",
+  "residents": 12,
+  "grid": 1,
+  "objectCodes": 77,
+  "migrationBackupExact": true,
+  "priorChatPreserved": true,
+  "activityRecords": [
+    {
+      "id": "lin",
+      "count": 8,
+      "phase": "walking"
+    },
+    {
+      "id": "xu",
+      "count": 6,
+      "phase": "walking"
+    },
+    {
+      "id": "chen",
+      "count": 5,
+      "phase": "walking"
+    },
+    {
+      "id": "tang",
+      "count": 6,
+      "phase": "walking"
+    },
+    {
+      "id": "zhou",
+      "count": 4,
+      "phase": "walking"
+    },
+    {
+      "id": "su",
+      "count": 5,
+      "phase": "doing"
+    },
+    {
+      "id": "lu",
+      "count": 6,
+      "phase": "walking"
+    },
+    {
+      "id": "wen",
+      "count": 4,
+      "phase": "walking"
+    },
+    {
+      "id": "a",
+      "count": 6,
+      "phase": "doing"
+    },
+    {
+      "id": "shen",
+      "count": 4,
+      "phase": "walking"
+    },
+    {
+      "id": "ye",
+      "count": 7,
+      "phase": "walking"
+    },
+    {
+      "id": "gu",
+      "count": 5,
+      "phase": "walking"
+    }
+  ],
+  "lampSaved": true,
+  "playerLogSaved": true,
+  "browser": "Headless Chrome, 390x844, touch simulation",
+  "rosterAndPersonalLog": true,
+  "tapMovement": {
+    "verifiedEarlier": true
+  },
+  "holdObjectMenu": true,
+  "objectInspection": true,
+  "recordDateLayout": true,
+  "finalBuild": "success code 36",
+  "pageErrors": [],
+  "missing": []
+}

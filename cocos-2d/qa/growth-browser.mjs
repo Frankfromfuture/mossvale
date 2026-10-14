@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+import {chromium} from '/Users/frankfan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+const browser=await chromium.launch({channel:'chrome',headless:true}),page=await browser.newPage({viewport:{width:390,height:844}}),errors=[],report={at:new Date().toISOString(),environment:'Headless Chrome, isolated in-memory town',scenarios:[]},base='http://127.0.0.1:4323';page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto(base+'/?view=grid',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!!globalThis.System?.import,{},{timeout:45000});await page.evaluate(async()=>window.__cc=await System.import('cc'));
+ await page.waitForFunction(()=>!!window.__cc.director.getScene()?.getComponentsInChildren('Mossvale')[0]?.state,{},{timeout:45000});
+ report.canvas=await page.locator('canvas').first().boundingBox();await page.screenshot({path:'cocos-2d/qa/growth-mobile-initial.png'});
+ await page.evaluate(()=>{const g=window.__cc.director.getScene().getComponentsInChildren('Mossvale')[0];window.__town=g;window.__frames=[];let key='';function watch(){const frames=Object.entries(g.hud.ambient).filter(([,b])=>b.node.active).map(([id,b])=>{const size=b.node.getComponent(window.__cc.UITransform);return {id,text:b.label.string,font:b.label.fontSize,width:size.width,height:size.height};});const next=JSON.stringify(frames);if(next!==key){key=next;window.__frames.push({at:Date.now(),frames});}requestAnimationFrame(watch);}requestAnimationFrame(watch);});
+ for(const kind of ['news','failure']){
+  await page.evaluate(()=>{window.__frames=[];window.__town.speechPlayback.clear();});await page.request.post(base+'/trigger?kind='+kind);
+  let result;for(let i=0;i<120;i++){result=await(await page.request.get(base+'/report')).json();if(result.done)break;await new Promise(r=>setTimeout(r,250));}assert.ok(result?.passed,result?.failure||'unfinished');
+  await page.waitForFunction(()=>window.__frames.some(f=>f.frames.some(b=>b.id==='tang')),{},{timeout:18000});
+  const ui=await page.evaluate(()=>({frames:window.__frames,live:window.__town.api.liveConnected,layout:window.__town.layout.bounds}));assert.ok(ui.live);assert.ok(ui.frames.some(f=>f.frames.some(b=>b.id==='xu')));assert.ok(ui.frames.every(f=>f.frames.every(b=>b.width<=182&&b.height<=44&&b.font===11)));assert.ok(ui.frames.every(f=>f.frames.every(b=>!b.text.includes('thought')&&!b.text.includes('eventId'))));assert.ok(ui.frames.find(f=>f.frames.some(b=>b.id==='tang')).at-ui.frames.find(f=>f.frames.some(b=>b.id==='xu')).at>=2500);
+  await page.screenshot({path:`cocos-2d/qa/growth-mobile-${kind}.png`});report.scenarios.push({kind,requests:result.requests.map(r=>({name:r.name,firstTextMs:r.firstTextMs,completeMs:r.completeMs,mode:r.mode})),events:result.events,ui});
+ }
+ const regression=await page.evaluate(()=>{const g=window.__town,r=g.state.residents.find(r=>r.id==='xu');g.hud.showResident(r);g.hud.showReply('我刚从溪湾走回来，想聊聊今天看到的景色。');const d=g.hud.dialogue;return {hasDialogue:!!d,input:g.hud.input?.node.active!==false,bodyFont:d?.speech?.fontSize};});report.playerDialogue=regression;
+ await page.setViewportSize({width:1280,height:800});await page.evaluate(()=>{const g=window.__town;g.hud.closeCard();g.hud.showAmbient('xu','溪湾这边的光线真好。',0,0);});await page.screenshot({path:'cocos-2d/qa/growth-desktop.png'});
+ const desktop=await page.evaluate(()=>{const e=window.__town.hud.ambient.xu,t=e.node.getComponent(window.__cc.UITransform);return {width:t.width,height:t.height,font:e.label.fontSize};});assert.ok(desktop.width<=182&&desktop.height<=44&&desktop.font===11);report.desktop=desktop;assert.deepEqual(errors,[]);report.passed=true;
+}catch(e){report.passed=false;report.failure=e.message;process.exitCode=1;}finally{report.errors=errors;await writeFile('cocos-2d/qa/growth-browser.json',JSON.stringify(report,null,2));console.log(JSON.stringify({passed:report.passed,failure:report.failure,scenarios:report.scenarios.map(s=>({kind:s.kind,requests:s.requests})),errors}));await browser.close();}

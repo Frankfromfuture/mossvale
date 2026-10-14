@@ -1,0 +1,22 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "dpr": 2
+  },
+  "browser": "154.0.8037.93",
+  "residentCount": 3,
+  "chatMode": "deepseek",
+  "persistedChatMessages": 2,
+  "walkDistance": 8.564153581206963,
+  "walkEndValid": true,
+  "dragDistance": 1.0940321619447362,
+  "movementAfterRelease": 0,
+  "perf": {
+    "frames": 120,
+    "medianMs": 16.69999999999709,
+    "p95Ms": 16.700000000004366,
+    "averageMs": 16.665833333333286
+  },
+  "errors": []
+}

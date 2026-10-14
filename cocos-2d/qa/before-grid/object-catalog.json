@@ -1,0 +1,7888 @@
+{
+  "schema": "mossvale.objects.v1",
+  "version": 1,
+  "unit": "world-unit",
+  "definitions": {
+    "grass": {
+      "id": "grass",
+      "name": "草地",
+      "category": "terrain",
+      "sprite": "grass",
+      "size": {
+        "w": 2,
+        "d": 2
+      },
+      "material": "草皮",
+      "mass": 0,
+      "maxHealth": 200,
+      "blocking": false,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 200,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "layer": 0
+    },
+    "stone-floor": {
+      "id": "stone-floor",
+      "name": "石板路",
+      "category": "terrain",
+      "sprite": "paving",
+      "size": {
+        "w": 2,
+        "d": 2
+      },
+      "material": "石灰岩",
+      "mass": 0,
+      "maxHealth": 200,
+      "blocking": false,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 200,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "layer": 0
+    },
+    "wood-floor": {
+      "id": "wood-floor",
+      "name": "木地板",
+      "category": "terrain",
+      "sprite": "planks",
+      "size": {
+        "w": 2,
+        "d": 2
+      },
+      "material": "松木",
+      "mass": 0,
+      "maxHealth": 200,
+      "blocking": false,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 200,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "layer": 0
+    },
+    "soil": {
+      "id": "soil",
+      "name": "种植土",
+      "category": "terrain",
+      "sprite": "soil",
+      "size": {
+        "w": 2,
+        "d": 2
+      },
+      "material": "土壤",
+      "mass": 0,
+      "maxHealth": 200,
+      "blocking": false,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 200,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "layer": 0
+    },
+    "table": {
+      "id": "table",
+      "name": "木圆桌",
+      "category": "furniture",
+      "sprite": "table",
+      "size": {
+        "w": 2.5,
+        "d": 2.5
+      },
+      "material": "橡木",
+      "mass": 18,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean",
+        "move",
+        "rotate"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "surface": true
+    },
+    "chair": {
+      "id": "chair",
+      "name": "木椅",
+      "category": "furniture",
+      "sprite": "chair",
+      "size": {
+        "w": 1.1,
+        "d": 1.1
+      },
+      "material": "橡木",
+      "mass": 5,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "sit",
+        "move",
+        "rotate",
+        "clean"
+      ],
+      "defaultAction": "sit",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "occupiedBy": "",
+        "occupiedUntil": 0
+      }
+    },
+    "shelf": {
+      "id": "shelf",
+      "name": "书架",
+      "category": "furniture",
+      "sprite": "shelf",
+      "size": {
+        "w": 2.8,
+        "d": 1.5
+      },
+      "material": "松木",
+      "mass": 24,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "browse",
+        "move",
+        "rotate",
+        "clean"
+      ],
+      "defaultAction": "browse",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "lastRead": -60
+      },
+      "surface": true
+    },
+    "workbench": {
+      "id": "workbench",
+      "name": "木工台",
+      "category": "furniture",
+      "sprite": "workbench",
+      "size": {
+        "w": 3.7,
+        "d": 1.6
+      },
+      "material": "橡木",
+      "mass": 35,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "craft",
+        "move",
+        "rotate",
+        "repair"
+      ],
+      "defaultAction": "craft",
+      "initial": {
+        "health": 85,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "surface": true
+    },
+    "counter": {
+      "id": "counter",
+      "name": "咖啡柜台",
+      "category": "furniture",
+      "sprite": "counter",
+      "size": {
+        "w": 3.1,
+        "d": 1.15
+      },
+      "material": "橡木",
+      "mass": 45,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "clean",
+        "move",
+        "rotate"
+      ],
+      "defaultAction": "clean",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0
+      },
+      "surface": true
+    },
+    "machine": {
+      "id": "machine",
+      "name": "咖啡机",
+      "category": "appliance",
+      "sprite": "machine",
+      "size": {
+        "w": 0.9,
+        "d": 1.15
+      },
+      "material": "金属",
+      "mass": 8,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "brew",
+        "move",
+        "clean"
+      ],
+      "defaultAction": "brew",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "stock": 8,
+        "capacity": 8
+      }
+    },
+    "cup": {
+      "id": "cup",
+      "name": "陶杯",
+      "category": "item",
+      "sprite": "cup",
+      "size": {
+        "w": 0.6,
+        "d": 0.6
+      },
+      "material": "陶瓷",
+      "mass": 0.2,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "drink",
+        "move",
+        "clean"
+      ],
+      "defaultAction": "drink",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "volume": 1,
+        "capacity": 1,
+        "content": "桂花茶"
+      }
+    },
+    "book": {
+      "id": "book",
+      "name": "旧书",
+      "category": "item",
+      "sprite": "book",
+      "size": {
+        "w": 0.58,
+        "d": 0.73
+      },
+      "material": "纸张",
+      "mass": 0.4,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "read",
+        "move"
+      ],
+      "defaultAction": "read",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "lastRead": -60
+      }
+    },
+    "pot": {
+      "id": "pot",
+      "name": "盆栽",
+      "category": "plant",
+      "sprite": "pot",
+      "size": {
+        "w": 1.1,
+        "d": 1.1
+      },
+      "material": "陶土",
+      "mass": 3,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "water",
+        "move",
+        "rotate"
+      ],
+      "defaultAction": "water",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "moisture": 45,
+        "growth": 65
+      }
+    },
+    "tree": {
+      "id": "tree",
+      "name": "果树",
+      "category": "plant",
+      "sprite": "tree",
+      "size": {
+        "w": 3.2,
+        "d": 3.2
+      },
+      "material": "木材",
+      "mass": 160,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "harvest",
+        "water"
+      ],
+      "defaultAction": "harvest",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "moisture": 62,
+        "growth": 100,
+        "stock": 3,
+        "capacity": 3,
+        "regrowAt": 0
+      }
+    },
+    "shrub": {
+      "id": "shrub",
+      "name": "灌木",
+      "category": "plant",
+      "sprite": "shrub",
+      "size": {
+        "w": 1.4,
+        "d": 1.4
+      },
+      "material": "枝叶",
+      "mass": 6,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "prune",
+        "water"
+      ],
+      "defaultAction": "prune",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "moisture": 48,
+        "growth": 80,
+        "lastPruned": -90
+      }
+    },
+    "flowers": {
+      "id": "flowers",
+      "name": "雏菊",
+      "category": "plant",
+      "sprite": "flowers",
+      "size": {
+        "w": 1,
+        "d": 1
+      },
+      "material": "草本",
+      "mass": 0.2,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "water",
+        "pick"
+      ],
+      "defaultAction": "water",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "moisture": 40,
+        "growth": 85
+      }
+    },
+    "door": {
+      "id": "door",
+      "name": "木门",
+      "category": "structure",
+      "sprite": "door-open",
+      "size": {
+        "w": 2.4,
+        "d": 0.5
+      },
+      "material": "橡木",
+      "mass": 16,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": false,
+      "opaque": true,
+      "range": 2,
+      "actions": [
+        "toggle",
+        "repair"
+      ],
+      "defaultAction": "toggle",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "open": true
+      },
+      "closedSprite": "door-closed",
+      "openSprite": "door-open",
+      "render": {
+        "w": 2.6,
+        "d": 2.6
+      }
+    },
+    "wall": {
+      "id": "wall",
+      "name": "木墙",
+      "category": "structure",
+      "sprite": "wall",
+      "size": {
+        "w": 1,
+        "d": 0.5
+      },
+      "material": "松木",
+      "mass": 15,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": false,
+      "opaque": true,
+      "range": 2,
+      "actions": [
+        "repair",
+        "clean"
+      ],
+      "defaultAction": "repair",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0
+      }
+    },
+    "bench": {
+      "id": "bench",
+      "name": "长椅",
+      "category": "furniture",
+      "sprite": "bench",
+      "size": {
+        "w": 3.5,
+        "d": 1.3
+      },
+      "material": "橡木",
+      "mass": 16,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "sit",
+        "move",
+        "rotate",
+        "repair"
+      ],
+      "defaultAction": "sit",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "occupiedBy": "",
+        "occupiedUntil": 0
+      }
+    },
+    "fountain": {
+      "id": "fountain",
+      "name": "小喷泉",
+      "category": "appliance",
+      "sprite": "fountain",
+      "size": {
+        "w": 4.1,
+        "d": 4.1
+      },
+      "material": "石灰岩",
+      "mass": 800,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": false,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "water-fill",
+        "toggle",
+        "clean"
+      ],
+      "defaultAction": "water-fill",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "running": true,
+        "water": 100
+      }
+    },
+    "crate": {
+      "id": "crate",
+      "name": "木箱",
+      "category": "container",
+      "sprite": "crate",
+      "size": {
+        "w": 1.45,
+        "d": 1.45
+      },
+      "material": "松木",
+      "mass": 7,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "take",
+        "store",
+        "move",
+        "rotate"
+      ],
+      "defaultAction": "take",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "stock": 6,
+        "capacity": 12,
+        "resource": "wood"
+      }
+    },
+    "rock": {
+      "id": "rock",
+      "name": "石块",
+      "category": "resource",
+      "sprite": "rock",
+      "size": {
+        "w": 0.9,
+        "d": 0.8
+      },
+      "material": "石灰岩",
+      "mass": 4,
+      "maxHealth": 100,
+      "blocking": true,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "collect",
+        "move"
+      ],
+      "defaultAction": "collect",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0
+      }
+    },
+    "lamp": {
+      "id": "lamp",
+      "name": "提灯",
+      "category": "appliance",
+      "sprite": "lamp",
+      "size": {
+        "w": 0.65,
+        "d": 0.9
+      },
+      "material": "黄铜",
+      "mass": 1,
+      "maxHealth": 100,
+      "blocking": false,
+      "movable": true,
+      "opaque": false,
+      "range": 2,
+      "actions": [
+        "toggle",
+        "move"
+      ],
+      "defaultAction": "toggle",
+      "initial": {
+        "health": 100,
+        "cleanliness": 78,
+        "uses": 0,
+        "lit": true
+      }
+    }
+  },
+  "instances": [
+    {
+      "id": "ground-0-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-0-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-0-2",
+      "defId": "grass",
+      "x": -11,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-0-3",
+      "defId": "grass",
+      "x": -9,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-0-4",
+      "defId": "grass",
+      "x": -7,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-0-5",
+      "defId": "grass",
+      "x": -5,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-0-6",
+      "defId": "grass",
+      "x": -3,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-0-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-0-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-0-9",
+      "defId": "grass",
+      "x": 3,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-0-10",
+      "defId": "grass",
+      "x": 5,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-0-11",
+      "defId": "grass",
+      "x": 7,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-0-12",
+      "defId": "grass",
+      "x": 9,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-0-13",
+      "defId": "grass",
+      "x": 11,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-0-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-0-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-1-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-1-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-1-2",
+      "defId": "grass",
+      "x": -11,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-1-3",
+      "defId": "grass",
+      "x": -9,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-1-4",
+      "defId": "grass",
+      "x": -7,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-1-5",
+      "defId": "grass",
+      "x": -5,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-1-6",
+      "defId": "grass",
+      "x": -3,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-1-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-1-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-1-9",
+      "defId": "grass",
+      "x": 3,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-1-10",
+      "defId": "grass",
+      "x": 5,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-1-11",
+      "defId": "grass",
+      "x": 7,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-1-12",
+      "defId": "grass",
+      "x": 9,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-1-13",
+      "defId": "grass",
+      "x": 11,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-1-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-1-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-2-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-2-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-2-2",
+      "defId": "grass",
+      "x": -11,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-2-3",
+      "defId": "grass",
+      "x": -9,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-2-4",
+      "defId": "grass",
+      "x": -7,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-2-5",
+      "defId": "grass",
+      "x": -5,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-2-6",
+      "defId": "grass",
+      "x": -3,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-2-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-2-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-2-9",
+      "defId": "grass",
+      "x": 3,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-2-10",
+      "defId": "grass",
+      "x": 5,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-2-11",
+      "defId": "grass",
+      "x": 7,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-2-12",
+      "defId": "grass",
+      "x": 9,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-2-13",
+      "defId": "grass",
+      "x": 11,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-2-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-2-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-3-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-3-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-3-2",
+      "defId": "grass",
+      "x": -11,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-3-3",
+      "defId": "grass",
+      "x": -9,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-3-4",
+      "defId": "grass",
+      "x": -7,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-3-5",
+      "defId": "grass",
+      "x": -5,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-3-6",
+      "defId": "grass",
+      "x": -3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-3-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-3-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-3-9",
+      "defId": "grass",
+      "x": 3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-3-10",
+      "defId": "grass",
+      "x": 5,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-3-11",
+      "defId": "grass",
+      "x": 7,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-3-12",
+      "defId": "grass",
+      "x": 9,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-3-13",
+      "defId": "grass",
+      "x": 11,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-3-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-3-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-4-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-4-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-4-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": -15,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-4-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": -15,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-4-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": -15,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-4-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": -15,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-4-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": -15,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-4-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-4-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-4-9",
+      "defId": "wood-floor",
+      "x": 3,
+      "z": -15,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-4-10",
+      "defId": "wood-floor",
+      "x": 5,
+      "z": -15,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-4-11",
+      "defId": "wood-floor",
+      "x": 7,
+      "z": -15,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-4-12",
+      "defId": "wood-floor",
+      "x": 9,
+      "z": -15,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-4-13",
+      "defId": "wood-floor",
+      "x": 11,
+      "z": -15,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-4-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-4-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-5-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-5-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-5-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": -13,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-5-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": -13,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-5-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": -13,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-5-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": -13,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-5-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": -13,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-5-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-5-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-5-9",
+      "defId": "wood-floor",
+      "x": 3,
+      "z": -13,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-5-10",
+      "defId": "wood-floor",
+      "x": 5,
+      "z": -13,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-5-11",
+      "defId": "wood-floor",
+      "x": 7,
+      "z": -13,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-5-12",
+      "defId": "wood-floor",
+      "x": 9,
+      "z": -13,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-5-13",
+      "defId": "wood-floor",
+      "x": 11,
+      "z": -13,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-5-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-5-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-6-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-6-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-6-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": -11,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-6-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": -11,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-6-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": -11,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-6-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": -11,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-6-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": -11,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-6-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-6-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-6-9",
+      "defId": "wood-floor",
+      "x": 3,
+      "z": -11,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-6-10",
+      "defId": "wood-floor",
+      "x": 5,
+      "z": -11,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-6-11",
+      "defId": "wood-floor",
+      "x": 7,
+      "z": -11,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-6-12",
+      "defId": "wood-floor",
+      "x": 9,
+      "z": -11,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-6-13",
+      "defId": "wood-floor",
+      "x": 11,
+      "z": -11,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-6-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-6-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-7-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-7-1",
+      "defId": "grass",
+      "x": -13,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-7-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": -9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-7-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": -9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-7-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": -9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-7-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": -9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-7-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": -9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-7-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-7-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-7-9",
+      "defId": "wood-floor",
+      "x": 3,
+      "z": -9,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-7-10",
+      "defId": "wood-floor",
+      "x": 5,
+      "z": -9,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-7-11",
+      "defId": "wood-floor",
+      "x": 7,
+      "z": -9,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-7-12",
+      "defId": "wood-floor",
+      "x": 9,
+      "z": -9,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-7-13",
+      "defId": "wood-floor",
+      "x": 11,
+      "z": -9,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-7-14",
+      "defId": "grass",
+      "x": 13,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-7-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-8-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-8-1",
+      "defId": "stone-floor",
+      "x": -13,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-8-2",
+      "defId": "stone-floor",
+      "x": -11,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-8-3",
+      "defId": "stone-floor",
+      "x": -9,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-8-4",
+      "defId": "stone-floor",
+      "x": -7,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-8-5",
+      "defId": "stone-floor",
+      "x": -5,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-8-6",
+      "defId": "stone-floor",
+      "x": -3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-8-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-8-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-8-9",
+      "defId": "stone-floor",
+      "x": 3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-8-10",
+      "defId": "stone-floor",
+      "x": 5,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-8-11",
+      "defId": "stone-floor",
+      "x": 7,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-8-12",
+      "defId": "stone-floor",
+      "x": 9,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-8-13",
+      "defId": "stone-floor",
+      "x": 11,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-8-14",
+      "defId": "stone-floor",
+      "x": 13,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-8-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-9-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-9-1",
+      "defId": "stone-floor",
+      "x": -13,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-9-2",
+      "defId": "stone-floor",
+      "x": -11,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-9-3",
+      "defId": "stone-floor",
+      "x": -9,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-9-4",
+      "defId": "stone-floor",
+      "x": -7,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-9-5",
+      "defId": "stone-floor",
+      "x": -5,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-9-6",
+      "defId": "stone-floor",
+      "x": -3,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-9-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-9-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-9-9",
+      "defId": "stone-floor",
+      "x": 3,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-9-10",
+      "defId": "stone-floor",
+      "x": 5,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-9-11",
+      "defId": "stone-floor",
+      "x": 7,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-9-12",
+      "defId": "stone-floor",
+      "x": 9,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-9-13",
+      "defId": "stone-floor",
+      "x": 11,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-9-14",
+      "defId": "stone-floor",
+      "x": 13,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-9-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-10-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-10-1",
+      "defId": "stone-floor",
+      "x": -13,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-10-2",
+      "defId": "stone-floor",
+      "x": -11,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-10-3",
+      "defId": "stone-floor",
+      "x": -9,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-10-4",
+      "defId": "stone-floor",
+      "x": -7,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-10-5",
+      "defId": "stone-floor",
+      "x": -5,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-10-6",
+      "defId": "stone-floor",
+      "x": -3,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-10-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-10-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-10-9",
+      "defId": "stone-floor",
+      "x": 3,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-10-10",
+      "defId": "stone-floor",
+      "x": 5,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-10-11",
+      "defId": "stone-floor",
+      "x": 7,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-10-12",
+      "defId": "stone-floor",
+      "x": 9,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-10-13",
+      "defId": "stone-floor",
+      "x": 11,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-10-14",
+      "defId": "stone-floor",
+      "x": 13,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-10-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-11-0",
+      "defId": "grass",
+      "x": -15,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-11-1",
+      "defId": "stone-floor",
+      "x": -13,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-11-2",
+      "defId": "stone-floor",
+      "x": -11,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-11-3",
+      "defId": "stone-floor",
+      "x": -9,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-11-4",
+      "defId": "stone-floor",
+      "x": -7,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-11-5",
+      "defId": "stone-floor",
+      "x": -5,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-11-6",
+      "defId": "stone-floor",
+      "x": -3,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-11-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-11-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-11-9",
+      "defId": "stone-floor",
+      "x": 3,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-11-10",
+      "defId": "stone-floor",
+      "x": 5,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-11-11",
+      "defId": "stone-floor",
+      "x": 7,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-11-12",
+      "defId": "stone-floor",
+      "x": 9,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-11-13",
+      "defId": "stone-floor",
+      "x": 11,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-11-14",
+      "defId": "stone-floor",
+      "x": 13,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-11-15",
+      "defId": "grass",
+      "x": 15,
+      "z": -1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-12-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-12-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-12-2",
+      "defId": "soil",
+      "x": -11,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-12-3",
+      "defId": "soil",
+      "x": -9,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-12-4",
+      "defId": "soil",
+      "x": -7,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-12-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-12-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-12-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-12-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-12-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-12-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-12-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-12-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-12-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-12-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-12-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-13-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-13-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-13-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-13-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-13-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-13-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-13-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-13-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-13-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-13-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-13-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-13-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-13-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-13-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-13-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-13-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-14-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-14-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-14-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": 5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-14-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": 5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-14-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": 5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-14-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": 5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-14-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": 5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-14-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-14-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-14-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-14-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-14-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-14-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-14-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-14-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-14-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-15-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-15-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-15-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": 7,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-15-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": 7,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-15-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": 7,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-15-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": 7,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-15-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": 7,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-15-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-15-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-15-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-15-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-15-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-15-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-15-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-15-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-15-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-16-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-16-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-16-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": 9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-16-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": 9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-16-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": 9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-16-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": 9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-16-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": 9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-16-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-16-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-16-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-16-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-16-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-16-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-16-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-16-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-16-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-17-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-17-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-17-2",
+      "defId": "wood-floor",
+      "x": -11,
+      "z": 11,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-17-3",
+      "defId": "wood-floor",
+      "x": -9,
+      "z": 11,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-17-4",
+      "defId": "wood-floor",
+      "x": -7,
+      "z": 11,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-17-5",
+      "defId": "wood-floor",
+      "x": -5,
+      "z": 11,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-17-6",
+      "defId": "wood-floor",
+      "x": -3,
+      "z": 11,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-17-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-17-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-17-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-17-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-17-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-17-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-17-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-17-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-17-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 11,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-18-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "ground-18-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-18-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-18-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-18-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-18-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-18-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-18-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-18-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-18-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-18-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-18-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-18-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-18-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-18-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-18-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-19-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 94
+      }
+    },
+    {
+      "id": "ground-19-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-19-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-19-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-19-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-19-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-19-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-19-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-19-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-19-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-19-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-19-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-19-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-19-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-19-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-19-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-20-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 75
+      }
+    },
+    {
+      "id": "ground-20-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-20-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-20-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-20-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-20-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-20-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-20-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-20-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-20-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-20-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-20-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-20-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-20-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-20-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-20-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-21-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 76
+      }
+    },
+    {
+      "id": "ground-21-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-21-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-21-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-21-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-21-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-21-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-21-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-21-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-21-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-21-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-21-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-21-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-21-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-21-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-21-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 19,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-22-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 77
+      }
+    },
+    {
+      "id": "ground-22-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-22-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-22-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-22-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-22-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-22-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-22-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-22-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-22-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-22-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-22-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-22-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-22-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-22-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-22-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 21,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-23-0",
+      "defId": "grass",
+      "x": -15,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 78
+      }
+    },
+    {
+      "id": "ground-23-1",
+      "defId": "grass",
+      "x": -13,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 79
+      }
+    },
+    {
+      "id": "ground-23-2",
+      "defId": "grass",
+      "x": -11,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 80
+      }
+    },
+    {
+      "id": "ground-23-3",
+      "defId": "grass",
+      "x": -9,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 81
+      }
+    },
+    {
+      "id": "ground-23-4",
+      "defId": "grass",
+      "x": -7,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 82
+      }
+    },
+    {
+      "id": "ground-23-5",
+      "defId": "grass",
+      "x": -5,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 83
+      }
+    },
+    {
+      "id": "ground-23-6",
+      "defId": "grass",
+      "x": -3,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 84
+      }
+    },
+    {
+      "id": "ground-23-7",
+      "defId": "stone-floor",
+      "x": -1,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 85
+      }
+    },
+    {
+      "id": "ground-23-8",
+      "defId": "stone-floor",
+      "x": 1,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 86
+      }
+    },
+    {
+      "id": "ground-23-9",
+      "defId": "grass",
+      "x": 3,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 87
+      }
+    },
+    {
+      "id": "ground-23-10",
+      "defId": "grass",
+      "x": 5,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 88
+      }
+    },
+    {
+      "id": "ground-23-11",
+      "defId": "grass",
+      "x": 7,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 89
+      }
+    },
+    {
+      "id": "ground-23-12",
+      "defId": "grass",
+      "x": 9,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 90
+      }
+    },
+    {
+      "id": "ground-23-13",
+      "defId": "grass",
+      "x": 11,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 91
+      }
+    },
+    {
+      "id": "ground-23-14",
+      "defId": "grass",
+      "x": 13,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 92
+      }
+    },
+    {
+      "id": "ground-23-15",
+      "defId": "grass",
+      "x": 15,
+      "z": 23,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null,
+      "state": {
+        "cleanliness": 93
+      }
+    },
+    {
+      "id": "cafe-wall-0",
+      "defId": "wall",
+      "x": -12.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-1",
+      "defId": "wall",
+      "x": -12.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-2",
+      "defId": "wall",
+      "x": -11.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-3",
+      "defId": "wall",
+      "x": -11.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-4",
+      "defId": "wall",
+      "x": -10.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-5",
+      "defId": "wall",
+      "x": -10.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-6",
+      "defId": "wall",
+      "x": -9.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-7",
+      "defId": "wall",
+      "x": -9.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-8",
+      "defId": "wall",
+      "x": -8.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-9",
+      "defId": "wall",
+      "x": -7.300000000000001,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-10",
+      "defId": "wall",
+      "x": -6.300000000000001,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-11",
+      "defId": "wall",
+      "x": -5.300000000000001,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-12",
+      "defId": "wall",
+      "x": -5.300000000000001,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-13",
+      "defId": "wall",
+      "x": -4.300000000000001,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-14",
+      "defId": "wall",
+      "x": -4.300000000000001,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-15",
+      "defId": "wall",
+      "x": -3.3000000000000007,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-16",
+      "defId": "wall",
+      "x": -3.3000000000000007,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-17",
+      "defId": "wall",
+      "x": -2.3000000000000007,
+      "z": -17,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-18",
+      "defId": "wall",
+      "x": -2.3000000000000007,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-19",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -16.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-20",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -16.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-21",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -15.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-22",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -15.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-23",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -14.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-24",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -14.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-25",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -13.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-26",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -13.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-27",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -12.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-28",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -12.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-29",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -11.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-30",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -11.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-31",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -10.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-32",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -10.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-33",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -9.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-34",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -9.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-35",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -8.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-36",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -8.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-37",
+      "defId": "wall",
+      "x": -12.8,
+      "z": -7.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-wall-38",
+      "defId": "wall",
+      "x": -1.8,
+      "z": -7.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-door",
+      "defId": "door",
+      "x": -7.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-0",
+      "defId": "wall",
+      "x": 3.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-1",
+      "defId": "wall",
+      "x": 3.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-2",
+      "defId": "wall",
+      "x": 4.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-3",
+      "defId": "wall",
+      "x": 4.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-4",
+      "defId": "wall",
+      "x": 5.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-5",
+      "defId": "wall",
+      "x": 5.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-6",
+      "defId": "wall",
+      "x": 6.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-7",
+      "defId": "wall",
+      "x": 7.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-8",
+      "defId": "wall",
+      "x": 8.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-9",
+      "defId": "wall",
+      "x": 9.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-10",
+      "defId": "wall",
+      "x": 9.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-11",
+      "defId": "wall",
+      "x": 10.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-12",
+      "defId": "wall",
+      "x": 10.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-13",
+      "defId": "wall",
+      "x": 11.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-14",
+      "defId": "wall",
+      "x": 11.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-15",
+      "defId": "wall",
+      "x": 12.3,
+      "z": -17,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-16",
+      "defId": "wall",
+      "x": 12.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-17",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -16.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-18",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -16.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-19",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -15.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-20",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -15.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-21",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -14.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-22",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -14.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-23",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -13.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-24",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -13.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-25",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -12.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-26",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -12.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-27",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -11.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-28",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -11.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-29",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -10.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-30",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -10.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-31",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -9.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-32",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -9.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-33",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -8.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-34",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -8.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-35",
+      "defId": "wall",
+      "x": 2.8,
+      "z": -7.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-wall-36",
+      "defId": "wall",
+      "x": 12.8,
+      "z": -7.5,
+      "rotation": 90,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-door",
+      "defId": "door",
+      "x": 7.3,
+      "z": -7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-0",
+      "defId": "wall",
+      "x": -12.3,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-1",
+      "defId": "wall",
+      "x": -12.3,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-2",
+      "defId": "wall",
+      "x": -11.3,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-3",
+      "defId": "wall",
+      "x": -11.3,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-4",
+      "defId": "wall",
+      "x": -10.3,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-5",
+      "defId": "wall",
+      "x": -10.3,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-6",
+      "defId": "wall",
+      "x": -9.3,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-7",
+      "defId": "wall",
+      "x": -8.3,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-8",
+      "defId": "wall",
+      "x": -7.300000000000001,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-9",
+      "defId": "wall",
+      "x": -6.300000000000001,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-10",
+      "defId": "wall",
+      "x": -6.300000000000001,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-11",
+      "defId": "wall",
+      "x": -5.300000000000001,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-12",
+      "defId": "wall",
+      "x": -5.300000000000001,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-13",
+      "defId": "wall",
+      "x": -4.300000000000001,
+      "z": 4,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-14",
+      "defId": "wall",
+      "x": -4.300000000000001,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-15",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 4.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-16",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 4.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-17",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 5.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-18",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 5.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-19",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 6.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-20",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 6.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-21",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 7.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-22",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 7.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-23",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 8.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-24",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 8.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-25",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 9.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-26",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 9.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-27",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 10.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-28",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 10.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-29",
+      "defId": "wall",
+      "x": -12.8,
+      "z": 11.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-wall-30",
+      "defId": "wall",
+      "x": -3.8,
+      "z": 11.5,
+      "rotation": 90,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-door",
+      "defId": "door",
+      "x": -8.3,
+      "z": 12,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "cafe-table-1",
+      "defId": "table",
+      "x": -9.8,
+      "z": -13.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-chair-1",
+      "defId": "chair",
+      "x": -9.8,
+      "z": -11.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-cup-1",
+      "defId": "cup",
+      "x": -10.25,
+      "z": -14.05,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-1"
+    },
+    {
+      "id": "cafe-book-1",
+      "defId": "book",
+      "x": -9.38,
+      "z": -13.8,
+      "rotation": 12,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-1"
+    },
+    {
+      "id": "cafe-table-2",
+      "defId": "table",
+      "x": -6.5,
+      "z": -13.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-chair-2",
+      "defId": "chair",
+      "x": -6.5,
+      "z": -11.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-cup-2",
+      "defId": "cup",
+      "x": -6.95,
+      "z": -14.05,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-2"
+    },
+    {
+      "id": "cafe-book-2",
+      "defId": "book",
+      "x": -6.08,
+      "z": -13.8,
+      "rotation": 12,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-2"
+    },
+    {
+      "id": "cafe-table-3",
+      "defId": "table",
+      "x": -3.2,
+      "z": -13.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-chair-3",
+      "defId": "chair",
+      "x": -3.2,
+      "z": -11.9,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-cup-3",
+      "defId": "cup",
+      "x": -3.6500000000000004,
+      "z": -14.05,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-3"
+    },
+    {
+      "id": "cafe-book-3",
+      "defId": "book",
+      "x": -2.7800000000000002,
+      "z": -13.8,
+      "rotation": 12,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-table-3"
+    },
+    {
+      "id": "cafe-counter",
+      "defId": "counter",
+      "x": -11.45,
+      "z": -10,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-machine",
+      "defId": "machine",
+      "x": -11.4,
+      "z": -10,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "cafe-counter"
+    },
+    {
+      "id": "cafe-pot",
+      "defId": "pot",
+      "x": -2.65,
+      "z": -8.3,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "cafe-lamp",
+      "defId": "lamp",
+      "x": -2.7,
+      "z": -16,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "library-shelf-1",
+      "defId": "shelf",
+      "x": 4.7,
+      "z": -15.7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-shelf-1-book-0",
+      "defId": "book",
+      "x": 4,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-1"
+    },
+    {
+      "id": "library-shelf-1-book-1",
+      "defId": "book",
+      "x": 4.65,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-1"
+    },
+    {
+      "id": "library-shelf-1-book-2",
+      "defId": "book",
+      "x": 5.3,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-1"
+    },
+    {
+      "id": "library-shelf-2",
+      "defId": "shelf",
+      "x": 8,
+      "z": -15.7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-shelf-2-book-0",
+      "defId": "book",
+      "x": 7.3,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-2"
+    },
+    {
+      "id": "library-shelf-2-book-1",
+      "defId": "book",
+      "x": 7.95,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-2"
+    },
+    {
+      "id": "library-shelf-2-book-2",
+      "defId": "book",
+      "x": 8.6,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-2"
+    },
+    {
+      "id": "library-shelf-3",
+      "defId": "shelf",
+      "x": 11.3,
+      "z": -15.7,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-shelf-3-book-0",
+      "defId": "book",
+      "x": 10.600000000000001,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-3"
+    },
+    {
+      "id": "library-shelf-3-book-1",
+      "defId": "book",
+      "x": 11.250000000000002,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-3"
+    },
+    {
+      "id": "library-shelf-3-book-2",
+      "defId": "book",
+      "x": 11.900000000000002,
+      "z": -15.45,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-shelf-3"
+    },
+    {
+      "id": "library-table",
+      "defId": "table",
+      "x": 6.8,
+      "z": -12.1,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-book",
+      "defId": "book",
+      "x": 6.6,
+      "z": -12.1,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-table"
+    },
+    {
+      "id": "library-table-lamp",
+      "defId": "lamp",
+      "x": 7.4,
+      "z": -12.25,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": "library-table"
+    },
+    {
+      "id": "library-chair",
+      "defId": "chair",
+      "x": 6.8,
+      "z": -10.2,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "library-pot",
+      "defId": "pot",
+      "x": 11.5,
+      "z": -8.5,
+      "rotation": 0,
+      "owner": "许知远",
+      "group": "library",
+      "parentId": null
+    },
+    {
+      "id": "studio-workbench",
+      "defId": "workbench",
+      "x": -8.4,
+      "z": 5.9,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-crate",
+      "defId": "crate",
+      "x": -11.1,
+      "z": 9.5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-chair",
+      "defId": "chair",
+      "x": -8.4,
+      "z": 7.65,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "studio-pot",
+      "defId": "pot",
+      "x": -5,
+      "z": 5.5,
+      "rotation": 0,
+      "owner": "陈默",
+      "group": "studio",
+      "parentId": null
+    },
+    {
+      "id": "terrace-table-1",
+      "defId": "table",
+      "x": -9,
+      "z": -4.65,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "terrace-chair-1",
+      "defId": "chair",
+      "x": -10.9,
+      "z": -4.65,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "terrace-cup-1",
+      "defId": "cup",
+      "x": -9.35,
+      "z": -4.65,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "terrace-table-1"
+    },
+    {
+      "id": "terrace-pot-1",
+      "defId": "pot",
+      "x": -8.52,
+      "z": -4.65,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "terrace-table-1"
+    },
+    {
+      "id": "terrace-table-2",
+      "defId": "table",
+      "x": -4.8,
+      "z": -2.5,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "terrace-chair-2",
+      "defId": "chair",
+      "x": -6.699999999999999,
+      "z": -2.5,
+      "rotation": 90,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": null
+    },
+    {
+      "id": "terrace-cup-2",
+      "defId": "cup",
+      "x": -5.1499999999999995,
+      "z": -2.5,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "terrace-table-2"
+    },
+    {
+      "id": "terrace-pot-2",
+      "defId": "pot",
+      "x": -4.32,
+      "z": -2.5,
+      "rotation": 0,
+      "owner": "林夏",
+      "group": "cafe",
+      "parentId": "terrace-table-2"
+    },
+    {
+      "id": "garden-fountain",
+      "defId": "fountain",
+      "x": 7.4,
+      "z": 5.3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-bench",
+      "defId": "bench",
+      "x": 7.5,
+      "z": 11.1,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-crate",
+      "defId": "crate",
+      "x": 3.5,
+      "z": 7.7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "street-lamp",
+      "defId": "lamp",
+      "x": -1,
+      "z": -5.2,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "street-pot",
+      "defId": "pot",
+      "x": 2,
+      "z": -4.3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "street-bench",
+      "defId": "bench",
+      "x": 9,
+      "z": -3.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-0",
+      "defId": "flowers",
+      "x": -11.3,
+      "z": 0.45,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-1",
+      "defId": "flowers",
+      "x": -10.350000000000001,
+      "z": 0.45,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-2",
+      "defId": "flowers",
+      "x": -9.4,
+      "z": 0.45,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-3",
+      "defId": "flowers",
+      "x": -8.450000000000001,
+      "z": 0.45,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-4",
+      "defId": "flowers",
+      "x": -7.500000000000001,
+      "z": 0.45,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-5",
+      "defId": "flowers",
+      "x": -11.3,
+      "z": 1.65,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-6",
+      "defId": "flowers",
+      "x": -10.350000000000001,
+      "z": 1.65,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-7",
+      "defId": "flowers",
+      "x": -9.4,
+      "z": 1.65,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-8",
+      "defId": "flowers",
+      "x": -8.450000000000001,
+      "z": 1.65,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-flowers-9",
+      "defId": "flowers",
+      "x": -7.500000000000001,
+      "z": 1.65,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-0",
+      "defId": "tree",
+      "x": 14.45,
+      "z": -18,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-1",
+      "defId": "tree",
+      "x": -14.45,
+      "z": -18,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-2",
+      "defId": "tree",
+      "x": 14.45,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-3",
+      "defId": "tree",
+      "x": -14.45,
+      "z": -13,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-4",
+      "defId": "tree",
+      "x": 14.45,
+      "z": -8,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-5",
+      "defId": "tree",
+      "x": -14.45,
+      "z": -8,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-6",
+      "defId": "tree",
+      "x": 14.45,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-7",
+      "defId": "tree",
+      "x": -14.45,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-8",
+      "defId": "tree",
+      "x": 14.45,
+      "z": 2,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-9",
+      "defId": "tree",
+      "x": -14.45,
+      "z": 2,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-10",
+      "defId": "tree",
+      "x": 14.45,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-11",
+      "defId": "tree",
+      "x": -14.45,
+      "z": 7,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-12",
+      "defId": "tree",
+      "x": 14.45,
+      "z": 12,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-13",
+      "defId": "tree",
+      "x": -14.45,
+      "z": 12,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-14",
+      "defId": "tree",
+      "x": 14.45,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-tree-15",
+      "defId": "tree",
+      "x": -14.45,
+      "z": 17,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-0",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-1",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": -15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-2",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-3",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": -9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-4",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-5",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": -3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-6",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-7",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": 3,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-8",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-9",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": 9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-10",
+      "defId": "shrub",
+      "x": 13.1,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "border-shrub-11",
+      "defId": "shrub",
+      "x": -13.1,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-0",
+      "defId": "tree",
+      "x": -12,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-0",
+      "defId": "tree",
+      "x": -12,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-1",
+      "defId": "tree",
+      "x": -9,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-1",
+      "defId": "tree",
+      "x": -9,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-2",
+      "defId": "tree",
+      "x": -6,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-2",
+      "defId": "tree",
+      "x": -6,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-3",
+      "defId": "tree",
+      "x": -3,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-3",
+      "defId": "tree",
+      "x": -3,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-4",
+      "defId": "tree",
+      "x": 0,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-4",
+      "defId": "tree",
+      "x": 0,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-5",
+      "defId": "tree",
+      "x": 3,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-5",
+      "defId": "tree",
+      "x": 3,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-6",
+      "defId": "tree",
+      "x": 6,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-6",
+      "defId": "tree",
+      "x": 6,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-7",
+      "defId": "tree",
+      "x": 9,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-7",
+      "defId": "tree",
+      "x": 9,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "north-tree-8",
+      "defId": "tree",
+      "x": 12,
+      "z": -21.6,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "south-tree-8",
+      "defId": "tree",
+      "x": 12,
+      "z": 20.9,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-rock-0",
+      "defId": "rock",
+      "x": -3,
+      "z": 14,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-rock-1",
+      "defId": "rock",
+      "x": 4.6,
+      "z": 14.5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-rock-2",
+      "defId": "rock",
+      "x": -11,
+      "z": 15,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    },
+    {
+      "id": "garden-rock-3",
+      "defId": "rock",
+      "x": 11.5,
+      "z": 15.5,
+      "rotation": 0,
+      "owner": "小镇共有",
+      "group": "outdoors",
+      "parentId": null
+    }
+  ]
+}

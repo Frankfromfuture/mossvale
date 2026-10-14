@@ -1,0 +1,56 @@
+// Focused acceptance on isolated towns. No provider, browser window, or player save.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'../..');
+process.env.MOSSVALE_SCENE='cafe-2d';process.env.MOSSVALE_LAYOUT=root+'/cocos-2d/assets/resources/town-layout.json';
+const {seed,record,advance,retrieve,context,publicWorld}=await import('../../server/engine.mjs');
+const {initializeLife,initializeGridResidents,layout}=await import('../../server/life.mjs');
+const {initializeObjects}=await import('../../server/objects.mjs');
+const {initializeEconomy,idleOptions,hotelRooms,economyAction}=await import('../../server/economy.mjs');
+const {installLongMemory}=await import('../../server/long-memory.mjs');
+const {installTownMind,ensureSchedule,adjustSchedule,parseAppointment,acceptAppointment,closeAppointment,tickAppointments,ownCommitments,randomIdleChoice}=await import('../../server/calendar.mjs');
+const {autonomousContext}=await import('../../server/autonomy.mjs');
+const {decisionMind}=await import('../../server/jev-life.mjs');
+function make(){const w=seed();initializeLife(w,seed(),record);initializeObjects(w);initializeGridResidents(w,seed(),record);Object.assign(w.player,layout.spawn);initializeEconomy(w);installLongMemory(w);installTownMind(w);for(const r of w.residents)ensureSchedule(w,r,layout.places);return w;}
+function restore(w){const copy=JSON.parse(JSON.stringify(w));installLongMemory(copy);installTownMind(copy);return copy;}
+const w=make(),r=w.residents.find(r=>r.id==='tang'),other=w.residents.find(r=>r.id==='xu');
+const older=record(w,'activity','唐桃和许知远借阅了一本鲸鱼图鉴，约好看完后讨论。',[r.id,other.id],9,{place:'library'});w.minute+=1440*10;
+for(let i=0;i<4000;i++)record(w,'activity',`整理第${i}批工具，完成日常清点。`,[r.id],1,{place:'studio'});
+const started=performance.now(),found=retrieve(w,r,'许知远借阅的鲸鱼图鉴');assert.equal(found[0].eventId,older.id);const retrievalMs=performance.now()-started;
+assert.ok(found.length<=7&&found.reduce((n,m)=>n+m.text.length,0)<=2200);
+assert.ok(!Object.hasOwn(JSON.parse(JSON.stringify(r.memories.at(-1))),'text'));
+const secret=record(w,'secret','验收私事：紫色信封藏在私人抽屉里。',[r.id],9,{private:true});
+const privateThought=record(w,'reflection','因紫色信封形成的私人看法。',[r.id],9,{evidence:[secret.id]});
+const foreign=record(w,'secret','别人独有的金色信封。',[other.id],9,{private:true});r.memories.push({eventId:foreign.id,text:foreign.text,kind:'fact',at:w.minute,importance:10,evidence:[]});
+assert.ok(!retrieve(w,r,'金色信封').some(m=>m.eventId===foreign.id));
+assert.ok(!retrieve(w,r,'紫色信封',{publicOnly:true}).some(m=>[secret.id,privateThought.id].includes(m.eventId)));
+assert.ok(retrieve(w,r,'紫色信封').some(m=>m.eventId===secret.id));
+assert.ok(!JSON.stringify(autonomousContext(w,r,other)).includes('紫色信封'));assert.ok(!JSON.stringify(decisionMind(w,r,'紫色信封')).includes('紫色信封'));
+const restored=restore(w);assert.equal(retrieve(restored,restored.residents.find(x=>x.id===r.id),'鲸鱼图鉴')[0].eventId,older.id);
+const local=make(),person=local.residents.find(r=>r.id==='tang'),calendar=person.calendar,flex=calendar.items.find(s=>!s.fixed);
+Object.assign(flex,{start:local.minute+5,end:local.minute+15,latest:local.minute+120});
+const fixed=JSON.stringify(calendar.items.filter(s=>s.fixed));calendar.items.at(-1).status='completed';const done=JSON.stringify(calendar.items.at(-1));
+adjustSchedule(local,person,local.minute+35,'验收交谈打断');assert.equal(flex.start,local.minute+35);assert.equal(JSON.stringify(calendar.items.at(-1)),done);
+assert.equal(JSON.stringify(calendar.items.filter(s=>s.fixed).slice(0,-1)),JSON.stringify(JSON.parse(fixed).slice(0,-1)));
+const proposal=parseAppointment(local,person,'明天19:00在公园一起散步',layout.places);assert.ok(proposal);
+assert.equal(parseAppointment(local,person,'改天一起散步',layout.places),null);assert.equal(parseAppointment(local,person,'明天10:00在公园见面',layout.places),null);
+assert.equal(parseAppointment(local,person,'不要约明天19:00在公园见面',layout.places),null);
+const source=record(local,'dialogue','唐桃明确答应了明天19:00在公园见面。',[person.id],6,{player:true});
+const c=acceptAppointment(local,{...proposal,private:true,placeLabel:'公园'},source.id,record),count=local.events.length;
+assert.equal(acceptAppointment(local,{...proposal,private:true},source.id,record).id,c.id);assert.equal(local.events.length,count);
+assert.equal(ownCommitments(local,person.id,{publicOnly:true}).length,0);assert.equal(ownCommitments(local,other.id).length,0);
+const cancelled=restore(local),cancel=cancelled.commitments.active[0];assert.equal(closeAppointment(cancelled,cancel,'cancelled','验收取消',record),true);assert.equal(closeAppointment(cancelled,cancel,'cancelled','重复取消',record),false);
+const park=layout.places.find(p=>p.id==='park');local.minute=c.at;local.economy.playerOnlineUntil=c.until+10;Object.assign(local.player,{x:park.x,z:park.z,route:[]});Object.assign(person.life,{x:park.x,z:park.z,route:[]});tickAppointments(local,layout.places,record);assert.equal(c.status,'fulfilled');
+const missed=make(),late=missed.residents.find(r=>r.id==='tang'),q=parseAppointment(missed,late,'明天19:00在公园一起散步',layout.places);const absent=acceptAppointment(missed,q,null,record);missed.minute=absent.until+1;tickAppointments(missed,layout.places,record);assert.equal(absent.status,'missed');
+const random=make(),pool=[{place:'library',preferenceScore:40},{place:'park',preferenceScore:37},{place:'cafe',preferenceScore:34},{place:'unsafe',preferenceScore:0}];let changed=0;
+for(let i=0;i<10000;i++){const choice=randomIdleChoice(random,pool);if(choice){changed++;assert.ok(['park','cafe'].includes(choice.place));}}
+assert.ok(changed>1800&&changed<2200);const randomCopy=restore(random);for(let i=0;i<100;i++)assert.deepEqual(randomIdleChoice(random,pool),randomIdleChoice(randomCopy,pool));
+const continuous=make(),walker=continuous.residents.find(r=>r.id==='tang'),walkingProposal=parseAppointment(continuous,walker,'今天19:00在公园一起散步',layout.places,{partner:'xu'});assert.ok(walkingProposal);
+const walkingCommitment=acceptAppointment(continuous,walkingProposal,null,record),split=restore(continuous);advance(continuous,1440,{offline:true});for(let i=0;i<24;i++)advance(split,60,{offline:true});
+assert.equal(walkingCommitment.status,'fulfilled','both residents really walk to their meeting');
+const businessState=x=>JSON.stringify({accounts:x.economy.accounts,ledger:x.economy.ledger,rng:x.economy.rng,tasks:x.economy.tasks,events:x.events,residents:x.residents,commitments:x.commitments,mind:x.townMind});assert.equal(businessState(continuous),businessState(split));
+const initial=continuous.economy.ledger.filter(t=>t.kind==='initial').reduce((n,t)=>n+t.amount,0),flows=Object.values(continuous.economy.days).reduce((n,d)=>n+d.externalIn-d.externalOut,0),cash=Object.entries(continuous.economy.accounts).filter(([id])=>!id.startsWith('visitor:')).reduce((n,[,v])=>n+v,0);assert.equal(cash,initial+flows);assert.ok(continuous.economy.ledger.some(t=>t.kind==='lodging'));assert.equal(hotelRooms(continuous).filter(r=>r.ready).length,2);
+assert.ok(continuous.townMind.randomChoices>0);assert.ok(publicWorld(continuous,{}).economy.report.people.find(p=>p.id==='tang').dayPlan.length);
+const evidence={longMemory:{olderEventRetrieved:true,additionalMemories:4000,retrievalMs:Number(retrievalMs.toFixed(2)),boundedContext:true,eventTextStoredOnce:true,reload:true},privacy:{foreignMemoryRejected:true,privateEvidenceExcludedFromNeighbourInput:true,privateAppointmentsIsolated:true},calendar:{onlyRemainingFlexibleSlotsAdjusted:true,completedAndFixedSlotsPreserved:true},appointments:{explicitAcceptance:true,vagueAndConflictingInvitationsRejected:true,fulfilled:true,missed:true,cancellationIdempotent:true},random:{probability:.2,samples:10000,changed,observedRate:changed/10000,boundedCandidates:true,persistedSequence:true},economy:{continuousEqualsChunked:true,cashConserved:true,hotelPayments:true},scope:'isolated in-memory 2D; no real model requests or phone test'};
+fs.writeFileSync(root+'/cocos-2d/qa/town-mind-check.json',JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence));

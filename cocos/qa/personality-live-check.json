@@ -1,0 +1,24 @@
+{
+  "httpArrival": {
+    "updated": 12,
+    "duplicate": true,
+    "sameCoins": true,
+    "sameSequence": true
+  },
+  "dialogues": [
+    {
+      "resident": "lin",
+      "mode": "rules",
+      "speech": "想把咖啡馆打理好，让大家有地方坐坐。 我们可以慢慢聊。",
+      "thought": "想把咖啡馆打理好，让大家有地方坐坐。",
+      "soulRevision": 2
+    },
+    {
+      "resident": "xu",
+      "mode": "deepseek",
+      "speech": "谢谢你想到我。人很多的话，我可能坐不太住——大概会有多少人？",
+      "thought": "又是人多的地方。先问清楚人数，不合适就直说。",
+      "soulRevision": 2
+    }
+  ]
+}

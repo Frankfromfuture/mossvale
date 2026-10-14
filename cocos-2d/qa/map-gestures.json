@@ -1,0 +1,21 @@
+{
+  "environment": "Headless Chrome with real wheel/CDP touch input, isolated mocked world; not a physical phone test",
+  "checks": {
+    "desktopScrollPans": true,
+    "desktopPinchZoomsAtCursor": true,
+    "manualCameraStays": true,
+    "browserScaleUnchanged": true,
+    "panelProtectsMap": true,
+    "mobilePinchAndPan": true,
+    "releaseDoesNotAct": true,
+    "mobileBrowserScaleUnchanged": true,
+    "singleFingerWalkStillWorks": true
+  },
+  "screenshots": [
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/map-gestures-desktop.png",
+    "/Users/frankfan/Desktop/Project/Mossvale/output/playwright/map-gestures-phone.png"
+  ],
+  "formalBuilds": 1,
+  "pageErrors": [],
+  "cocosExitCode": 36
+}

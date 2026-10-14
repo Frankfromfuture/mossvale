@@ -1,0 +1,21 @@
+{
+  "formalProjectBuilds": 1,
+  "engineOnlyRepairs": 2,
+  "reason": "Enable mask; retain block scoping and lower engine classes to match existing ES5 game inheritance",
+  "engineVersion": "3.8.8",
+  "engineFile": "cc.fc68870b.js",
+  "importMap": "import-map.db19aaf3.json",
+  "features": [
+    "2d",
+    "affine-transform",
+    "base",
+    "custom-pipeline",
+    "gfx-webgl",
+    "gfx-webgl2",
+    "graphics",
+    "mask",
+    "ui",
+    "custom-pipeline-builtin-scripts"
+  ],
+  "classCompatibilityPass": true
+}

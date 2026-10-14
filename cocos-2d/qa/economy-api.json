@@ -1,0 +1,8 @@
+{
+  "httpSession": true,
+  "initialPopulation": 12,
+  "initialRooms": 2,
+  "purchaseRetrySafe": true,
+  "unavailableModelFallback": true,
+  "visitorsArrive": true
+}

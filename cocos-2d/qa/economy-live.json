@@ -1,0 +1,8 @@
+{
+  "listening": "127.0.0.1:4321",
+  "staticStatus": 200,
+  "residents": 11,
+  "initialRooms": 2,
+  "planner": "deepseek",
+  "provider": "deepseek"
+}

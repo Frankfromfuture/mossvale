@@ -1,0 +1,122 @@
+{
+  "preserved": true,
+  "duplicateStable": true,
+  "privateBoundary": true,
+  "initial": [
+    {
+      "id": "lin",
+      "place": "cafe",
+      "thought": "想把咖啡馆打理好，让大家有地方坐坐。",
+      "speech": "茶慢慢喝，手头的事我也得一件件来。",
+      "socialGap": 42,
+      "stay": 18
+    },
+    {
+      "id": "xu",
+      "place": "library",
+      "thought": "想留一段安静的阅读时间，有人愿意一起看也很好。",
+      "speech": "这一页我想再读一遍。你愿意的话，坐旁边就好。",
+      "socialGap": 85,
+      "stay": 24
+    },
+    {
+      "id": "chen",
+      "place": "studio",
+      "thought": "想把手里的木料做扎实，再考虑别的事。",
+      "speech": "先把毛边磨平。这一步急不得。",
+      "socialGap": 76,
+      "stay": 28
+    },
+    {
+      "id": "tang",
+      "place": "nursery",
+      "thought": "想看看新芽，先做好这一件再答应下一件。",
+      "speech": "这一片先浇好，我今天可别又东跑西跑啦。",
+      "socialGap": 32,
+      "stay": 12
+    },
+    {
+      "id": "zhou",
+      "place": "shop",
+      "thought": "想把摊位理清楚，东西摆明白了才放心。",
+      "speech": "摆齐了才好找，别为了省一步又返工。",
+      "socialGap": 66,
+      "stay": 25
+    },
+    {
+      "id": "su",
+      "place": "lookout",
+      "thought": "想安静看看远处，让注意力从工作里回来。",
+      "speech": "我今天留了休息时间，想好好用它。",
+      "socialGap": 66,
+      "stay": 22
+    },
+    {
+      "id": "lu",
+      "place": "lookout",
+      "thought": "想换个角度看看小镇，找找适合记录的日常。",
+      "speech": "换个角度看，这里也挺有意思。",
+      "socialGap": 40,
+      "stay": 10
+    },
+    {
+      "id": "wen",
+      "place": "cafe",
+      "thought": "想留点时间琢磨面包的味道，一次只改一个地方。",
+      "speech": "我想慢慢尝，细微的味道也值得留意。",
+      "socialGap": 76,
+      "stay": 26
+    },
+    {
+      "id": "a",
+      "place": "meadow",
+      "thought": "想在草坪试试节奏，也给邻居留出安静。",
+      "speech": "这段我想敲轻一点，好听也得让邻居舒服。",
+      "socialGap": 34,
+      "stay": 15
+    },
+    {
+      "id": "shen",
+      "place": "nursery",
+      "thought": "想仔细观察新芽，先看清楚再下结论。",
+      "speech": "这里我还没弄明白，先别急着说确定。",
+      "socialGap": 83,
+      "stay": 30
+    },
+    {
+      "id": "ye",
+      "place": "square",
+      "thought": "想听听音乐，找邻居聊聊今天的打算。",
+      "speech": "这边我来理！不过得先把自己那份做完。",
+      "socialGap": 34,
+      "stay": 13
+    },
+    {
+      "id": "gu",
+      "place": "nursery",
+      "thought": "想把新芽照料好，有心种的人可以一起学。",
+      "speech": "别光夸花好看，土干不干也看看。",
+      "socialGap": 59,
+      "stay": 23
+    }
+  ],
+  "returning": {
+    "awayMinutes": 180,
+    "updated": 12,
+    "changes": [
+      {
+        "eventId": "e54",
+        "text": "林夏和顾奶奶在住宅区停下来聊了几句。"
+      },
+      {
+        "eventId": "e56",
+        "text": "温婉在苗圃给花圃浇了水。"
+      },
+      {
+        "eventId": "e57",
+        "text": "顾奶奶在住宅区安静地歇了一会儿。"
+      }
+    ],
+    "invalid": []
+  }
+}

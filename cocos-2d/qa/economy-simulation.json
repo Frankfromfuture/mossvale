@@ -1,0 +1,330 @@
+{
+  "seconds": 2.021,
+  "days": 7,
+  "minute": 10620,
+  "continuousEqualsSplit": true,
+  "accountsConserved": true,
+  "initial": 295000,
+  "localCash": 359400,
+  "externalNet": 64400,
+  "noNegativeAccounts": true,
+  "noNegativeInventory": true,
+  "rooms": [
+    {
+      "name": "101",
+      "ready": true,
+      "stays": 7
+    },
+    {
+      "name": "102",
+      "ready": true,
+      "stays": 6
+    },
+    {
+      "name": "103",
+      "ready": false,
+      "stays": 0
+    },
+    {
+      "name": "104",
+      "ready": false,
+      "stays": 0
+    }
+  ],
+  "visitors": 56,
+  "transactions": 1404,
+  "events": 1665,
+  "daysDetail": [
+    {
+      "day": 0,
+      "externalIn": 5800,
+      "externalOut": 640,
+      "tax": 1110,
+      "hotelRevenue": 0,
+      "hotelCosts": 3300,
+      "wages": 10436,
+      "visitors": 8,
+      "reviews": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 1,
+      "externalIn": 10950,
+      "externalOut": 1040,
+      "tax": 1675,
+      "hotelRevenue": 4800,
+      "hotelCosts": 1180,
+      "wages": 7784,
+      "visitors": 8,
+      "reviews": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 2,
+      "externalIn": 10850,
+      "externalOut": 2280,
+      "tax": 1665,
+      "hotelRevenue": 4800,
+      "hotelCosts": 1030,
+      "wages": 7610,
+      "visitors": 8,
+      "reviews": [
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 3,
+      "externalIn": 8200,
+      "externalOut": 640,
+      "tax": 1400,
+      "hotelRevenue": 2400,
+      "hotelCosts": 690,
+      "wages": 6830,
+      "visitors": 8,
+      "reviews": [
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 4,
+      "externalIn": 10050,
+      "externalOut": 1040,
+      "tax": 1535,
+      "hotelRevenue": 4800,
+      "hotelCosts": 780,
+      "wages": 11692,
+      "visitors": 8,
+      "reviews": [
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 5,
+      "externalIn": 10950,
+      "externalOut": 1160,
+      "tax": 1675,
+      "hotelRevenue": 4800,
+      "hotelCosts": 780,
+      "wages": 8546,
+      "visitors": 9,
+      "reviews": [
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 6,
+      "externalIn": 11100,
+      "externalOut": 1800,
+      "tax": 1690,
+      "hotelRevenue": 4800,
+      "hotelCosts": 780,
+      "wages": 9102,
+      "visitors": 9,
+      "reviews": [
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finished": true
+    },
+    {
+      "day": 7,
+      "externalIn": 5100,
+      "externalOut": 0,
+      "tax": 510,
+      "hotelRevenue": 4800,
+      "hotelCosts": 480,
+      "wages": 0,
+      "visitors": 1,
+      "reviews": [
+        3,
+        3
+      ],
+      "finished": false
+    }
+  ],
+  "mayor": {
+    "labor": 13800,
+    "share": 2150,
+    "withdrawals": 0,
+    "otherIncome": 0,
+    "spending": 2800,
+    "hotelIncome": 31200,
+    "hotelCosts": 9020
+  },
+  "businesses": [
+    {
+      "id": "cafe",
+      "balance": 35682,
+      "sales": 37800,
+      "status": "营业",
+      "stock": {
+        "bread": 6,
+        "coffee": 6,
+        "flour": 0,
+        "beans": 0
+      }
+    },
+    {
+      "id": "library",
+      "balance": 18258,
+      "sales": 8700,
+      "status": "营业",
+      "stock": {
+        "book": 4,
+        "paper": 0
+      }
+    },
+    {
+      "id": "shop",
+      "balance": 24316,
+      "sales": 13500,
+      "status": "营业",
+      "stock": {
+        "provisions": 3,
+        "flour": 5,
+        "beans": 5,
+        "wood": 5,
+        "paper": 4,
+        "seed": 6,
+        "cloth": 8
+      }
+    },
+    {
+      "id": "studio",
+      "balance": 16246,
+      "sales": 4900,
+      "status": "营业",
+      "stock": {
+        "souvenir": 4,
+        "bed": 1,
+        "lamp": 1,
+        "desk": 1,
+        "armchair": 1,
+        "sofa": 1,
+        "shelf": 1,
+        "rug": 1,
+        "wood": 0
+      }
+    },
+    {
+      "id": "garden",
+      "balance": 16758,
+      "sales": 4500,
+      "status": "营业",
+      "stock": {
+        "bouquet": 6,
+        "pot": 1,
+        "seed": 0
+      }
+    },
+    {
+      "id": "clinic",
+      "balance": 20640,
+      "sales": 8000,
+      "status": "营业",
+      "stock": {}
+    },
+    {
+      "id": "photo",
+      "balance": 15648,
+      "sales": 1600,
+      "status": "营业",
+      "stock": {}
+    },
+    {
+      "id": "music",
+      "balance": 16272,
+      "sales": 2400,
+      "status": "营业",
+      "stock": {}
+    },
+    {
+      "id": "hotel",
+      "balance": 42180,
+      "sales": 31200,
+      "status": "营业",
+      "stock": {}
+    }
+  ],
+  "milestones": {
+    "guest": {
+      "at": 842,
+      "eventId": "e68"
+    },
+    "review": {
+      "at": 1949,
+      "eventId": "e258"
+    },
+    "profit": {
+      "at": 4320,
+      "eventId": "e680"
+    }
+  }
+}

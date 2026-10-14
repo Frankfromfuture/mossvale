@@ -1,0 +1,105 @@
+{
+  "expectedMetresPerSecond": 0.5700000000000001,
+  "seconds": 16,
+  "tasks": {
+    "resident": {
+      "frames": 960,
+      "min": 0.5699999999999505,
+      "max": 0.5700000000000571,
+      "stoppedFrames": 0,
+      "backwardFrames": 0,
+      "lateSnapshotSpeed": 0.5699999999999505
+    },
+    "visitor": {
+      "frames": 960,
+      "min": 0.5699999999999505,
+      "max": 0.5700000000000571,
+      "stoppedFrames": 0,
+      "backwardFrames": 0,
+      "lateSnapshotSpeed": 0.5699999999999505
+    },
+    "playerTask": {
+      "frames": 960,
+      "min": 0.5699999999999505,
+      "max": 0.5700000000000571,
+      "stoppedFrames": 0,
+      "backwardFrames": 0,
+      "lateSnapshotSpeed": 0.5699999999999505
+    }
+  },
+  "manualTap": {
+    "frames": 960,
+    "min": 0.5699999999999505,
+    "max": 0.5700000000000571,
+    "stoppedFrames": 0,
+    "backwardFrames": 0
+  },
+  "manualDrag": {
+    "frames": 60,
+    "min": 0.5700000000000038,
+    "max": 0.5700000000000038,
+    "stoppedFrames": 0,
+    "backwardFrames": 0
+  },
+  "staleRejected": true,
+  "route": [
+    {
+      "x": 25.5,
+      "z": 3.5
+    },
+    {
+      "x": 25.5,
+      "z": 2.5
+    },
+    {
+      "x": 25.5,
+      "z": 1.5
+    },
+    {
+      "x": 25.5,
+      "z": 0.5
+    },
+    {
+      "x": 25.5,
+      "z": -0.5
+    },
+    {
+      "x": 25.5,
+      "z": -1.5
+    },
+    {
+      "x": 25.5,
+      "z": -2.5
+    },
+    {
+      "x": 25.5,
+      "z": -3.5
+    },
+    {
+      "x": 25.5,
+      "z": -4.5
+    },
+    {
+      "x": 24.5,
+      "z": -4.5
+    },
+    {
+      "x": 23.5,
+      "z": -4.5
+    },
+    {
+      "x": 22.5,
+      "z": -4.5
+    },
+    {
+      "x": 21.5,
+      "z": -4.5
+    },
+    {
+      "x": 21.5,
+      "z": -4.5
+    }
+  ],
+  "environment": "Headless Chrome 390x844; actual Cocos component with fixed 60 Hz updates; isolated rules-only town and client-only snapshots",
+  "errors": []
+}

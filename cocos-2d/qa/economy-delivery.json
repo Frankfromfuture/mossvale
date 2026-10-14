@@ -1,0 +1,19 @@
+{
+  "cocosWebBuilds": 1,
+  "cocosExitCode": 36,
+  "sceneIncluded": true,
+  "typescriptCheck": "passed",
+  "local2DRestarts": 1,
+  "localPort": 4321,
+  "threeDPortUnchanged": 4319,
+  "verification": [
+    "economy-simulation.json",
+    "economy-acceptance.json",
+    "economy-api.json",
+    "economy-migration.json",
+    "economy-offline-summary.json",
+    "economy-ui.json",
+    "economy-live.json"
+  ],
+  "extraAutomatedSuitesRun": false
+}

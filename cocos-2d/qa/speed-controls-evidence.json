@@ -1,0 +1,17 @@
+{
+  "viewport": "390×844 desktop headless Chrome",
+  "selectedSpeeds": [
+    1,
+    2,
+    3,
+    1
+  ],
+  "persistedAfterReload": 3,
+  "threeSpeedMinutesIn3Seconds": 3,
+  "pausedMinutesIn2_7Seconds": 0,
+  "invalidSpeedStatus": 400,
+  "legacySpeed": 3,
+  "noWalkOnTap": true,
+  "runtimeErrors": [],
+  "formalBuilds": 1
+}

@@ -1,0 +1,139 @@
+{
+  "kind": "failure",
+  "done": true,
+  "requests": [
+    {
+      "name": "许知远",
+      "cue": {
+        "kind": "news",
+        "scene": {
+          "place": "苔间咖啡馆",
+          "time": "晚上",
+          "weather": "晴天",
+          "activity": "和唐桃聊聊天",
+          "visible": [
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "木圆桌",
+              "condition": "可用"
+            },
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "旧书",
+              "condition": "可用"
+            }
+          ],
+          "newPlaces": [
+            "东篱果园",
+            "西风草坪",
+            "溪畔苗圃",
+            "林间茶歇",
+            "溪湾栈道",
+            "溪东凉亭",
+            "西街集市",
+            "槐荫活动场",
+            "邻里菜园"
+          ]
+        },
+        "news": {
+          "id": "7db7adc856d449144d9b",
+          "title": "Pictured: Winning entries for Wildlife Photographer of the Year 2026",
+          "source": "BBC",
+          "url": "https://www.bbc.co.uk/news/articles/cw5y4nv05rp8o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-10-13T23:26:54.000Z"
+        },
+        "interest": [
+          "books",
+          "culture",
+          "science"
+        ]
+      }
+    },
+    {
+      "name": "唐桃",
+      "cue": {
+        "kind": "scene",
+        "scene": {
+          "place": "苔间咖啡馆",
+          "time": "晚上",
+          "weather": "晴天",
+          "activity": "在咖啡馆歇脚",
+          "visible": [
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "木圆桌",
+              "condition": "可用"
+            },
+            {
+              "name": "木椅",
+              "condition": "可用"
+            },
+            {
+              "name": "旧书",
+              "condition": "可用"
+            }
+          ],
+          "newPlaces": [
+            "东篱果园",
+            "西风草坪",
+            "溪畔苗圃",
+            "林间茶歇",
+            "溪湾栈道",
+            "溪东凉亭",
+            "西街集市",
+            "槐荫活动场",
+            "邻里菜园"
+          ]
+        },
+        "interest": [
+          "nature",
+          "science"
+        ],
+        "style": "活泼、感性，对新鲜事很上心；喜欢把花分享出去，也常担心自己答应太多。"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "e31",
+      "text": "许知远对唐桃说：“在苔间咖啡馆走走，读书时卡住的地方有时就想通了。”",
+      "mode": "rules"
+    },
+    {
+      "id": "e32",
+      "text": "唐桃对许知远说：“你家门前的花最近怎么样？”",
+      "replyTo": "e31",
+      "mode": "rules"
+    }
+  ],
+  "samples": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "rules",
+      "firstTextMs": 0,
+      "elapsedMs": 2,
+      "applied": true
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "rules",
+      "firstTextMs": 0,
+      "elapsedMs": 0,
+      "applied": true
+    }
+  ],
+  "passed": true
+}

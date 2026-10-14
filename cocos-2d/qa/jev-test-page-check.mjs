@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from '/Users/frankfan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+const base='http://127.0.0.1:4321',saveDir=new URL('../../.data-cocos-2d/',import.meta.url),before=new Set(fs.readdirSync(saveDir));
+const browser=await chromium.launch({headless:true,channel:'chrome'});
+try{
+ const context=await browser.newContext({viewport:{width:1240,height:1000}}),page=await context.newPage(),errors=[],requests=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.url().startsWith(base+'/api/'))requests.push(new URL(r.url()).pathname);});
+ const loaded=await page.goto(base+'/jev-test');await page.waitForLoadState('networkidle');
+ assert.equal(loaded.status(),200);assert.equal(await page.getByRole('heading',{name:'村民反应测试',exact:true}).count(),1);
+ assert.equal((await context.cookies()).length,0);assert.equal((await page.locator('#rows tr').count()),0);
+ await page.getByRole('button',{name:'开始测试 →',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelectorAll('#rows tr').length>=2,{},{timeout:15000});
+ const streamedWhileRunning=await page.locator('#run').isDisabled();assert.ok(streamedWhileRunning,'Rows should arrive while the full run is still in progress');
+ await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('测试完成'),{},{timeout:90000});
+ const result=await page.evaluate(()=>({status:document.querySelector('#status').textContent,samples,records,finished}));
+ assert.equal(result.samples.filter(r=>r.kind!=='speech').length,4);assert.ok(result.samples.filter(r=>r.kind==='idle').every(r=>r.applied));assert.ok(result.finished);
+ await page.locator('#xu summary').click();assert.ok((await page.locator('#xu .basis').textContent()).length>0);
+ await page.screenshot({path:'cocos-2d/qa/jev-test-page-desktop.png',fullPage:true});
+ const downloadEvent=page.waitForEvent('download');await page.getByRole('button',{name:'下载结果',exact:true}).click();const download=await downloadEvent;await download.saveAs('cocos-2d/qa/jev-test-page-result.json');
+ const exported=JSON.parse(fs.readFileSync('cocos-2d/qa/jev-test-page-result.json','utf8'));assert.equal(exported.complete,true);assert.equal(exported.records.filter(r=>r.type==='sample').length,result.samples.length);
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:'cocos-2d/qa/jev-test-page-mobile.png',fullPage:true});
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile page must fit viewport');
+ const blocked=await context.request.post(base+'/api/jev-test',{data:{scenario:'both',rounds:1}});assert.equal(blocked.status(),403);
+ const game=await context.request.get(base+'/');assert.equal(game.status(),200);assert.ok(!(await game.text()).includes('<h1>村民反应测试</h1>'));
+ assert.equal((await context.cookies()).length,0);assert.ok(requests.every(p=>p==='/api/jev-test'));assert.deepEqual(errors,[]);
+ const newSaveFiles=fs.readdirSync(saveDir).filter(f=>!before.has(f));assert.equal(newSaveFiles.length,0);
+ const report={checkedAt:new Date().toISOString(),environment:'Headless desktop Chrome; mobile viewport emulation',page:base+'/jev-test',streamedWhileRunning,decisions:result.samples.filter(r=>r.kind!=='speech').length,speech:result.samples.filter(r=>r.kind==='speech').length,status:result.status,pageErrors:errors,sessionCookies:0,newSaveFiles,missingHeaderStatus:blocked.status(),gameStatus:game.status(),downloadValid:true,mobileFits:true};
+ fs.writeFileSync('cocos-2d/qa/jev-test-page-check.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+}finally{await browser.close();}

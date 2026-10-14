@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-13",
+  "supersedes": "interaction-ring.json",
+  "scope": "Local 2D grid view only",
+  "environment": "Headless Chrome, 390×844; isolated intercepted API fixture, no model calls or user-save writes",
+  "formalBuilds": 1,
+  "finalBundleSync": "TownHud source synchronized after the press-area repair, preserving its Cocos registration; no additional Cocos build",
+  "serverRestarts": 0,
+  "objectMenu": {
+    "radius": 40,
+    "icons": 5,
+    "backgroundGraphics": 0,
+    "visibleSprites": 5,
+    "captionHiddenByDefault": true,
+    "hitSize": 44,
+    "releaseKeepsMenu": true,
+    "overlapPressCaption": "看看",
+    "inspectTarget": "V3 靠背椅"
+  },
+  "edgeMenu": {
+    "center": [-129, -338],
+    "icons": 4,
+    "backgroundGraphics": 0,
+    "visibleSprites": 4,
+    "captionHiddenByDefault": true,
+    "allHitAreasWithinViewport": true,
+    "hoverCaption": "送面包 · 4 币",
+    "outsideDismissed": true
+  },
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "screenshots": [
+    "output/playwright/interaction-icons.png",
+    "output/playwright/interaction-icons-edge.png"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "preserved": true,
+  "residents": 12,
+  "unreachable": [],
+  "daytime": {
+    "activities": 47,
+    "encounters": 17,
+    "visited": [
+      "library",
+      "cafe",
+      "home",
+      "shop",
+      "park",
+      "river",
+      "studio",
+      "square",
+      "orchard"
+    ],
+    "residents": [
+      {
+        "id": "lin",
+        "phase": "walking",
+        "positionValid": true,
+        "action": "前往小院"
+      },
+      {
+        "id": "xu",
+        "phase": "walking",
+        "positionValid": true,
+        "action": "前往河畔"
+      },
+      {
+        "id": "chen",
+        "phase": "doing",
+        "positionValid": true,
+        "action": "在花园照料花圃"
+      },
+      {
+        "id": "tang",
+        "phase": "doing",
+        "positionValid": true,
+        "action": "在咖啡馆喝茶"
+      },
+      {
+        "id": "zhou",
+        "phase": "doing",
+        "positionValid": true,
+        "action": "在集市整理摊位"
+      },
+      {
+        "id": "su",
+        "phase": "walking",
+        "positionValid": true,
+        "action": "前往河畔"
+      },
+      {
+        "id": "lu",
+        "phase": "walking",
+        "positionValid": true,
+        "action": "前往果园"
+      },
+      {
+        "id": "wen",
+        "phase": "social",
+        "positionValid": true,
+        "action": "和顾奶奶聊聊天"
+      },
+      {
+        "id": "a",
+        "phase": "social",
+        "positionValid": true,
+        "action": "和叶小满聊聊天"
+      },
+      {
+        "id": "shen",
+        "phase": "walking",
+        "positionValid": true,
+        "action": "前往书屋"
+      },
+      {
+        "id": "ye",
+        "phase": "social",
+        "positionValid": true,
+        "action": "和阿澈聊聊天"
+      },
+      {
+        "id": "gu",
+        "phase": "social",
+        "positionValid": true,
+        "action": "和温婉聊聊天"
+      }
+    ]
+  },
+  "peaches": 1,
+  "picked": "你在桃子小岛摘下一颗成熟的桃子，放进了口袋。",
+  "duplicateBlocked": true,
+  "sheltered": true,
+  "reloadKeepsState": true
+}

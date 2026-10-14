@@ -1,0 +1,39 @@
+{
+  "status": "completed",
+  "startedAt": "2026-10-13T14:01:10.808Z",
+  "scheduledEndAt": "2026-10-13T14:11:10.808Z",
+  "observedEndAt": "2026-10-13T14:11:10.824Z",
+  "durationSeconds": 600.016,
+  "saveSnapshotLagSeconds": 0.041,
+  "sampleCount": 61,
+  "deepseek": {
+    "calls": 27,
+    "input": 78080,
+    "output": 3155,
+    "failures": 0,
+    "autoCalls": 27,
+    "reflectionCalls": 11,
+    "resets": [],
+    "total": 81235
+  },
+  "jev": {
+    "calls": 40,
+    "input": 59898,
+    "failures": 0,
+    "resets": []
+  },
+  "jevOutputTokens": "not recorded by current integration",
+  "conditions": [
+    {
+      "at": "2026-10-13T14:01:10.808Z",
+      "speed": 3,
+      "paused": false,
+      "online": true
+    }
+  ],
+  "initialDeepseekAutoCalls": 58,
+  "unlimitedDailyModelCalls": true,
+  "gameMinutes": 721,
+  "errors": [],
+  "scope": "Current local 2D saved session only; API-reported usage deltas from saved snapshots, not provider billing. Requests without returned usage are not measurable."
+}

@@ -1,0 +1,33 @@
+{
+  "environment": "Hidden desktop Chromium; mobile viewport 390x844; canvas 780x1688; not handset hardware",
+  "before": {
+    "bubbleRebuilds": 183,
+    "canvas": [
+      780,
+      1688
+    ],
+    "cpuMeanMs": 3.63,
+    "cpuP95Ms": 4.5,
+    "drawCalls": 87,
+    "fps": 30,
+    "frameTarget": 30,
+    "frames": 152,
+    "intervalMeanMs": 33.33,
+    "intervalP95Ms": 35.2
+  },
+  "after": {
+    "bubbleRebuilds": 2,
+    "canvas": [
+      780,
+      1688
+    ],
+    "cpuMeanMs": 2.64,
+    "cpuP95Ms": 3.6,
+    "drawCalls": 87,
+    "fps": 60,
+    "frameTarget": 60,
+    "frames": 305,
+    "intervalMeanMs": 16.67,
+    "intervalP95Ms": 19
+  }
+}

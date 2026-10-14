@@ -1,0 +1,278 @@
+{
+  "hotelExit": {
+    "x": 28.5,
+    "z": 8.324339999940992,
+    "roof": true,
+    "inside": false
+  },
+  "hotelEntry": {
+    "x": 28.5,
+    "z": 3.7838999999999996,
+    "roof": false,
+    "inside": true
+  },
+  "sitting": {
+    "pose": {
+      "kind": "sit",
+      "object": "hotel-lobby-chair-1",
+      "until": 697
+    },
+    "player": {
+      "x": 31.5,
+      "z": 2.5
+    },
+    "node": {
+      "x": 31.5,
+      "y": 0,
+      "z": 2.5
+    }
+  },
+  "rotate": {
+    "rotation": 90,
+    "navRevision": 2
+  },
+  "move": {
+    "x": 33,
+    "z": 3,
+    "revision": 2,
+    "navRevision": 3
+  },
+  "cafeOutside": {
+    "x": -7.5,
+    "z": -5.5,
+    "roof": true
+  },
+  "cafeInside": {
+    "x": -7.5,
+    "z": -9.5,
+    "roof": false
+  },
+  "tableRotation": {
+    "table": {
+      "rotation": 90
+    },
+    "cup": {
+      "x": -6.5,
+      "z": -14.5,
+      "parent": "cafe-table-2"
+    },
+    "navRevision": 4
+  },
+  "tableMove": {
+    "table": {
+      "x": -7,
+      "z": -15
+    },
+    "cup": {
+      "x": -6.5,
+      "z": -15.5,
+      "parent": "cafe-table-2"
+    }
+  },
+  "purchase": {
+    "before": 10000,
+    "after": 8000,
+    "warehouse": [
+      {
+        "id": "owned-1",
+        "name": "提灯"
+      }
+    ],
+    "last": "拾光工坊营业税"
+  },
+  "persistence": {
+    "table": -15,
+    "cup": -15.5,
+    "warehouse": 1,
+    "hatAttached": true,
+    "hatX": -7.5,
+    "playerX": -7.5
+  },
+  "mobileViewport": {
+    "css": {
+      "width": 390,
+      "height": 844
+    },
+    "canvas": {
+      "width": 780,
+      "height": 1688
+    },
+    "dpr": 3,
+    "engineDpr": 2,
+    "hud": {
+      "width": 390,
+      "height": 844
+    },
+    "frameTarget": 60
+  },
+  "performance": {
+    "samples": 180,
+    "meanMs": 16.666111111111114,
+    "p95Ms": 16.700000000000728,
+    "over33ms": 0,
+    "drawCallsMin": 50,
+    "drawCallsMax": 51
+  },
+  "pinch": {
+    "before": {
+      "x": -7.5,
+      "z": -11.5,
+      "zoom": 0.8
+    },
+    "after": {
+      "x": -7.5,
+      "z": -11.5,
+      "zoom": 1.2444444444444445
+    },
+    "route": 0,
+    "manualView": true
+  },
+  "chat": {
+    "resident": "lu",
+    "callsBefore": 10,
+    "callsAfter": 11,
+    "messages": [
+      {
+        "role": "user",
+        "content": "今天小镇里有什么新鲜事？",
+        "eventId": "e94"
+      },
+      {
+        "role": "assistant",
+        "content": "新鲜事啊……我刚在喷泉花园拍完一组旅拍，光落下来的时候特别好看。不过我今天还没去别处转，说不上全镇的新鲜事。",
+        "eventId": "e95",
+        "mode": "deepseek"
+      }
+    ],
+    "composerRetained": true
+  },
+  "imeResize": {
+    "messagesBefore": 2,
+    "messagesAfter": 2,
+    "draft": "明天一起去散步",
+    "canvasWidth": 390,
+    "hudHeight": 550,
+    "selected": "lu"
+  },
+  "finalSitting": {
+    "state": "sit",
+    "pose": {
+      "kind": "sit",
+      "object": "cafe-chair-2",
+      "until": 942
+    },
+    "hat": {
+      "x": -6.5,
+      "z": -11.5
+    },
+    "player": {
+      "x": -6.5,
+      "z": -11.5
+    }
+  },
+  "coverage": {
+    "definitions": 29,
+    "entities": 968,
+    "unrendered": [],
+    "residentCount": 11,
+    "visitors": 3,
+    "buildings": 4,
+    "lifeRecords": 95,
+    "decisionRecords": 5,
+    "habitPeople": 12,
+    "clips": [
+      {
+        "name": "idle",
+        "duration": 1.0416666269302368
+      },
+      {
+        "name": "run",
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "sit",
+        "duration": 1
+      }
+    ]
+  },
+  "finalState": {
+    "player": {
+      "x": 0.5,
+      "z": 1.5
+    },
+    "hat": {
+      "x": 0.5,
+      "z": 1.5
+    },
+    "roofStatus": [
+      {
+        "id": "cafe",
+        "inside": false,
+        "visible": true
+      },
+      {
+        "id": "library",
+        "inside": false,
+        "visible": true
+      },
+      {
+        "id": "studio",
+        "inside": false,
+        "visible": true
+      },
+      {
+        "id": "hotel",
+        "inside": false,
+        "visible": true
+      }
+    ]
+  },
+  "villagersPanel": {
+    "rows": 13,
+    "open": true,
+    "title": "村民系统"
+  },
+  "environment": {
+    "date": "2026-10-13",
+    "browser": "154.0.8037.93",
+    "platform": "macOS; background Chrome on Mac; mobile viewport simulation",
+    "viewport": "390x844",
+    "realPhone": false,
+    "formalBuildCount": 1,
+    "automatedTestSuite": false
+  },
+  "finalLoad": {
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  "method": {
+    "roof": "hotel actual pointer clicks, cafe gameplay walk command",
+    "furniture": "same client action controller and server validation",
+    "chat": "touch input and send; live DeepSeek response",
+    "pinch": "two-touch CDP input",
+    "keyboard": "composition events and viewport resize simulation"
+  },
+  "cameraFollow": {
+    "frames": 218,
+    "maxAbsX": 98.66726231402254,
+    "maxAbsY": 60.88229428906226,
+    "halfWidth": 195,
+    "halfHeight": 422,
+    "meanMs": 16.666055045871563,
+    "p95Ms": 16.799999999999272,
+    "over33ms": 0,
+    "player": {
+      "x": 9.5,
+      "z": 4.5
+    }
+  },
+  "zoomFollow": {
+    "zoom": 2,
+    "maxAbsX": 137.85279762684831,
+    "halfWidth": 195,
+    "player": {
+      "x": 14.5,
+      "z": 4.5
+    }
+  }
+}

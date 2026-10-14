@@ -1,0 +1,162 @@
+[
+  {
+    "kind": "chat",
+    "request": "我想给一条安静的小路起名叫“风铃小径”，还没决定。你喜欢这个名字吗？也想听听你的想法。",
+    "conversation": [
+      {
+        "role": "user",
+        "content": "我喜欢雨后安静的小路。"
+      },
+      {
+        "role": "assistant",
+        "content": "那可以慢慢走，挑人少的时候。"
+      }
+    ],
+    "contextKeys": [
+      "kind",
+      "resident",
+      "state",
+      "impressions",
+      "memory",
+      "belief",
+      "places",
+      "knownResidents",
+      "commitments",
+      "conversation",
+      "request"
+    ],
+    "fullSoul": true,
+    "budget": 420,
+    "temperature": 0.8
+  },
+  {
+    "kind": "chat",
+    "request": "刚才我给小路想的名字是什么？我们之前聊过我喜欢什么样的小路，结合这些再慢慢聊聊你的感觉吧。",
+    "conversation": [
+      {
+        "role": "user",
+        "content": "我喜欢雨后安静的小路。"
+      },
+      {
+        "role": "assistant",
+        "content": "那可以慢慢走，挑人少的时候。"
+      },
+      {
+        "role": "user",
+        "content": "我想给一条安静的小路起名叫“风铃小径”，还没决定。你喜欢这个名字吗？也想听听你的想法。"
+      },
+      {
+        "role": "assistant",
+        "content": "风铃……听起来很轻，像雨天屋檐下的声音。我一时说不上喜不喜欢，但我觉得它适合安静的地方。"
+      }
+    ],
+    "contextKeys": [
+      "kind",
+      "resident",
+      "state",
+      "impressions",
+      "memory",
+      "belief",
+      "places",
+      "knownResidents",
+      "commitments",
+      "conversation",
+      "request"
+    ],
+    "fullSoul": true,
+    "budget": 420,
+    "temperature": 0.8
+  },
+  {
+    "kind": "chat",
+    "request": "断流测试：请保留完整的长回复，不用压短。",
+    "conversation": [
+      {
+        "role": "user",
+        "content": "我喜欢雨后安静的小路。"
+      },
+      {
+        "role": "assistant",
+        "content": "那可以慢慢走，挑人少的时候。"
+      },
+      {
+        "role": "user",
+        "content": "我想给一条安静的小路起名叫“风铃小径”，还没决定。你喜欢这个名字吗？也想听听你的想法。"
+      },
+      {
+        "role": "assistant",
+        "content": "风铃……听起来很轻，像雨天屋檐下的声音。我一时说不上喜不喜欢，但我觉得它适合安静的地方。"
+      },
+      {
+        "role": "user",
+        "content": "刚才我给小路想的名字是什么？我们之前聊过我喜欢什么样的小路，结合这些再慢慢聊聊你的感觉吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "你刚才说的是“风铃小径”。我记得你提过喜欢雨后安静的小路，所以这个名字放在那种地方，我觉得是合适的。"
+      }
+    ],
+    "contextKeys": [
+      "kind",
+      "resident",
+      "state",
+      "impressions",
+      "memory",
+      "belief",
+      "places",
+      "knownResidents",
+      "commitments",
+      "conversation",
+      "request"
+    ],
+    "fullSoul": true,
+    "budget": 420,
+    "temperature": 0.8
+  },
+  {
+    "kind": "chat",
+    "request": "断流测试：请保留完整的长回复，不用压短。",
+    "conversation": [
+      {
+        "role": "user",
+        "content": "我喜欢雨后安静的小路。"
+      },
+      {
+        "role": "assistant",
+        "content": "那可以慢慢走，挑人少的时候。"
+      },
+      {
+        "role": "user",
+        "content": "我想给一条安静的小路起名叫“风铃小径”，还没决定。你喜欢这个名字吗？也想听听你的想法。"
+      },
+      {
+        "role": "assistant",
+        "content": "风铃……听起来很轻，像雨天屋檐下的声音。我一时说不上喜不喜欢，但我觉得它适合安静的地方。"
+      },
+      {
+        "role": "user",
+        "content": "刚才我给小路想的名字是什么？我们之前聊过我喜欢什么样的小路，结合这些再慢慢聊聊你的感觉吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "你刚才说的是“风铃小径”。我记得你提过喜欢雨后安静的小路，所以这个名字放在那种地方，我觉得是合适的。"
+      }
+    ],
+    "contextKeys": [
+      "kind",
+      "resident",
+      "state",
+      "impressions",
+      "memory",
+      "belief",
+      "places",
+      "knownResidents",
+      "commitments",
+      "conversation",
+      "request"
+    ],
+    "fullSoul": true,
+    "budget": 420,
+    "temperature": 0.8
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "name": "wechatgame",
+  "platform": "wechatgame",
+  "buildPath": "project://build",
+  "debug": false,
+  "md5Cache": true,
+  "startScene": "b1dcc3fe-f746-4d5b-9768-37b3a0d001d9",
+  "scenes": [
+    {
+      "url": "db://assets/scenes/CafeStreet.scene",
+      "uuid": "b1dcc3fe-f746-4d5b-9768-37b3a0d001d9"
+    }
+  ],
+  "packages": {
+    "wechatgame": {
+      "appid": "wx3dfe91fe51cb2c34",
+      "orientation": "portrait",
+      "REMOTE_SERVER_ROOT": "",
+      "startSceneAssetBundle": false
+    }
+  },
+  "engineModulesConfigKey": "townLite",
+  "mainBundleCompressionType": "merge_dep"
+}

@@ -1,0 +1,36 @@
+{
+  "environment": "Background Chrome; isolated seven-day save; no model calls or user-window operation",
+  "mobileEntries": {
+    "economyButton": {
+      "x": 106,
+      "y": 379
+    },
+    "villagersButton": {
+      "x": 155,
+      "y": 379
+    },
+    "mapButton": {
+      "x": 155,
+      "y": 335
+    },
+    "journalButton": {
+      "x": 106,
+      "y": 335
+    }
+  },
+  "periodToggle": true,
+  "townNetIncome": 644,
+  "linIncome": 118.84,
+  "linAge": 27,
+  "habitsVisible": true,
+  "individualTransactions": true,
+  "population": 12,
+  "desktop": {
+    "sameRow": true,
+    "open": "villager",
+    "width": 960,
+    "height": 600
+  },
+  "existingMapWorks": true,
+  "errors": []
+}

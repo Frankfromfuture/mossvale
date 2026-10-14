@@ -1,0 +1,470 @@
+{
+  "at": "2026-10-13T06:01:55.194Z",
+  "environment": "Local Mac; production Jev endpoint and encrypted Mossvale credential; isolated in-memory towns",
+  "scope": "Server request and applied task/encounter. Browser polling and visual movement are not included.",
+  "rounds": [
+    {
+      "round": 1,
+      "scenario": "idle",
+      "durationMs": 620,
+      "decisions": 2,
+      "encounterRecorded": false,
+      "dialogue": []
+    },
+    {
+      "round": 1,
+      "scenario": "encounter",
+      "durationMs": 1847,
+      "decisions": 2,
+      "encounterRecorded": true,
+      "dialogue": [
+        "许知远对唐桃说：“唐桃，晚上好。今天店里挺安静的。”",
+        "唐桃对许知远说：“许知远，晚上好呀！今天在咖啡馆里都能闻到一点花香，你也是来歇会儿的？”"
+      ]
+    },
+    {
+      "round": 2,
+      "scenario": "idle",
+      "durationMs": 351,
+      "decisions": 2,
+      "encounterRecorded": false,
+      "dialogue": []
+    },
+    {
+      "round": 2,
+      "scenario": "encounter",
+      "durationMs": 1740,
+      "decisions": 2,
+      "encounterRecorded": true,
+      "dialogue": [
+        "唐桃对许知远说：“许知远，晚上好呀。今天路过花圃的时候还想起你那边的花，开得挺精神的。”",
+        "许知远对唐桃说：“你好，唐桃。今天咖啡还合口味吗？”"
+      ]
+    },
+    {
+      "round": 3,
+      "scenario": "idle",
+      "durationMs": 338,
+      "decisions": 2,
+      "encounterRecorded": false,
+      "dialogue": []
+    },
+    {
+      "round": 3,
+      "scenario": "encounter",
+      "durationMs": 1456,
+      "decisions": 2,
+      "encounterRecorded": true,
+      "dialogue": [
+        "许知远对唐桃说：“你好，唐桃。今天店里不算吵，正好能歇一会儿。”",
+        "唐桃对许知远说：“知远，晚上好！你也来咖啡馆坐坐？今天的花色配得挺顺，心情不错。”"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "round": 1,
+      "scenario": "idle",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "uncertain",
+      "selected": "square",
+      "requestMs": 610,
+      "applied": true,
+      "observedAfterTriggerMs": 619,
+      "action": "前往散步放松",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "散步放松",
+        "phase": "walking",
+        "routeSteps": 13
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "idle",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "idle",
+      "mode": "jev",
+      "reason": null,
+      "selected": "library",
+      "requestMs": 612,
+      "applied": true,
+      "observedAfterTriggerMs": 620,
+      "action": "前往安静阅读",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "安静阅读",
+        "phase": "walking",
+        "routeSteps": 23
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 339,
+      "applied": true,
+      "observedAfterTriggerMs": 340,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 1,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 301,
+      "applied": true,
+      "observedAfterTriggerMs": 340,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "idle",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "idle",
+      "mode": "jev",
+      "reason": null,
+      "selected": "library",
+      "requestMs": 322,
+      "applied": true,
+      "observedAfterTriggerMs": 326,
+      "action": "前往安静阅读",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "安静阅读",
+        "phase": "walking",
+        "routeSteps": 23
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "idle",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "uncertain",
+      "selected": "square",
+      "requestMs": 347,
+      "applied": true,
+      "observedAfterTriggerMs": 351,
+      "action": "前往散步放松",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "散步放松",
+        "phase": "walking",
+        "routeSteps": 13
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 312,
+      "applied": true,
+      "observedAfterTriggerMs": 313,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 2,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 310,
+      "applied": true,
+      "observedAfterTriggerMs": 313,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "idle",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "uncertain",
+      "selected": "square",
+      "requestMs": 331,
+      "applied": true,
+      "observedAfterTriggerMs": 335,
+      "action": "前往散步放松",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "散步放松",
+        "phase": "walking",
+        "routeSteps": 13
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "idle",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "idle",
+      "mode": "jev",
+      "reason": null,
+      "selected": "library",
+      "requestMs": 334,
+      "applied": true,
+      "observedAfterTriggerMs": 338,
+      "action": "前往安静阅读",
+      "phase": "walking",
+      "task": {
+        "kind": "leisure",
+        "label": "安静阅读",
+        "phase": "walking",
+        "routeSteps": 23
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 310,
+      "applied": true,
+      "observedAfterTriggerMs": 311,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 3,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selected": "greet",
+      "requestMs": 303,
+      "applied": true,
+      "observedAfterTriggerMs": 311,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    }
+  ],
+  "speech": [
+    {
+      "round": 1,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1368,
+      "applied": true,
+      "observedAfterTriggerMs": 1847,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 1,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1506,
+      "applied": true,
+      "observedAfterTriggerMs": 1847,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1307,
+      "applied": true,
+      "observedAfterTriggerMs": 1740,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1428,
+      "applied": true,
+      "observedAfterTriggerMs": 1740,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 3,
+      "scenario": "encounter",
+      "name": "许知远",
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1087,
+      "applied": true,
+      "observedAfterTriggerMs": 1456,
+      "action": "向邻居打招呼",
+      "phase": "social",
+      "task": null
+    },
+    {
+      "round": 3,
+      "scenario": "encounter",
+      "name": "唐桃",
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selected": null,
+      "requestMs": 1145,
+      "applied": true,
+      "observedAfterTriggerMs": 1456,
+      "action": "稍作休息",
+      "phase": "doing",
+      "task": {
+        "kind": "habit",
+        "label": "整理画稿",
+        "phase": "doing",
+        "routeSteps": 0
+      }
+    }
+  ],
+  "summary": {
+    "all": {
+      "count": 12,
+      "accepted": 9,
+      "fallbacks": 3,
+      "timeouts": 0,
+      "minMs": 301,
+      "medianMs": 326.5,
+      "maxMs": 612,
+      "averageMs": 369,
+      "appliedMaxMs": 620
+    },
+    "idle": {
+      "count": 6,
+      "accepted": 3,
+      "fallbacks": 3,
+      "timeouts": 0,
+      "minMs": 322,
+      "medianMs": 340.5,
+      "maxMs": 612,
+      "averageMs": 426,
+      "appliedMaxMs": 620
+    },
+    "encounter": {
+      "count": 6,
+      "accepted": 6,
+      "fallbacks": 0,
+      "timeouts": 0,
+      "minMs": 301,
+      "medianMs": 310,
+      "maxMs": 339,
+      "averageMs": 313,
+      "appliedMaxMs": 340
+    },
+    "speech": {
+      "count": 6,
+      "accepted": 6,
+      "fallbacks": 0,
+      "timeouts": 0,
+      "minMs": 1087,
+      "medianMs": 1337.5,
+      "maxMs": 1506,
+      "averageMs": 1307,
+      "appliedMaxMs": 1847
+    }
+  },
+  "checks": {
+    "twelveDecisions": true,
+    "idleApplied": true,
+    "encountersRecorded": true,
+    "noAuthRejection": true,
+    "deepseekSpeechPreserved": true
+  },
+  "endpoint": "https://api.typesafe.ai/v1/systemone"
+}

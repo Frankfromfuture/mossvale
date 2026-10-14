@@ -1,0 +1,174 @@
+{
+  "scope": "独立内存小镇；不含游戏画面同步延迟",
+  "complete": true,
+  "records": [
+    {
+      "type": "start",
+      "at": "2026-10-13T10:56:14.557Z",
+      "scenario": "both",
+      "rounds": 1
+    },
+    {
+      "type": "scenario",
+      "round": 1,
+      "scenario": "idle"
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "idle",
+      "resident": "xu",
+      "name": "许知远",
+      "kind": "idle",
+      "mode": "jev",
+      "reason": null,
+      "selection": "安静阅读，去风页书屋，做一小段时间。",
+      "confidence": 0.89,
+      "basis": "性格：慢热、细心，喜欢一对一相处；想交朋友，也需要安静和自己的空间。\n状态：精力充足，饥饿程度一般；晴天\n喜好：独自阅读、一对一交谈",
+      "basisKind": "input",
+      "requestMs": 559,
+      "observedAfterTriggerMs": 572,
+      "applied": true,
+      "action": "前往安静阅读",
+      "task": "安静阅读",
+      "speech": null
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "idle",
+      "resident": "tang",
+      "name": "唐桃",
+      "kind": "idle",
+      "mode": "rules",
+      "reason": "uncertain",
+      "selection": "散步放松，去石板小街，做一小段时间。",
+      "confidence": 0.39,
+      "basis": "按习惯、安静与社交偏好、地点和邻居印象、上次到访时间排序，选择当前可达的最高分去处。",
+      "basisKind": "rule",
+      "requestMs": 569,
+      "observedAfterTriggerMs": 581,
+      "applied": true,
+      "action": "前往散步放松",
+      "task": "散步放松",
+      "speech": null
+    },
+    {
+      "type": "scenario-complete",
+      "round": 1,
+      "scenario": "idle",
+      "durationMs": 582,
+      "speechCount": 0,
+      "events": []
+    },
+    {
+      "type": "scenario",
+      "round": 1,
+      "scenario": "encounter"
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "encounter",
+      "resident": "xu",
+      "name": "许知远",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selection": "友善地点头、简短问候，保持自己的安排。",
+      "confidence": 0.85,
+      "basis": "性格：慢热、细心，喜欢一对一相处；想交朋友，也需要安静和自己的空间。\n状态：精力充足，饥饿程度一般\n喜好：独自阅读、一对一交谈\n与唐桃的熟悉度：30/100",
+      "basisKind": "input",
+      "requestMs": 302,
+      "observedAfterTriggerMs": 303,
+      "applied": true,
+      "action": "向邻居打招呼",
+      "task": null,
+      "speech": null
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "encounter",
+      "resident": "tang",
+      "name": "唐桃",
+      "kind": "encounter",
+      "mode": "jev",
+      "reason": null,
+      "selection": "友善地点头、简短问候，保持自己的安排。",
+      "confidence": 0.55,
+      "basis": "性格：活泼、感性，对新鲜事很上心；喜欢把花分享出去，也常担心自己答应太多。\n状态：精力充足，饥饿程度一般\n喜好：配色与花形、和人分享见闻\n与许知远的熟悉度：30/100",
+      "basisKind": "input",
+      "requestMs": 297,
+      "observedAfterTriggerMs": 303,
+      "applied": true,
+      "action": "稍作休息",
+      "task": "整理花材",
+      "speech": null
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "encounter",
+      "resident": "xu",
+      "name": "许知远",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selection": null,
+      "confidence": null,
+      "basis": null,
+      "basisKind": null,
+      "requestMs": 1150,
+      "observedAfterTriggerMs": 2119,
+      "applied": true,
+      "action": "向邻居打招呼",
+      "task": null,
+      "speech": "唐桃，你好。今天店里还算安静，你坐得还舒服吗？"
+    },
+    {
+      "type": "sample",
+      "round": 1,
+      "scenario": "encounter",
+      "resident": "tang",
+      "name": "唐桃",
+      "kind": "speech",
+      "mode": "deepseek",
+      "reason": null,
+      "selection": null,
+      "confidence": null,
+      "basis": null,
+      "basisKind": null,
+      "requestMs": 1812,
+      "observedAfterTriggerMs": 2119,
+      "applied": true,
+      "action": "稍作休息",
+      "task": "整理花材",
+      "speech": "许知远，晚上好！今天花圃那边风挺舒服的，你也在休息？"
+    },
+    {
+      "type": "scenario-complete",
+      "round": 1,
+      "scenario": "encounter",
+      "durationMs": 2119,
+      "speechCount": 2,
+      "events": [
+        {
+          "type": "encounter",
+          "text": "许知远向唐桃打招呼，两人简短点头问候。"
+        },
+        {
+          "type": "dialogue",
+          "text": "许知远对唐桃说：“唐桃，你好。今天店里还算安静，你坐得还舒服吗？”"
+        },
+        {
+          "type": "dialogue",
+          "text": "唐桃对许知远说：“许知远，晚上好！今天花圃那边风挺舒服的，你也在休息？”"
+        }
+      ]
+    },
+    {
+      "type": "complete"
+    }
+  ]
+}

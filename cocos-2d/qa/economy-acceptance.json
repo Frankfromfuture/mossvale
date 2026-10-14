@@ -1,0 +1,16 @@
+{
+  "residents": 11,
+  "initialReadyRooms": 2,
+  "thirdRoomOpens": true,
+  "purchaseRetrySafe": true,
+  "warehousePersistence": true,
+  "blockedPlacementRejected": true,
+  "paidWork": true,
+  "hotelReception": true,
+  "guestRevenue": true,
+  "invitedResidentFeedback": true,
+  "visitorDialogueLimit": true,
+  "invalidModelPlanRejected": true,
+  "repeatedReturnDoesNotRepeatIncome": true,
+  "archivedHistoryPreserved": true
+}

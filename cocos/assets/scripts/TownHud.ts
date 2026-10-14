@@ -1,0 +1,337 @@
+import { Node, Canvas, Camera, UITransform, Graphics, Color, Label, LabelOutline, Layers, EditBox, view, ResolutionPolicy, Vec3, sys, Sprite, SpriteFrame, resources } from 'cc';
+import {PlaceSpot, TownLayout} from './StreetWorld';
+import { Resident, TownState } from './TownApi';
+declare const wx:any;
+const ink='#435443', paper='#FFF7DF', green='#708859', ochre='#BB8257';
+const c=(s:string)=>new Color().fromHEX(s);
+const clamp=(v:number,min:number,max:number)=>Math.max(min,Math.min(max,v));
+export type HudActions={send:(kind:string,message?:string)=>void;close:()=>void;control:(action:string)=>void;navigate:(place:string)=>void};
+export type ContextOption={label:string;icon:string;cost?:string;run:()=>void};
+type Motion={node:Node;time:number;duration:number;from:number};
+
+/** Native, world-attached game UI. Paper is a prop, never a generic panel. */
+export class TownHud {
+    canvas:Node;uiCamera:Camera;topInset=0;bottomInset=0;width=390;height=844;
+    nameplates:Record<string,Node>={};landmarks:{node:Node,world:Vec3,id:string}[]=[];ambient:Record<string,{node:Node,label:Label}>={};destination:Node;
+    private bubble:Node|null=null;private tail:Graphics|null=null;private bubbleRect:number[]|null=null;
+    private tailBase=NaN;private tailTip=NaN;private tailLength=NaN;
+    private composer:Node|null=null;private input:EditBox|null=null;private draft='';private composing=false;private compositionEnded=0;private draftResident='';private submitted='';
+    private journalFrame:SpriteFrame|null=null;private journal:Node|null=null;private journalPage=0;private menu:Node|null=null;private state:TownState|null=null;
+    private selected:Resident|null=null;private speech:Label|null=null;private nextHint:Label|null=null;
+    private pages:string[]=[];private speechPage=0;private waiting=false;
+    private notice:Node;private noticeText:Label;private noticeTime=0;private retry=false;
+    private clockLabel:Label;private weather:Node;private lastWeather='';private hold:Node;
+    playerPosition=new Vec3();private map:Node|null=null;private mapButton:Node;private journalButton:Node;
+    private hint:Node;private hintTime=7;private motions:Motion[]=[];
+    private pageFold:{node:Node;time:number;height:number}|null=null;
+    private reduceMotion=!!(globalThis as any).matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    private imeStart=(e:Event)=>{if(this.isReplyInput(e.target))this.composing=true;};
+    private imeEnd=(e:Event)=>{if(this.isReplyInput(e.target)){this.composing=false;this.compositionEnded=performance.now();}};
+    private imeKey=(e:KeyboardEvent)=>{
+        if(this.isReplyInput(e.target)&&(e.key==='Enter'||e.keyCode===13)&&
+            (this.composing||e.isComposing||e.keyCode===229||performance.now()-this.compositionEnded<80)){
+            // Let the IME accept its candidate; keep Cocos from sending or blurring it.
+            e.stopImmediatePropagation();
+        }
+    };
+    private isReplyInput(target:EventTarget|null){return !!this.input&&target instanceof HTMLInputElement&&!!target.closest('#GameDiv');}
+    constructor(root:Node,private actions:HudActions,private layout:TownLayout){
+        if(typeof document!=='undefined'){
+            document.addEventListener('compositionstart',this.imeStart,true);
+            document.addEventListener('compositionend',this.imeEnd,true);
+            document.addEventListener('keydown',this.imeKey,true);
+        }
+        view.setDesignResolutionSize(390,844,ResolutionPolicy.FIXED_WIDTH);this.height=view.getVisibleSize().height;
+        if(sys.platform===sys.Platform.WECHAT_GAME){
+            const info=wx.getWindowInfo?wx.getWindowInfo():wx.getSystemInfoSync(),scale=390/info.windowWidth;
+            const menu=wx.getMenuButtonBoundingClientRect?.();
+            this.topInset=Math.max(0,(menu?.bottom||info.safeArea?.top||24)*scale-14);
+            this.bottomInset=Math.max(0,(info.windowHeight-(info.safeArea?.bottom||info.windowHeight))*scale-12);
+        }
+        this.canvas=this.node('Village overlays',root,0,0,this.width,this.height);this.canvas.setPosition(this.width/2,this.height/2);
+        const cc=this.canvas.addComponent(Canvas);cc.alignCanvasWithScreen=false;
+        const cn=new Node('UI Camera');cn.parent=root;cn.setPosition(this.width/2,this.height/2,1000);
+        this.uiCamera=cn.addComponent(Camera);this.uiCamera.projection=Camera.ProjectionType.ORTHO;
+        this.uiCamera.orthoHeight=this.height/2;this.uiCamera.near=1;this.uiCamera.far=2000;
+        this.uiCamera.clearFlags=Camera.ClearFlag.DEPTH_ONLY;this.uiCamera.priority=10;this.uiCamera.visibility=Layers.Enum.UI_2D;cc.cameraComponent=this.uiCamera;
+        resources.load('journal-notebook-v3/spriteFrame',SpriteFrame,(err,frame)=>{
+            if(err||!this.canvas.isValid)return;this.journalFrame=frame;if(this.journal)this.drawJournal();
+        });
+        const top=this.height/2-this.topInset,bottom=-this.height/2+this.bottomInset;
+        this.weather=this.node('Weather',this.canvas,-158,top-43,34,34);this.icon(this.weather,'sun');
+        this.clockLabel=this.label(this.canvas,'09:00',-105,top-44,72,30,21,ink,true,true);
+        this.mapButton=this.iconButton(this.canvas,'map',155,top-43,()=>this.toggleMap(this.playerPosition));
+        this.journalButton=this.iconButton(this.canvas,'journal',106,top-43,()=>this.toggleJournal());
+        this.notice=this.node('Little reminder',this.canvas,0,top-93,334,48);
+        this.cloud(this.notice,334,48,'#FFF7DF');this.noticeText=this.label(this.notice,'',0,0,304,42,14);
+        this.bind(this.notice,()=>{if(this.retry)this.openComposer();});this.notice.active=false;
+        this.hint=this.node('First steps',this.canvas,0,bottom+43,272,36);
+        this.label(this.hint,'轻点前往 · 拖住走动 · 长按互动',0,0,270,32,15,ink,false,true);
+        if(sys.localStorage.getItem('mossvale-touch-learned'))this.hint.active=false;
+        this.destination=this.node('Footfall',this.canvas,0,0,30,20);const dg=this.destination.addComponent(Graphics);
+        dg.lineWidth=2.5;dg.strokeColor=c(paper);dg.ellipse(0,0,13,7);dg.stroke();dg.fillColor=c(green);dg.ellipse(-3,1,2.8,4);dg.ellipse(4,-1,2.8,4);dg.fill();this.destination.active=false;
+        this.hold=this.node('Hold progress',this.canvas,0,0,50,50);this.hold.addComponent(Graphics);this.hold.active=false;
+        for(const {id,name} of layout.actors){
+            const p=this.node('Nearby '+id,this.canvas,0,0,78,30);this.label(p,name,0,0,78,30,15,ink,true,true);this.nameplates[id]=p;
+            const n=this.node('Neighbour thought '+id,this.canvas,0,0,168,42);this.cloud(n,168,42,paper);const label=this.label(n,'',0,0,150,35,12);n.active=false;this.ambient[id]={node:n,label};
+        }
+        for(const spot of layout.places){const n=this.node('Sign '+spot.id,this.canvas,0,0,104,48);this.label(n,spot.short,0,8,104,23,16,ink,true,true);this.label(n,spot.cost?`${spot.label} · ${spot.cost} 币`:spot.label,0,-13,104,20,12,green,false,true);this.landmarks.push({node:n,world:new Vec3(spot.x+1.7,1.1,spot.z),id:spot.id});}
+    }
+    relayout(height:number){
+        this.height=height;
+        this.canvas.getComponent(UITransform)!.setContentSize(this.width,height);
+        this.canvas.setPosition(this.width/2,height/2,0);
+        this.uiCamera.node.setPosition(this.width/2,height/2,1000);this.uiCamera.orthoHeight=height/2;
+        const top=height/2-this.topInset,bottom=-height/2+this.bottomInset;
+        this.weather.setPosition(-158,top-43,0);this.clockLabel.node.setPosition(-105,top-44,0);
+        this.mapButton.setPosition(155,top-43,0);this.journalButton.setPosition(106,top-43,0);
+        this.notice.setPosition(0,top-93,0);this.hint.setPosition(0,bottom+43,0);
+        this.composer?.setPosition(0,bottom+60,0);
+        this.closeContext();if(this.journal)this.drawJournal();if(this.map)this.drawMap();
+    }
+    private node(name:string,parent:Node,x=0,y=0,w=1,h=1){const n=new Node(name);n.parent=parent;n.layer=Layers.Enum.UI_2D;n.setPosition(x,y,0);n.addComponent(UITransform).setContentSize(w,h);return n;}
+    private label(parent:Node,text:string,x:number,y:number,w:number,h:number,size:number,tone=ink,bold=false,outline=false){
+        const n=this.node(text.slice(0,18)||'Text',parent,x,y,w,h),l=n.addComponent(Label);
+        l.string=text;l.fontSize=size;l.lineHeight=size*1.55;l.color=c(tone);l.isBold=bold;l.fontFamily='PingFang SC';
+        l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;l.enableWrapText=true;
+        if(outline){const o=n.addComponent(LabelOutline);o.color=c(paper);o.width=3;}return l;
+    }
+    private cloud(n:Node,w:number,h:number,tone=paper){
+        const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=c(tone);g.strokeColor=c('#D7C49D');g.lineWidth=2;
+        g.moveTo(-w/2+28,-h/2+2);g.bezierCurveTo(-w/2-4,-h/2+2,-w/2-4,h/2-10,-w/2+32,h/2);
+        g.bezierCurveTo(-w/4,h/2+5,w/3,h/2+3,w/2-23,h/2-3);
+        g.bezierCurveTo(w/2+6,h/2-9,w/2+5,-h/2+6,w/2-25,-h/2+1);
+        g.bezierCurveTo(w/4,-h/2-4,-w/3,-h/2-3,-w/2+28,-h/2+2);g.close();g.fill();g.stroke();return g;
+    }
+    private pop(n:Node,from=.86,duration=.18){if(this.reduceMotion)return;n.setScale(from,from,1);this.motions.push({node:n,time:0,duration,from});}
+    private bind(n:Node,run:()=>void){
+        let pressed=false;
+        n.on(Node.EventType.TOUCH_START,e=>{e.propagationStopped=true;pressed=true;n.setScale(.94,.94,1);});
+        n.on(Node.EventType.TOUCH_MOVE,e=>{const a=e.getStartLocation(),b=e.getLocation();if(Math.hypot(a.x-b.x,a.y-b.y)>12){pressed=false;n.setScale(1,1,1);}});
+        n.on(Node.EventType.TOUCH_END,e=>{e.propagationStopped=true;const yes=pressed;pressed=false;n.setScale(1,1,1);if(yes)run();});
+        n.on(Node.EventType.TOUCH_CANCEL,()=>{pressed=false;n.setScale(1,1,1);});
+    }
+    private icon(parent:Node,kind:string,x=0,y=0,scale=1){
+        const n=this.node('Drawn '+kind,parent,x,y,40,40);n.setScale(scale,scale,1);const g=n.addComponent(Graphics);
+        g.lineWidth=2.4;g.strokeColor=c(ink);g.fillColor=c('#EAC47F');
+        const stroke=()=>g.stroke();const circle=(x:number,y:number,r:number,tone:string)=>{g.fillColor=c(tone);g.circle(x,y,r);g.fill();};
+        if(kind==='sun'){circle(0,0,10,'#F1CA6E');for(let i=0;i<8;i++){const a=i*Math.PI/4;g.moveTo(Math.cos(a)*14,Math.sin(a)*14);g.lineTo(Math.cos(a)*18,Math.sin(a)*18);}g.strokeColor=c('#B58B40');stroke();}
+        else if(kind==='rain'){circle(-6,4,8,'#C6DBD7');circle(5,7,10,'#C6DBD7');circle(12,2,7,'#C6DBD7');g.strokeColor=c('#699CA2');for(const x of [-8,1,10]){g.moveTo(x,-9);g.lineTo(x-3,-16);}stroke();}
+        else if(kind==='chat'){g.fillColor=c('#BFD1A2');g.roundRect(-17,-10,34,26,11);g.fill();g.moveTo(-8,-8);g.lineTo(-10,-17);g.lineTo(1,-8);g.close();g.fill();for(const x of [-8,0,8])circle(x,3,1.8,ink);}
+        else if(kind==='tea'){g.fillColor=c('#DBAA79');g.ellipse(0,-13,20,4);g.fill();g.fillColor=c('#FFFEF0');g.roundRect(-14,-10,27,25,7);g.fill();g.stroke();g.moveTo(13,10);g.bezierCurveTo(27,13,25,-8,13,-5);stroke();g.fillColor=c('#8D6B4F');g.ellipse(0,12,11,3);g.fill();g.moveTo(-4,21);g.bezierCurveTo(-9,24,1,26,-2,30);g.strokeColor=c('#A8B8A0');stroke();}
+        else if(kind==='gift'){g.fillColor=c('#D8B6A0');g.ellipse(0,-14,20,4);g.fill();g.fillColor=c('#E4B76F');g.roundRect(-16,-11,32,20,5);g.fill();g.fillColor=c('#FFF1C6');g.roundRect(-17,2,34,9,4);g.fill();circle(0,15,5,'#C98166');g.strokeColor=c('#8A714E');g.moveTo(-11,-4);g.lineTo(11,-4);stroke();}
+        else if(kind==='help'){g.fillColor=c('#A8C38D');g.moveTo(-14,2);g.bezierCurveTo(-25,19,-7,25,0,14);g.bezierCurveTo(9,26,25,18,14,3);g.lineTo(0,-12);g.close();g.fill();g.strokeColor=c('#B98965');g.moveTo(-23,-8);g.lineTo(-10,-18);g.bezierCurveTo(-3,-22,7,-15,18,-10);g.moveTo(-21,-5);g.lineTo(-8,-10);g.lineTo(2,-7);stroke();}
+        else if(kind==='memory'||kind==='journal'){g.fillColor=c(kind==='memory'?'#CA9574':'#7E9E73');g.roundRect(-17,-20,34,40,4);g.fill();g.stroke();g.strokeColor=c('#F5E9C6');g.moveTo(-10,-17);g.lineTo(-10,17);stroke();g.fillColor=c('#FFF2D2');g.rect(-5,-8,16,20);g.fill();circle(3,3,4,'#C3A15F');g.moveTo(-2,-5);g.lineTo(3,0);g.lineTo(8,-5);g.strokeColor=c(green);stroke();}
+        else if(kind==='walk'){g.fillColor=c('#849E6E');g.ellipse(-8,1,5,10);g.ellipse(8,-8,5,10);g.fill();circle(-8,14,3,'#849E6E');circle(8,5,3,'#849E6E');}
+        else if(kind==='map'){g.fillColor=c('#E6D7A6');g.moveTo(-21,-15);g.lineTo(-7,-20);g.lineTo(6,-13);g.lineTo(21,-17);g.lineTo(21,16);g.lineTo(7,20);g.lineTo(-7,13);g.lineTo(-21,18);g.close();g.fill();g.strokeColor=c('#ADBC86');g.moveTo(-18,0);g.bezierCurveTo(-8,13,5,-16,18,5);stroke();circle(9,8,5,'#BF8664');}
+        else if(kind==='rest'){g.fillColor=c('#E8BD6B');g.circle(-2,2,18);g.fill();g.fillColor=c(paper);g.circle(7,10,15);g.fill();circle(16,-10,2,'#C79C56');circle(12,-2,2,'#C79C56');}
+        else if(kind==='close'){g.strokeColor=c(ink);g.moveTo(-6,-6);g.lineTo(6,6);g.moveTo(-6,6);g.lineTo(6,-6);stroke();}
+        else if(kind==='next'||kind==='prev'){const d=kind==='next'?1:-1;g.strokeColor=c(ochre);g.moveTo(-d*8,-8);g.lineTo(d*4,0);g.lineTo(-d*8,8);stroke();}
+        else if(kind==='send'){g.fillColor=c(green);g.moveTo(-16,-13);g.lineTo(19,0);g.lineTo(-16,15);g.lineTo(-10,1);g.close();g.fill();g.strokeColor=c(paper);g.moveTo(-9,1);g.lineTo(9,1);stroke();}
+        return n;
+    }
+    private iconButton(parent:Node,kind:string,x:number,y:number,run:()=>void){const n=this.node(kind,parent,x,y,46,46);this.icon(n,kind);this.bind(n,run);return n;}
+    get menuOpen(){return !!this.menu;}
+    get modalOpen(){return !!this.menu||!!this.journal||!!this.map;}
+    nameAt(x:number,y:number){return Object.entries(this.nameplates).find(([,p])=>p.active&&Math.abs(x-p.position.x)<40&&Math.abs(y-p.position.y)<18)?.[0]||'';}
+    conversationAt(x:number,y:number){if(!this.bubbleRect||!this.selected)return '';const [cx,cy,w,h]=this.bubbleRect;return Math.abs(x-cx)<w/2-18&&Math.abs(y-cy)<h/2-35?this.selected.id:'';}
+    blocks(x:number,y:number){
+        if(this.modalOpen||y>this.height/2-this.topInset-72||y<-this.height/2+this.bottomInset+8)return true;
+        if(this.notice.active&&y>this.height/2-this.topInset-120)return true;
+        if(this.composer&&y<-this.height/2+this.bottomInset+120)return true;
+        if(this.bubbleRect){const [cx,cy,w,h]=this.bubbleRect;if(Math.abs(x-cx)<w/2+8&&y>cy-h/2-50&&y<cy+h/2+15)return true;}
+        return false;
+    }
+    setState(w:TownState){
+        this.state=w;this.clockLabel.string=`${String(Math.floor(w.minute%1440/60)).padStart(2,'0')}:${String(w.minute%60).padStart(2,'0')}`;
+        if(this.lastWeather!==w.weather){this.lastWeather=w.weather;this.weather.children.slice().forEach(n=>n.destroy());this.icon(this.weather,w.weather==='rain'?'rain':'sun');}
+        if(this.selected)this.selected=w.residents.find(r=>r.id===this.selected!.id)||this.selected;
+        if(this.journal)this.drawJournal();
+    }
+    toast(text:string){this.notice.active=true;this.noticeText.string=text;this.noticeTime=5;this.retry=false;this.notice.setSiblingIndex(this.canvas.children.length-1);}
+    tick(dt:number){
+        if(this.noticeTime>0&&(this.noticeTime-=dt)<=0)this.notice.active=false;
+        if(this.hintTime>0&&(this.hintTime-=dt)<=0)this.hint.active=false;
+        if(this.pageFold){
+            const f=this.pageFold;f.time+=dt;
+            if(!f.node.isValid||f.time>=.2){if(f.node.isValid)f.node.destroy();this.pageFold=null;}
+            else{const size=Math.sin(f.time/.2*Math.PI)*88,g=f.node.getComponent(Graphics)!;g.clear();g.fillColor=c('#E4D4AA');g.strokeColor=c('#C6B58D');g.lineWidth=1;g.moveTo(f.height*.292,-f.height*.375);g.lineTo(f.height*.292-size,-f.height*.375);g.quadraticCurveTo(f.height*.292-size*.28,-f.height*.375+size*.26,f.height*.292,-f.height*.375+size);g.close();g.fill();g.stroke();}
+        }
+        if(this.motions.length)this.motions=this.motions.filter(m=>{if(!m.node.isValid)return false;m.time+=dt;const t=Math.min(1,m.time/m.duration),s=m.from+(1-m.from)*(1-Math.pow(1-t,3));m.node.setScale(s,s,1);return t<1;});
+    }
+    holdAt(x:number,y:number,progress:number){
+        this.hold.active=progress>0&&progress<1;if(!this.hold.active)return;this.hold.setPosition(x,y,0);
+        const g=this.hold.getComponent(Graphics)!;g.clear();g.lineWidth=3;g.strokeColor=c('#FFF7DF70');g.circle(0,0,23);g.stroke();
+        g.strokeColor=c(paper);g.arc(0,0,23,Math.PI/2,Math.PI/2-progress*Math.PI*2,true);g.stroke();
+    }
+    private learned(){this.hint.active=false;sys.localStorage.setItem('mossvale-touch-learned','1');}
+    connectionError(_message:string){this.toast('邻居暂时没回应，先四处走走吧。');}
+    showResident(r:Resident){
+        this.closeCard();if(this.draftResident!==r.id){this.draft='';this.submitted='';}this.draftResident=r.id;this.selected=r;this.learned();
+        this.bubble=this.node('Speech beside '+r.name,this.canvas,0,100,322,170);this.tail=this.bubble.addComponent(Graphics);
+        this.label(this.bubble,r.name,-90,61,110,30,19,ochre,true);
+        this.iconButton(this.bubble,'close',136,62,()=>this.actions.close());
+        this.speech=this.label(this.bubble,'',0,3,274,82,18);this.speech.horizontalAlign=Label.HorizontalAlign.LEFT;
+        this.nextHint=this.label(this.bubble,'',-58,-58,180,24,12,green);
+        const reply=this.iconButton(this.bubble,'chat',112,-112,()=>this.openComposer());this.label(reply,'聊两句',0,-27,64,20,12,ink,true,true);
+        this.bubbleRect=[0,100,322,170];
+        this.showReply(r.life?`${r.action}。${r.life.speech||r.thought}`:r.thought);this.pop(this.bubble);
+    }
+    anchorSpeech(x:number,y:number){
+        if(!this.bubble||!this.tail)return;
+        const bx=clamp(x,-this.width/2+173,this.width/2-173);
+        const ceiling=this.height/2-this.topInset-160;
+        const floor=-this.height/2+this.bottomInset+(this.composer?200:155);
+        const by=clamp(y+120,Math.min(floor,ceiling),ceiling);
+        if(Math.abs(this.bubble.position.x-bx)>.05||Math.abs(this.bubble.position.y-by)>.05)this.bubble.setPosition(bx,by,0);
+        this.bubbleRect![0]=bx;this.bubbleRect![1]=by;
+        const reply=this.bubble.getChildByName('chat');if(reply)reply.active=!this.composer;
+        // Reuse the tessellated bubble until its outline actually changes.
+        const base=Math.round(clamp(x-bx,-112,112)*2)/2,tip=Math.round(clamp(x-bx,base-16,base+16)*2)/2;
+        const length=Math.round(clamp(by-85-y-8,16,34)*2)/2,g=this.tail;
+        if(base===this.tailBase&&tip===this.tailTip&&length===this.tailLength)return;
+        this.tailBase=base;this.tailTip=tip;this.tailLength=length;
+        // One continuous outline: no seam, looping lobe, or stretched spike.
+        g.clear();g.fillColor=c(paper);g.strokeColor=c('#D7C49D');g.lineWidth=2;
+        g.moveTo(-133,-83);g.bezierCurveTo(-165,-83,-165,75,-129,85);
+        g.bezierCurveTo(-80,90,107,88,138,82);
+        g.bezierCurveTo(167,76,166,-79,136,-84);
+        g.bezierCurveTo(104,-88,base+24,-87,base+14,-86);
+        g.quadraticCurveTo(base+10,-96,tip,-85-length);
+        g.quadraticCurveTo(base-3,-96,base-14,-86);
+        g.bezierCurveTo(base-40,-87,-106,-86,-133,-83);g.close();g.fill();g.stroke();
+    }
+
+    private chunks(text:string,limit=42){
+        const parts:string[]=[];let rest=text.trim();
+        while(rest.length>limit){let end=limit;const cut=rest.slice(0,limit).search(/[。！？；\n][^。！？；\n]*$/);if(cut>limit*.4)end=cut+1;parts.push(rest.slice(0,end));rest=rest.slice(end).trim();}if(rest)parts.push(rest);return parts.length?parts:['……'];
+    }
+    advanceSpeech(){if(this.waiting)return;if(this.speechPage<this.pages.length-1){this.speechPage++;this.paintSpeech();}else this.openComposer();}
+    private paintSpeech(){if(this.speech)this.speech.string=this.pages[this.speechPage]||'……';if(this.nextHint)this.nextHint.string=this.waiting?'':this.speechPage<this.pages.length-1?'轻点，听下去  · · ·':'轻点聊两句';}
+    showReply(text:string){this.pages=this.chunks(text);this.speechPage=0;this.paintSpeech();this.submitted='';}
+    showMemory(){if(!this.selected)return;const items=this.selected.memories.filter(m=>m.kind==='fact'||m.kind==='impression').slice(-3);this.pages=items.length?items.flatMap(m=>this.chunks(m.text)):['还没有共同的回忆。先聊聊吧。'];this.speechPage=0;this.paintSpeech();}
+    setWaiting(waiting:boolean){this.waiting=waiting;if(waiting){this.pages=['……'];this.speechPage=0;}this.paintSpeech();}
+    messageFailed(){this.draft=this.submitted||this.draft;this.pages=['……'];this.speechPage=0;this.paintSpeech();this.toast('没发出去，点这里再试');this.retry=true;this.noticeTime=12;}
+    private openComposer(){
+        if(!this.selected||this.waiting||this.composer)return;
+        const n=this.node('Your words',this.canvas,0,-this.height/2+this.bottomInset+60,340,82);this.composer=n;this.cloud(n,340,82);
+        const entry=this.node('Reply input',n,-25,0,238,48);entry.active=false;this.input=entry.addComponent(EditBox);
+        this.input.textLabel=this.label(entry,'',0,0,228,44,17);this.input.textLabel.horizontalAlign=Label.HorizontalAlign.LEFT;
+        this.input.placeholderLabel=this.label(entry,'想说点什么？',0,0,228,44,16,'#A3AA8E');this.input.placeholderLabel.horizontalAlign=Label.HorizontalAlign.LEFT;
+        this.input.textLabel.node.getComponent(UITransform)!.setAnchorPoint(0,1);this.input.placeholderLabel.node.getComponent(UITransform)!.setAnchorPoint(0,1);
+        this.input.inputMode=EditBox.InputMode.SINGLE_LINE;this.input.maxLength=300;this.input.returnType=EditBox.KeyboardReturnType.SEND;this.input.string=this.draft;
+        entry.on('editing-return',()=>this.sendText());
+        entry.on('editing-did-ended',()=>{this.composing=false;if(this.input)this.draft=this.input.string;});
+        entry.active=true;
+        this.iconButton(n,'send',135,0,()=>this.sendText());this.input.focus();this.notice.active=false;
+    }
+    private sendText(){if(this.waiting||this.composing)return;const message=this.input?.string.trim();if(!message)return;this.submitted=message;this.draft='';this.composer?.destroy();this.composer=null;this.input=null;this.actions.send('chat',message);}
+    closeCard(){
+        this.composing=false;if(this.input)this.draft=this.input.string;this.composer?.destroy();this.composer=null;this.input=null;
+        this.bubble?.destroy();this.bubble=null;this.tail=null;this.tailBase=this.tailTip=this.tailLength=NaN;this.bubbleRect=null;this.selected=null;this.speech=null;this.nextHint=null;
+    }
+    showContext(x:number,y:number,title:string,options:ContextOption[]){
+        this.closeContext();this.learned();this.hold.active=false;
+        this.menu=this.node('Petals around the touch',this.canvas,0,0,this.width,this.height);this.bind(this.menu,()=>this.closeContext());
+        // The invisible catcher owns a new press; releasing the original hold cannot choose an action.
+        const mx=clamp(x,-35,35),my=clamp(y,-this.height/2+this.bottomInset+185,this.height/2-this.topInset-222);
+        const center=this.node('Flower centre',this.menu,mx,my,74,54);this.cloud(center,74,44,'#DAE5BC');this.label(center,title,0,0,72,32,14,ink,true);this.bind(center,()=>this.closeContext());
+        if(Math.hypot(mx-x,my-y)>30){const g=this.menu.addComponent(Graphics);g.strokeColor=c('#FFF7DFAB');g.lineWidth=2;g.moveTo(x,y);g.quadraticCurveTo(x,my,mx,my);g.stroke();g.circle(x,y,6);g.stroke();}
+        options.slice(0,5).forEach((o,i)=>{
+            const a=(90-i*360/options.length)*Math.PI/180,r=108,n=this.node(o.label,this.menu,mx+Math.cos(a)*r,my+Math.sin(a)*r,86,84);
+            this.cloud(n,82,76,i%2?'#F1E6C9':paper);this.icon(n,o.icon,0,9,.85);this.label(n,o.label,0,-23,78,25,14,ink,true);
+            if(o.cost)this.label(n,o.cost,0,-48,80,20,11,ink,false,true);
+            this.bind(n,()=>{this.closeContext();o.run();});this.pop(n,.55,.18+i*.012);
+        });
+    }
+    closeContext(){this.menu?.destroy();this.menu=null;}
+    toggleJournal(){this.closeMap();this.closeContext();if(this.journal){this.journal.destroy();this.journal=null;return;}this.actions.close();this.learned();this.journalPage=0;this.drawJournal();if(this.journal)this.pop(this.journal);}
+    closeMap(){this.map?.destroy();this.map=null;}
+    toggleMap(position:Vec3){
+        if(this.map){this.closeMap();return;}this.playerPosition=position;this.closeContext();this.actions.close();
+        this.journal?.destroy();this.journal=null;this.drawMap();if(this.map)this.pop(this.map,.94);
+    }
+    private drawMap(){
+        this.closeMap();const h=500,n=this.node('Folded town map',this.canvas,0,(this.bottomInset-this.topInset)/2,354,h);this.map=n;
+        n.setScale(Math.min(1,(this.height-this.topInset-this.bottomInset-50)/h),Math.min(1,(this.height-this.topInset-this.bottomInset-50)/h),1);
+        const g=n.addComponent(Graphics);g.fillColor=c('#F4E7C2');g.strokeColor=c('#BFAF81');g.lineWidth=2;
+        g.moveTo(-173,244);g.lineTo(-55,239);g.lineTo(56,246);g.lineTo(175,239);g.lineTo(172,-244);g.lineTo(52,-238);g.lineTo(-56,-246);g.lineTo(-175,-238);g.close();g.fill();g.stroke();
+        this.label(n,'苔溪散步图',0,207,240,42,27,ink,true);this.label(n,'点一个地方，沿小路走过去',0,168,290,26,14,green);
+        this.iconButton(n,'close',149,215,()=>this.closeMap());
+        const b=this.layout.bounds,mx=(x:number)=>(x-b.minX)/(b.maxX-b.minX)*300-150,my=(z:number)=>128-(z-b.minZ)/(b.maxZ-b.minZ)*300;
+        g.fillColor=c('#CCD5A5');g.roundRect(-156,-179,312,317,26);g.fill();
+        g.fillColor=c('#E8D8AB');g.rect(-65,-179,116,43);g.fill();g.fillColor=c('#9EC5BD');g.rect(-149,-179,300,16);g.fill();
+        g.strokeColor=c('#89B4B4');g.lineWidth=13;g.moveTo(mx(14),my(-30));g.lineTo(mx(14),my(30));g.stroke();
+        g.strokeColor=c('#F5E9C7');g.lineWidth=5;
+        for(const [x,z,tx,tz] of this.layout.paths){g.moveTo(mx(x),my(z));g.lineTo(mx(tx),my(tz));}g.stroke();
+        g.moveTo(mx(-12),my(3.1));g.lineTo(mx(23),my(3.1));g.stroke();
+        g.strokeColor=c('#BFAF81');g.lineWidth=1;for(const x of [-55,55]){g.moveTo(x,143);g.lineTo(x,-187);}g.stroke();
+        const districts=new Set(['cafe','orchard','homes','campsite','meadow','nursery','beach','lookout']);
+        for(const p of this.layout.places){if(!districts.has(p.id))continue;
+            const x=mx(p.x),y=my(p.z),pin=this.node('Map destination '+p.id,n,x,y,76,48);
+            const mark=pin.addComponent(Graphics);mark.fillColor=c('#BB8257');mark.circle(0,5,5);mark.fill();mark.fillColor=c(paper);mark.circle(0,5,2);mark.fill();
+            this.label(pin,p.id==='cafe'?'咖啡街':p.short,0,-12,76,25,14,ink,true,true);
+            this.bind(pin,()=>{this.closeMap();this.actions.navigate(p.id);});
+        }
+        const here=this.node('You are here',n,mx(this.playerPosition.x),my(this.playerPosition.z),12,12).addComponent(Graphics);
+        here.fillColor=c('#FFFFFF');here.circle(0,0,7);here.fill();here.fillColor=c('#6385A0');here.circle(0,0,4.5);here.fill();
+        this.label(n,'● 你在这里',0,-209,160,28,14,'#6385A0');
+        this.label(n,'北 ↑',135,155,40,25,13,green,true);
+    }
+    private journalEntries(){
+        const discoveries=(this.state?.events||[]).filter(e=>e.player).slice(-4).reverse().flatMap(e=>this.chunks(e.text,82).map(text=>({r:{name:'我的散步'} as Resident,heading:'今天做过的事',text})));
+        const arrivals=(this.state?.arrival?.changes||[]).flatMap(e=>this.chunks(e.text,82).map(text=>({r:{name:'邻居近况'} as Resident,heading:'你离开时',text})));
+        const conversations=(this.state?.events||[]).filter(e=>e.autonomous&&e.type==='dialogue').slice(-4).flatMap(e=>this.chunks(e.text,82).map(text=>({r:{name:'邻居闲谈'} as Resident,heading:'小镇里的新对话',text})));
+        return [...conversations,...arrivals,...discoveries,...(this.state?.residents||[]).flatMap(r=>[
+            ...(r.persona?this.chunks(r.persona.summary,82).map(text=>({r,heading:'性情',text})):[]),
+            ...this.chunks(r.goal,82).map(text=>({r,heading:'想做的事',text})),
+            ...this.chunks(`${r.action}。${r.thought}`,82).map(text=>({r,heading:'最近的心事',text})),
+            ...r.memories.filter(m=>(m.kind==='fact'||m.kind==='impression')&&!m.text.includes('的既往经历：')).slice(-5).reverse().flatMap(m=>this.chunks(m.text,82).map(text=>({r,heading:m.kind==='fact'?'记住的事':'心里的印象',text})))
+        ])];
+    }
+    private drawJournal(){
+        this.journal?.destroy();const entries=this.journalEntries();this.journalPage=clamp(this.journalPage,0,Math.max(0,entries.length-1));
+        const h=Math.min(549,this.height-this.topInset-this.bottomInset-100),w=h*2/3;
+        const n=this.node('Illustrated field journal',this.canvas,0,(this.bottomInset-this.topInset)/2,w,h);this.journal=n;
+        if(this.journalFrame){
+            const art=this.node('Hand-painted linen and paper',n,0,0,w,h),sprite=art.addComponent(Sprite);
+            sprite.spriteFrame=this.journalFrame;sprite.sizeMode=Sprite.SizeMode.CUSTOM;sprite.trim=false;art.getComponent(UITransform)!.setContentSize(w,h);
+        }else this.cloud(n,w*.88,h*.87,paper);
+        this.label(n,'苔溪手记',w*.015,h*.345,w*.37,36,24,ochre,true);
+        this.iconButton(n,'close',w*.407,h*.425,()=>this.toggleJournal());
+        const e=entries[this.journalPage],left=w*.04,textWidth=w*.67;
+        const scale=h/549,fontSize=16*scale,lineHeight=26*scale,firstBaseline=h*.088,textHeight=lineHeight*6;
+        const rules=this.node('Writing lines',n).addComponent(Graphics);rules.strokeColor=c('#C4B58D80');rules.lineWidth=.8*scale;
+        for(let row=0;row<6;row++){
+            const y=firstBaseline-row*lineHeight-fontSize*.1;
+            rules.moveTo(left-textWidth/2,y);rules.lineTo(left+textWidth/2,y);
+        }
+        rules.stroke();
+        if(e){
+            const name=this.label(n,e.r.name,left,h*.20,textWidth,34,25,ink,true);name.horizontalAlign=Label.HorizontalAlign.LEFT;
+            const heading=this.label(n,e.heading,left,h*.141,textWidth,26,13,ochre);heading.horizontalAlign=Label.HorizontalAlign.LEFT;
+            // Cocos 3.8 TTF top alignment places its alphabetic baseline at 0.87 em.
+            // Rules sit at the CJK glyph bottom; shared spacing prevents drift on later rows.
+            const text=this.label(n,e.text,left,firstBaseline+fontSize*.87-textHeight/2,textWidth,textHeight,fontSize);
+            text.lineHeight=lineHeight;text.overflow=Label.Overflow.CLAMP;text.horizontalAlign=Label.HorizontalAlign.LEFT;text.verticalAlign=Label.VerticalAlign.TOP;
+        }else this.label(n,'散散步，认识一位新邻居。',left,0,textWidth,130,18);
+        const party=this.state?.party;if(party?.status==='planned'){
+            const attend=this.node('Tea invitation',n,w*.185,-h*.232,w*.33,44);this.label(attend,party.playerAttending?'说好赴约了':'下午茶见',0,0,w*.32,32,14,green,true);this.bind(attend,()=>this.actions.control('attend'));
+            const miss=this.node('Decline invitation',n,w*.185,-h*.302,w*.33,44);this.label(miss,'这次不去',0,0,w*.32,32,13,ochre);this.bind(miss,()=>this.actions.control('miss'));
+        }
+        this.label(n,`${this.state?.coins??100} 币`,w*.27,h*.141,w*.20,24,12,ochre);
+        const bag=this.state?.inventory;if(bag)this.label(n,`口袋：桃子 ${bag.peaches} · 点心 ${bag.snacks} · 贝壳 ${bag.shells||0}`,w*.03,-h*.26,w*.72,24,12,green);
+        this.iconButton(n,'prev',-w*.205,-h*.360,()=>this.turnPage(-1));this.iconButton(n,'next',w*.225,-h*.360,()=>this.turnPage(1));
+        this.label(n,`${this.journalPage+1} / ${Math.max(1,entries.length)}`,w*.02,-h*.360,96,26,13,green);
+    }
+    private turnPage(delta:number){const next=this.journalPage+delta;if(next<0||next>=this.journalEntries().length)return;this.journalPage=next;this.drawJournal();if(this.journal&&!this.reduceMotion){const node=this.node('Turning paper corner',this.journal);node.addComponent(Graphics);this.pageFold={node,time:0,height:this.journal.getComponent(UITransform)!.height};}}
+    isEditing(){return this.input?.isFocused()||false;}
+    destroy(){
+        if(typeof document!=='undefined'){
+            document.removeEventListener('compositionstart',this.imeStart,true);
+            document.removeEventListener('compositionend',this.imeEnd,true);
+            document.removeEventListener('keydown',this.imeKey,true);
+        }
+        this.canvas.destroy();this.uiCamera.node.destroy();
+    }
+}

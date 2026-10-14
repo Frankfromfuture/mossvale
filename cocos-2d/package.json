@@ -1,0 +1,5 @@
+{
+ "name":"mossvale-2d-trial","version":"0.1.0","private":true,
+ "uuid":"2581940e-6af3-49b2-af31-16b4a7fbddcd","creator":{"version":"3.8.8"},
+ "scripts":{"build":"node scripts/build.mjs","start":"node scripts/start.mjs"}
+}

@@ -1,0 +1,218 @@
+{
+  "table": {
+    "atlas": "objects",
+    "rect": [
+      38,
+      55,
+      212,
+      203
+    ]
+  },
+  "chair": {
+    "atlas": "objects",
+    "rect": [
+      344,
+      80,
+      141,
+      177
+    ]
+  },
+  "shelf": {
+    "atlas": "objects",
+    "rect": [
+      586,
+      77,
+      222,
+      182
+    ]
+  },
+  "workbench": {
+    "atlas": "objects",
+    "rect": [
+      859,
+      96,
+      239,
+      153
+    ]
+  },
+  "counter": {
+    "atlas": "objects",
+    "rect": [
+      27,
+      381,
+      239,
+      147
+    ]
+  },
+  "machine": {
+    "atlas": "objects",
+    "rect": [
+      348,
+      332,
+      164,
+      222
+    ]
+  },
+  "cup": {
+    "atlas": "objects",
+    "rect": [
+      602,
+      357,
+      190,
+      188
+    ]
+  },
+  "book": {
+    "atlas": "objects",
+    "rect": [
+      896,
+      341,
+      170,
+      205
+    ]
+  },
+  "pot": {
+    "atlas": "objects",
+    "rect": [
+      31,
+      624,
+      216,
+      205
+    ]
+  },
+  "tree": {
+    "atlas": "objects",
+    "rect": [
+      288,
+      588,
+      270,
+      253
+    ]
+  },
+  "shrub": {
+    "atlas": "objects",
+    "rect": [
+      610,
+      649,
+      174,
+      174
+    ]
+  },
+  "flowers": {
+    "atlas": "objects",
+    "rect": [
+      878,
+      631,
+      202,
+      201
+    ]
+  },
+  "door-closed": {
+    "atlas": "objects",
+    "rect": [
+      27,
+      965,
+      235,
+      157
+    ]
+  },
+  "door-open": {
+    "atlas": "objects",
+    "rect": [
+      306,
+      841,
+      232,
+      221
+    ]
+  },
+  "wall": {
+    "atlas": "objects",
+    "rect": [
+      577,
+      972,
+      241,
+      69
+    ]
+  },
+  "bench": {
+    "atlas": "objects",
+    "rect": [
+      864,
+      951,
+      233,
+      171
+    ]
+  },
+  "fountain": {
+    "atlas": "objects",
+    "rect": [
+      33,
+      1122,
+      224,
+      226
+    ]
+  },
+  "crate": {
+    "atlas": "objects",
+    "rect": [
+      341,
+      1144,
+      161,
+      189
+    ]
+  },
+  "rock": {
+    "atlas": "objects",
+    "rect": [
+      628,
+      1171,
+      145,
+      136
+    ]
+  },
+  "lamp": {
+    "atlas": "objects",
+    "rect": [
+      923,
+      1122,
+      115,
+      210
+    ]
+  },
+  "grass": {
+    "atlas": "terrain",
+    "rect": [
+      1,
+      1,
+      625,
+      625
+    ]
+  },
+  "paving": {
+    "atlas": "terrain",
+    "rect": [
+      628,
+      1,
+      625,
+      625
+    ]
+  },
+  "planks": {
+    "atlas": "terrain",
+    "rect": [
+      1,
+      628,
+      625,
+      625
+    ]
+  },
+  "soil": {
+    "atlas": "terrain",
+    "rect": [
+      628,
+      628,
+      625,
+      625
+    ]
+  }
+}

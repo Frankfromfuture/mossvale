@@ -1,0 +1,125 @@
+{
+  "kind": "decline",
+  "done": true,
+  "startedAt": 1791904228510,
+  "calls": [
+    {
+      "resident": "许知远",
+      "atMs": 3,
+      "firstTextMs": 614,
+      "completeMs": 1046,
+      "speech": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗？",
+      "thought": "人不多，或许能安静说几句。"
+    },
+    {
+      "resident": "唐桃",
+      "atMs": 1049,
+      "firstTextMs": 1485,
+      "completeMs": 1926,
+      "speech": "干花这个比喻我喜欢，不过今天花材还没理完，先让我把手上这束收个尾，改天再聊？",
+      "thought": "他这话挺戳我，可手上事没完，先别又答应太快。"
+    }
+  ],
+  "publications": [
+    {
+      "atMs": 615,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 715,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子让我想起旧书里",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 840,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子让我想起旧书里夹的干",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1485,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗？",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "干",
+          "status": "streaming"
+        }
+      ]
+    },
+    {
+      "atMs": 1663,
+      "frames": [
+        {
+          "id": "e30:xu",
+          "resident": "xu",
+          "text": "你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗？",
+          "status": "complete"
+        },
+        {
+          "id": "e30:tang",
+          "resident": "tang",
+          "text": "干花",
+          "status": "streaming"
+        }
+      ]
+    }
+  ],
+  "parserChecked": true,
+  "samples": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 611,
+      "elapsedMs": 1043,
+      "applied": true
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "kind": "speech",
+      "mode": "deepseek",
+      "firstTextMs": 436,
+      "elapsedMs": 878,
+      "applied": true
+    }
+  ],
+  "events": [
+    {
+      "id": "e31",
+      "text": "许知远对唐桃说：“你整理花材的样子让我想起旧书里夹的干花。今天不忙的话，想聊两句吗？”"
+    },
+    {
+      "id": "e32",
+      "replyTo": "e31",
+      "text": "唐桃对许知远说：“干花这个比喻我喜欢，不过今天花材还没理完，先让我把手上这束收个尾，改天再聊？”"
+    }
+  ],
+  "passed": true
+}

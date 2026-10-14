@@ -1,0 +1,9 @@
+{
+  "catalogEntities": 566,
+  "integerDimensionsAndEdges": true,
+  "moveWithChildren": true,
+  "rectangularRotation": true,
+  "inMemorySaveMigrations": 4,
+  "historyAndStatesPreserved": true,
+  "idempotentMigration": true
+}

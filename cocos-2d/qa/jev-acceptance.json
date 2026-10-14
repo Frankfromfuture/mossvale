@@ -1,0 +1,143 @@
+{
+  "environment": "Local Mac, Brizo encrypted provider configuration, isolated in-memory towns",
+  "live": [
+    {
+      "at": 1141,
+      "resident": "xu",
+      "kind": "idle",
+      "baseline": "library",
+      "selected": "library",
+      "choice": "library",
+      "mode": "jev",
+      "confidence": 0.9,
+      "reason": null,
+      "elapsedMs": 2173,
+      "applied": true,
+      "name": "许知远",
+      "action": "安静阅读"
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "kind": "idle",
+      "baseline": "square",
+      "selected": "square",
+      "choice": "square",
+      "mode": "rules",
+      "confidence": null,
+      "reason": "timeout",
+      "elapsedMs": 3029,
+      "applied": true,
+      "name": "唐桃",
+      "action": "散步放松"
+    },
+    {
+      "at": 1141,
+      "resident": "xu",
+      "partner": "tang",
+      "kind": "encounter",
+      "baseline": "greet",
+      "selected": "greet",
+      "mode": "jev",
+      "confidence": 0.83,
+      "reason": null,
+      "elapsedMs": 1110,
+      "applied": true
+    },
+    {
+      "at": 1141,
+      "resident": "tang",
+      "partner": "xu",
+      "kind": "encounter",
+      "baseline": "chat",
+      "selected": "greet",
+      "mode": "jev",
+      "confidence": 0.55,
+      "reason": null,
+      "elapsedMs": 1667,
+      "applied": true
+    }
+  ],
+  "checks": {
+    "idleApplied": true,
+    "encounterApplied": true,
+    "actualEncounter": true,
+    "newCommitmentWins": true,
+    "privateMemoriesIsolated": true,
+    "invalidChoiceRejected": true,
+    "timeoutContinuesLife": true,
+    "transportTimeoutHandled": true,
+    "offlineParity": true,
+    "moneyNonnegative": true,
+    "realJev": true,
+    "weatherRevalidated": true,
+    "offlineDoesNotWaitForAPI": true,
+    "runtimeLoaded": true,
+    "oldSaveBackedUp": true,
+    "deepseekPreserved": true
+  },
+  "latencies": {
+    "jevIdle": [
+      2173,
+      3029
+    ],
+    "deepseekIdle": [
+      {
+        "resident": "xu",
+        "kind": "autonomy-plan",
+        "ms": 676,
+        "action": "move",
+        "target": "library",
+        "speech": "这会儿书屋应该安静了，回去坐一会儿。",
+        "mode": "deepseek"
+      },
+      {
+        "resident": "tang",
+        "kind": "autonomy-plan",
+        "ms": 844,
+        "action": "talk",
+        "target": "xu",
+        "speech": "许知远，你今天在忙什么呀？我脑子里又冒出一堆新搭配了。",
+        "mode": "deepseek"
+      }
+    ],
+    "jevEncounter": [
+      1110,
+      1667
+    ],
+    "deepseekEncounter": [
+      {
+        "resident": "xu",
+        "kind": "autonomy-open",
+        "ms": 1221,
+        "action": "wait",
+        "speech": "",
+        "mode": "deepseek"
+      },
+      {
+        "resident": "tang",
+        "kind": "autonomy-open",
+        "ms": 1010,
+        "action": "talk",
+        "speech": "许知远，你也在这儿歇脚呀？我刚从花圃过来，脑子里还转着白天那些花的配色。",
+        "mode": "deepseek"
+      }
+    ]
+  },
+  "speech": [
+    {
+      "text": "唐桃对许知远说：“许知远，晚上好呀。今天的花色看过了，正想着歇一会儿再回去。”",
+      "mode": "deepseek"
+    },
+    {
+      "text": "许知远对唐桃说：“你好，唐桃。今天也来这边坐坐？”",
+      "mode": "deepseek"
+    }
+  ],
+  "realJevAccepted": 3,
+  "build": {
+    "count": 1,
+    "exitCode": 36,
+    "scene": "CafeStreet"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "mossvale-living-3d",
+  "version": "0.1.0",
+  "private": true,
+  "uuid": "b88a14ed-1ee6-450c-bafe-354d2a1dc542",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/start.mjs"
+  }
+}

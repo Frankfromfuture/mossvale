@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-13",
+  "scope": "Local 2D grid view only",
+  "environment": "Headless Chrome, 390×844 viewport; not physical phone testing",
+  "isolation": "All API requests intercepted with an in-memory fixture; no model calls or user-save writes. World stream deliberately aborted.",
+  "builds": 1,
+  "serverRestarts": 0,
+  "objectMenu": {
+    "target": "V3 靠背椅",
+    "diameter": 160,
+    "iconRadius": 58,
+    "icons": 5,
+    "hitSize": 44,
+    "releaseKeepsMenu": true,
+    "inspectOpensCorrectDetails": true,
+    "actionClosesMenu": true
+  },
+  "edgeMenu": {
+    "requestedCenter": [-183, -408],
+    "adjustedCenter": [-105, -308],
+    "icons": 4,
+    "allHitAreasWithinViewport": true,
+    "captionWithinViewport": true,
+    "giftPrice": "4 币",
+    "hoverCaption": "送面包 · 4 币",
+    "outsideDismissed": true
+  },
+  "screenshots": [
+    "output/playwright/interaction-ring.png",
+    "output/playwright/interaction-ring-edge.png"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Animated Characters Protagonists",
+  "author": "Kenney",
+  "source": "https://kenney.nl/assets/animated-characters-protagonists",
+  "license": "CC0-1.0",
+  "archive": "vendor/kenney-3d/protagonists.zip",
+  "sha256": "ec3787de70fa2200256848d74201b10f6b6c3126594e9857bf989753312c2b84",
+  "runtime": "assets/resources/people/townsfolk.gltf",
+  "changes": [
+    "FBX to glTF 2.0",
+    "Compatible idle/run animations merged",
+    "Runtime town accessories and seated pose"
+  ]
+}

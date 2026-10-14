@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "lib": [
+      "DOM",
+      "ES2022"
+    ],
+    "baseUrl": "..",
+    "paths": {
+      "cc": [
+        "/Users/frankfan/Applications/CocosCreator-3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.declarations/cc.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "../assets/scripts/**/*.ts"
+  ]
+}

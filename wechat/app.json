@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/town/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "苔溪镇 Mossvale",
+    "navigationBarBackgroundColor": "#f7f7f2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f7f2",
+    "pageOrientation": "portrait"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,37 @@
+node_modules/
+dist/
+.data/
+.env
+*.local.json
+qa/*.log
+qa/characters.zip
+qa/kenney/
+
+.data-cocos/
+.data-cocos-2d/
+.data-cocos-2d-qa/
+.data-cocos-town3d/
+cocos-town3d/temp/
+cocos-town3d/library/
+cocos-town3d/local/
+cocos-town3d/qa/*.log
+cocos-town3d/qa/browser-endpoint.txt
+
+# Downloaded LPC source library; runtime art and reproducible source manifests live in cocos-2d.
+vendor/lpc/
+
+# Local state, editor caches, and generated diagnostics stay on this machine.
+.DS_Store
+.playwright-cli/
+/.data*/
+.env.*
+!.env.example
+*.log
+library/
+temp/
+local/
+build/
+profiles/
+**/qa/browser-endpoint.txt
+**/qa/*-data/
+cocos-2d/qa/player-stream-fixture.json

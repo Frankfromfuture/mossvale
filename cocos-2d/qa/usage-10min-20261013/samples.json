@@ -1,0 +1,1893 @@
+[
+  {
+    "at": 1791900070808,
+    "iso": "2026-10-13T14:01:10.808Z",
+    "saveModifiedAt": "2026-10-13T14:01:10.432Z",
+    "minute": 44313,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 65,
+      "input": 183235,
+      "output": 6479,
+      "failures": 0,
+      "autoCalls": 58,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 152,
+      "input": 226851,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 56,
+      "speech": 32,
+      "idle": 95
+    }
+  },
+  {
+    "at": 1791900080832,
+    "iso": "2026-10-13T14:01:20.832Z",
+    "saveModifiedAt": "2026-10-13T14:01:20.439Z",
+    "minute": 44325,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 67,
+      "input": 189136,
+      "output": 6603,
+      "failures": 0,
+      "autoCalls": 60,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 154,
+      "input": 229307,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 58,
+      "speech": 33,
+      "idle": 95
+    }
+  },
+  {
+    "at": 1791900090853,
+    "iso": "2026-10-13T14:01:30.853Z",
+    "saveModifiedAt": "2026-10-13T14:01:30.444Z",
+    "minute": 44337,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 67,
+      "input": 189136,
+      "output": 6603,
+      "failures": 0,
+      "autoCalls": 60,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 156,
+      "input": 232522,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 58,
+      "speech": 33,
+      "idle": 97
+    }
+  },
+  {
+    "at": 1791900100875,
+    "iso": "2026-10-13T14:01:40.875Z",
+    "saveModifiedAt": "2026-10-13T14:01:40.458Z",
+    "minute": 44349,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 69,
+      "input": 195356,
+      "output": 6717,
+      "failures": 0,
+      "autoCalls": 62,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 159,
+      "input": 236685,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 60,
+      "speech": 35,
+      "idle": 98
+    }
+  },
+  {
+    "at": 1791900110904,
+    "iso": "2026-10-13T14:01:50.904Z",
+    "saveModifiedAt": "2026-10-13T14:01:50.458Z",
+    "minute": 44361,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 69,
+      "input": 195356,
+      "output": 6717,
+      "failures": 0,
+      "autoCalls": 62,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 160,
+      "input": 238441,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 60,
+      "speech": 35,
+      "idle": 99
+    }
+  },
+  {
+    "at": 1791900120932,
+    "iso": "2026-10-13T14:02:00.932Z",
+    "saveModifiedAt": "2026-10-13T14:02:00.466Z",
+    "minute": 44373,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 69,
+      "input": 195356,
+      "output": 6717,
+      "failures": 0,
+      "autoCalls": 62,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 160,
+      "input": 238441,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 60,
+      "speech": 35,
+      "idle": 99
+    }
+  },
+  {
+    "at": 1791900130960,
+    "iso": "2026-10-13T14:02:10.960Z",
+    "saveModifiedAt": "2026-10-13T14:02:10.468Z",
+    "minute": 44385,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 69,
+      "input": 195356,
+      "output": 6717,
+      "failures": 0,
+      "autoCalls": 62,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 160,
+      "input": 238441,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 60,
+      "speech": 35,
+      "idle": 99
+    }
+  },
+  {
+    "at": 1791900140986,
+    "iso": "2026-10-13T14:02:20.986Z",
+    "saveModifiedAt": "2026-10-13T14:02:20.474Z",
+    "minute": 44397,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 69,
+      "input": 195356,
+      "output": 6717,
+      "failures": 0,
+      "autoCalls": 62,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 162,
+      "input": 241831,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 60,
+      "speech": 35,
+      "idle": 101
+    }
+  },
+  {
+    "at": 1791900151008,
+    "iso": "2026-10-13T14:02:31.008Z",
+    "saveModifiedAt": "2026-10-13T14:02:30.718Z",
+    "minute": 44410,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 71,
+      "input": 201258,
+      "output": 6843,
+      "failures": 0,
+      "autoCalls": 64,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 165,
+      "input": 245874,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 62,
+      "speech": 36,
+      "idle": 103
+    }
+  },
+  {
+    "at": 1791900161032,
+    "iso": "2026-10-13T14:02:41.032Z",
+    "saveModifiedAt": "2026-10-13T14:02:40.478Z",
+    "minute": 44421,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 71,
+      "input": 201258,
+      "output": 6843,
+      "failures": 0,
+      "autoCalls": 64,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 167,
+      "input": 249219,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 62,
+      "speech": 36,
+      "idle": 105
+    }
+  },
+  {
+    "at": 1791900171057,
+    "iso": "2026-10-13T14:02:51.057Z",
+    "saveModifiedAt": "2026-10-13T14:02:50.487Z",
+    "minute": 44433,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 71,
+      "input": 201258,
+      "output": 6843,
+      "failures": 0,
+      "autoCalls": 64,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 167,
+      "input": 249219,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 62,
+      "speech": 36,
+      "idle": 105
+    }
+  },
+  {
+    "at": 1791900181083,
+    "iso": "2026-10-13T14:03:01.083Z",
+    "saveModifiedAt": "2026-10-13T14:03:00.494Z",
+    "minute": 44445,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 73,
+      "input": 207267,
+      "output": 6966,
+      "failures": 0,
+      "autoCalls": 66,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 170,
+      "input": 253334,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 64,
+      "speech": 37,
+      "idle": 106
+    }
+  },
+  {
+    "at": 1791900191111,
+    "iso": "2026-10-13T14:03:11.111Z",
+    "saveModifiedAt": "2026-10-13T14:03:10.501Z",
+    "minute": 44457,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 73,
+      "input": 207267,
+      "output": 6966,
+      "failures": 0,
+      "autoCalls": 66,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 171,
+      "input": 254889,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 64,
+      "speech": 37,
+      "idle": 107
+    }
+  },
+  {
+    "at": 1791900201134,
+    "iso": "2026-10-13T14:03:21.134Z",
+    "saveModifiedAt": "2026-10-13T14:03:20.511Z",
+    "minute": 44469,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 77,
+      "input": 219904,
+      "output": 7227,
+      "failures": 0,
+      "autoCalls": 70,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 175,
+      "input": 259982,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 68,
+      "speech": 40,
+      "idle": 107
+    }
+  },
+  {
+    "at": 1791900211167,
+    "iso": "2026-10-13T14:03:31.167Z",
+    "saveModifiedAt": "2026-10-13T14:03:30.509Z",
+    "minute": 44481,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 77,
+      "input": 219904,
+      "output": 7227,
+      "failures": 0,
+      "autoCalls": 70,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 176,
+      "input": 261763,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 68,
+      "speech": 40,
+      "idle": 108
+    }
+  },
+  {
+    "at": 1791900221191,
+    "iso": "2026-10-13T14:03:41.191Z",
+    "saveModifiedAt": "2026-10-13T14:03:40.516Z",
+    "minute": 44493,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 77,
+      "input": 219904,
+      "output": 7227,
+      "failures": 0,
+      "autoCalls": 70,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 176,
+      "input": 261763,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 68,
+      "speech": 40,
+      "idle": 108
+    }
+  },
+  {
+    "at": 1791900231220,
+    "iso": "2026-10-13T14:03:51.220Z",
+    "saveModifiedAt": "2026-10-13T14:03:50.520Z",
+    "minute": 44505,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 77,
+      "input": 219904,
+      "output": 7227,
+      "failures": 0,
+      "autoCalls": 70,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 176,
+      "input": 261763,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 68,
+      "speech": 40,
+      "idle": 108
+    }
+  },
+  {
+    "at": 1791900241247,
+    "iso": "2026-10-13T14:04:01.247Z",
+    "saveModifiedAt": "2026-10-13T14:04:00.524Z",
+    "minute": 44517,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 78,
+      "input": 223067,
+      "output": 7278,
+      "failures": 0,
+      "autoCalls": 71,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 179,
+      "input": 265946,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 70,
+      "speech": 40,
+      "idle": 109
+    }
+  },
+  {
+    "at": 1791900251269,
+    "iso": "2026-10-13T14:04:11.269Z",
+    "saveModifiedAt": "2026-10-13T14:04:10.530Z",
+    "minute": 44530,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 78,
+      "input": 223067,
+      "output": 7278,
+      "failures": 0,
+      "autoCalls": 71,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 182,
+      "input": 270875,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 70,
+      "speech": 40,
+      "idle": 112
+    }
+  },
+  {
+    "at": 1791900261293,
+    "iso": "2026-10-13T14:04:21.293Z",
+    "saveModifiedAt": "2026-10-13T14:04:20.540Z",
+    "minute": 44542,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 78,
+      "input": 223067,
+      "output": 7278,
+      "failures": 0,
+      "autoCalls": 71,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 182,
+      "input": 270875,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 70,
+      "speech": 40,
+      "idle": 112
+    }
+  },
+  {
+    "at": 1791900271312,
+    "iso": "2026-10-13T14:04:31.312Z",
+    "saveModifiedAt": "2026-10-13T14:04:31.154Z",
+    "minute": 44554,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 78,
+      "input": 223067,
+      "output": 7278,
+      "failures": 0,
+      "autoCalls": 71,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 183,
+      "input": 272581,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 70,
+      "speech": 40,
+      "idle": 113
+    }
+  },
+  {
+    "at": 1791900281338,
+    "iso": "2026-10-13T14:04:41.338Z",
+    "saveModifiedAt": "2026-10-13T14:04:40.544Z",
+    "minute": 44566,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 78,
+      "input": 223067,
+      "output": 7278,
+      "failures": 0,
+      "autoCalls": 71,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 183,
+      "input": 272581,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 70,
+      "speech": 40,
+      "idle": 113
+    }
+  },
+  {
+    "at": 1791900291363,
+    "iso": "2026-10-13T14:04:51.363Z",
+    "saveModifiedAt": "2026-10-13T14:04:50.553Z",
+    "minute": 44578,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 185,
+      "input": 275059,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 113
+    }
+  },
+  {
+    "at": 1791900301395,
+    "iso": "2026-10-13T14:05:01.395Z",
+    "saveModifiedAt": "2026-10-13T14:05:00.557Z",
+    "minute": 44590,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 185,
+      "input": 275059,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 113
+    }
+  },
+  {
+    "at": 1791900311415,
+    "iso": "2026-10-13T14:05:11.415Z",
+    "saveModifiedAt": "2026-10-13T14:05:10.563Z",
+    "minute": 44602,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 186,
+      "input": 276810,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 114
+    }
+  },
+  {
+    "at": 1791900321438,
+    "iso": "2026-10-13T14:05:21.438Z",
+    "saveModifiedAt": "2026-10-13T14:05:20.572Z",
+    "minute": 44614,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 186,
+      "input": 276810,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 114
+    }
+  },
+  {
+    "at": 1791900331464,
+    "iso": "2026-10-13T14:05:31.464Z",
+    "saveModifiedAt": "2026-10-13T14:05:30.580Z",
+    "minute": 44626,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 186,
+      "input": 276810,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 114
+    }
+  },
+  {
+    "at": 1791900341491,
+    "iso": "2026-10-13T14:05:41.491Z",
+    "saveModifiedAt": "2026-10-13T14:05:40.585Z",
+    "minute": 44638,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 80,
+      "input": 229309,
+      "output": 7427,
+      "failures": 0,
+      "autoCalls": 73,
+      "reflectionCalls": 16
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 186,
+      "input": 276810,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 114
+    }
+  },
+  {
+    "at": 1791900351516,
+    "iso": "2026-10-13T14:05:51.516Z",
+    "saveModifiedAt": "2026-10-13T14:05:50.594Z",
+    "minute": 44650,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 85,
+      "input": 239098,
+      "output": 8110,
+      "failures": 0,
+      "autoCalls": 78,
+      "reflectionCalls": 20
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900361535,
+    "iso": "2026-10-13T14:06:01.535Z",
+    "saveModifiedAt": "2026-10-13T14:06:00.621Z",
+    "minute": 44662,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 87,
+      "input": 247308,
+      "output": 8730,
+      "failures": 0,
+      "autoCalls": 80,
+      "reflectionCalls": 22
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900371555,
+    "iso": "2026-10-13T14:06:11.555Z",
+    "saveModifiedAt": "2026-10-13T14:06:11.134Z",
+    "minute": 44674,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 91,
+      "input": 256113,
+      "output": 9276,
+      "failures": 0,
+      "autoCalls": 84,
+      "reflectionCalls": 26
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900381582,
+    "iso": "2026-10-13T14:06:21.582Z",
+    "saveModifiedAt": "2026-10-13T14:06:20.617Z",
+    "minute": 44686,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900391612,
+    "iso": "2026-10-13T14:06:31.612Z",
+    "saveModifiedAt": "2026-10-13T14:06:30.622Z",
+    "minute": 44698,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900401635,
+    "iso": "2026-10-13T14:06:41.635Z",
+    "saveModifiedAt": "2026-10-13T14:06:40.623Z",
+    "minute": 44710,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900411661,
+    "iso": "2026-10-13T14:06:51.661Z",
+    "saveModifiedAt": "2026-10-13T14:06:50.633Z",
+    "minute": 44722,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900421687,
+    "iso": "2026-10-13T14:07:01.687Z",
+    "saveModifiedAt": "2026-10-13T14:07:00.642Z",
+    "minute": 44734,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900431717,
+    "iso": "2026-10-13T14:07:11.717Z",
+    "saveModifiedAt": "2026-10-13T14:07:10.643Z",
+    "minute": 44746,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900441748,
+    "iso": "2026-10-13T14:07:21.748Z",
+    "saveModifiedAt": "2026-10-13T14:07:20.653Z",
+    "minute": 44758,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900451772,
+    "iso": "2026-10-13T14:07:31.772Z",
+    "saveModifiedAt": "2026-10-13T14:07:30.654Z",
+    "minute": 44770,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900461797,
+    "iso": "2026-10-13T14:07:41.797Z",
+    "saveModifiedAt": "2026-10-13T14:07:40.659Z",
+    "minute": 44782,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900471820,
+    "iso": "2026-10-13T14:07:51.820Z",
+    "saveModifiedAt": "2026-10-13T14:07:50.657Z",
+    "minute": 44794,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900481846,
+    "iso": "2026-10-13T14:08:01.846Z",
+    "saveModifiedAt": "2026-10-13T14:08:00.666Z",
+    "minute": 44806,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900491870,
+    "iso": "2026-10-13T14:08:11.870Z",
+    "saveModifiedAt": "2026-10-13T14:08:10.670Z",
+    "minute": 44818,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900501893,
+    "iso": "2026-10-13T14:08:21.893Z",
+    "saveModifiedAt": "2026-10-13T14:08:20.681Z",
+    "minute": 44830,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900511918,
+    "iso": "2026-10-13T14:08:31.918Z",
+    "saveModifiedAt": "2026-10-13T14:08:30.685Z",
+    "minute": 44842,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900521942,
+    "iso": "2026-10-13T14:08:41.942Z",
+    "saveModifiedAt": "2026-10-13T14:08:40.689Z",
+    "minute": 44854,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900531965,
+    "iso": "2026-10-13T14:08:51.965Z",
+    "saveModifiedAt": "2026-10-13T14:08:50.690Z",
+    "minute": 44866,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900541987,
+    "iso": "2026-10-13T14:09:01.987Z",
+    "saveModifiedAt": "2026-10-13T14:09:00.696Z",
+    "minute": 44878,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900552010,
+    "iso": "2026-10-13T14:09:12.010Z",
+    "saveModifiedAt": "2026-10-13T14:09:10.703Z",
+    "minute": 44890,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900562037,
+    "iso": "2026-10-13T14:09:22.037Z",
+    "saveModifiedAt": "2026-10-13T14:09:20.707Z",
+    "minute": 44902,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900572062,
+    "iso": "2026-10-13T14:09:32.062Z",
+    "saveModifiedAt": "2026-10-13T14:09:30.717Z",
+    "minute": 44914,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900582087,
+    "iso": "2026-10-13T14:09:42.087Z",
+    "saveModifiedAt": "2026-10-13T14:09:40.724Z",
+    "minute": 44926,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900592111,
+    "iso": "2026-10-13T14:09:52.111Z",
+    "saveModifiedAt": "2026-10-13T14:09:50.725Z",
+    "minute": 44938,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 187,
+      "input": 278326,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 115
+    }
+  },
+  {
+    "at": 1791900602134,
+    "iso": "2026-10-13T14:10:02.134Z",
+    "saveModifiedAt": "2026-10-13T14:10:00.716Z",
+    "minute": 44950,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 188,
+      "input": 280019,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 116
+    }
+  },
+  {
+    "at": 1791900612159,
+    "iso": "2026-10-13T14:10:12.159Z",
+    "saveModifiedAt": "2026-10-13T14:10:10.736Z",
+    "minute": 44962,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 188,
+      "input": 280019,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 116
+    }
+  },
+  {
+    "at": 1791900622187,
+    "iso": "2026-10-13T14:10:22.187Z",
+    "saveModifiedAt": "2026-10-13T14:10:21.403Z",
+    "minute": 44974,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 190,
+      "input": 283279,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 118
+    }
+  },
+  {
+    "at": 1791900632211,
+    "iso": "2026-10-13T14:10:32.211Z",
+    "saveModifiedAt": "2026-10-13T14:10:30.752Z",
+    "minute": 44986,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 190,
+      "input": 283279,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 118
+    }
+  },
+  {
+    "at": 1791900642236,
+    "iso": "2026-10-13T14:10:42.236Z",
+    "saveModifiedAt": "2026-10-13T14:10:40.752Z",
+    "minute": 44998,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 190,
+      "input": 283279,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 118
+    }
+  },
+  {
+    "at": 1791900652257,
+    "iso": "2026-10-13T14:10:52.257Z",
+    "saveModifiedAt": "2026-10-13T14:10:50.761Z",
+    "minute": 45010,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 192,
+      "input": 286749,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 120
+    }
+  },
+  {
+    "at": 1791900662279,
+    "iso": "2026-10-13T14:11:02.279Z",
+    "saveModifiedAt": "2026-10-13T14:11:00.769Z",
+    "minute": 45022,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 192,
+      "input": 286749,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 120
+    }
+  },
+  {
+    "at": 1791900670824,
+    "iso": "2026-10-13T14:11:10.824Z",
+    "saveModifiedAt": "2026-10-13T14:11:10.783Z",
+    "minute": 45034,
+    "speed": 3,
+    "paused": false,
+    "online": true,
+    "deepseek": {
+      "day": "2026-10-13",
+      "calls": 92,
+      "input": 261315,
+      "output": 9634,
+      "failures": 0,
+      "autoCalls": 85,
+      "reflectionCalls": 27
+    },
+    "jev": {
+      "day": "2026-10-13",
+      "calls": 192,
+      "input": 286749,
+      "failures": 1,
+      "consecutiveFailures": 0,
+      "retryAfter": 0
+    },
+    "jevCounts": {
+      "encounter": 72,
+      "speech": 41,
+      "idle": 120
+    }
+  }
+]

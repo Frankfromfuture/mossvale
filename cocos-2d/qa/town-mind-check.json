@@ -1,0 +1,50 @@
+{
+  "longMemory": {
+    "olderEventRetrieved": true,
+    "retrievalMs": 16.13,
+    "boundedContext": true,
+    "eventTextStoredOnce": true,
+    "reload": true,
+    "additionalMemories": 4000
+  },
+  "privacy": {
+    "foreignMemoryRejected": true,
+    "privateEvidenceExcludedFromNeighbourInput": true,
+    "privateAppointmentsIsolated": true
+  },
+  "calendar": {
+    "onlyRemainingFlexibleSlotsAdjusted": true,
+    "completedAndFixedSlotsPreserved": true
+  },
+  "appointments": {
+    "explicitAcceptance": true,
+    "vagueAndConflictingInvitationsRejected": true,
+    "fulfilled": true,
+    "missed": true,
+    "cancellationIdempotent": true,
+    "residentsActuallyWalkToMeeting": true
+  },
+  "random": {
+    "probability": 0.2,
+    "samples": 10000,
+    "changed": 1957,
+    "observedRate": 0.1957,
+    "boundedCandidates": true,
+    "persistedSequence": true
+  },
+  "economy": {
+    "continuousEqualsChunked": true,
+    "cashConserved": true,
+    "hotelPayments": true
+  },
+  "scope": "isolated in-memory 2D; no real model requests or phone test",
+  "build": {
+    "web": true,
+    "runs": 1
+  },
+  "service": {
+    "local2d": true,
+    "restarts": 1,
+    "httpStatus": 200
+  }
+}

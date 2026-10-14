@@ -1,0 +1,48 @@
+{
+  "environment": "Headless Chrome, touch 390×844 DPR 2; real isolated HTTP server on 4322",
+  "initialReadyRooms": 2,
+  "mobileHotelMenu": true,
+  "actualPurchase": true,
+  "coinsAfterDesk": 75,
+  "placed": {
+    "x": 26.5,
+    "z": 2.5,
+    "w": 1,
+    "d": 1,
+    "stored": false
+  },
+  "errors": [],
+  "responsiveFixture": "Same isolated save, paused; Lin placed nearby for touch checks",
+  "viewports": [
+    [
+      390,
+      844
+    ],
+    [
+      390,
+      430
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1000,
+      700
+    ]
+  ],
+  "dialogueAutoOpen": true,
+  "clickOutsideCloses": true,
+  "chineseDraftPreserved": true,
+  "zoomWorks": true,
+  "ledgerResizes": true,
+  "ledgerBounds": {
+    "width": 350,
+    "height": 536,
+    "screenWidth": 857.1428571428571,
+    "screenHeight": 600,
+    "people": 12,
+    "visitors": 1,
+    "zoomRight": 36
+  }
+}

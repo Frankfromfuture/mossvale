@@ -1,0 +1,11 @@
+{
+  "environment": "Independent rules-only town clone; no user saves or model requests",
+  "metresPerSecond": {
+    "resident": 0.5700000000000003,
+    "player": 0.5700000000000003,
+    "visitor": 0.5700000000000003
+  },
+  "existingTasksRetimed": true,
+  "existingPositionsPreserved": true,
+  "existingPathsPreserved": true
+}
