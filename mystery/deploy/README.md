@@ -1,22 +1,41 @@
-# 戏中局云端发布
+# 青苔镇 Mossvale 云端发布
 
-2026-10-29 首次发布到 <https://www.iambrizo.com/mystery/>。2026-10-31 更新为 `20261031-mystery-intrigue-v10`，与 <https://www.iambrizo.com/mossvale/> 并行。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，发布版本为 `20261031-mossvale-mystery-v11`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261031-mystery-intrigue-v10` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261031-mossvale-mystery-v11` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
 | 服务监听 | `127.0.0.1:8796` |
-| 配置备份 | `/srv/mossvale-mystery/backups/nginx-before-20261029-mystery-v1.conf` |
+| 配置备份 | `/srv/mossvale-mystery/backups/nginx-before-20261031-mossvale-mystery-v11.conf` |
 
 网页、游戏后端和 DeepSeek 请求均在云端运行，本机无需保持在线。容器只读挂载既有云端模型密文，解密后的配置仅留在进程内存。实际对话使用 `deepseek-v4-flash`。
 
-Nginx 只增加 `/mystery` 跳转与 `/mystery/` 代理。新增路由通过配置检查后热重载，原苔溪镇和其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mystery/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
+域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。首发清单在 `../qa/cloud-v1/manifest.json`，UI 更新清单在 `release-manifest-ui-v2.json`，剧情更新清单在 `release-manifest-story-v3.json`，行动点版本清单在 `release-manifest-investigation-v4.json`，玩家反馈清单在 `release-manifest-feedback-v5.json`，当前清单在 `release-manifest-intrigue-v10.json`。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-mossvale-v11.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-10-31 青苔镇品牌与入口迁移
+
+发布 `20261031-mossvale-mystery-v11`，上线青苔镇书法 Logo、简化后的设置及已验收的最新剧本杀代码。复用本地 Web 构建，没有重新构建或重启 4331。
+
+- 90 项发布文件校验通过；11 份旧存档的只读隔离副本由新旧版本加载，角色槽位、调查进度和对话记录一致。
+- 桌面 1280×900 与手机 390×844 的首页、六角色选角、旧链接跳转及进度接续通过；两名测试访客的进度独立，页面和资源错误零。
+- 线上入口、脚本、首页样式和 Logo 与发布产物一致；跨站写入、私有文件访问及无会话语音连接按预期被拒绝。本轮模型调用为零。
+- 两份测试档已清理，14 项原有数据文件的内容及修改时间保持；存档备份和上一版容器保留，其他服务未重启。
+
+存档备份为 `/srv/mossvale-mystery/backups/before-20261031-mossvale-mystery-v11.tgz`，上一版容器为 `mossvale-mystery-before-mossvale-v11`。本地证据位于 `mystery/qa/github-refresh-v1/`。
+
+需要回退本次发布时，执行以下命令。脚本核对当前版本与代理配置，再恢复 v10 程序和迁移前的代理，保留当前玩家存档；v10 与 v11 的存档兼容性已验证。
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/current/deploy/migrate-mossvale.py rollback
+```
+
+以下为历次发布记录，目录与回退命令对应各自的历史版本。
 
 ## 2026-10-31 戏中局首页、角色解锁与背景音乐
 
