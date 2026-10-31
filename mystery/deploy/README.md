@@ -1,6 +1,6 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.8`，发布目录为 `20261101-mossvale-0.8.8-v12`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.10`，沿用发布目录 `20261101-mossvale-0.8.8-v12`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
@@ -16,7 +16,25 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-v12.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。基础发布清单为 `deploy/release-manifest-v12.json`，0.8.10 的静态更新清单与原文件另存于 `/srv/mossvale-mystery/backups/menu-0.8.10/`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-01 首页图标与版本号 · 0.8.10
+
+“关于 Mossvale”右侧加入 GitHub 矢量图标，点击文字或图标均前往仓库介绍；首页底部由 GitHub 链接改为项目版本号，本次显示 `v0.8.10`。版本值由包清单编入网页，后续升版随构建同步。
+
+本次同时上线 0.8.9 的左对齐文字菜单、悬停下划线、工具文字去底缩字、目标支线与提示加粗、“我”入口放大和每次进入默认自动朗读。
+
+一次 Web 构建，复用本地 4331，无应用重启。桌面与 390×844 内嵌视口检查图标位置、实际 GitHub 跳转、底部版本、设置返回和默认朗读开关通过，页面错误零；连续回复的自动朗读沿用 0.8.9 已通过的模拟验收。
+
+只更新 `dist/game.js`、`dist/ui-icons.css`、`dist/investigation.css`、`dist/start-menu.css` 及两份包版本文件。28 项服务端和共享文件与线上一致，4 项线上网页资源与构建哈希一致；16 项原有线上数据内容与修改时间保持，本轮未创建线上测试档。应用容器、其他服务及 Nginx 均未重启，Nginx 配置未变；本轮验收未调用模型或语音服务。
+
+原文件、当前数据备份、变更清单及回退脚本保存在 `/srv/mossvale-mystery/backups/menu-0.8.10/`。需要恢复发布前的网页与包版本时，脚本核对当前文件后恢复备份，保留玩家存档且不重启服务：
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/backups/menu-0.8.10/apply-static.py rollback
+```
+
+本地证据：`mystery/qa/menu-github-version-v1/`。
 
 ## 2026-11-01 合并发布 · 0.8.8
 
