@@ -18,6 +18,14 @@
 
 发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-mossvale-v11.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
 
+## 2026-10-31 网页图标更新 · 0.8.2
+
+将雾气山谷圆角 Logo 缩为 64×64 透明 PNG，256 色压缩后为 4,019 字节，文件为 `dist/art/brand/mossvale-favicon-v1.png`。网页入口改用此图标，文件名带版本以避开旧 favicon 缓存。
+
+本轮仅向当前 v11 发布目录更新 `dist/index.html` 并新增图标，不切换游戏版本。其余线上文件保留原样，容器和 Nginx 无需重启。原入口、发布清单及变更后的哈希另存于 `/srv/mossvale-mystery/backups/favicon-0.8.2/`，原 v11 清单继续记录首次发布时的文件哈希；本次验证记录在 `mystery/qa/favicon-v1/verification.json`。GitHub 包版本、标签及 Release 为 `0.8.2`。
+
+需要回退图标时，将备份中的 `index.html` 恢复至其记录的发布目录 `dist/index.html`；新增 PNG 可保留，不影响旧入口。
+
 ## 2026-10-31 青苔镇品牌与入口迁移
 
 发布 `20261031-mossvale-mystery-v11`，上线青苔镇书法 Logo、简化后的设置及已验收的最新剧本杀代码。复用本地 Web 构建，没有重新构建或重启 4331。
