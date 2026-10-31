@@ -18,6 +18,14 @@
 
 发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-mossvale-v11.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
 
+## 2026-10-31 设置与重新开始修正 · 0.8.3
+
+设置页底部改为同一行的两个操作，重开入口靠右，文字和返回菜单对齐。原样式混用了带图标的行内弹性布局与普通按钮，手机实测有 7.5px 的上下偏差。
+
+隔离存档的单次重开返回 200，未复现服务退出。前端补齐重开期间的操作锁：一次只提交一份请求；若重开回复丢失，读取当前进度，确认仍为同一角色的新开场后接续，避免页面继续使用作废的进度标识。其他角色的进度保持。
+
+本轮只将构建后的 `dist/game.js` 和 `dist/style.css` 更新至当前 v11 发布目录，后端及 Nginx 无需重启。备份与发布核验存于 `/srv/mossvale-mystery/backups/settings-reset-0.8.3/`，本地证据为 `mystery/qa/settings-reset-v1/verification.json`；GitHub 包版本、标签及 Release 为 `0.8.3`。回退时将备份中的两份文件恢复至该目录的 `dist/`。
+
 ## 2026-10-31 网页图标更新 · 0.8.2
 
 将雾气山谷圆角 Logo 缩为 64×64 透明 PNG，256 色压缩后为 4,019 字节，文件为 `dist/art/brand/mossvale-favicon-v1.png`。网页入口改用此图标，文件名带版本以避开旧 favicon 缓存。
