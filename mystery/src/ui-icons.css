@@ -7,11 +7,11 @@
  width:58px; min-width:58px; min-height:76px; padding:2px;
  display:flex; flex-direction:column; gap:0;
  border:0; border-radius:11px 9px 12px 8px; background:transparent; box-shadow:none;
- font-size:12px; line-height:20px; white-space:nowrap;
+ font-size:11px; line-height:20px; white-space:nowrap;
 }
 .tools .ui-icon {width:52px; height:52px; filter:drop-shadow(0 1px 0 #fff6dc);}
-.tools button>span:last-child {padding:0 5px; border-radius:3px; background:#f6f0dcaa; text-shadow:0 1px #fff9e9;}
-.tools button:hover {background:#f7efd6b5; transform:translateY(-1px);}
+.tools button>span:last-child {padding:0 5px; font-size:11px; background:transparent; text-shadow:0 1px #fff9e9;}
+.tools button:hover {background:transparent; transform:translateY(-1px);}
 .tools button:focus-visible,.scene-tools button:focus-visible {outline:2px solid #967346; outline-offset:2px;}
 .scene-tools {gap:8px;}
 .scene-tools button {
@@ -47,9 +47,9 @@
  .masthead {display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px;}
  .case-title h1 {white-space:nowrap;}
  .tools {gap:3px;}
- .tools button {width:44px; min-width:44px; min-height:60px; padding:0; gap:0; font-size:10px; line-height:18px;}
+ .tools button {width:44px; min-width:44px; min-height:60px; padding:0; gap:0; font-size:9px; line-height:18px;}
  .tools .ui-icon {width:42px; height:42px;}
- .tools button>span:last-child {padding:0 3px;}
+ .tools button>span:last-child {padding:0 3px;font-size:9px;}
  .scene-tools {gap:6px;}
  .scene-tools button {min-height:42px; padding:3px 8px 3px 4px; gap:3px; font-size:11px;}
  .scene-tools .ui-icon {width:30px; height:30px;}
