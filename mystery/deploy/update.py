@@ -15,20 +15,20 @@ import time
 import urllib.request
 
 BASE = Path('/srv/mossvale-mystery')
-NAME = '20261031-mystery-intrigue-v10'
-PREVIOUS = BASE/'releases'/'20261031-mystery-qwen-v9'
+NAME = '20261101-mossvale-0.8.8-v12'
+PREVIOUS = BASE/'releases'/'20261031-mossvale-mystery-v11'
 RELEASE = BASE/'releases'/NAME
 ARCHIVE = Path('/tmp/mystery-'+NAME+'.tgz')
 CURRENT = BASE/'current'
 DATA = BASE/'data'
 PREFLIGHT_DATA = BASE/('preflight-data-'+NAME)
 MAIN = 'mossvale-mystery'
-CHECK = 'mossvale-mystery-check-intrigue-v10'
-OLD = 'mossvale-mystery-before-intrigue-v10'
-MANIFEST = 'deploy/release-manifest-intrigue-v10.json'
+CHECK = 'mossvale-mystery-check-v12'
+OLD = 'mossvale-mystery-before-v12'
+MANIFEST = 'deploy/release-manifest-v12.json'
 BACKUP = BASE/'backups'/('before-'+NAME+'.tgz')
 LIVE = Path('/srv/brizo-sync/current/services/device-sync/deploy/nginx.conf')
-NGINX_PREVIOUS_HASH = '74c007632dfba7882985916c6d72bc0bd0f524612a9b735eb8479433939c152d'
+NGINX_PREVIOUS_HASH = '32143d62eab3f572a6183b915ba6fcb6350604db562badfd9933edd05eb96e9e'
 
 
 def check_nginx():
@@ -36,8 +36,10 @@ def check_nginx():
         raise RuntimeError('Nginx changed since the release baseline')
 
 
-def has_new_archives():
-    return any(json.loads(p.read_text()).get('format') == 'six-roles-v1' for p in DATA.glob('*.json'))
+def check_compatible_archives():
+    for p in DATA.glob('*.json'):
+        if json.loads(p.read_text()).get('format') not in (None, 'six-roles-v1'):
+            raise RuntimeError('Unknown save format; preserve data before switching releases')
 
 
 def run(*args):
@@ -93,7 +95,7 @@ def docker_start(name, port, release, data, image, restart):
                '--mount', f'type=bind,src={BASE}/secrets/qwen.json,dst=/run/secrets/mystery/qwen.json,readonly',
                '-e', 'MYSTERY_QWEN_CONFIG=/run/secrets/mystery/qwen.json',
                '--workdir', '/app', '-e', f'PORT={port}', '-e', 'MYSTERY_DATA_DIR=/app-data',
-               '-e', 'MYSTERY_COOKIE_PATH=/mystery/', '-e', 'MYSTERY_SECURE_COOKIE=1',
+               '-e', 'MYSTERY_COOKIE_PATH=/mossvale/', '-e', 'MYSTERY_SECURE_COOKIE=1',
                '-e', 'TZ=Asia/Shanghai', image, 'node', 'server/cloud-entry.mjs')
 
 
@@ -136,10 +138,23 @@ if phase == 'prepare':
         check_nginx()
         if any(PREFLIGHT_DATA.iterdir()):
             raise RuntimeError('Preflight unexpectedly wrote a save')
+        run('docker', 'rm', '-f', CHECK)
+        for p in DATA.glob('*.json'):
+            if len(p.stem) == 32 and all(c in '0123456789abcdef' for c in p.stem):
+                shutil.copy2(p, PREFLIGHT_DATA/p.name)
+                os.chown(PREFLIGHT_DATA/p.name, 1000, 1000)
+        compat = json.loads(run('docker', 'run', '--rm', '--network', 'none', '--read-only', '--user', '1000:1000',
+            '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
+            '--mount', f'type=bind,src={RELEASE},dst=/app,readonly',
+            '--mount', f'type=bind,src={PREVIOUS},dst=/previous,readonly',
+            '--mount', f'type=bind,src={PREFLIGHT_DATA},dst=/app-data,readonly',
+            image, 'node', '/app/deploy/check-save-compat.mjs'))
+        if not compat.get('passed'):
+            raise RuntimeError('Save compatibility check failed')
         passed = True
         record('preflight', {'passed': True, 'release': str(RELEASE),
                              'assetHashesMatch': True, 'providerReady': ready['ai']['ready'],
-                             'playerSavesRead': False, 'modelCalls': 0})
+                             'saveCompatibility': compat, 'modelCalls': 0})
     finally:
         subprocess.run(['docker', 'rm', '-f', CHECK], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if PREFLIGHT_DATA.exists():
@@ -152,6 +167,7 @@ elif phase == 'activate':
         raise SystemExit('Release state changed; inspect before activation')
     listing = manifest()
     check_nginx()
+    check_compatible_archives()
     image = run('docker', 'inspect', MAIN, '--format', '{{.Config.Image}}')
     stopped = renamed = False
     try:
@@ -168,15 +184,14 @@ elif phase == 'activate':
         temporary = BASE/('current-'+NAME)
         temporary.symlink_to(RELEASE)
         os.replace(temporary, CURRENT)
-        record('activation', {'published': True, 'url': 'https://www.iambrizo.com/mystery/',
+        record('activation', {'published': True, 'url': 'https://www.iambrizo.com/mossvale/',
                               'release': str(RELEASE), 'previousRelease': str(PREVIOUS),
                               'saveBackup': str(BACKUP), 'providerReady': ready['ai']['ready'],
                               'assetHashesMatch': True, 'nginxChanged': False,
                               'otherServicesRestarted': False})
     except Exception:
-        if renamed and has_new_archives():
-            raise RuntimeError('New role archives exist; keep both releases and all saves for recovery. Do not start the old server against these archives.')
         if renamed:
+            check_compatible_archives()
             subprocess.run(['docker', 'rm', '-f', MAIN], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             run('docker', 'rename', OLD, MAIN)
             run('docker', 'start', MAIN)
@@ -191,10 +206,9 @@ elif phase == 'rollback':
     if CURRENT.resolve() != RELEASE:
         raise SystemExit('This release is not current')
     check_nginx()
-    if has_new_archives():
-        raise RuntimeError('Role archives use a new format. Preserve all slots and migrate them before a rollback to v9; automatic rollback is disabled.')
+    check_compatible_archives()
     run('docker', 'stop', '--time', '25', MAIN)
-    run('docker', 'rename', MAIN, 'mossvale-mystery-after-intrigue-v10')
+    run('docker', 'rename', MAIN, 'mossvale-mystery-after-v12')
     run('docker', 'rename', OLD, MAIN)
     run('docker', 'start', MAIN)
     health(8796)

@@ -30,15 +30,10 @@ export const walkSpeedMultiplier=3;
 const ink='#4d4d43', palette={grass:'#c9d1aa',wood:'#c6aa83',cream:'#f2e8ca',sage:'#a9b79f',blue:'#b7c9cd',rose:'#d8b5a7'};
 function grain(seed=17){let a=seed;return ()=>{a=(Math.imul(a,1664525)+1013904223)>>>0;return a/4294967296;};}
 const distantFocusShader={
- uniforms:{tDiffuse:{value:null},resolution:{value:new THREE.Vector2(1,1)},strength:{value:1},haze:{value:new THREE.Color('#d6dcc8')},fogTime:{value:0},fogSeed:{value:0},fogAmount:{value:.26}},
+ uniforms:{tDiffuse:{value:null},resolution:{value:new THREE.Vector2(1,1)},strength:{value:1},haze:{value:new THREE.Color('#d6dcc8')}},
  vertexShader:'varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
  fragmentShader:`uniform sampler2D tDiffuse; uniform vec2 resolution; uniform float strength; uniform vec3 haze;
- uniform float fogTime; uniform float fogSeed; uniform float fogAmount; varying vec2 vUv;
- float mistHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
- float mistNoise(vec2 p){
-  vec2 cell=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
-  return mix(mix(mistHash(cell),mistHash(cell+vec2(1.0,0.0)),f.x),mix(mistHash(cell+vec2(0.0,1.0)),mistHash(cell+vec2(1.0,1.0)),f.x),f.y);
- }
+ varying vec2 vUv;
  void main(){
   vec4 source=texture2D(tDiffuse,vUv);
   float distanceFromFocus=abs(vUv.y-.5);
@@ -57,13 +52,7 @@ const distantFocusShader={
   }
   vec3 color=mix(source.rgb,soft,fade*.96);
   color=mix(color,haze,fade*.028);
-  // Independent, stretched cloud fields drift through the two defocused bands.
-  float band=step(.5,vUv.y),direction=mix(-1.0,1.0,band);
-  vec2 p=vUv*vec2(max(1.0,resolution.x/resolution.y)*2.8,10.0)+vec2(fogSeed+band*31.7,band*17.3);
-  vec2 drift=vec2(fogTime*.018*direction,fogTime*.007);
-  float clouds=mistNoise(p+drift)*.55+mistNoise(p*2.03-drift*.7+7.1)*.3+mistNoise(p*4.07+drift*.4+23.4)*.15;
-  float mist=smoothstep(.30,.74,clouds)*smoothstep(.18,.40,distanceFromFocus)*strength*fogAmount;
-  gl_FragColor=vec4(mix(color,mix(haze,vec3(1.0),.68),mist),source.a);
+  gl_FragColor=vec4(color,source.a);
  }`
 };
 export class TownScene{
@@ -78,7 +67,6 @@ export class TownScene{
   const target=new THREE.WebGLRenderTarget(1,1,{samples:4,depthTexture:this.comic?new THREE.DepthTexture(1,1):null});this.composer=new EffectComposer(this.renderer,target);this.composer.addPass(new RenderPass(this.scene,this.camera));this.comicPass=new ComicInkPass(this.camera);this.comicPass.enabled=this.comic;this.composer.addPass(this.comicPass);this.distantPass=new ShaderPass(distantFocusShader);this.distantPass.enabled=this.comic;this.composer.addPass(this.distantPass);
   this.outline=new OutlinePass(new THREE.Vector2(1,1),this.scene,this.camera);this.outline.edgeStrength=4.2;this.outline.edgeThickness=2.2;this.outline.edgeGlow=.08;this.outline.visibleEdgeColor.set('#df9d45');this.outline.hiddenEdgeColor.set('#ae8654');this.composer.addPass(this.outline);this.composer.addPass(new OutputPass());
   this.conversationCamera=new ConversationCamera(this);
-  this.reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');this.distantPass.uniforms.fogSeed.value=Math.random()*100;
   this.host.dataset.roofs='0';this.host.dataset.look=this.comic?'comic':'volume';this.host.dataset.scenery=this.scenery?'crafted':'classic';
   const canvas=this.renderer.domElement;
   canvas.addEventListener('pointerdown',e=>{this.pointerStart=[e.clientX,e.clientY];});
@@ -90,7 +78,7 @@ export class TownScene{
  // Rounded faces keep the original extents; the depth pass traces their silhouette.
  roundBox(x,y,z,w,h,d,color,parent,radius,surface='paper'){return this.box(x,y,z,w,h,d,color,parent,false,radius,surface);}
  ball(x,y,z,r,color,parent=this.scene,scale=[1,1,1]){const m=new THREE.Mesh(new THREE.SphereGeometry(r,10,7),this.mat(color));m.position.set(x,y,z);m.scale.set(...scale);m.castShadow=true;parent.add(m);return m;}
- label(text,world,cls='',pick=null){const el=document.createElement('button');el.className='world-label '+cls;el.textContent=text;el.type='button';if(pick)el.onclick=e=>{e.stopPropagation();this.onPick(pick);};else el.tabIndex=-1;this.labels.append(el);return {el,world};}
+ label(text,world,cls='',pick=null){const el=document.createElement(pick?'button':'div');el.className='world-label '+cls;el.textContent=text;el.type='button';if(pick)el.onclick=e=>{e.stopPropagation();this.onPick(pick);};else el.tabIndex=-1;this.labels.append(el);return {el,world};}
  buildGround(){
   this.box(0,-.45,0,420,.5,420,palette.grass,this.scene,false);
   const r=grain(981),size=2048,groundCanvas=document.createElement('canvas');groundCanvas.width=groundCanvas.height=size;const ctx=groundCanvas.getContext('2d');ctx.fillStyle=palette.grass;ctx.fillRect(0,0,size,size);
@@ -325,7 +313,6 @@ export class TownScene{
   this.setActorPath(playerId(this.current),point,this.current.room);
  }
  frame(t){requestAnimationFrame(this.frame);if(document.hidden||t-this.last<1000/40)return;const dt=Math.min((t-this.last)/1000,.05);this.last=t;this.landscape.stream.update(dt);
-  if(!this.reducedMotion.matches)this.distantPass.uniforms.fogTime.value+=dt;
   const entryHold=this.entrySpeech?.started&&this.entrySpeech.hold>0&&this.entryBubble.inView;
   if(this.travelRoom&&!entryHold){const player=this.actors.get(playerId(this.current));if(this.moving(player)){
    const up=new THREE.Vector3(0,1,0).applyQuaternion(this.camera.quaternion),h=this.host.clientHeight,top=this.host.clientWidth<600?205:h<540?90:125;

@@ -16,3 +16,10 @@ const aliases={
  'candle-ishikawa':['蜡烛'],'candle-kato':['蜡烛'],'candle-jiang':['蜡烛']
 };
 export const clueTerms=clue=>[clue.title,...(aliases[clue.id]||[])];
+// Vocabulary only: the descriptions and hidden contents stay on the server.
+export const objectTerms=[...new Set(Object.values(aliases).flat().concat([
+ '行囊','烛台','丝帛','纸条','衣物内衬','菊纹','十六瓣六重菊纹','血迹','灰烬','花土','风信花根','花汁','白离花','风信花',
+ '菜地','扫帚','旧册','夹页','供物','供台','供桌','人偶','木偶','长发人偶','华服人偶','骨片','遗骨','油泥','凡士林',
+ '刀架','衣柜','书桌','秘册','首饰盒','蛇形戒指','床边小瓶','梳妆包','火盆','炭火','公文袋','合同','匣子','茶杯','杯子',
+ '罗刹木牌','罗刹纹样','樱花图样','毒针','毒茶','茶水','人皮','烛火','石板','水钵','茶具','药草','毒物','蜡烛','小说','匕首'
+]))];

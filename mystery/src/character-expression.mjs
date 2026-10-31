@@ -25,8 +25,8 @@ export function animateFace(rig,dt,gesture){
  const speaking=!rig.thinking&&!rig.performancePaused&&(rig.voiceSpeaking||rig.speakingUntil>t||gesture==='talk'&&!rig.inConversation);
  // Separate blink phases prevent a roomful of simultaneous blinks.
  const blinkTime=(t+f.offset)%4.7,blink=blinkTime<.16?Math.max(.05,Math.abs(blinkTime-.08)/.08):1;
- f.eyeLevel=lerp(f.eyeLevel??1,pose.eye);f.eyes.forEach(eye=>{eye.scale.y=.041*f.eyeLevel*blink;});
- f.brows.forEach((b,i)=>{const side=i?1:-1;b.rotation.z=lerp(b.rotation.z,side*pose.brow);b.position.y=lerp(b.position.y,.138+pose.lift+(mood==='thoughtful'&&i===1?.016:0));});
+ f.eyeLevel=lerp(f.eyeLevel??1,pose.eye);f.eyes.forEach(eye=>{eye.scale.y=eye.userData.restHeight*f.eyeLevel*blink;});
+ f.brows.forEach((b,i)=>{const side=i?1:-1,rest=b.userData.rest;b.rotation.z=lerp(b.rotation.z,rest.angle+side*pose.brow);b.position.y=lerp(b.position.y,rest.y+pose.lift+(mood==='thoughtful'&&i===1?.016:0));b.position.z=f.depthAt(b.position.x,b.position.y)+.002;});
  f.mouth.scale.y=lerp(f.mouth.scale.y,pose.mouth);
  // Audio drives the mouth from the actual playback signal, including its pauses.
  // Silent text replies use varied syllable beats instead of a constant bob.

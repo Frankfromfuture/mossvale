@@ -1,9 +1,9 @@
 import {createReadStream} from 'node:fs';
 
-// Browsers can request the front-loaded M4A header or resume a buffered section.
+// Support seeking and looping without downloading the soundtrack again.
 export function sendAudioFile(req,res,file,size){
  let start=0,end=size-1,status=200;
- const headers={'Content-Type':'audio/mp4','Accept-Ranges':'bytes','Cache-Control':'no-cache'};
+ const headers={'Content-Type':file.endsWith('.mp3')?'audio/mpeg':'audio/mp4','Accept-Ranges':'bytes','Cache-Control':'no-cache'};
  if(req.headers.range){
   const match=/^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
   if(match&&(match[1]||match[2])){

@@ -12,6 +12,15 @@ export const characterLooks={
  emi:{height:.97,skin:'#eac6ac',hair:'#625044',coat:'#cc9e8e',trousers:'#d7c8a5',shoes:'#8a7060',stride:.5,speed:1.08,description:'盘发、花纹交领衣、珊瑚色披肩与束带；双臂拢着衣襟，动作小而克制。'}
 };
 const mix=THREE.MathUtils.damp;
+// Resting features belong to the person; expressions are offsets from these shapes.
+const facialFeatures={
+ player:{eye:[.128,.025,.027,.041,-.035],brow:[.133,.142,.014,0,[[-.061,-.006],[-.012,.014],[.06,-.004]]]},
+ miyazaki:{eye:[.13,.022,.034,.022,.07],brow:[.136,.131,.016,.035,[[-.061,0],[0,.004],[.064,-.002]]]},
+ jiang:{eye:[.137,.013,.026,.031,-.13],brow:[.144,.137,.019,-.07,[[-.061,.004],[-.015,.014],[.061,-.013]]]},
+ ishikawa:{eye:[.124,.029,.035,.019,.14],brow:[.13,.145,.012,.065,[[-.058,-.008],[.008,.012],[.066,.005]]]},
+ kato:{eye:[.12,.018,.028,.023,.02],brow:[.129,.128,.021,.09,[[-.063,-.004],[-.016,.012],[.061,.008]]]},
+ emi:{eye:[.132,.027,.031,.028,-.085],brow:[.14,.151,.01,-.03,[[-.062,-.014],[-.008,.018],[.06,-.008]]]}
+};
 export function createCharacter(scene,id){
  const look=characterLooks[id],root=new THREE.Group(),body=new THREE.Group(),head=new THREE.Group();root.name='character-'+id;root.add(body);body.position.y=.27;body.scale.setScalar(look.height*.88);
  const mat=c=>scene.mat(c),ink='#504a40';
@@ -38,9 +47,21 @@ export function createCharacter(scene,id){
   ell(elbow,0,-.29,.015,.085,.103,.075,look.skin);
  }
  body.add(head);head.position.set(0,1.78,0);
- ell(head,0,0,.015,.34,.39,.315,look.skin);
- const face={eyes:[],brows:[],offset:Object.keys(characterLooks).indexOf(id)*.73,open:0};
- for(const side of [-1,1]){ell(head,side*.328,-.055,.01,.065,.105,.075,look.skin);face.eyes.push(ell(head,side*.128,.025,.305,.023,.041,.014,ink));const brow=new THREE.Group();brow.position.set(side*.13,.138,.28);head.add(brow);line(brow,[[side*-.06,-.01,.012],[side*.02,.012,0],[side*.07,-.003,-.022]],look.hair,.017);face.brows.push(brow);}
+ const skin=ell(head,0,0,.015,.34,.39,.315,look.skin);
+ // Sample the actual faceted skin, so short hairs touch even at the jaw's edge.
+ const surface=new THREE.Mesh(skin.geometry);surface.position.copy(skin.position);surface.scale.copy(skin.scale);surface.updateMatrixWorld(true);
+ const ray=new THREE.Raycaster(new THREE.Vector3(),new THREE.Vector3(0,0,-1));
+ const depthAt=(x,y)=>{ray.ray.origin.set(x,y,1);return ray.intersectObject(surface,false)[0]?.point.z??.015;};
+ const features=facialFeatures[id],face={eyes:[],brows:[],depthAt,offset:Object.keys(characterLooks).indexOf(id)*.73,open:0};
+ for(const side of [-1,1]){
+  ell(head,side*.328,-.055,.01,.065,.105,.075,look.skin);
+  const [ex,ey,ew,eh,tilt]=features.eye,eye=ell(head,side*ex,ey,depthAt(side*ex,ey)+.002,ew,eh,.012,ink);
+  eye.rotation.set(0,side*.26,side*tilt);eye.userData.restHeight=eh;face.eyes.push(eye);
+  const [bx,by,width,angle,points]=features.brow,brow=new THREE.Group(),rotation=side*angle;
+  brow.position.set(side*bx,by,depthAt(side*bx,by)+.002);brow.rotation.z=rotation;head.add(brow);
+  line(brow,points.map(([x,y])=>{const px=side*x,rx=px*Math.cos(rotation)-y*Math.sin(rotation),ry=px*Math.sin(rotation)+y*Math.cos(rotation);return [px,y,depthAt(side*bx+rx,by+ry)+.002-brow.position.z];}),look.hair,width);
+  brow.userData.rest={y:by,angle:rotation};face.brows.push(brow);
+ }
  ell(head,.015,-.062,.316,.038,.061,.045,look.skin);
  face.mouth=new THREE.Group();face.mouth.position.set(0,-.185,.31);head.add(face.mouth);line(face.mouth,[[-.065,0,-.006],[.012,-.011,.01],[.074,.004,-.011]],'#99775f',.01);face.openMouth=ell(head,0,-.191,.316,.052,.003,.014,'#76594e');face.openMouth.visible=false;
  // Hair cap is an actual back/side shell, leaving the forehead and face clear.
@@ -64,7 +85,10 @@ export function createCharacter(scene,id){
   taper(torso,0,-.07,0,.3,.3,.12,'#687c6c',.83);
  }else if(id==='jiang'){
   for(let i=0;i<7;i++){const tuft=ell(head,Math.cos(i*2.4)*.24,.29+Math.sin(i)*.035,Math.sin(i*2.4)*.2,.1,.15,.08,look.hair);tuft.rotation.z=i*.5;}
-  for(const side of [-1,1])for(let j=0;j<4;j++)line(head,[[side*(.1+j*.04),-.19-j*.01,.28-j*.015],[side*(.11+j*.04),-.22-j*.01,.28-j*.015]],'#8d8676',.007);
+  for(const side of [-1,1])for(let j=0;j<4;j++){
+   const x=side*(.1+j*.04),y=-.19-j*.01;
+   const hair=line(head,[[x,y,depthAt(x,y)+.002],[x+side*.005,y-.015,depthAt(x+side*.005,y-.015)+.002],[x+side*.01,y-.03,depthAt(x+side*.01,y-.03)+.002]],'#8d8676',.007);hair.name='fitted-stubble';
+  }
   box(torso,0,.08,.235,.37,.57,.035,'#c8bea0');line(torso,[[-.19,.57,.19],[-.13,.37,.26],[.13,.37,.26],[.19,.57,.19]],'#e1d7bc',.026);
   for(const side of [-1,1])box(torso,side*.205,.4,.24,.115,.46,.05,'#e7dcc0');box(torso,.02,-.03,.263,.2,.16,.024,'#afa58b');
  }else if(id==='ishikawa'){
@@ -73,7 +97,14 @@ export function createCharacter(scene,id){
   box(elbows[0],0,-.18,.12,.32,.4,.065,'#625e58');box(elbows[0],.015,-.18,.158,.27,.35,.015,'#e9dec4');box(elbows[0],-.14,-.18,.17,.04,.4,.025,'#858177');
   const pen=box(elbows[1],0,-.32,.05,.018,.22,.018,'#c4a56d');pen.rotation.x=-.6;
  }else if(id==='kato'){
-  for(const side of [-1,1]){const moustache=ell(head,side*.047,-.13,.31,.061,.022,.025,look.hair);moustache.rotation.z=side*.2;}
+  for(const side of [-1,1]){
+   const geometry=new THREE.SphereGeometry(1,20,12),positions=geometry.attributes.position;
+   for(let i=0;i<positions.count;i++){
+    const u=positions.getX(i),v=positions.getY(i),w=positions.getZ(i),x=side*.053+u*.057,y=-.127+v*.019-side*u*.012;
+    positions.setXYZ(i,x,y,depthAt(x,y)+.002+w*.007);
+   }
+   geometry.computeVertexNormals();const moustache=mesh(geometry,look.hair,head);moustache.name='fitted-moustache';
+  }
   box(torso,0,.28,.22,.24,.51,.035,'#786c57');patch(torso,[[-.12,.61],[0,.45],[-.06,.35]],'#f2e8d1');patch(torso,[[.12,.61],[0,.45],[.06,.35]],'#f2e8d1');
   patch(torso,[[0,.46],[-.05,.35],[0,.06],[.05,.35]],'#7c875f');
   patch(torso,[[-.25,.62],[-.06,.29],[-.2,.06],[-.27,.36]],'#c9ad83');patch(torso,[[.25,.62],[.06,.29],[.2,.06],[.27,.36]],'#c9ad83');

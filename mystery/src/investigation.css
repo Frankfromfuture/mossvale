@@ -31,9 +31,9 @@
 .self-secret small,.score-entry small {color:#8b7055;font-size:12px;}
 .challenge-banner {display:grid;place-items:center;min-width:0;padding:0;color:#8c7847;font-size:12px;line-height:1.4;white-space:nowrap;}
 .dialogue-challenge-edge {opacity:0;pointer-events:none;}
-.being-questioned .dialogue-challenge-edge {animation:question-edge-pulse 2.8s ease-in-out infinite;filter:drop-shadow(0 0 3px #f3d87d99);}
-@keyframes question-edge-pulse {0%,100%{opacity:.18}50%{opacity:.75}}
-@media(prefers-reduced-motion:reduce){.being-questioned .dialogue-challenge-edge{animation:none;opacity:.55;}}
+.being-questioned .dialogue-challenge-edge {animation:question-edge-pulse 1.6s ease-in-out infinite;stroke:#eebd3d;stroke-width:4;filter:drop-shadow(0 0 6px #f4c84dd9);}
+@keyframes question-edge-pulse {0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.being-questioned .dialogue-challenge-edge{animation:none;opacity:.9;}}
 
 .consent-actions {display:grid;gap:10px;margin-top:18px;}
 .consent-actions button {min-height:44px;}

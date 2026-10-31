@@ -17,8 +17,8 @@
 .scene-time>span {font-size:11px;color:#666b55;}
 
 /* Names remain part of their sentence; the dotted line is the only affordance. */
-button.person-name-link,button.clue-name-link {display:inline;position:static;min-width:0;min-height:0;width:auto;height:auto;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;transform:none;color:inherit;font:inherit;letter-spacing:inherit;line-height:inherit;vertical-align:baseline;text-align:inherit;text-decoration:underline dashed #8d8266;text-decoration-thickness:1px;text-underline-offset:4px;white-space:normal;}
-button.person-name-link:hover,button.clue-name-link:hover {color:#6b764f;text-decoration-color:currentColor;}
+button.person-name-link,button.clue-name-link,button.reference-name-link {display:inline;position:static;min-width:0;min-height:0;width:auto;height:auto;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;transform:none;color:inherit;font:inherit;letter-spacing:inherit;line-height:inherit;vertical-align:baseline;text-align:inherit;text-decoration:underline dashed #8d8266;text-decoration-thickness:1px;text-underline-offset:4px;white-space:normal;}
+button.person-name-link:hover,button.clue-name-link:hover,button.reference-name-link:hover {color:#6b764f;text-decoration-color:currentColor;}
 .chat-avatar {padding:0;border:0;}
 .dialogue-actions {grid-template-columns:repeat(5,minmax(0,1fr));}
 
@@ -148,3 +148,10 @@ button.person-name-link:hover,button.clue-name-link:hover {color:#6b764f;text-de
  .map-destinations {grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px;}
  .map-events {border-left:0;border-top:1px dashed #b8af93;padding:15px 0 0;}
 }
+
+.reference-sheet{width:min(580px,100%);font-family:var(--dialogue-font)}
+.reference-body{max-height:calc(var(--app-height,100dvh) - 220px);overflow:auto;overscroll-behavior:contain}
+.reference-body p,.reference-body blockquote{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.reference-body blockquote{margin:10px 0;padding:8px 12px;border-left:2px solid #b7ad92;background:#eee7d744}
+.reference-body h3{font-size:14px;margin:16px 0 8px}
+.ambient-bubble :is(.person-name-link,.clue-name-link,.reference-name-link){pointer-events:auto}

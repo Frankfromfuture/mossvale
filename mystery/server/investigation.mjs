@@ -4,12 +4,13 @@ import {randomBytes} from 'node:crypto';
 import {cast,getRoom} from '../shared/layout.mjs';
 import {clueById} from './scenario.mjs';
 import {conductPenalties} from '../shared/investigation-rules.mjs';
+import {inquiryContext,validateInquiry,recordInquiry} from './repeated-inquiry.mjs';
 
 export const scoreRules=[
  {id:'deduction',name:'案件推理',max:30,rule:'发现遗骸、核实身份、核对机关和现场各得5分，正确结案得10分。'},
  {id:'secrets',name:'秘密保护',max:25,rule:'寻玉来意、与真野的关系各扣2分，家族身份扣5分，夜探经过扣5分，毒簪伤人扣8分；同一秘密只扣一次。'},
  {id:'credibility',name:'回答可信度',max:20,rule:'盘问中明显回避扣1分，有原话依据的前后矛盾扣3分；强行结束反问或承认隐瞒各扣3分。'},
- {id:'courtesy',name:'交谈分寸',max:10,rule:'直接辱骂扣1分，羞辱或威胁扣3分。正常质疑、拒绝和引用别人的话不扣分。'},
+ {id:'courtesy',name:'交谈分寸',max:10,rule:'直接辱骂扣1分，羞辱或威胁扣3分。向同一人物重复问同一件事，第3次起每次扣1分，第3次会惹怒对方并触发一次反问；新线索下追问另计。正常质疑、拒绝和引用别人的话不扣分，本项最低0分。'},
  {id:'conduct',name:'调查规矩',max:10,rule:`擅入客房扣${conductPenalties.entry}分，越界翻找扣${conductPenalties.search}分，未经同意强行检查本人扣${conductPenalties.personal}分。本项最低为0分，同次行为只记一次。`},
  {id:'time',name:'行动效率',max:5,rule:'初始360行动点。每轮玩家对话、申请许可、出示或公开线索消耗1点，首次搜证消耗3点。用尽后每额外消耗15点扣1分，最多扣5分。走路、阅读、等待和离线不消耗行动点。'}
 ];
@@ -159,30 +160,39 @@ function questionTopics(s){if(playerId(s)==='player')return topics;return cast.f
  {id:`${p.id}-night`,actor:p.id,text:'百物语散场以后，你去过哪些地方？哪些是你确实记得的？',focus:'说明自己的夜间行踪，记忆断处可以直说。',secrets:[]},
  {id:`${p.id}-purpose`,actor:p.id,text:'你现在最想弄清什么？为什么要问这件事？',focus:'说明本次调查的目的，承接对方的疑问。',secrets:[]}]);}
 function random(v){v.rng=(Math.imul(v.rng,1664525)+1013904223)>>>0;return v.rng/4294967296;}
-export function maybeChallenge(s,actor,audience,review){
- const v=ensureInvestigation(s);if(!s.started||s.ending||v.challenge||v.turn<v.cooldown)return;
+export function maybeChallenge(s,actor,audience,review,{embedded=false}={}){
+ const v=ensureInvestigation(s);if(!s.started||s.ending||v.challenge)return;
+ if(review.repeatedInquiry){
+  if(review.repeatedInquiry.trigger){
+   const topic={id:`repeat-${review.repeatedInquiry.id}`,actor,focus:'说明反复追问这件事的原因，以及你想确认什么。'};
+   openChallenge(s,topic,actor,audience,'你反复追问这件事，到底想从我这里确认什么？',`${name(actor)}皱起眉，显然生气了，转过来质问你。`,{source:'repeated-inquiry',embedded});
+  }
+  return;
+ }
+ if(v.turn<v.cooldown)return;
  const candidates=questionTopics(s).filter(t=>t.actor===actor&&t.actor!==playerId(s)&&audience.includes(t.actor)&&(!v.topics[t.id]||t.requires==='conflict'&&review.contradiction)&&
   !v.explanations.some(e=>e.subject===topicSubject(t.id)&&e.audience.includes(t.actor))&&
   (!t.requires||(t.requires==='conflict'?review.contradiction&&review.contradiction.audience.includes(t.actor):v.statements.some(w=>w.audience.includes(t.actor)&&w.text.includes(t.requires)))));
  if(!candidates.length)return;
  const pressure=review.disclosures.length||review.contradiction||v.violations.some(e=>e.audience.includes(actor));
- if(random(v)> (pressure ? .45 : .15))return;
+ if(random(v)> (pressure ? .45 : .25))return;
  let topic=candidates[Math.floor(random(v)*candidates.length)];
  if(review.contradiction){topic=candidates.find(t=>t.requires==='conflict')||topic;}
  let text=topic.text;
  if(topic.requires==='conflict')text=`你先前说「${review.contradiction.earlierQuote}」，刚才却说「${review.contradiction.quote}」。能解释一下吗？`;
  const reason=topic.requires==='conflict'?'想核对刚才两处不同的说法':topicSubject(topic.id)==='night'?'想先听清你昨夜的行踪':topic.requires?`听你提起${topic.requires}，想问清缘由`:topicSubject(topic.id)==='rules'?'想先约定搜查的分寸':'想弄清你参与调查的缘由';
- const transition=`${name(actor)}停下回答，${reason}。`;
- openChallenge(s,topic,actor,audience,text,transition);
+ const transition=`${name(actor)}${embedded?'顺着谈话问起，':'停下回答，'}${reason}。`;
+ openChallenge(s,topic,actor,audience,text,transition,{embedded});
 }
 function openChallenge(s,topic,actor,audience,text,transition,extra={}){
  const v=ensureInvestigation(s);
  v.challenge={id:`question-${++v.sequence}`,topic:topic.id,subject:topicSubject(topic.id),actor:topic.actor,resumeActor:actor,text,focus:topic.focus,transition,secretIds:roleSecrets(s).map(x=>x.id),round:0,audience:[...audience],status:'open'};
  Object.assign(v.challenge,extra);
  v.topics[topic.id]=(v.topics[topic.id]||0)+1;
- s.chats[topic.actor]||=[];s.chats[topic.actor].push({who:'narrator',text:transition,challenge:v.challenge.id},{who:topic.actor,text,challenge:v.challenge.id});
+ s.chats[topic.actor]||=[];s.chats[topic.actor].push({who:'narrator',text:transition,challenge:v.challenge.id});
+ if(!extra.embedded)s.chats[topic.actor].push({who:topic.actor,text,challenge:v.challenge.id});
  if(topic.actor!==actor)s.chats[actor].push({who:'narrator',text:transition,challenge:v.challenge.id});
- for(const id of audience){s.heard[id].push({source:name(topic.actor),text,kind:'reported'});s.heard[id]=s.heard[id].slice(-50);}
+ if(!extra.embedded)for(const id of audience){s.heard[id].push({source:name(topic.actor),text,kind:'reported'});s.heard[id]=s.heard[id].slice(-50);}
 }
 // One persisted draw per new search target; retrying or reloading cannot reroll it.
 export function maybeSearchChallenge(s,{id,actor,personal=false,force=false,forcedRoom=false}){
@@ -199,7 +209,7 @@ export function maybeSearchChallenge(s,{id,actor,personal=false,force=false,forc
 export function reviewContext(s,actor,message){
  const v=ensureInvestigation(s),audience=listeners(s,actor);
  const known=v.statements.filter(x=>x.audience.includes(actor)&&x.kind==='statement'),remembered=new Set(explanationMemory(s,actor).map(e=>e.statementId));
- return {kind:'player-review',message,challenge:v.challenge?{question:v.challenge.text,focus:v.challenge.focus,round:v.challenge.round}:null,
+ return {kind:'player-review',message,inquiries:inquiryContext(s,actor),challenge:v.challenge?{question:v.challenge.text,focus:v.challenge.focus,round:v.challenge.round}:null,
   playerName:playerPerson(s).name,secrets:roleSecrets(s).map(({id,title,text})=>({id,title,text})),
   subjects,explanations:explanationMemory(s,actor),previous:[...new Map([...known.filter(w=>remembered.has(w.id)),...known.slice(-35)].map(w=>[w.id,w])).values()].map(({id,text})=>({id,text})),
   evidence:[...new Set([...(s.presented[actor]||[]),...s.public])].map(id=>({id,title:clueById(id).title,text:clueById(id).text})),audience};
@@ -219,7 +229,7 @@ export function validateReview(s,ctx,raw){
  }
  const mistreatment=certain&&raw.mistreatment&&['insult','humiliation','threat'].includes(raw.mistreatment.kind)&&quoted(raw.mistreatment.quote)?raw.mistreatment:null;
  const explained=certain&&!contradiction?(Array.isArray(raw.explained)?raw.explained:[]).filter(e=>e&&subjects[e.subject]&&typeof e.quote==='string'&&e.quote.length>=2&&e.quote.length<=800&&(e.earlierId?ctx.previous.find(w=>w.id===e.earlierId)?.text.includes(e.quote):ctx.message.includes(e.quote))):[];
- return {answer:certain?raw.answer:'uncertain',basis:quoted(raw.basis)?raw.basis:'',disclosures,contradiction,mistreatment,explained,confidence:raw.confidence};
+ return {answer:certain?raw.answer:'uncertain',basis:quoted(raw.basis)?raw.basis:'',disclosures,contradiction,mistreatment,explained,confidence:raw.confidence,inquiry:validateInquiry(s,ctx,raw)};
 }
 export function settleReview(s,actor,message,audience,review,key){
  const v=ensureInvestigation(s),q=v.challenge;
@@ -230,13 +240,15 @@ export function settleReview(s,actor,message,audience,review,key){
  if(review.mistreatment){const points=review.mistreatment.kind==='insult'?1:3;penalty(s,'courtesy',points,'这句话直接辱骂、羞辱或威胁了对方。',`${key}-courtesy`,review.mistreatment.quote);v.impressions[actor].rapport=Math.max(-100,v.impressions[actor].rapport-points*4);}
  if(review.contradiction||review.answer==='evasive')v.impressions[actor].suspicion=Math.min(100,v.impressions[actor].suspicion+3);
  const statement=recordStatement(s,message,audience);spend(s,1);
+ const repeatedInquiry=q?null:recordInquiry(s,actor,message,review.inquiry);
+ if(repeatedInquiry){penalty(s,'courtesy',1,`向${name(actor)}重复询问同一件事，第${repeatedInquiry.count}次。`,`${key}-repeat-inquiry`,message);v.impressions[actor].rapport=Math.max(-100,v.impressions[actor].rapport-4);}
  for(const e of review.explained||[]){const source=e.earlierId?v.statements.find(w=>w.id===e.earlierId):statement;if(source)remember(s,e.subject,source,e.quote);}
  if(q){
   q.round++;
   if(review.answer==='resolved'&&!review.contradiction){remember(s,q.subject||topicSubject(q.topic),statement);v.challenge=null;v.cooldown=v.turn+4;if(q.source==='search')v.searchCooldown=(v.searchTurn||0)+2;return {resolved:true,resumeActor:q.resumeActor};}
   return {resolved:false,focus:q.focus,round:q.round};
  }
- v.turn++;return {normal:true};
+ v.turn++;return {normal:true,repeatedInquiry};
 }
 export function concede(s,actor,questionId,resolution='concede'){
  const v=ensureInvestigation(s),q=v.challenge;

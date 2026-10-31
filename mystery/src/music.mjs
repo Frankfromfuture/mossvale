@@ -9,7 +9,7 @@ export function createBackgroundMusic({env=window,notice=()=>{}}={}){
  function ensure(){
   if(audio)return;
   context=new (env.AudioContext||env.webkitAudioContext)();gain=context.createGain();gain.gain.value=0;gain.connect(context.destination);
-  audio=new env.Audio();audio.id='case-music';audio.hidden=true;audio.loop=true;audio.preload='none';audio.src=new URL('audio/mist-lantern-theme-v1.m4a',env.location.href).href;
+  audio=new env.Audio();audio.id='case-music';audio.hidden=true;audio.loop=true;audio.preload='none';audio.src=new URL('audio/mist-lantern-theme-v2.mp3',env.location.href).href;
   context.createMediaElementSource(audio).connect(gain);env.document.body.append(audio);
   audio.addEventListener('error',()=>{if(active&&enabled&&!notified){notified=true;notice('背景音乐暂时没能加载，可在设置中关闭后重试。');}});
  }

@@ -8,6 +8,7 @@ import {sideQuestOverview} from './side-quest-ui.mjs';
 import {conductPenalties} from '../shared/investigation-rules.mjs';
 import {actionPointsHud,scoreHud,rulesContent,selfContent,challengeBanner,goalsHud,leadHud} from './investigation-ui.mjs';
 import {personSheet} from './person-sheet.mjs';
+import {referenceEntries,referenceEvidence} from './reference-terms.mjs';
 import {installPersonLinks} from './person-links.mjs';
 import {icon} from './ui-icons.mjs';
 import {TownScene} from './scene.mjs';
@@ -94,8 +95,10 @@ function showOpening(){
  modal('先把各自的昨夜说出来',`<p class="opening-role">${esc(b.role)}</p><article class="opening-speaker">${portrait(person)}<div><small>公开口述 · ${b.next+1} / ${b.total}</small><h3>${person.name}${line.actor===playerId(state)?' · 轮到你了':''}</h3></div></article><blockquote>${esc(line.text)}</blockquote><p class="score-note">这是本人愿意公开的说法，尚待核实。私下经历仍由你自己决定何时说明。</p><div class="modal-foot"><button id="opening-next" class="primary">${line.actor===playerId(state)?'这样介绍自己，开始调查 · 1行动点':'记下，听下一位'}</button></div>`,'opening-modal');
  $('close-modal').hidden=true;$('opening-next').focus();$('opening-next').onclick=async()=>{const button=$('opening-next');button.disabled=true;const r=await action({type:'briefing-next',index:b.next},{quiet:true});if(r.error){button.disabled=false;return;}if(state.briefing.current)showOpening();else{closeModal(true);toast('六人的口述已收进手记。先去花园查看铜炉。');}};
 }
-function showSelf({focusSecret=null}={}){
- modal('我的简介',selfContent(state,{esc,portrait}),'self-profile');
+function showSelf({focusSecret=null,fromLink=false}={}){
+ if(fromLink)rememberReadingSource();
+ modal('我的简介',selfContent(state,{esc,portrait}),'self-profile',{keepTrail:fromLink});
+ if(fromLink){$('overlay').querySelector('.self-profile').dataset.readingReturn='1';readingBack();}
  $('overlay').querySelectorAll('[data-personal-visit]').forEach(b=>b.onclick=()=>startConversation(b.dataset.personalVisit));
  $('overlay').querySelectorAll('[data-personal-goal]').forEach(b=>b.onclick=async()=>{const r=await action({type:'personal-goal',id:b.dataset.personalGoal,choice:Number(b.dataset.choice)},{quiet:true});if(!r.error)showSelf({focusSecret});});
  const entry=focusSecret?$('self-secret-'+focusSecret):null;
@@ -183,12 +186,12 @@ function showVisitConsent(c){
 }
 
 function showPersonProfile(id,{refresh=false,focusQuest=false}={}){
- if(id===playerId(state)){showSelf();return;}
+ if(id===playerId(state)){showSelf({fromLink:true});return;}
  if(busy){toast('等这句话说完再翻手记。');return;}
  const person=profilePeople().find(p=>p.id===id);if(!person)return;
  if(!refresh&&modalName==='person-sheet'&&profileId===id){if(focusQuest)focusPersonQuest();return;}
  speech.stop();
- if(!refresh)profileTrail.push({name:modalName,id:profileId,nodes:[...$('overlay').childNodes],focus:document.activeElement,scrolls:[...$('overlay').querySelectorAll('*')].filter(e=>e.scrollTop||e.scrollLeft).map(e=>[e,e.scrollTop,e.scrollLeft])});
+ if(!refresh)rememberReadingSource();
  profileId=id;
  const dossier=id==='asano'?{biography:'真野是白川的挚友，出发前在家中遇害。关于他与黑泽的接触，还需核实。',related:state.clues.filter(c=>c.id==='asano').map(({id,title,kind})=>({id,title,kind})),conversations:0,shown:0,roomStatus:'不在神社',question:'关于真野的遭遇，还需要向认识他的人求证。'}:state.dossiers?.[id];
  modal(person.name,personSheet(person,dossier,{esc,portrait,icon}),'person-sheet',{keepTrail:true});
@@ -196,7 +199,7 @@ function showPersonProfile(id,{refresh=false,focusQuest=false}={}){
  $('profile-back').onclick=returnFromProfile;$('profile-back').focus();
  $('overlay').querySelector('.eyebrow').textContent='人物札记';renderHud();
  if(focusQuest)focusPersonQuest();
- $('overlay').querySelectorAll('[data-person-clue]').forEach(button=>button.onclick=()=>showClue(button.dataset.personClue));
+ $('overlay').querySelectorAll('[data-person-clue]').forEach(button=>button.onclick=()=>openClueMention([button.dataset.personClue],{source:button}));
  $('finish-sidequest')?.addEventListener('click',async()=>{
   if(busy||actionPending||lockedQuestion())return;
   const button=$('finish-sidequest');button.disabled=true;
@@ -221,7 +224,7 @@ function returnFromProfile(){
   if(previous.name==='ending-modal')showEnding();else book();
   const target=$('overlay').querySelector(previous.name==='ending-modal'?'.ending':'.sidequest-list');if(target)target.scrollTop=scroll;return;
  }
- $('overlay').replaceChildren(...previous.nodes);modalName=previous.name;profileId=previous.id;renderHud();
+ $('overlay').replaceChildren(...previous.nodes);modalName=previous.name;profileId=previous.id;menuScenery.setActive(inStartMenu&&modalName==='start-menu');renderHud();
  for(const [node,top,left]of previous.scrolls){node.scrollTop=top;node.scrollLeft=left;}
  const focus=previous.focus?.isConnected?previous.focus:$('overlay').querySelector('button')||$('speaker-profile');focus?.focus({preventScroll:true});
 }
@@ -323,7 +326,7 @@ function renderVoice(){
  replay.disabled=busy&&!v.speaking||!v.outputAvailable||!lastReply;replay.setAttribute('aria-pressed',String(v.speaking));replay.setAttribute('aria-label',v.speaking?'停止朗读':'重听人物回答');replay.title=v.speaking?'停止朗读':'重听人物回答';
 }
 function modal(title,body,cls='',{keepTrail=false}={}){speech.stop();pendingConversation=null;disconnectMap?.();disconnectMap=null;if(!keepTrail){profileTrail=[];profileId=null;}modalName=cls||title;scene?.social.setPaused(true);$('overlay').classList.toggle('menu-active',inStartMenu);$('overlay').innerHTML=`${inStartMenu?menuSceneryMarkup:''}<div class="veil"><section class="paper-modal ${cls}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header class="modal-heading"><div><span class="eyebrow">${inStartMenu?'青苔镇':esc(state?.self?.name||'雾灯未眠')+'的手记'}</span><h2>${title}</h2></div><button id="close-modal" aria-label="关闭">${icon('close')}</button></header>${body}</section></div>`;menuScenery.setActive(inStartMenu&&cls==='start-menu');$('close-modal').onclick=closeModal;$('overlay').querySelector('.veil').onclick=e=>{if(e.target.classList.contains('veil'))closeModal();};$('close-modal').focus();}
-function closeModal(force=false){if(inStartMenu){if(modalName==='start-menu')return;if(modalName==='role-picker'){showScripts();return;}showMainMenu();return;}if(modalName==='opening-modal'&&state.briefing?.current&&force!==true){toast('听完这一轮口述后，就可以开始调查。');return;}if(modalName==='person-sheet'&&force!==true){returnFromProfile();return;}if(modalName==='storybook'&&force!==true){finishStory();return;}const returnSecret=modalName==='self-profile'?$('overlay').querySelector('.self-profile')?.dataset.focusSecret:null;disconnectMap?.();disconnectMap=null;modalName=null;profileId=null;profileTrail=[];$('overlay').innerHTML='';renderHud();if(returnSecret)[...$('dialogue').querySelectorAll('[data-self-secret]')].find(link=>link.dataset.selfSecret===returnSecret)?.focus({preventScroll:true});}
+function closeModal(force=false){if(force!==true&&(modalName==='reference-sheet'||$('overlay').querySelector('[data-reading-return]'))){returnFromProfile();return;}if(inStartMenu){if(modalName==='start-menu')return;if(modalName==='role-picker'){showScripts();return;}showMainMenu();return;}if(modalName==='opening-modal'&&state.briefing?.current&&force!==true){toast('听完这一轮口述后，就可以开始调查。');return;}if(modalName==='person-sheet'&&force!==true){returnFromProfile();return;}if(modalName==='storybook'&&force!==true){finishStory();return;}const returnSecret=modalName==='self-profile'?$('overlay').querySelector('.self-profile')?.dataset.focusSecret:null;disconnectMap?.();disconnectMap=null;modalName=null;profileId=null;profileTrail=[];$('overlay').innerHTML='';renderHud();if(returnSecret)[...$('dialogue').querySelectorAll('[data-self-secret]')].find(link=>link.dataset.selfSecret===returnSecret)?.focus({preventScroll:true});}
 async function finishStory(){
  if(storyTurning)return;if(!state.started){const r=await action({type:'start'});if(r?.error)return;}
  localStorage.setItem(storageKey(storySeenKey),'1');closeModal(true);if(state.briefing?.current)showOpening();
@@ -363,12 +366,31 @@ function personQuestionPicker(){
  });
 }
 
-function openClueMention(ids){
+function rememberReadingSource(source=document.activeElement){
+ profileTrail.push({name:modalName,id:profileId,nodes:[...$('overlay').childNodes],focus:source,scrolls:[...$('app').querySelectorAll('*')].filter(e=>e.scrollTop||e.scrollLeft).map(e=>[e,e.scrollTop,e.scrollLeft])});
+}
+function readingBack(){
+ $('overlay').querySelector('.modal-heading').insertAdjacentHTML('afterbegin',`<button id="reference-back" class="profile-back" aria-label="返回上一页">${icon('back')}</button>`);
+ $('reference-back').onclick=returnFromProfile;$('reference-back').focus();
+}
+function referenceSheet(title,body,{source,kind='词条',clues='',term=''}={}){
+ rememberReadingSource(source);profileId=null;
+ modal(title,`<div class="reference-body" data-reading-clues="${esc(clues)}" data-reading-term="${esc(term)}">${body}</div>`,'reference-sheet',{keepTrail:true});
+ $('overlay').querySelector('.eyebrow').textContent=kind;readingBack();renderHud();
+ $('overlay').querySelectorAll('[data-clue-choice]').forEach(button=>button.onclick=()=>openClueMention([button.dataset.clueChoice],{source:button}));
+}
+function openClueMention(ids,{source}={}){
  if(busy){toast('等这句话说完再翻线索。');return;}
- const cards=state.clues.filter(c=>ids.includes(c.id));if(!cards.length)return;
- if(cards.length===1){showClue(cards[0].id);return;}
- modal('你说的是哪一件？',`<div class="evidence-picker">${cards.map(c=>`<button data-clue-choice="${c.id}">${icon('evidence')}<strong>${esc(c.title)}</strong><small>${esc(c.kind)}</small></button>`).join('')}</div>`,'picker-modal');
- $('overlay').querySelectorAll('[data-clue-choice]').forEach(button=>button.onclick=()=>showClue(button.dataset.clueChoice));
+ const cards=(state?.clues||[]).filter(c=>ids.includes(c.id));if(!cards.length)return;
+ const body=cards.length===1?clueDetails(cards[0]):`<div class="evidence-picker">${cards.map(c=>`<button data-clue-choice="${c.id}">${icon('evidence')}<strong>${esc(c.title)}</strong><small>${esc(c.kind)}</small></button>`).join('')}</div>`;
+ referenceSheet(cards.length===1?cards[0].title:'你说的是哪一件？',body,{source,kind:cards.length===1?cards[0].kind:'相关线索',clues:ids.join(',')});
+}
+function openReferenceMention(id,{source,text}={}){
+ if(busy){toast('等这句话说完再翻手记。');return;}
+ const entry=referenceEntries(state).find(entry=>entry.id===id);if(!entry)return;
+ const related=referenceEvidence(entry,state);
+ const body=`${entry.text?`<p>${esc(entry.text)}</p>`:''}${text?`<h3>刚才提到</h3><blockquote>${esc(text)}</blockquote>`:''}${related.clues.length?`<h3>已收进手记</h3><div class="evidence-picker">${related.clues.map(clue=>`<button data-clue-choice="${esc(clue.id)}"><strong>${esc(clue.title)}</strong><small>${esc(clue.kind)}</small></button>`).join('')}</div>`:''}${related.events.length?`<h3>调查记录</h3>${related.events.map(event=>`<p>${esc(event.text)}</p>`).join('')}`:''}`;
+ referenceSheet(entry.title,body,{source,kind:entry.kind,term:id});
 }
 function history(){const p=state.people.find(x=>x.id===selected);modal('与'+p.name+'的交谈',`<div class="chat-archive">${chatBubbles(p,state.chats[selected]||[])||'<p class="empty">还没有说上话。</p>'}</div>`,'history-modal');}
 function showPublicReactions(id,round=null,loading=false){
@@ -482,7 +504,7 @@ window.addEventListener('resize',syncViewport);
 document.addEventListener('focusin',syncViewport);
 document.addEventListener('focusout',()=>requestAnimationFrame(syncViewport));
 syncViewport();
-installPersonLinks($('app'),profilePeople,showPersonProfile,{getClues:()=>state?.clues||[],openClue:openClueMention});
+installPersonLinks($('app'),profilePeople,showPersonProfile,{getClues:()=>state?.clues||[],openClue:openClueMention,getReferences:()=>referenceEntries(state),openReference:openReferenceMention});
 $('app').addEventListener('click',event=>{const avatar=event.target.closest('[data-chat-profile]');if(avatar){event.preventDefault();showPersonProfile(avatar.dataset.chatProfile);}});
 try{[menuState]=await Promise.all([api('menu'),introReady]);showMainMenu();$('loading').remove();}catch(e){$('loading').textContent='暂时没能翻开手记。刷新页面重试。';console.error(e);}
 

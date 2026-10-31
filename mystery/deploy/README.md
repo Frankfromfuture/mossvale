@@ -1,11 +1,11 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，发布版本为 `20261031-mossvale-mystery-v11`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.8`，发布目录为 `20261101-mossvale-0.8.8-v12`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261031-mossvale-mystery-v11` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.8.8-v12` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
@@ -16,7 +16,23 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-mossvale-v11.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布目录内的清单为 `deploy/release-manifest-v12.json`，验收记录另存于服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-01 合并发布 · 0.8.8
+
+普通对话反问的基础概率从 15% 提到 25%，压力情形仍为 45%，搜证仍为 40%／强行尝试 60%，冷却和话题过滤保持原样。同一人物、同一证据进度下的同一问题，第 3 次起每次扣 1 分，第 3 次生气并反问一次；重试不重复计数或扣分。
+
+本次一并上线其他 session 已完成的自然对白与流式反问、事件和物件词条跳转、人物头像统一与问人草稿、胡须贴合及眉眼差异、手机键盘适配和默认朗读、三分钟 MP3、加亮反问边框与移除场景随机雾气等改动。
+
+一次 Web 构建，7 项定向规则检查通过；11 份线上旧档的只读隔离副本加载兼容，95 项发布文件一致。线上 6 项静态资源与构建一致，MP3 范围请求及旧链接跳转通过；浏览器验证首页、选角、词条打开与返回，以及双访客隔离，无页面错误。竖屏模拟未保持，本次截图按桌面结果记录，手机改动复用对应 session 已通过的验收。
+
+两份测试存档已清理，15 项原有线上数据的内容与修改时间保持。Nginx 配置及其他服务未变，只切换剧本杀容器；本轮验收未调用模型或语音服务。本地证据在 `mystery/qa/cloud-0.8.8/`。
+
+存档备份：`/srv/mossvale-mystery/backups/before-20261101-mossvale-0.8.8-v12.tgz`；上一版容器：`mossvale-mystery-before-v12`。v11 与 v12 使用相同存档格式，回退保留当前数据：
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/current/deploy/update.py rollback
+```
 
 ## 2026-10-31 设置与重新开始修正 · 0.8.3
 

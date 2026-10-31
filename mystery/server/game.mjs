@@ -1,4 +1,5 @@
 import {playerId,playerPerson,playerHome} from '../shared/player.mjs';
+import {createHash} from 'node:crypto';
 import {presentNames} from '../shared/story-names.mjs';
 import {roleStory,validRole,roleDefinition,selfView,roleReason,completePersonalGoal} from './roles.mjs';
 import {caseProgress,caseEnding,witnessedEvidence} from './case-story.mjs';
@@ -256,7 +257,22 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
  }else{
   const ctx=dialogueContext(s,actor,message),judgeContext={...reviewContext(s,actor,message),actor};
   const rawReview=await generate(judgeContext),review=validateReview(s,judgeContext,rawReview);
-  const challenge=q?{question:q.text,focus:q.focus,round:q.round,outcome:review.answer==='resolved'&&!review.contradiction?'resolved':'follow-up'}:null;
+  // Preview the existing question draw without spending points or recording words.
+  // Only a validated reply commits either the review or its question below.
+  let plannedQuestion=null;
+  if(!q){
+   const preview=structuredClone(s),outcome=settleReview(preview,actor,message,audience,review,requestId);
+   maybeChallenge(preview,actor,audience,{...review,repeatedInquiry:outcome.repeatedInquiry});
+   plannedQuestion=preview.investigation.challenge;
+  }
+  const challenge=q?{question:q.text,focus:q.focus,round:q.round,outcome:review.answer==='resolved'&&!review.contradiction?'resolved':'follow-up'}:plannedQuestion?{question:plannedQuestion.text,focus:plannedQuestion.focus,round:0,outcome:'ask'}:null;
+  const variation=createHash('sha256').update(requestId).digest();
+  const delivery=[
+   '先简短回应，再顺着话头带出确有必要的补充或反问。',
+   '接住对方的一句话自然作答；若有本轮反问，可在回答中间顺势问起。',
+   '语气直接些，长短句自然变化；若有本轮反问，可先顺口问起再回应。',
+   '按人物性格简短交谈；没有新信息时不必加总结或动作。'
+  ][variation[0]%4];
   const currentExplanations=review.explained.map(e=>({subject:e.subject,quote:e.quote,statementId:e.earlierId||'current'}));
   let emitted='';
   const partial=onSpeech?{onPartial:raw=>{
@@ -266,13 +282,13 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
    const text=raw.speech.slice(0,end).trim();if(text.length<=emitted.length)return;
    validateReply(ctx,{...raw,speech:raw.speech});emitted=text;onSpeech(text);
   }}:undefined;
-  const raw=await generate({...ctx,explanations:[...ctx.explanations,...currentExplanations],challenge},partial),reply=validateReply(ctx,raw);
+  const repeated=review.inquiry?.count>=3;
+  const raw=await generate({...ctx,explanations:[...ctx.explanations,...currentExplanations],challenge,delivery,casualQuestion:variation[1]%4===0,repeatedInquiry:repeated?{count:review.inquiry.count}:null},partial),reply=validateReply(ctx,raw);
   speech=reply.speech;
   const outcome=settleReview(s,actor,message,audience,review,requestId);resumeActor=outcome.resumeActor;
-  if(q&&!outcome.resolved)speech+=`\n${q.round>=3?'我们把这一点说清楚：':''}${q.focus}`;
   s.usage.input+=(raw.usage?.prompt_tokens||0)+(rawReview.usage?.prompt_tokens||0);s.usage.output+=(raw.usage?.completion_tokens||0)+(rawReview.usage?.completion_tokens||0);models=2;
   // Start the next question only after this ordinary reply is committed below.
-  if(outcome.normal)s.investigation.nextReview=review;
+  if(outcome.normal)s.investigation.nextReview={...review,repeatedInquiry:outcome.repeatedInquiry,embedded:!!plannedQuestion};
  }
  onSpeech?.(speech);
  const history=s.chats[actor]||=[];history.push({who:playerId(s),text:message},{who:actor,text:speech});
@@ -284,7 +300,7 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
  for(const id of audience){s.heard[id]||=[];s.heard[id].push({source:own(actor).name,text:speech,kind:'reported'});s.heard[id]=s.heard[id].slice(-50);}
  log(s,`${playerPerson(s).name}：${message}`,audience,s.room==='hall'&&!s.chatSetting?'public':'private');
  log(s,`${own(actor).name}：${speech}`,audience,s.room==='hall'&&!s.chatSetting?'public':'private');s.usage.calls+=models;s.revision++;
- if(s.investigation.nextReview){const review=s.investigation.nextReview;delete s.investigation.nextReview;maybeChallenge(s,actor,audience,review);}
+ if(s.investigation.nextReview){const review=s.investigation.nextReview;delete s.investigation.nextReview;maybeChallenge(s,actor,audience,review,{embedded:review.embedded});}
  const result={speech,mode,resumeActor,elapsed:Date.now()-start};s.requests[requestId]={actor,message,fingerprint,result};
  return result;
 }
