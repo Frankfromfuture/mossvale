@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
+  <!-- Nine-slice corners stay 24 CSS pixels wide; edge strokes stay 1 pixel. -->
+  <defs><path id="corner" d="M 23.5 0 H 8 V 5 H 0 V 0 H 5 V 8 H 0 V 23.5"/></defs>
+  <g stroke="#aba58c" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M 24 .5 H 72 M 95.5 24 V 72 M 72 95.5 H 24 M .5 72 V 24"/>
+    <use href="#corner" transform="translate(.5 .5)"/>
+    <use href="#corner" transform="translate(95.5 .5) scale(-1 1)"/>
+    <use href="#corner" transform="translate(95.5 95.5) scale(-1 -1)"/>
+    <use href="#corner" transform="translate(.5 95.5) scale(1 -1)"/>
+  </g>
+</svg>

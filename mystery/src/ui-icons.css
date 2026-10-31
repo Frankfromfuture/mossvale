@@ -1,0 +1,66 @@
+.ui-icon {
+ display:inline-block; width:28px; height:28px; flex:0 0 auto; vertical-align:middle;
+ overflow:hidden; stroke:none; fill:none; pointer-events:none;
+}
+.tools {gap:8px;}
+.tools button {
+ width:58px; min-width:58px; min-height:76px; padding:2px;
+ display:flex; flex-direction:column; gap:0;
+ border:0; border-radius:11px 9px 12px 8px; background:transparent; box-shadow:none;
+ font-size:12px; line-height:20px; white-space:nowrap;
+}
+.tools .ui-icon {width:52px; height:52px; filter:drop-shadow(0 1px 0 #fff6dc);}
+.tools button>span:last-child {padding:0 5px; border-radius:3px; background:#f6f0dcaa; text-shadow:0 1px #fff9e9;}
+.tools button:hover {background:#f7efd6b5; transform:translateY(-1px);}
+.tools button:focus-visible,.scene-tools button:focus-visible {outline:2px solid #967346; outline-offset:2px;}
+.scene-tools {gap:8px;}
+.scene-tools button {
+ min-height:46px; padding:3px 10px 3px 6px; gap:4px;
+ background:#f8f2dfe8; border:1px solid #ada584;
+ border-radius:13px 10px 14px 9px; box-shadow:1px 2px 0 #6d694b24;
+ font-size:12px; white-space:nowrap;
+}
+.scene-tools .ui-icon {width:36px; height:36px;}
+.modal-heading button {display:grid; place-items:center; padding:4px;}
+.modal-heading .ui-icon {width:28px; height:28px;}
+.ui-icon-ink {color:#796f58;}
+#app .ui-icon-ink:is(.ui-icon-back,.ui-icon-close) {display:block;width:24px;height:24px;transform:none;opacity:1;filter:none;}
+#app .ui-icon-ink.ui-icon-close {width:20px;height:20px;}
+#app .modal-heading :is(.profile-back,#close-modal):not([hidden]) {display:flex;align-items:center;justify-content:center;align-self:center;flex:0 0 44px;width:44px;height:44px;padding:0;gap:0;line-height:0;}
+#app button:has(> .ui-icon-close) {min-width:44px;min-height:44px;border:0;background:transparent;box-shadow:none;outline:none;}
+#app button:has(> .ui-icon-ink):focus-visible>.ui-icon-ink {filter:drop-shadow(0 0 1px #796f5866);}
+.profile-back .ui-icon.ui-icon-back,.story-navigation #story-prev .ui-icon.ui-icon-back {transform:none;}
+.menu-return {display:inline-flex;align-items:center;justify-content:center;gap:7px;}
+.menu-return .ui-icon {width:24px;height:24px;}
+.close-dialogue {padding:6px;}
+.close-dialogue .ui-icon {width:30px; height:30px;}
+#chat-form button {padding:6px;}
+#chat-form .ui-icon {width:30px; height:30px;}
+.dialogue-actions .ui-icon {width:22px; height:22px;}
+.story-navigation .ui-icon {width:28px; height:28px;}
+.story-navigation #story-prev .ui-icon {transform:rotate(180deg);}
+.clue-drawing .ui-icon {width:76px; height:76px; transform:rotate(-5deg);}
+.evidence-picker .ui-icon {width:30px; height:30px;}
+.deduction-lines .ui-icon {width:25px; height:25px;}
+.modal-foot .ui-icon {width:24px; height:24px;}
+@media(max-width:600px) {
+ .masthead {display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px;}
+ .case-title h1 {white-space:nowrap;}
+ .tools {gap:3px;}
+ .tools button {width:44px; min-width:44px; min-height:60px; padding:0; gap:0; font-size:10px; line-height:18px;}
+ .tools .ui-icon {width:42px; height:42px;}
+ .tools button>span:last-child {padding:0 3px;}
+ .scene-tools {gap:6px;}
+ .scene-tools button {min-height:42px; padding:3px 8px 3px 4px; gap:3px; font-size:11px;}
+ .scene-tools .ui-icon {width:30px; height:30px;}
+ .dialogue-actions .ui-icon {display:none;}
+ .clue-drawing .ui-icon {width:64px; height:64px;}
+ .story-navigation .ui-icon {width:24px; height:24px;}
+}
+@media(max-width:359px) {
+ .tools {gap:1px;}
+ .tools button {width:38px; min-width:38px;}
+ .tools .ui-icon {width:36px; height:36px;}
+ .case-title h1 {font-size:23px; letter-spacing:2px;}
+ .case-title .chapter {font-size:8px; letter-spacing:0;}
+}

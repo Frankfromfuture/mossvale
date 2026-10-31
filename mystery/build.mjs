@@ -1,0 +1,16 @@
+import {build} from 'esbuild';
+import {mkdir,cp} from 'node:fs/promises';
+const root=import.meta.dirname;
+await mkdir(root+'/dist',{recursive:true});
+await build({entryPoints:[root+'/src/app.mjs'],outfile:root+'/dist/game.js',bundle:true,format:'esm',target:'es2022',minify:true,legalComments:'eof'});
+await cp(root+'/public',root+'/dist',{recursive:true});
+await cp(root+'/src/style.css',root+'/dist/style.css');
+await cp(root+'/src/dialogue.css',root+'/dist/dialogue.css');
+await cp(root+'/src/ui-icons.css',root+'/dist/ui-icons.css');
+await cp(root+'/src/people.css',root+'/dist/people.css');
+await cp(root+'/src/navigation.css',root+'/dist/navigation.css');
+await cp(root+'/src/reading.css',root+'/dist/reading.css');
+await cp(root+'/src/investigation.css',root+'/dist/investigation.css');
+await cp(root+'/src/start-menu.css',root+'/dist/start-menu.css');
+await cp(root+'/src/music.css',root+'/dist/music.css');
+console.log('Mystery Web built.');

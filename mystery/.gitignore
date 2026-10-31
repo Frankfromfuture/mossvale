@@ -1,0 +1,4 @@
+.data/
+dist/
+qa/*.log
+qa/.venv/

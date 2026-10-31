@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <!-- Match the painted window: foreground frame, desk and books stay in front of the mist. -->
+  <defs><filter id="edge" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+  <path fill="white" filter="url(#edge)" d="M185 -40H1464V805L1340 819L1320 895L1215 908L635 846L628 784L185 698Z"/>
+</svg>

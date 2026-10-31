@@ -1,0 +1,4 @@
+.settings .music-volume{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center}
+.music-volume input{grid-column:1 / -1;width:100%;min-height:32px;margin:0;accent-color:#9b7958}
+.music-volume output{font-size:14px;font-variant-numeric:tabular-nums;color:#766747}
+.music-volume input:disabled{opacity:.45}

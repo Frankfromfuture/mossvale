@@ -1,0 +1,133 @@
+// Display aliases only. Stable role, clue and save IDs retain their original values.
+export const legacyNames=Object.freeze([
+ [
+  "羽生夜谈",
+  "雾灯未眠"
+ ],
+ [
+  "小仓信子",
+  "白川澄"
+ ],
+ [
+  "宫崎正诚",
+  "神谷朔"
+ ],
+ [
+  "江一郎",
+  "森川介"
+ ],
+ [
+  "石川纪田",
+  "雾岛律"
+ ],
+ [
+  "石川吉田",
+  "雾岛律"
+ ],
+ [
+  "加藤太郎",
+  "黑泽修"
+ ],
+ [
+  "加藤惠美",
+  "黑泽绫"
+ ],
+ [
+  "小仓",
+  "白川"
+ ],
+ [
+  "信子",
+  "澄"
+ ],
+ [
+  "宫崎",
+  "神谷"
+ ],
+ [
+  "正诚",
+  "朔"
+ ],
+ [
+  "石川",
+  "雾岛"
+ ],
+ [
+  "纪田",
+  "律"
+ ],
+ [
+  "加藤",
+  "黑泽"
+ ],
+ [
+  "太郎",
+  "黑泽修"
+ ],
+ [
+  "惠美",
+  "黑泽绫"
+ ],
+ [
+  "浅野",
+  "真野"
+ ],
+ [
+  "高桥",
+  "桐原"
+ ],
+ [
+  "羽生湖",
+  "雾镜湖"
+ ],
+ [
+  "和川山",
+  "雾岭山"
+ ],
+ [
+  "平安神社",
+  "灯守神社"
+ ],
+ [
+  "青理",
+  "青岚"
+ ],
+ [
+  "森川宗介",
+  "森川介"
+ ],
+ [
+  "黑泽修一",
+  "黑泽修"
+ ],
+ [
+  "黑泽绫乃",
+  "黑泽绫"
+ ],
+ [
+  "桐原绫乃",
+  "桐原绫"
+ ],
+ [
+  "绫乃",
+  "黑泽绫"
+ ],
+ [
+  "修一",
+  "黑泽修"
+ ],
+ [
+  "高桥惠美",
+  "桐原绫"
+ ]
+]);
+const names=new Map(legacyNames),pattern=new RegExp(legacyNames.map(([name])=>name).sort((a,b)=>b.length-a.length).join('|'),'g');
+export const currentNames=text=>typeof text==='string'?text.replace(pattern,name=>names.get(name)):text;
+// Return a fresh projection: historical quotes and retry fingerprints remain untouched.
+export function presentNames(value){
+ if(typeof value==='string')return currentNames(value);
+ if(Array.isArray(value))return value.map(presentNames);
+ if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([key,item])=>[key,presentNames(item)]));
+ return value;
+}
+export const namingContext='人物与地名已更名。旧记录中的下列称呼与新称呼指同一人或地点，绝不当作新人物。判断时引用必须保持输入原文；人物台词一律用新称呼：'+legacyNames.map(([a,b])=>a+'→'+b).join('；');

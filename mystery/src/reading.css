@@ -1,0 +1,70 @@
+/* Reading surfaces share the dialogue's bundled Kai face and keep their paper art. */
+:is(.storybook,.notebook,.person-sheet,.clue-modal),
+:is(.storybook,.notebook,.person-sheet,.clue-modal) * {font-family:var(--dialogue-font)!important;}
+
+.people-ribbon {left:max(18px,env(safe-area-inset-left));right:auto;transform:none;justify-content:flex-start;}
+
+.storybook .story-left {padding:19px 23px;}
+.storybook .story-right {padding:19px 23px;}
+.storybook .story-right h3 {margin-bottom:9px;line-height:1.32;}
+.storybook .story-right p {font-size:14px;line-height:1.62;margin-bottom:8px;}
+.storybook .story-right .story-footnote {padding-top:8px;margin-top:auto;}
+.storybook .story-chapter {margin-bottom:7px;}
+.storybook .story-quote {margin-bottom:9px;padding:6px 10px;line-height:1.5;}
+.storybook .story-steps li {margin-bottom:7px;}
+.storybook .story-steps span {line-height:1.55;}
+
+.notebook,.person-sheet,.clue-modal {padding:18px 24px;}
+:is(.notebook,.person-sheet,.clue-modal) .modal-heading {margin-bottom:9px;padding-bottom:8px;}
+.notebook .book-tabs {margin-bottom:6px;}
+.notebook .notebook-detail {padding:10px 0 0 18px;}
+.notebook .clue-index button {padding-top:5px;padding-bottom:5px;min-height:36px;}
+:is(.notebook,.clue-modal) .evidence-detail h3 {margin:8px 0 6px;}
+:is(.notebook,.clue-modal) .evidence-detail p {line-height:1.6;margin:6px 0 12px;}
+
+.person-sheet .person-intro {gap:12px;padding-bottom:10px;}
+.person-sheet .person-intro p {margin:3px 0;line-height:1.55;}
+.person-sheet .person-section-title {margin-top:10px;}
+.person-sheet .person-question {margin:5px 0;line-height:1.55;}
+.person-sheet .person-room-status {margin:5px 0 9px;}
+.person-sheet .person-last {margin-top:11px;padding-top:9px;}
+.person-sheet .person-last blockquote {margin:5px 0;line-height:1.55;}
+
+@media(max-width:600px){
+ .people-ribbon {left:max(8px,env(safe-area-inset-left));}
+ .storybook .story-left {padding:12px 16px 6px;}
+ .storybook .story-right {padding:10px 18px 16px;}
+ .storybook .story-right p {font-size:13px;line-height:1.58;margin-bottom:6px;}
+ .storybook .story-right h3 {margin-bottom:7px;}
+ .notebook,.person-sheet,.clue-modal {padding:16px 18px;}
+ .notebook .notebook-detail {padding:8px 0 0 11px;}
+ .notebook .clue-index button {min-height:44px;}
+ :is(.notebook,.clue-modal) .evidence-detail p {font-size:13px;line-height:1.58;margin:5px 0 10px;}
+}
+
+/* Character side stories use the existing notebook and its inner scrolling area. */
+.person-quest {margin-top:12px;padding:10px 0 12px;border-bottom:1px solid #aaa18480;}
+.person-quest p,.person-quest blockquote {font-size:14px;line-height:1.6;margin:7px 0;}
+.person-quest blockquote {border-left:3px solid #a3ae86;padding-left:10px;color:#5e6651;}
+.quest-steps {list-style:none;margin:9px 0;padding:0;display:grid;gap:7px;}
+.quest-steps li {display:flex;gap:8px;font-size:13px;line-height:1.55;}
+.quest-steps li>span {flex-shrink:0;color:#7b845f;}
+.quest-steps .done {color:#68744e;}.quest-steps .unrevealed {color:#96917c;}
+.person-quest .quest-next {color:#85603d;font-size:13px;}
+.person-sheet-foot .primary {min-height:44px;font-size:13px;}
+.person-sheet-foot button:disabled {opacity:.6;cursor:default;}
+.sidequest-list {min-height:0;overflow:auto;padding:5px 5px 12px 0;}
+.sidequest-list>h3 {font-size:19px;margin:6px 0;}.sidequest-list h3 small {font-size:12px;font-weight:400;margin-left:8px;color:#747b5e;}
+.sidequest-list .quest-overview-note {font-size:12px;line-height:1.5;color:#777862;margin:7px 0 12px;}
+.sidequest-list article {border-bottom:1px dashed #b6ae9380;padding:9px 0;}
+.quest-person {display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;text-align:left;color:#65513b;font-size:15px;}
+.quest-person small {font-size:11px;color:#747b5e;white-space:nowrap;}
+.sidequest-list article p {font-size:13px;line-height:1.6;margin:1px 0 8px;}
+.ending-quests {border-top:1px solid #b6ae9380;margin-top:18px;padding-top:12px;overflow:visible;}
+@media(max-width:600px){.quest-person {font-size:14px;gap:7px;}.person-quest p,.person-quest blockquote {font-size:13px;}}
+
+.ending-modal {height:min(760px,calc(var(--app-height) - 60px));display:flex;flex-direction:column;overflow:hidden;}
+.ending-modal .modal-heading {flex-shrink:0;}
+.ending-modal>.ending {min-height:0;overflow:auto;overscroll-behavior:contain;padding-right:5px;}
+.ending-quests,.ending-quests * {font-family:var(--dialogue-font)!important;}
+@media(max-width:600px){.ending-modal {height:calc(var(--app-height) - 24px);}}
