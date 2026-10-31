@@ -1,5 +1,7 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
+当前版本 **0.8**（`0.8.0`） · [完整版本记录](../CHANGELOG.md)
+
 当前剧本为《雾灯未眠》，包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档。
 
 [在线测试](https://www.iambrizo.com/mossvale/) · [项目介绍与启动方式](../README.md)

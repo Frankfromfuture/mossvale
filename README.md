@@ -4,6 +4,8 @@
 
 # 青苔镇 Mossvale
 
+当前版本 **0.8**（`0.8.0`） · [版本记录：0.2 → 0.8](CHANGELOG.md)
+
 青苔镇是一款由 AI 扮演人物的单人剧本杀。走进手绘风格的 3D 场景，与人物自由交谈、寻找物证、核对口供，再把散落的线索拼成自己的推断。
 
 **[进入测试版 · www.iambrizo.com/mossvale](https://www.iambrizo.com/mossvale/)**
