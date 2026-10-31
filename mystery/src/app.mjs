@@ -356,7 +356,10 @@ function personQuestionPicker(){
  $('overlay').querySelectorAll('[data-ask-person]').forEach(button=>button.onclick=()=>{
   if(busy||actionPending||selected!==speaker.id)return;
   const target=people.find(p=>p.id===button.dataset.askPerson);if(!target)return;
-  closeModal();sendChat(undefined,`关于「${target.name}」，你知道些什么？`);
+  draft=`关于「${target.name}」，你知道些什么？`;
+  localStorage.setItem(storageKey('mystery-draft'),draft);
+  closeModal();renderDialogue();
+  $('chat-input').focus({preventScroll:true});$('chat-input').setSelectionRange(draft.length,draft.length);
  });
 }
 
