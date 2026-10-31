@@ -117,7 +117,7 @@
  #chat-input {max-height:68px;}
 }
 .keyboard-open #dialogue {bottom:8px;}
-.keyboard-open .rpg-dialogue {height:calc(var(--app-height) - 16px);max-height:calc(var(--app-height) - 16px);}
+.keyboard-open #dialogue .rpg-dialogue {height:calc(var(--app-height) - 16px);max-height:calc(var(--app-height) - 16px);}
 .keyboard-open .bottom-tools {visibility:hidden;}
 
 .speaker-badge {filter:drop-shadow(0 2px 2px #7c775c18);}

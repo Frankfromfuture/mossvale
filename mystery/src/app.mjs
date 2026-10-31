@@ -22,6 +22,8 @@ const portrait=(a,cls='')=>a.portrait==null?`<span class="portrait portrait-unkn
 const menuScenery=bindMenuScenery($('overlay'));
 const introReady=($('loading').querySelector('img')?.decode().catch(()=>{})||Promise.resolve()).then(()=>new Promise(resolve=>setTimeout(resolve,900)));
 let inStartMenu=true,menuState=null;
+// Enable reading once on this update, then keep the player's later choice.
+if(localStorage.getItem('mystery-read-default')!=='1'){localStorage.setItem('mystery-read','1');localStorage.setItem('mystery-read-default','1');}
 let state,selected=null,busy=false,lastReply='',lastMode='',bookTab='clues',storyPage=0,storyTurning=false,bookFilter='全部',selectedClue=null,modalName=null,toastTimer,retry=null,voice=localStorage.getItem('mystery-read')!=='0',draft='';
 let actionPending=false,actionRetry=null,pendingConversation=null,liveReply=null,sideGoalsOpen=false;
 let disconnectMap,disconnectDialogueFrame,profileId=null,profileTrail=[];
@@ -461,10 +463,14 @@ function settings(){
 window.addEventListener('keydown',e=>{if(modalName==='storybook'&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();turnStory(e.key==='ArrowRight'?1:-1);}if(e.key==='Escape'){if(modalName)closeModal();else if(selected)closeDialogue();}if(e.key==='Tab'&&modalName){const nodes=[...$('overlay').querySelectorAll('button,a[href],input,textarea,select')].filter(n=>!n.disabled&&!n.closest('[inert]')&&n.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 window.addEventListener('pagehide',()=>speech.stop());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)speech.stop();});
+let viewportWidth=innerWidth,fullViewportHeight=Math.max(innerHeight,window.visualViewport?.height||0);
 function syncViewport(){
  const height=window.visualViewport?.height||innerHeight;
+ // Some mobile browsers resize both viewports when the keyboard opens.
+ if(viewportWidth!==innerWidth){viewportWidth=innerWidth;fullViewportHeight=Math.max(innerHeight,height);}
+ else fullViewportHeight=Math.max(fullViewportHeight,innerHeight,height);
  document.documentElement.style.setProperty('--app-height',height+'px');
- document.documentElement.classList.toggle('keyboard-open',document.activeElement?.id==='chat-input'&&height<innerHeight-100);
+ document.documentElement.classList.toggle('keyboard-open',document.activeElement?.id==='chat-input'&&height<fullViewportHeight-100);
  fitChatInput();
  fitGuidance();
 }

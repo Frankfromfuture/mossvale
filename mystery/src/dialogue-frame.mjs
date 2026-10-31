@@ -8,18 +8,10 @@ export function bindDialogueFrame(panel) {
   if(key===previous||w<40||h<40)return;
   previous=key;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
   const edge=`M 27 7 H ${w-27} Q ${w-7} 7 ${w-7} 27 V ${h-27} Q ${w-7} ${h-7} ${w-27} ${h-7} H 27 Q 7 ${h-7} 7 ${h-27} V 27 Q 7 7 27 7 Z`;
-  const corner='M 24 0 H 8 V 5 H 0 V 0 H 5 V 8 H 0 V 24';
   svg.innerHTML=`
    <path d="${edge}" fill="#fcf8ec" stroke="#c4bda7" stroke-width="1"/>
    <path d="${edge}" fill="none" stroke="#807c67" stroke-width="2" filter="url(#crayon-outline)"/>
-   <path class="dialogue-challenge-edge" d="${edge}" fill="none" stroke="#f3dc88" stroke-width="3"/>
-   <g class="dialogue-inner-frame" fill="none" stroke="#d8d1bb" stroke-width=".6" opacity=".65" stroke-linecap="butt" stroke-linejoin="miter">
-    <path d="M 35 11 H ${w-35} M ${w-11} 35 V ${h-35} M ${w-35} ${h-11} H 35 M 11 ${h-35} V 35"/>
-    <path d="${corner}" transform="translate(11 11)"/>
-    <path d="${corner}" transform="translate(${w-11} 11) scale(-1 1)"/>
-    <path d="${corner}" transform="translate(${w-11} ${h-11}) scale(-1 -1)"/>
-    <path d="${corner}" transform="translate(11 ${h-11}) scale(1 -1)"/>
-   </g>`;
+   <path class="dialogue-challenge-edge" d="${edge}" fill="none" stroke="#f3dc88" stroke-width="3"/>`;
 
  };
  draw();
