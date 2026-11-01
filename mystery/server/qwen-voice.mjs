@@ -6,7 +6,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import WebSocket,{WebSocketServer} from 'ws';
 export const characterVoices={
- miyazaki:{voice:'longnan_v3.1',name:'龙楠',rate:1.026,style:'年长男性，安稳温厚；安慰时亲切柔和，谈到疑点时语气稍凝重。'},
+ miyazaki:{voice:'longnan_v3.1',name:'龙楠',rate:1.026,delivery:'用普通话，像在桌边对面前的一个人接话，音量适中，口吻平常。语句随意思自然连起来，停顿短而松弛；疑问带轻微探询，句尾收得轻，节奏有细小变化。',style:'年轻成年男性，待客温和、有礼，声音清朗。谈到疑点会犹豫一下再继续，保持日常交谈的分寸。'},
  jiang:{voice:'longsanshu_v3.1',name:'龙三叔',rate:1.0925,pitch:.94,style:'六十岁左右的年长男声，中低声区，厚实温和，带轻微沙哑和岁月感。话语里有关切，疑问带一点探询，重要的事实说得笃定，气息舒展。'},
  ishikawa:{voice:'longtian_v3.1',name:'龙天',rate:1.121,style:'成年男性，思路清楚，边回想边自然接话；解释时流畅，遇到疑点略有迟疑，关键处重音清楚。'},
  kato:{voice:'longxiaocheng_v3.1',name:'龙小诚',rate:1.121,pitch:.92,style:'五六十岁的年长男声，低沉粗厚，带一点沙哑，干脆爽直。说事实有底气，反问稍有力度，关心对方时语气放软，词句连贯。'},
@@ -32,7 +32,7 @@ export function openQwenTask(config,kind,actor,callbacks={},context=[]){
  socket.on('open',()=>command('run-task',kind==='asr'?{
   task_group:'audio',task:'asr',function:'recognition',model:config.asrModel,
   parameters:{format:'pcm',sample_rate:16000,intermediate_result_enabled:true,disfluency_removal_enabled:false,vocabulary:{'白川澄':5,'神谷朔':5,'森川介':5,'雾岛律':5,'黑泽修':5,'黑泽绫':5,'玉珏':5,'神社':3}},input:{context:presentNames(context)}
- }:{task_group:'audio',task:'tts',function:'SpeechSynthesizer',model:config.ttsModel,parameters:{text_type:'PlainText',voice:profile.voice,format:'pcm',sample_rate:24000,volume:50,rate:profile.rate,pitch:profile.pitch??1,language_hints:['zh'],instruction:conversationStyle+profile.style},input:{}}));
+ }:{task_group:'audio',task:'tts',function:'SpeechSynthesizer',model:config.ttsModel,parameters:{text_type:'PlainText',voice:profile.voice,format:'pcm',sample_rate:24000,volume:50,rate:profile.rate,pitch:profile.pitch??1,language_hints:['zh'],instruction:(profile.delivery??conversationStyle)+profile.style},input:{}}));
  socket.on('message',(data,binary)=>{
   if(ended)return;
   if(binary){if(kind==='tts'&&ready)callbacks.audio?.(data);return;}
