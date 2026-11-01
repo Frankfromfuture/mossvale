@@ -1,11 +1,11 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.10`，沿用发布目录 `20261101-mossvale-0.8.8-v12`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.12`，发布目录为 `20261101-mossvale-0.8.12-v13`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.8.8-v12` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.8.12-v13` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
@@ -16,7 +16,23 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。基础发布清单为 `deploy/release-manifest-v12.json`，0.8.10 的静态更新清单与原文件另存于 `/srv/mossvale-mystery/backups/menu-0.8.10/`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v13.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-01 纸页窗口内框与操作提示 · 0.8.12
+
+纸页窗口的回纹内框移到滚动容器外，仍沿用原有颜色、线宽、角花和边距；按可见窗口的尺寸定位，滚动、标签切换、故事翻页、内容展开、阅读返回和视口变化共用同一套处理，首页继续无框。规则写入 `mystery/AGENTS.md`。
+
+本次同时上线 0.8.11 的操作提示：根据已找到的线索说明入口和下一步操作，可直接打开对应手记页，引导公开线索、查看反应、追问、出示、搜查和整理推断。
+
+一次 Web 构建，使用隔离内存存档验证手机长手记、公开反应、手记标签、故事翻页、人物页返回、提示展开及视口变化。云端先用隔离数据预检资源和旧档兼容，再仅切换剧本杀容器；Nginx 与其他服务保持，不调用真实模型或语音服务。
+
+存档备份为 `/srv/mossvale-mystery/backups/before-20261101-mossvale-0.8.12-v13.tgz`，上一版容器为 `mossvale-mystery-before-v13`。回退保留现有存档：
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/current/deploy/update.py rollback
+```
+
+本地证据：`mystery/qa/paper-frame-v1/`。
 
 ## 2026-11-01 首页图标与版本号 · 0.8.10
 

@@ -14,6 +14,7 @@ import {installPersonLinks} from './person-links.mjs';
 import {icon} from './ui-icons.mjs';
 import {TownScene} from './scene.mjs';
 import {bindDialogueFrame,speakerBadge} from './dialogue-frame.mjs';
+import {bindPaperFrame} from './paper-frame.mjs';
 import {dialogueGlyph} from './dialogue-controls.mjs';
 import {createVoice} from './voice.mjs';
 import {storySpread,storySeenKey} from './storybook.mjs';
@@ -22,6 +23,7 @@ import {rooms,cast,getRoom} from '../shared/layout.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const portrait=(a,cls='')=>a.portrait==null?`<span class="portrait portrait-unknown ${cls}" role="img" aria-label="${esc(a.name)}的资料">${icon('book')}</span>`:`<span class="portrait ${cls}" style="--col:${a.portrait%3};--row:${Math.floor(a.portrait/3)}" role="img" aria-label="${esc(a.name)}的头像"></span>`;
 const menuScenery=bindMenuScenery($('overlay'));
+bindPaperFrame($('overlay'));
 const introReady=($('loading').querySelector('img')?.decode().catch(()=>{})||Promise.resolve()).then(()=>new Promise(resolve=>setTimeout(resolve,900)));
 let inStartMenu=true,menuState=null;
 // Each visit starts with automatic reply reading; settings can mute this visit.

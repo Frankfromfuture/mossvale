@@ -26,7 +26,6 @@
 .menu-active .profile-back{position:static;margin:0;transform:none}
 .menu-active .modal-heading>div{flex:1}
 .menu-active .paper-modal.start-menu{width:min(680px,100%);max-height:calc(var(--app-height,100dvh) - 120px);padding:0;background:none;border:0;box-shadow:none;overflow:visible;text-align:center}
-.start-menu:before{display:none}
 .start-menu #close-modal{display:none}
 .start-menu .modal-heading{display:none}
 .start-menu .eyebrow{display:none}
@@ -46,7 +45,6 @@
 .start-menu-button:not(:disabled):hover,.start-menu-button:focus-visible{background:transparent;transform:none;box-shadow:none;text-decoration:underline;outline:none}
 .start-menu-button:disabled{opacity:1;color:#767a72;background:transparent;box-shadow:none}
 .menu-active .paper-modal.script-picker,.menu-active .paper-modal.role-picker{width:min(820px,100%);max-height:calc(var(--app-height,100dvh) - 48px);display:flex;flex-direction:column;overflow:hidden;background-color:#f7f0df;box-shadow:7px 9px 0 #33392d22}
-.menu-active .paper-modal:before{z-index:0}
 .menu-active .paper-modal>header,.menu-active .role-picker-scroll,.menu-active .script-carousel{position:relative;z-index:1}
 .role-picker-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b6ae96 transparent;scrollbar-gutter:stable;padding:4px 8px 8px 4px}
 .script-carousel{display:flex;flex-direction:column;min-height:0}
