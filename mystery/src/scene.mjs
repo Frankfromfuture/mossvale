@@ -312,7 +312,7 @@ export class TownScene{
   // A tap on a table stops at its edge; an empty destination gets a clear path.
   this.setActorPath(playerId(this.current),point,this.current.room);
  }
- frame(t){requestAnimationFrame(this.frame);if(document.hidden||t-this.last<1000/40)return;const dt=Math.min((t-this.last)/1000,.05);this.last=t;this.landscape.stream.update(dt);
+ frame(t){requestAnimationFrame(this.frame);if(this.suspended||document.hidden||t-this.last<1000/40)return;const dt=Math.min((t-this.last)/1000,.05);this.last=t;this.landscape.stream.update(dt);
   const entryHold=this.entrySpeech?.started&&this.entrySpeech.hold>0&&this.entryBubble.inView;
   if(this.travelRoom&&!entryHold){const player=this.actors.get(playerId(this.current));if(this.moving(player)){
    const up=new THREE.Vector3(0,1,0).applyQuaternion(this.camera.quaternion),h=this.host.clientHeight,top=this.host.clientWidth<600?205:h<540?90:125;

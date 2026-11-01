@@ -1,0 +1,38 @@
+{
+  "version": "0.11.0",
+  "formalWebBuilds": 1,
+  "localServiceStarts": 1,
+  "bundlePatch": "Explicit type=button, same literal in source and built bundle",
+  "ruleChecks": 6,
+  "ruleChecksPassed": 6,
+  "http": true,
+  "browser": true,
+  "pageErrors": 0,
+  "formalData": {
+    "checked": 16,
+    "changed": [],
+    "preserved": true
+  },
+  "realModelCalls": 0,
+  "realVoiceCalls": 0,
+  "cloudDeployed": false,
+  "localResources": [
+    {
+      "file": "game.js",
+      "sha256": "65a074bb53103056e1a1a6d5d4c992d1df4dbeb7bd708e04ef4b813b4222926d"
+    },
+    {
+      "file": "suspect7.css",
+      "sha256": "750decbeafc710d7ee640a05b6afd392993860955624c4b9e7cf138210ea9744"
+    },
+    {
+      "file": "art/suspect7/andy.svg",
+      "sha256": "7224d42f9a2755be870717adc80482bd023566f1c166236112a703a8c35ca2a6"
+    }
+  ],
+  "limitations": [
+    "Original MP4 soundtracks not independently transcribed; fixed scenes adapted from verified script text.",
+    "2–3 hours is a design target, not a measured playtest duration.",
+    "Real provider latency, voice quality and physical mobile keyboard/haptics were not tested."
+  ]
+}

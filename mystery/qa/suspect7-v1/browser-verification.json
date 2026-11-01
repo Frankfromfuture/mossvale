@@ -1,0 +1,31 @@
+{
+  "realModelCalls": 0,
+  "realVoiceCalls": 0,
+  "errors": [],
+  "steps": [
+    "Desktop chapter-one actions completed in preceding run; resumed after correcting the duplicate-heading test selector",
+    "390×844 password wrong-input retention, correct unlock, paper frame",
+    "Mobile secret-room view, long paper scrolling, short/long resize, two-source comparison",
+    "Editable question starter sends only on submit; simulated reply; 390×464 keyboard and restore",
+    "Wu Quan final verdict UI, six-route unlock and menu return",
+    "First case continues with old notes and its original scene"
+  ],
+  "screenshots": [
+    "output/playwright/suspect7-v1/04-conversation-desktop.png",
+    "output/playwright/suspect7-v1/05-password-mobile.png",
+    "output/playwright/suspect7-v1/06-secret-mobile.png",
+    "output/playwright/suspect7-v1/07-long-paper-mobile.png",
+    "output/playwright/suspect7-v1/08-compare-mobile.png",
+    "output/playwright/suspect7-v1/09-keyboard-mobile.png",
+    "output/playwright/suspect7-v1/10-ending-desktop.png",
+    "output/playwright/suspect7-v1/11-first-case-regression.png"
+  ],
+  "passed": true,
+  "fixes": [
+    "Question starters were default submit buttons inside a form; explicit type=button now preserves editing until the player sends."
+  ],
+  "harnessAdjustments": [
+    "Restricted the chapter heading locator to the modal because the HUD uses the same title.",
+    "Waited for the next rendered scene frame before capturing the secret room."
+  ]
+}

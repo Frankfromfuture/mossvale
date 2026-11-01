@@ -1,0 +1,11 @@
+{
+  "realModelCalls": 0,
+  "realVoiceCalls": 0,
+  "isolatedData": true,
+  "checks": [
+    "Andy → Wu Quan: all chapters, vote, password, reconstruction, insufficient-evidence theory, four reports, confrontation, 100-point ending, per-chapter reload",
+    "Legacy read is read-only; first mutation backup exact; script roundtrip preserves first case; stale action/chat/voice rejected",
+    "Visitors and routes isolated"
+  ],
+  "passed": true
+}

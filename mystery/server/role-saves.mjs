@@ -1,35 +1,43 @@
 import {randomUUID} from 'node:crypto';
-import {createGame,view} from './game.mjs';
 import {investigationView} from './investigation.mjs';
 import {roleCatalog,validRole} from './roles.mjs';
+import {scriptCatalog,scriptDefinition} from './scripts.mjs';
+import {routes,person} from '../shared/suspect7/cast.mjs';
+export const archiveFormat='scripts-v2';
 export const unlockScores=Object.freeze({player:0,jiang:60,emi:70,miyazaki:80,kato:88,ishikawa:95});
-export const newArchive=()=>({format:'six-roles-v1',active:null,slots:{},tokens:{},menuToken:randomUUID(),bestScore:0});
+const emptyBook=()=>({active:null,slots:{},tokens:{},bestScore:0,unlocked:false});
+export const newArchive=()=>({format:archiveFormat,activeScript:'hanyu',books:{hanyu:emptyBook(),suspect7:emptyBook()},sessionToken:randomUUID()});
 export function migrateArchive(raw){
- if(raw.format==='six-roles-v1')return raw;
- // Legacy progress is wrapped in memory; the first mutation backs up the source file.
- const book=newArchive();book.active='player';book.slots.player=raw;book.tokens.player=randomUUID();return book;
+ if(raw.format===archiveFormat)return raw;
+ const book=newArchive();
+ if(raw.format==='six-roles-v1')book.books.hanyu=structuredClone(raw);
+ else {book.books.hanyu.active='player';book.books.hanyu.slots.player=structuredClone(raw);book.books.hanyu.tokens.player=randomUUID();}
+ // No source file is written during reads. main.mjs backs it up before the first mutation.
+ return book;
 }
-export const activeGame=book=>book.active?book.slots[book.active]:null;
-export const activeToken=book=>book.active?book.tokens[book.active]:book.menuToken;
+const current=book=>book.books[book.activeScript];
+export const activeRole=book=>current(book).active;
+export const activeGame=book=>{const b=current(book);return b.active?b.slots[b.active]:null;};
+export const activeToken=book=>book.sessionToken;
+export const rotateToken=book=>{book.sessionToken=randomUUID();};
 export function bestCompletedScore(book){
- const recorded=Number.isFinite(book.bestScore)?Math.max(0,Math.min(100,book.bestScore)):0;
- return Math.max(recorded,...Object.values(book.slots).filter(s=>s.ending).map(s=>investigationView(s).total));
+ const b=book.books.hanyu,recorded=Number.isFinite(b.bestScore)?Math.max(0,Math.min(100,b.bestScore)):0;
+ return Math.max(recorded,...Object.values(b.slots).filter(s=>s.ending).map(s=>investigationView(s).total));
 }
-export function rememberBestScore(book){book.bestScore=bestCompletedScore(book);}
-export const roleUnlocked=(book,id)=>validRole(id)&&(id==='player'||bestCompletedScore(book)>=unlockScores[id]);
-const roleChoices=book=>{const best=bestCompletedScore(book);return roleCatalog.map(({id,name,portrait})=>({id,name,portrait,unlockScore:unlockScores[id],locked:best<unlockScores[id],saved:!!book.slots[id],finished:!!book.slots[id]?.ending}));};
-export function continuationRole(book){return roleUnlocked(book,book.active)&&activeGame(book)?book.active:roleCatalog.find(p=>book.slots[p.id]&&roleUnlocked(book,p.id))?.id||null;}
+export function rememberBestScore(book){book.books.hanyu.bestScore=bestCompletedScore(book);const b=book.books.suspect7;if(Object.values(b.slots).some(s=>s.ending))b.unlocked=true;}
+const valid=(book,id)=>book.activeScript==='suspect7'?routes.some(r=>r.id===id):validRole(id);
+export const roleUnlocked=(book,id)=>valid(book,id)&&(book.activeScript==='suspect7'?(id==='andy'||book.books.suspect7.unlocked||Object.values(book.books.suspect7.slots).some(s=>s.ending)):(id==='player'||bestCompletedScore(book)>=unlockScores[id]));
+const roleChoices=book=>{const b=current(book);return book.activeScript==='suspect7'?routes.map(r=>({...r,portraitUrl:`art/suspect7/${r.id}.svg`,locked:!roleUnlocked(book,r.id),saved:!!b.slots[r.id],finished:!!b.slots[r.id]?.ending})):roleCatalog.map(({id,name,portrait})=>({id,name,portrait,unlockScore:unlockScores[id],locked:!roleUnlocked(book,id),saved:!!b.slots[id],finished:!!b.slots[id]?.ending}));};
+export function continuationRole(book){const b=current(book);return roleUnlocked(book,b.active)&&activeGame(book)?b.active:roleChoices(book).find(p=>p.saved&&!p.locked)?.id||null;}
 function menuFields(book,ai){
- const id=continuationRole(book),person=roleCatalog.find(p=>p.id===id),s=id?book.slots[id]:null;
- return {roles:roleChoices(book),bestScore:bestCompletedScore(book),scripts:[{id:'hanyu',name:'雾灯未眠',tagline:'昨夜，他们都藏起了一件事。',description:'最后一支蜡烛熄灭，山里的怪谈散了场。天亮后，六个人重新围坐，却谁也不敢先说自己看见了什么。你为一位故人而来，有人等着重逢，有人只盼昨夜从未发生。',cover:'art/menu/mist-lantern-v1.png'}],continueProgress:s?{role:id,name:person.name,finished:!!s.ending,started:!!s.started}:null,slotToken:activeToken(book),ai};
+ const id=continuationRole(book),b=current(book),s=id?b.slots[id]:null,p=book.activeScript==='suspect7'?person(s?.playerId||id):roleCatalog.find(p=>p.id===id);
+ return {activeScript:book.activeScript,roles:roleChoices(book),bestScore:bestCompletedScore(book),scripts:scriptCatalog.map(script=>({...script,saved:Object.keys(book.books[script.id].slots).length>0})),continueProgress:s?{scriptId:book.activeScript,role:id,name:p?.name,chapterId:s.chapterId,finished:!!s.ending,started:!!s.started}:null,slotToken:activeToken(book),ai};
 }
-export function menuView(book,ai){return {startMenu:true,...menuFields(book,ai)};}
-export function archiveView(book,ai){
- const s=activeGame(book);
- return {...(s&&roleUnlocked(book,book.active)?view(s,ai):{roleSelection:true}),...menuFields(book,ai)};
-}
-export function assertSlot(book,token){if(token!==activeToken(book)){const e=Error('当前主角已在其他页面切换，请刷新后继续。原进度已保留。');e.status=409;throw e;}}
-export function assertPlayable(book,id=book.active){if(!roleUnlocked(book,id)){const e=Error(validRole(id)?`结案调查分数达到${unlockScores[id]}分后解锁。`:'先选一位主角，再开始调查。');e.status=403;throw e;}}
-export function selectRole(book,id){if(!validRole(id))throw Error('没有这个人物。');assertPlayable(book,id);rememberBestScore(book);if(!book.slots[id]){book.slots[id]=createGame(id);book.tokens[id]=randomUUID();}book.active=id;}
+export const menuView=(book,ai)=>({startMenu:true,...menuFields(book,ai)});
+export function archiveView(book,ai){const s=activeGame(book);return {...(s&&roleUnlocked(book,activeRole(book))?{...scriptDefinition(book.activeScript).view(s,ai),scriptId:book.activeScript}:{roleSelection:true}),...menuFields(book,ai)};}
+export function assertSlot(book,token){if(token!==activeToken(book)){const e=Error('剧本或视角已切换，请刷新后继续。原进度已保留。');e.status=409;throw e;}}
+export function assertPlayable(book,id=activeRole(book)){if(!roleUnlocked(book,id)){const e=Error(book.activeScript==='suspect7'?'先完成安迪—吴全路线，其他路线随即开放。':validRole(id)?`结案调查分数达到${unlockScores[id]}分后解锁。`:'先选一位主角。');e.status=403;throw e;}}
+export function selectScript(book,id){if(!scriptDefinition(id))throw Error('没有这个剧本。');rememberBestScore(book);book.activeScript=id;rotateToken(book);}
+export function selectRole(book,id){if(!valid(book,id))throw Error('没有这个人物。');assertPlayable(book,id);rememberBestScore(book);const b=current(book);if(!b.slots[id]){b.slots[id]=scriptDefinition(book.activeScript).createGame(id);b.tokens[id]=randomUUID();}b.active=id;rotateToken(book);}
 export function continueRole(book){const id=continuationRole(book);if(!id){const e=Error('还没有可继续的进度，请先选择剧本。');e.status=409;throw e;}selectRole(book,id);}
-export function resetRole(book){assertPlayable(book);rememberBestScore(book);const id=book.active;book.slots[id]=createGame(id);book.tokens[id]=randomUUID();}
+export function resetRole(book){assertPlayable(book);rememberBestScore(book);const b=current(book),id=b.active;b.slots[id]=scriptDefinition(book.activeScript).createGame(id);b.tokens[id]=randomUUID();rotateToken(book);}

@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.10.1** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.11.0** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -17,7 +17,9 @@
 
 **[进入测试版 · www.iambrizo.com/mossvale](https://www.iambrizo.com/mossvale/)**
 
-当前剧本《雾灯未眠》从一场山中怪谈开始。最后一支蜡烛熄灭，六个人各自藏起了一件事；天亮后重新围坐，却谁也不愿先说自己看见了什么。你要弄清昨夜发生的事，也要想好，别人问起你时该怎样回答。
+第一部《雾灯未眠》从一场山中怪谈开始。最后一支蜡烛熄灭，六个人各自藏起了一件事；天亮后重新围坐，却谁也不愿先说自己看见了什么。你要弄清昨夜发生的事，也要想好，别人问起你时该怎样回答。
+
+本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮安迪—吴全结案后开放其余五条路线，支持独立存档、楼层搜证、双证据追问、分级提示与最终对质。在线测试站暂仍为0.10.1。
 
 ![青苔镇首页](mystery/docs/images/home.png)
 
@@ -105,7 +107,9 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.10.1** · [Full changelog](CHANGELOG.md)
+Current version **0.11.0** · [Full changelog](CHANGELOG.md)
+
+Version 0.11.0 adds a second local story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, floor exploration, evidence comparison, hints, and a final confrontation. Completing Andy → Wu Quan unlocks the other five routes regardless of score. The hosted demo remains on 0.10.1.
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 

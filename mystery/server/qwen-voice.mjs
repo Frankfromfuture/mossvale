@@ -1,3 +1,4 @@
+import {people as suspect7People} from '../shared/suspect7/cast.mjs';
 import {currentNames,presentNames} from '../shared/story-names.mjs';
 import {playerId} from '../shared/player.mjs';
 import {readFile} from 'node:fs/promises';
@@ -13,6 +14,9 @@ export const characterVoices={
  emi:{voice:'longyan_v3.1',name:'龙颜',rate:1.14,style:'成年女性，柔和清亮，说话利落。像熟人间交谈，安慰时温暖，疑问时轻轻上扬；台词涉及不安时稍放轻，情绪细腻而自然。'},
  player:{voice:'yezhiqing_v3.1',name:'叶知晴',rate:1.0925,style:'成年女性，清楚自然，带认真倾听后的好奇；询问时轻微扬起，解释时从容连贯。'}
 };
+for(const [index,p] of suspect7People.entries())characterVoices[p.id]={voice:['hongxue','vivian','cuiyuan'].includes(p.id)?(p.id==='vivian'?'longyan_v3.1':'yezhiqing_v3.1'):p.id==='aiyijun'?'longsanshu_v3.1':p.id==='franklin'?'longxiaocheng_v3.1':p.id==='chenxin'?'longtian_v3.1':'longnan_v3.1',name:p.name,rate:1.04+(index%3)*.025,pitch:p.id==='chenxin'?.96:1,style:p.style};
+characterVoices.dingyuanhou={voice:'longxiaocheng_v3.1',name:'定远侯',rate:1.05,pitch:.93,style:'克制的成年男声，逐句宣读，固定台词，不临场接话。'};
+characterVoices.narrator7={voice:'yezhiqing_v3.1',name:'供述旁白',rate:1.08,style:'平静、清楚的现代悬疑叙述，不夸张表演。'};
 const conversationStyle='用普通话，像面对面自然接话。以完整意群连贯地说，词组紧接，语义转折处短停，句间自然换气。重音落在关键事实和疑问上，问句轻轻上扬，解释自然回落；安慰更柔和，迟疑稍放轻，追问稍有力度。情绪随台词变化，整体温和克制；句尾留自然余韵，衔接下一句时保持气息连贯。';
 export async function voiceConfig(){
  let saved={};try{saved=JSON.parse(await readFile(process.env.MYSTERY_QWEN_CONFIG||path.join(homedir(),'.config/mossvale-mystery/qwen.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw Error('本机 Qwen 配置未能读取。');}
@@ -63,7 +67,9 @@ export function installVoice(server,getSession){
    wss.handleUpgrade(req,socket,head,client=>{
     let upstream,bytes=0,characters=0,started=false,finished=false;
     const send=(type,body={})=>{if(client.readyState===WebSocket.OPEN)client.send(JSON.stringify({type,...body}));};
-    const cleanup=()=>{clearTimeout(ttl);upstream?.close();active.delete(key);};
+    const slotChanged=id=>{if(id===session.visitorId){client.close();cleanup();}};
+    server.on('mystery-slot-changed',slotChanged);
+    const cleanup=()=>{clearTimeout(ttl);upstream?.close();active.delete(key);server.off('mystery-slot-changed',slotChanged);};
     const fail=error=>{send('error',{error});client.close();cleanup();};
     const ttl=setTimeout(()=>fail('这次语音已到时限，文字已保留。'),70000);ttl.unref();
     client.on('close',cleanup);client.on('error',cleanup);
@@ -74,7 +80,7 @@ export function installVoice(server,getSession){
       const message=JSON.parse(data.toString());
       if(message.type==='start'&&!started){
        if(message.slotToken!==session.slotToken)throw Error('主角已切换，请刷新页面。');started=true;const actor=message.actor;if(!characterVoices[actor]||actor===playerId(session.state))throw Error('请选择交谈人物。');
-       const s=session.state;if(s.positions[actor]!==s.room)throw Error('先到对方身边再开始语音。');
+       const s=session.state,fixed=s.scriptId==='suspect7'&&kind==='tts'&&['dingyuanhou','narrator7'].includes(actor)&&s.started;if(!fixed&&s.positions[actor]!==s.room)throw Error('先到对方身边再开始语音。');
        const config=await voiceConfig();if(client.readyState!==WebSocket.OPEN)return;
        const history=(s.chats[actor]||[]).filter(l=>l.who===playerId(s)||l.who===actor).slice(-4),context=[];
        for(let i=0;i<history.length-1;i++)if(history[i].who===playerId(s)&&history[i+1].who===actor){const a=history[i],b=history[++i];context.push({role:'user',content:[{type:'input_text',text:a.text.slice(0,90)}]},{role:'assistant',content:[{type:'text',text:b.text.slice(0,90)}]});}

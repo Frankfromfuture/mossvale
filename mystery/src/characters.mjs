@@ -21,8 +21,8 @@ const facialFeatures={
  kato:{eye:[.12,.018,.028,.023,.02],brow:[.129,.128,.021,.09,[[-.063,-.004],[-.016,.012],[.061,.008]]]},
  emi:{eye:[.132,.027,.031,.028,-.085],brow:[.14,.151,.01,-.03,[[-.062,-.014],[-.008,.018],[.06,-.008]]]}
 };
-export function createCharacter(scene,id){
- const look=characterLooks[id],root=new THREE.Group(),body=new THREE.Group(),head=new THREE.Group();root.name='character-'+id;root.add(body);body.position.y=.27;body.scale.setScalar(look.height*.88);
+export function createCharacter(scene,id,options={}){
+ const look=options.look||characterLooks[id],root=new THREE.Group(),body=new THREE.Group(),head=new THREE.Group();root.name='character-'+id;root.add(body);body.position.y=.27;body.scale.setScalar(look.height*.88);
  const mat=c=>scene.mat(c),ink='#504a40';
  const mesh=(geometry,color,parent,x=0,y=0,z=0)=>{const m=new THREE.Mesh(geometry,mat(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;};
  const ell=(parent,x,y,z,rx,ry,rz,c)=>{const m=mesh(new THREE.SphereGeometry(1,16,12),c,parent,x,y,z);m.scale.set(rx,ry,rz);return m;};
@@ -52,7 +52,7 @@ export function createCharacter(scene,id){
  const surface=new THREE.Mesh(skin.geometry);surface.position.copy(skin.position);surface.scale.copy(skin.scale);surface.updateMatrixWorld(true);
  const ray=new THREE.Raycaster(new THREE.Vector3(),new THREE.Vector3(0,0,-1));
  const depthAt=(x,y)=>{ray.ray.origin.set(x,y,1);return ray.intersectObject(surface,false)[0]?.point.z??.015;};
- const features=facialFeatures[id],face={eyes:[],brows:[],depthAt,offset:Object.keys(characterLooks).indexOf(id)*.73,open:0};
+ const features=options.features||facialFeatures[id],face={eyes:[],brows:[],depthAt,offset:options.offset??Object.keys(characterLooks).indexOf(id)*.73,open:0};
  for(const side of [-1,1]){
   ell(head,side*.328,-.055,.01,.065,.105,.075,look.skin);
   const [ex,ey,ew,eh,tilt]=features.eye,eye=ell(head,side*ex,ey,depthAt(side*ex,ey)+.002,ew,eh,.012,ink);
@@ -64,6 +64,13 @@ export function createCharacter(scene,id){
  }
  ell(head,.015,-.062,.316,.038,.061,.045,look.skin);
  face.mouth=new THREE.Group();face.mouth.position.set(0,-.185,.31);head.add(face.mouth);line(face.mouth,[[-.065,0,-.006],[.012,-.011,.01],[.074,.004,-.011]],'#99775f',.01);face.openMouth=ell(head,0,-.191,.316,.052,.003,.014,'#76594e');face.openMouth.visible=false;
+ if(options.modern){
+  patch(torso,[[-.22,.6],[-.04,.44],[-.12,.22],[-.27,.49]],'#d9d2bc');patch(torso,[[.22,.6],[.04,.44],[.12,.22],[.27,.49]],'#c9c1ad');
+  if(options.look.look==='glasses')for(const side of [-1,1])mesh(new THREE.TorusGeometry(.091,.012,6,24),ink,head,side*.128,.025,.337);
+  if(['long','bob','ponytail'].includes(options.look.look)){for(const side of [-1,1])ell(head,side*.28,-.05,-.06,.095,options.look.look==='long'?.49:.28,.25,look.hair);if(options.look.look==='ponytail')ell(head,0,-.12,-.37,.14,.44,.14,look.hair);}
+  if(options.look.look==='cane'){const stick=mesh(new THREE.CylinderGeometry(.025,.025,1.2,8),'#544d43',body,.44,.5,.13);ell(body,.44,1.11,.13,.085,.035,.05,'#b5ac91');}
+  if(options.look.look==='stubble')for(const side of [-1,1])for(let i=0;i<5;i++){const x=side*(.07+i*.035),y=-.22;line(head,[[x,y,depthAt(x,y)+.003],[x,y-.022,depthAt(x,y-.022)+.003]],look.hair,.007);}
+ }
  // Hair cap is an actual back/side shell, leaving the forehead and face clear.
  mesh(new THREE.SphereGeometry(.35,18,12,0,Math.PI*2,0,1.35),look.hair,head,0,.08,-.03).scale.set(1,1,1.03);
  if(id==='kato'){ell(head,0,.28,-.04,.31,.15,.29,look.hair);for(const x of [-.16,-.02,.12])line(head,[[x,.34,.17],[x+.035,.42,0],[x+.04,.35,-.21]],'#65594a',.01);}

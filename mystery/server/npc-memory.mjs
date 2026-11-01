@@ -18,7 +18,7 @@ function relevance(query,text){
  for(const t of a)if(b.has(t)){matches+=t.startsWith('topic:')?3:1;topic||=t.startsWith('topic:');}
  return matches>=2||topic?matches/Math.sqrt(Math.max(1,a.size)):0;
 }
-function selectRelevant(items,message,{limit=6,budget=4000,text=x=>x.text}={}){
+export function selectRelevant(items,message,{limit=6,budget=4000,text=x=>x.text}={}){
  const askPromise=/答应|承诺|约好|说好/.test(message);
  const ranked=items.map((item,index)=>({item,index,score:relevance(message,text(item))+(askPromise&&item.commitment?3:0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||b.index-a.index);
  const selected=[];let used=0;
