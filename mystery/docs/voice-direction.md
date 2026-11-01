@@ -12,6 +12,8 @@
 
 本地 0.8.17 根据下一轮试听反馈，只更新神谷朔的发声指令：句内起伏和语义重音更鲜明，每句最后两三个字渐弱、尾字轻收，问句在句中表达上扬。语速保持 `1.08`。同句一次真实合成得到 7.16 秒样音，供用户试听，不据此断言主观效果；其他配置与线上版本保持。样音位于 `qa/miyazaki-prosody-v1/more-expression-soft-endings.wav`。
 
+0.9.0 将以上三轮已试听的调整一并发布，保留龙楠音色和其他五人配置，本轮复用已有样音与验证记录。
+
 ## English
 
 
@@ -22,3 +24,5 @@ Two samples use the same line and synthesis settings, with only the speaking dir
 Local version 0.8.16 raises only Kamiya's rate from `1.026` to `1.08`, about 5.3%. One new sample of the same line lasts 7.01 seconds, compared with the earlier conversational sample's 7.38 seconds. All other voice settings remain unchanged; production has not been updated.
 
 Local version 0.8.17 requests clearer variation and emphasis within sentences, with a gradual reduction in volume over the last two or three words and a light final syllable. The rate stays at `1.08`. One real synthesis produced a 7.16-second sample for listening; other settings and production remain unchanged.
+
+Version 0.9.0 deploys these three previously auditioned changes together, retaining the Longnan voice and the other five profiles. This release reuses the existing samples and verification records.

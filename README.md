@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.8.17**（本地 / local） · [完整更新记录](CHANGELOG.md)
+当前版本 **0.9.0** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -32,6 +32,8 @@
 **换一个人，重新理解同一晚。** 六位主角各有开场经历、已知信息、主线和个人支线。首次从白川澄开始，其他角色按最高结案调查分数解锁；换一个视角，会知道一些原本需要调查的事，也会面对另一组疑问与选择。
 
 **按自己的节奏调查。** 每局有 360 行动点，问答与首次搜证消耗点数，行走、阅读和等待不消耗。案件推理、秘密保护、回答可信度、交谈分寸、调查规矩与行动效率共同构成调查成绩，扣分记录可以查看依据。
+
+**关键处停下来翻一页。** 五场手绘连环画随调查进度解锁，短幕间把刚发生的事接到下一步操作；可以跳过，也可以从「故事」重看。内容只讲已经查到的部分，末页可直接打开相关手记、人物或个人目标入口。
 
 ## 场景里的生活感
 
@@ -102,7 +104,7 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.8.17**（本地 / local） · [Full changelog](CHANGELOG.md)
+Current version **0.9.0** · [Full changelog](CHANGELOG.md)
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 
@@ -125,6 +127,8 @@ The current story, 《雾灯未眠》, begins with a night of ghost stories in t
 **Revisit the same night as someone else.** Six protagonists have different opening memories, starting knowledge, main goals, and personal stories. Begin as 白川澄; other characters unlock through your highest completed investigation score. Another viewpoint gives you information you previously had to uncover, along with different questions and decisions.
 
 **Investigate at your own pace.** Each run starts with 360 action points. Conversation and first-time searches use points; walking, reading, and waiting do not. The investigation score covers case reasoning, protection of secrets, credibility, conversational conduct, respect for investigation rules, and efficiency. You can inspect the reasons for deductions.
+
+**Pause for an illustrated interlude.** Five hand-drawn comic scenes unlock as your investigation progresses, connecting each turning point to a useful action screen. Skip them or revisit them through Story. Each scene stays within what you have discovered, with links to the relevant notebook page, character selection, or personal goals.
 
 ## Life in the scene
 

@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {presentNames} from '../shared/story-names.mjs';
 import {roleStory,validRole,roleDefinition,selfView,roleReason,completePersonalGoal} from './roles.mjs';
 import {caseProgress,caseEnding,witnessedEvidence} from './case-story.mjs';
+import {interludesFor} from './interludes.mjs';
 import {finishSideQuest} from './side-quests.mjs';
 import {ensureInvestigation,investigationView,guardAction,canEnter,trespass,inspectionGate,grantPermission,forcePersonal,spend,listeners,exposeCard,reviewContext,validateReview,settleReview,maybeChallenge,maybeSearchChallenge,concede,explanationMemory,recordStatement} from './investigation.mjs';
 import {openingStatements,openingFor,openingView,nextLead,organizerRole} from './opening.mjs';
@@ -51,7 +52,7 @@ export function view(s,ai={ready:false}){
  const room=getRoom(s.room);
  const people=cast.map(a=>{const visible=s.positions[a.id]===s.room||s.positions[a.id]==='hall';return {...a,location:visible?s.positions[a.id]:null,locationLabel:visible?getRoom(s.positions[a.id]).name:'暂时离席',near:s.positions[a.id]===s.room,knownIdentity:a.id==='ishikawa'&&has(s,'revealed')?'黑泽的孪生弟弟':null};});
  const roomChoices=rooms.map(({id,name,description,reserved,owner})=>({id,name,description,reserved:!!reserved,accessible:!reserved&&canEnter(s,getRoom(id))}));
- return presentNames({playerId:playerId(s),self:selfView(s),storyPages:roleStory(s),version:s.version,revision:s.revision,started:s.started,phase:s.phase,phaseLabel:s.ending?'调查完成':'调查中',room:s.room,roomDescription:room.description,people,rooms:roomChoices,
+ return presentNames({playerId:playerId(s),self:selfView(s),storyPages:roleStory(s),interludes:interludesFor(s),version:s.version,revision:s.revision,started:s.started,phase:s.phase,phaseLabel:s.ending?'调查完成':'调查中',room:s.room,roomDescription:room.description,people,rooms:roomChoices,
   clues:s.found.map(id=>{const {title,text,kind}=perspectiveClue(s,id);return {id,title,text,kind,public:s.public.includes(id)};}),
   spots:clues.filter(c=>c.room===s.room&&c.id!=='your-night').map(c=>({id:c.id,name:c.spot,found:s.found.includes(c.id),locked:(c.requires||[]).some(id=>!s.found.includes(id))||!!c.requiresTalk&&c.requiresTalk!==playerId(s)&&!s.chats[c.requiresTalk]?.length})),
   dossiers:Object.fromEntries(cast.map(person=>[person.id,personDossier(s,person)])),interactions:availableInteractions(s),

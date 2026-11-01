@@ -15,17 +15,17 @@ import time
 import urllib.request
 
 BASE = Path('/srv/mossvale-mystery')
-NAME = '20261101-mossvale-0.8.12-v13'
-PREVIOUS = BASE/'releases'/'20261101-mossvale-0.8.8-v12'
+NAME = '20261101-mossvale-0.9.0-v14'
+PREVIOUS = BASE/'releases'/'20261101-mossvale-0.8.12-v13'
 RELEASE = BASE/'releases'/NAME
 ARCHIVE = Path('/tmp/mystery-'+NAME+'.tgz')
 CURRENT = BASE/'current'
 DATA = BASE/'data'
 PREFLIGHT_DATA = BASE/('preflight-data-'+NAME)
 MAIN = 'mossvale-mystery'
-CHECK = 'mossvale-mystery-check-v13'
-OLD = 'mossvale-mystery-before-v13'
-MANIFEST = 'deploy/release-manifest-v13.json'
+CHECK = 'mossvale-mystery-check-v14'
+OLD = 'mossvale-mystery-before-v14'
+MANIFEST = 'deploy/release-manifest-v14.json'
 BACKUP = BASE/'backups'/('before-'+NAME+'.tgz')
 LIVE = Path('/srv/brizo-sync/current/services/device-sync/deploy/nginx.conf')
 NGINX_PREVIOUS_HASH = '32143d62eab3f572a6183b915ba6fcb6350604db562badfd9933edd05eb96e9e'

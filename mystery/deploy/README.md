@@ -1,11 +1,11 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.14`，沿用发布目录 `20261101-mossvale-0.8.12-v13`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.9.0`，发布目录 `20261101-mossvale-0.9.0-v14`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.8.12-v13` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.9.0-v14` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
@@ -16,7 +16,21 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。基础发布清单为 `deploy/release-manifest-v13.json`，0.8.14 的网页更新清单另存于 `/srv/mossvale-mystery/backups/menu-center-0.8.14/`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v14.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-01 调查幕间与神谷朔语音 · 0.9.0
+
+五场手绘幕间随调查进度解锁，支持跳过、重看与末页操作入口；未到达的正文由服务端保留，旧存档已完成节点直接收入故事册。同步上线 0.8.15—0.8.17 的神谷朔语音调整：年轻温和的日常表达、1.08 语速、句内起伏与轻收句尾，沿用龙楠音色及其他五人配置。
+
+一次 Web 构建，使用内存夹具验证幕间与手机纸页；发布先检查完整资源和旧档隔离兼容，只切换剧本杀容器，保留当前玩家存档、Nginx 与其他服务。复用已有真实语音样音，本轮不调用 DeepSeek 或 Qwen。
+
+发布目录为 `20261101-mossvale-0.9.0-v14`，存档备份为 `/srv/mossvale-mystery/backups/before-20261101-mossvale-0.9.0-v14.tgz`，上一版容器为 `mossvale-mystery-before-v14`。回退恢复本轮之前的 0.8.14 线上程序，保留现有存档：
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/current/deploy/update.py rollback
+```
+
+本地证据：`mystery/qa/interludes-v1/`。五张正式插画与提示词随仓库保存，参见 `mystery/art/interludes-v1/prompts.md`。
 
 ## 2026-11-01 首页菜单居中加粗 · 0.8.14
 

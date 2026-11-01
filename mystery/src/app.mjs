@@ -19,6 +19,7 @@ import {aboutText} from './about.mjs';
 import {dialogueGlyph} from './dialogue-controls.mjs';
 import {createVoice} from './voice.mjs';
 import {storySpread,storySeenKey} from './storybook.mjs';
+import {createInterludeQueue} from './interludes.mjs';
 import {mapContent,positionMapPins} from './location-map.mjs';
 import {rooms,cast,getRoom} from '../shared/layout.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -32,6 +33,8 @@ localStorage.setItem('mystery-read','1');
 let state,selected=null,busy=false,lastReply='',lastMode='',bookTab='clues',storyPage=0,storyTurning=false,bookFilter='全部',selectedClue=null,modalName=null,toastTimer,retry=null,voice=true,draft='';
 let actionPending=false,actionRetry=null,pendingConversation=null,liveReply=null,sideGoalsOpen=false;
 let disconnectMap,disconnectDialogueFrame,profileId=null,profileTrail=[];
+const interludeQueue=createInterludeQueue(localStorage);
+let currentInterlude=null;
 const music=createBackgroundMusic({notice:toast});
 const feedback=createInteractionFeedback();
 const speech=createVoice({
@@ -69,7 +72,7 @@ function apply(s,route){
   selected=oldQuestion.resumeActor;draft=saved?.draft||'';localStorage.removeItem(storageKey('mystery-interrupted'));localStorage.setItem(storageKey('mystery-draft'),draft);
  }
  if(previousActor!==selected)speech.stop();
- state=s;if(newQuestion?.source==='search'&&newQuestion.id!==oldQuestion?.id&&modalName)closeModal(true);scene?.update(s,route);renderHud();
+ state=s;interludeQueue.update(s.slotToken,s.interludes);if(newQuestion?.source==='search'&&newQuestion.id!==oldQuestion?.id&&modalName)closeModal(true);scene?.update(s,route);renderHud();
  if(selected&&!s.people.find(p=>p.id===selected)?.near){speech.stop();selected=null;clearDialogue();}else if(selected)renderDialogue();
  if(!switched){
   if(newQuestion&&newQuestion.id!==oldQuestion?.id)feedback.attention('question',`${s.slotToken}:question:${newQuestion.id}`);
@@ -144,7 +147,7 @@ function renderHud(){
  scene?.setConversation(selected);scene?.social.setPaused(!!selected||!!pendingConversation||!!modalName||busy);
  $('hud').innerHTML=`<header class="masthead"><nav class="tools" aria-label="调查工具">${button('故事','story','story')}${button('手记','book','book')}${button('地图','map','map')}${button('回厅堂','gather','home')}${button('设置','settings','gear')}<button class="self-tool" data-action="self" aria-label="我">${portrait(state.people.find(p=>p.id===playerId(state)))}<span>我</span></button></nav></header>${goalsHud(state,esc,sideGoalsOpen)}<div class="people-ribbon" aria-label="人物">${state.people.filter(p=>p.id!==playerId(state)).map(p=>`<button class="person-tab ${p.id===(modalName==='person-sheet'?profileId:selected)?'selected':''} ${p.location===null?'away':''}" data-person="${p.id}" title="${p.name} · ${p.locationLabel}">${portrait(p)}<span>${p.name}</span><i>${p.near?'在身边':p.locationLabel}</i></button>`).join('')}</div><footer class="bottom-tools"><div class="scene-status">${leadHud(state,esc)}${scoreHud(state.investigation,esc)}${actionPointsHud(state.investigation)}</div></footer>`;
  $('hud').querySelectorAll('[data-person]').forEach(b=>b.onclick=()=>startConversation(b.dataset.person));
- $('hud').querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>({story:()=>showIntro(),book:()=>book(),map:()=>map(),settings:()=>settings(),self:()=>showSelf(),gather:async()=>{if(lockedQuestion())return;closeModal();await action({type:'gather'});}}[b.dataset.action]?.()));
+ $('hud').querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>({story:()=>showStoryLibrary(),book:()=>book(),map:()=>map(),settings:()=>settings(),self:()=>showSelf(),gather:async()=>{if(lockedQuestion())return;closeModal();await action({type:'gather'});}}[b.dataset.action]?.()));
  $('score-button')?.addEventListener('click',showScoreRules);$('current-lead')?.addEventListener('click',showLead);$('current-goal')?.addEventListener('click',showSelf);
  $('toggle-side-goals')?.addEventListener('click',()=>{sideGoalsOpen=!sideGoalsOpen;$('toggle-side-goals').setAttribute('aria-expanded',String(sideGoalsOpen));$('hud-side-goals').hidden=!sideGoalsOpen;});
  $('hud').querySelectorAll('[data-self-goal]').forEach(b=>b.onclick=showSelf);
@@ -339,7 +342,7 @@ function renderVoice(){
  replay.disabled=busy&&!v.speaking||!v.outputAvailable||!lastReply;replay.setAttribute('aria-pressed',String(v.speaking));replay.setAttribute('aria-label',v.speaking?'停止朗读':'重听人物回答');replay.title=v.speaking?'停止朗读':'重听人物回答';
 }
 function modal(title,body,cls='',{keepTrail=false}={}){speech.stop();pendingConversation=null;disconnectMap?.();disconnectMap=null;if(!keepTrail){profileTrail=[];profileId=null;}modalName=cls||title;scene?.social.setPaused(true);$('overlay').classList.toggle('menu-active',inStartMenu);$('overlay').innerHTML=`${inStartMenu?menuSceneryMarkup:''}<div class="veil"><section class="paper-modal ${cls}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header class="modal-heading"><div><span class="eyebrow">${inStartMenu?'青苔镇':esc(state?.self?.name||'雾灯未眠')+'的手记'}</span><h2>${title}</h2></div><button id="close-modal" aria-label="关闭">${icon('close')}</button></header>${body}</section></div>`;menuScenery.setActive(inStartMenu&&cls==='start-menu');$('close-modal').onclick=closeModal;$('overlay').querySelector('.veil').onclick=e=>{if(e.target.classList.contains('veil'))closeModal();};$('close-modal').focus();}
-function closeModal(force=false){if(force!==true&&(modalName==='reference-sheet'||$('overlay').querySelector('[data-reading-return]'))){returnFromProfile();return;}if(inStartMenu){if(modalName==='start-menu')return;if(modalName==='role-picker'){showScripts();return;}showMainMenu();return;}if(modalName==='opening-modal'&&state.briefing?.current&&force!==true){toast('听完这一轮口述后，就可以开始调查。');return;}if(modalName==='person-sheet'&&force!==true){returnFromProfile();return;}if(modalName==='storybook'&&force!==true){finishStory();return;}const returnSecret=modalName==='self-profile'?$('overlay').querySelector('.self-profile')?.dataset.focusSecret:null;disconnectMap?.();disconnectMap=null;modalName=null;profileId=null;profileTrail=[];$('overlay').innerHTML='';renderHud();if(returnSecret)[...$('dialogue').querySelectorAll('[data-self-secret]')].find(link=>link.dataset.selfSecret===returnSecret)?.focus({preventScroll:true});}
+function closeModal(force=false){if(modalName==='interlude-modal'&&force!==true){finishInterlude();return;}if(force!==true&&(modalName==='reference-sheet'||$('overlay').querySelector('[data-reading-return]'))){returnFromProfile();return;}if(inStartMenu){if(modalName==='start-menu')return;if(modalName==='role-picker'){showScripts();return;}showMainMenu();return;}if(modalName==='opening-modal'&&state.briefing?.current&&force!==true){toast('听完这一轮口述后，就可以开始调查。');return;}if(modalName==='person-sheet'&&force!==true){returnFromProfile();return;}if(modalName==='storybook'&&force!==true){finishStory();return;}const returnSecret=modalName==='self-profile'?$('overlay').querySelector('.self-profile')?.dataset.focusSecret:null;disconnectMap?.();disconnectMap=null;modalName=null;profileId=null;profileTrail=[];$('overlay').innerHTML='';renderHud();if(returnSecret)[...$('dialogue').querySelectorAll('[data-self-secret]')].find(link=>link.dataset.selfSecret===returnSecret)?.focus({preventScroll:true});}
 async function finishStory(){
  if(storyTurning)return;if(!state.started){const r=await action({type:'start'});if(r?.error)return;}
  localStorage.setItem(storageKey(storySeenKey),'1');closeModal(true);if(state.briefing?.current)showOpening();
@@ -358,6 +361,65 @@ function drawStory(direction=0){
  $('story-next').focus();
 }
 function turnStory(direction){if(storyTurning)return;const next=storyPage+direction;if(next<0||next>=state.storyPages.length)return;storyTurning=true;storyPage=next;drawStory(direction);setTimeout(()=>{storyTurning=false;},280);}
+
+function showStoryLibrary(){
+ if(!state.started){showIntro();return;}
+ if(busy){toast('等这句话说完再翻书。');return;}
+ modal('故事',`<div class="story-library" data-static-reading><p>前情与已经走过的幕间，都留在这里。</p><button id="read-prologue"><span>前情 · 百物语之夜</span><small>重读自己的来路</small></button>${(state.interludes||[]).map(s=>`<button data-interlude="${esc(s.id)}"><span>${esc(s.title)}</span><small>幕间 · 重看</small></button>`).join('')}</div>`,'story-library-modal');
+ $('read-prologue').onclick=()=>showIntro();
+ $('overlay').querySelectorAll('[data-interlude]').forEach(b=>b.onclick=()=>showInterlude(b.dataset.interlude,true));
+}
+function showInterlude(id,fromLibrary=false){
+ const scene=state.interludes?.find(s=>s.id===id);if(!scene)return;
+ currentInterlude={id,page:0,fromLibrary};drawInterlude();
+}
+function drawInterlude(){
+ const reading=currentInterlude,entry=state.interludes?.find(s=>s.id===reading?.id);if(!entry)return;
+ const last=reading.page===entry.pages.length-1;
+ modal(entry.title,storySpread(entry.pages[reading.page],{esc})+`<footer class="interlude-navigation"><div class="interlude-pages"><button id="interlude-prev" ${reading.page===0?'disabled':''} aria-label="上一格">${icon('back')}<span>上一格</span></button><span aria-live="polite">${reading.page+1} / ${entry.pages.length}</span><button id="interlude-next" ${last?'hidden':''}>下一格 ${icon('arrow')}</button><button id="interlude-skip">${last?'合上':'跳过'}</button></div>${last?`<div class="interlude-guide"><p>${esc(entry.action.text)}</p><button id="interlude-action" class="primary">${esc(entry.action.label)}</button></div>`:''}</footer>`,'interlude-modal');
+ const panel=$('overlay').querySelector('.interlude-modal');panel.classList.add('storybook');panel.dataset.staticReading='';
+ panel.querySelector('.eyebrow').textContent='幕间 · '+state.self.name;
+ $('close-modal').setAttribute('aria-label','合上幕间');
+ $('interlude-prev').onclick=()=>turnInterlude(-1);$('interlude-next').onclick=()=>turnInterlude(1);$('interlude-skip').onclick=()=>finishInterlude();
+ $('interlude-action')?.addEventListener('click',()=>followInterlude(entry));
+ const spread=panel.querySelector('.story-spread');let startX,startY;
+ spread.onpointerdown=e=>{startX=e.clientX;startY=e.clientY;};
+ spread.onpointerup=e=>{if(startX===undefined)return;const dx=e.clientX-startX,dy=e.clientY-startY;startX=undefined;if(Math.abs(dx)>75&&Math.abs(dy)<45)turnInterlude(dx<0?1:-1);};
+ (last?$('interlude-action'):$('interlude-next')).focus();
+}
+function turnInterlude(direction){
+ const entry=state.interludes?.find(s=>s.id===currentInterlude?.id);if(!entry)return;
+ const next=currentInterlude.page+direction;if(next<0||next>=entry.pages.length)return;
+ currentInterlude.page=next;drawInterlude();
+}
+function finishInterlude({goToAction=false}={}){
+ if(!currentInterlude)return;
+ const {id,fromLibrary}=currentInterlude;interludeQueue.finish(id);currentInterlude=null;
+ closeModal(true);if(fromLibrary&&!goToAction)showStoryLibrary();
+}
+async function followInterlude(entry){
+ const a=entry.action;
+ // Public disclosure and deduction remain deliberate actions on their own pages.
+ if(a.type==='public'&&(state.room!=='hall'||state.people.some(p=>!p.near))){
+  if(lockedQuestion())return;const button=$('interlude-action');button.disabled=true;
+  const r=await action({type:'gather'},{quiet:true});if(r.error){button.disabled=false;return;}
+ }
+ finishInterlude({goToAction:true});
+ if(a.type==='self'){showSelf();return;}
+ if(a.type==='people'){
+  modal('找谁辨认样片',`<p>选人交谈，再点对话下方「出示」，选择「做成的面具」。</p><div class="person-inquiry-grid">${state.people.filter(p=>p.id!==playerId(state)).map(p=>`<button data-interlude-person="${p.id}">${portrait(p)}<span>${esc(p.name)}</span></button>`).join('')}</div>`,'interlude-people');
+  $('overlay').querySelectorAll('[data-interlude-person]').forEach(b=>b.onclick=()=>startConversation(b.dataset.interludePerson));return;
+ }
+ bookTab=a.type==='case'?'case':a.type==='opening'?'opening':'clues';
+ bookFilter=a.type==='accounts'?'证词':'全部';selectedClue=a.clue||(a.type==='accounts'?'miyazaki-statement':null);book();
+}
+// Wait until the player has closed the current card/conversation. In particular,
+// never interrupt streamed replies, voice input, an NPC question, or travel.
+setInterval(()=>{
+ if(inStartMenu||!state?.started||state.briefing?.current||modalName||selected||busy||actionPending||pendingConversation||document.hidden||scene?.travelRoom||scene?.entrySpeech||state.investigation?.challenge)return;
+ const v=speech.snapshot();if(v.speaking||v.phase!=='idle'||v.mode!=='off')return;
+ const next=interludeQueue.next();if(next)showInterlude(next.id);
+},600);
 
 async function inspect(id){const r=await action({type:'inspect',id});return r;}
 function clueDetails(c){return `<div class="evidence-detail"><span class="evidence-stamp">${c.kind}</span><div class="clue-drawing">${icon(c.kind==='文书'||c.kind==='记忆'?'book':c.kind==='证词'?'gather':'search')}</div><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="paper-rule"></div><small>已收进调查手记。</small></div>`;}
@@ -498,7 +560,7 @@ function settings(){
  $('return-menu').onclick=openStartMenu;
  $('new-game').onclick=()=>{modal('重新翻开这一页？','<p>只清空当前主角的调查、对话和手记；其他五人的进度保留。</p><div class="modal-foot"><button id="cancel-reset">留下这份记录</button><button id="confirm-reset" class="danger">重新开始</button></div>','reset-modal');$('cancel-reset').onclick=closeModal;$('confirm-reset').onclick=resetCurrentRole;};
 }
-window.addEventListener('keydown',e=>{if(modalName==='storybook'&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();turnStory(e.key==='ArrowRight'?1:-1);}if(e.key==='Escape'){if(modalName)closeModal();else if(selected)closeDialogue();}if(e.key==='Tab'&&modalName){const nodes=[...$('overlay').querySelectorAll('button,a[href],input,textarea,select')].filter(n=>!n.disabled&&!n.closest('[inert]')&&n.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+window.addEventListener('keydown',e=>{if(modalName==='interlude-modal'&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();turnInterlude(e.key==='ArrowRight'?1:-1);}if(modalName==='storybook'&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();turnStory(e.key==='ArrowRight'?1:-1);}if(e.key==='Escape'){if(modalName)closeModal();else if(selected)closeDialogue();}if(e.key==='Tab'&&modalName){const nodes=[...$('overlay').querySelectorAll('button,a[href],input,textarea,select')].filter(n=>!n.disabled&&!n.closest('[inert]')&&n.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 window.addEventListener('pagehide',()=>speech.stop());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)speech.stop();});
 let viewportWidth=innerWidth,fullViewportHeight=Math.max(innerHeight,window.visualViewport?.height||0);
