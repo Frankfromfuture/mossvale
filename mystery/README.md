@@ -1,8 +1,8 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.9.0** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.9.1** · [完整版本记录](../CHANGELOG.md)
 
-当前剧本为《雾灯未眠》，包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档；新增五场可跳过、重看的手绘幕间，按已知进度提供操作入口。
+当前剧本为《雾灯未眠》，包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档；新增五场可跳过、重看的手绘幕间，按已知进度提供操作入口。50个搜证点各配手绘实物图标，在场景、线索页和出示列表共用。
 
 [在线测试](https://www.iambrizo.com/mossvale/) · [项目介绍与启动方式](../README.md)
 
@@ -12,9 +12,9 @@
 
 ## English
 
-Current version **0.9.0** · [Full changelog](../CHANGELOG.md)
+Current version **0.9.1** · [Full changelog](../CHANGELOG.md)
 
-The current story, 《雾灯未眠》, includes six playable protagonists, scene investigation, AI dialogue, voice, and separate saves for each character. Five illustrated interludes unlock with progress, can be skipped or replayed, and link to useful action screens. The game is currently in Chinese; the [project introduction](../README.md#english) is available in Chinese and English and also appears in the in-game About window.
+The current story, 《雾灯未眠》, includes six playable protagonists, scene investigation, AI dialogue, voice, and separate saves for each character. Five illustrated interludes unlock with progress, can be skipped or replayed, and link to useful action screens. All 50 investigation spots share matching hand-drawn object icons across scene targets, clue pages, and evidence selection. The game is currently in Chinese; the [project introduction](../README.md#english) is available in Chinese and English and also appears in the in-game About window.
 
 [Play the preview](https://www.iambrizo.com/mossvale/) · [Introduction and setup](../README.md#english)
 

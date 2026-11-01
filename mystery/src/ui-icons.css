@@ -41,6 +41,11 @@
 .story-navigation #story-prev .ui-icon {transform:rotate(180deg);}
 .clue-drawing .ui-icon {width:76px; height:76px; transform:rotate(-5deg);}
 .evidence-picker .ui-icon {width:30px; height:30px;}
+.clue-drawing .prop-icon {width:92px;height:92px;transform:none;}
+.evidence-picker .prop-icon {width:36px;height:36px;}
+.prop-hit > .prop-icon {position:absolute;left:50%;top:50%;width:min(44px,100%);height:min(44px,100%);transform:translate(-50%,-50%);filter:drop-shadow(0 1px 1px #fff6dd) drop-shadow(0 2px 2px #454b3940);}
+.prop-hit[data-found="true"] > .prop-icon {opacity:.82;}
+.prop-hit:hover > .prop-icon,.prop-hit:focus-visible > .prop-icon {opacity:1;filter:drop-shadow(0 0 2px #fff2c2) drop-shadow(0 2px 2px #454b3960);}
 .deduction-lines .ui-icon {width:25px; height:25px;}
 .modal-foot .ui-icon {width:24px; height:24px;}
 @media(max-width:600px) {
@@ -55,6 +60,7 @@
  .scene-tools .ui-icon {width:30px; height:30px;}
  .dialogue-actions .ui-icon {display:none;}
  .clue-drawing .ui-icon {width:64px; height:64px;}
+ .clue-drawing .prop-icon {width:72px;height:72px;}
  .story-navigation .ui-icon {width:24px; height:24px;}
 }
 @media(max-width:359px) {

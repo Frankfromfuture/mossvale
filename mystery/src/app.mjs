@@ -12,6 +12,7 @@ import {personSheet} from './person-sheet.mjs';
 import {referenceEntries,referenceEvidence} from './reference-terms.mjs';
 import {installPersonLinks} from './person-links.mjs';
 import {icon} from './ui-icons.mjs';
+import {propIcon} from './prop-icons.mjs';
 import {TownScene} from './scene.mjs';
 import {bindDialogueFrame,speakerBadge} from './dialogue-frame.mjs';
 import {bindPaperFrame} from './paper-frame.mjs';
@@ -422,9 +423,9 @@ setInterval(()=>{
 },600);
 
 async function inspect(id){const r=await action({type:'inspect',id});return r;}
-function clueDetails(c){return `<div class="evidence-detail"><span class="evidence-stamp">${c.kind}</span><div class="clue-drawing">${icon(c.kind==='文书'||c.kind==='记忆'?'book':c.kind==='证词'?'gather':'search')}</div><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="paper-rule"></div><small>已收进调查手记。</small></div>`;}
+function clueDetails(c){return `<div class="evidence-detail"><span class="evidence-stamp">${c.kind}</span><div class="clue-drawing">${propIcon(c.id,c.kind==='文书'||c.kind==='记忆'?'book':c.kind==='证词'?'gather':'search')}</div><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="paper-rule"></div><small>已收进调查手记。</small></div>`;}
 function showClue(id){const c=state.clues.find(c=>c.id===id);if(!c)return;modal('记下一条线索',clueDetails(c)+`<div class="modal-foot">${selected?'<button class="primary" id="present-now">出示给'+state.people.find(p=>p.id===selected).name+'</button>':'<button class="primary" id="keep-clue">收进手记 '+icon('check')+'</button>'}<button id="open-book">翻看手记</button></div>`,'clue-modal');$('keep-clue')?.addEventListener('click',closeModal);$('present-now')?.addEventListener('click',async()=>{await action({type:'present',actor:selected,id},{quiet:true});draft=`这${c.kind==='证词'?'段话':'件东西'}，你怎么解释？`;closeModal();renderDialogue();toast('线索已出示，可以接着问。');});$('open-book').onclick=()=>{selectedClue=id;book();};}
-function evidencePicker(){modal('拿什么问？',`<p class="compact-description">出示后，你可以用自己的话追问。</p><div class="evidence-picker">${state.clues.map(c=>`<button data-present="${c.id}"><span>${icon(c.kind==='证词'?'gather':'book')}</span><strong>${esc(c.title)}</strong><small>${c.kind}</small></button>`).join('')}</div>`,'picker-modal');$('overlay').querySelectorAll('[data-present]').forEach(b=>b.onclick=async()=>{const id=b.dataset.present;const r=await action({type:'present',actor:selected,id},{quiet:true});if(!r?.error){draft=`关于「${state.clues.find(c=>c.id===id).title}」，你知道些什么？`;closeModal();renderDialogue();toast(r.message||'线索已出示。');}});}
+function evidencePicker(){modal('拿什么问？',`<p class="compact-description">出示后，你可以用自己的话追问。</p><div class="evidence-picker">${state.clues.map(c=>`<button data-present="${c.id}"><span>${propIcon(c.id,c.kind==='证词'?'gather':'book')}</span><strong>${esc(c.title)}</strong><small>${c.kind}</small></button>`).join('')}</div>`,'picker-modal');$('overlay').querySelectorAll('[data-present]').forEach(b=>b.onclick=async()=>{const id=b.dataset.present;const r=await action({type:'present',actor:selected,id},{quiet:true});if(!r?.error){draft=`关于「${state.clues.find(c=>c.id===id).title}」，你知道些什么？`;closeModal();renderDialogue();toast(r.message||'线索已出示。');}});}
 function personQuestionPicker(){
  if(busy||actionPending||!selected)return;speech.stop();
  const speaker=state.people.find(p=>p.id===selected),people=state.people.filter(p=>p.id!==playerId(state)&&p.id!==selected);
@@ -457,7 +458,7 @@ function referenceSheet(title,body,{source,kind='词条',clues='',term=''}={}){
 function openClueMention(ids,{source}={}){
  if(busy){toast('等这句话说完再翻线索。');return;}
  const cards=(state?.clues||[]).filter(c=>ids.includes(c.id));if(!cards.length)return;
- const body=cards.length===1?clueDetails(cards[0]):`<div class="evidence-picker">${cards.map(c=>`<button data-clue-choice="${c.id}">${icon('evidence')}<strong>${esc(c.title)}</strong><small>${esc(c.kind)}</small></button>`).join('')}</div>`;
+ const body=cards.length===1?clueDetails(cards[0]):`<div class="evidence-picker">${cards.map(c=>`<button data-clue-choice="${c.id}">${propIcon(c.id,'evidence')}<strong>${esc(c.title)}</strong><small>${esc(c.kind)}</small></button>`).join('')}</div>`;
  referenceSheet(cards.length===1?cards[0].title:'你说的是哪一件？',body,{source,kind:cards.length===1?cards[0].kind:'相关线索',clues:ids.join(',')});
 }
 function openReferenceMention(id,{source,text}={}){
@@ -475,7 +476,7 @@ function showPublicReactions(id,round=null,loading=false){
   const person=state.people.find(p=>p.id===reaction.actor),done=reaction.status==='done';
   return `<article class="public-reaction" data-reaction-person="${person.id}">${portrait(person)}<div><header><strong>${esc(person.name)}</strong>${done?`<button data-follow-reaction="${person.id}" ${loading?'disabled':''}>追问</button>`:''}</header>${done?`<p class="reaction-action">（${esc(reaction.action)}）</p>${reaction.speech?`<p class="reaction-speech">${esc(reaction.speech)}</p>`:''}`:`<p class="reaction-pending" role="status">${loading?'…':'暂未取得回应'}</p>`}</div></article>`;
  }).join('');
- modal('众人的反应',`<div class="public-item">${icon('evidence')}<div><strong>${esc(clue.title)}</strong><p>${esc(clue.text)}</p></div></div><div class="public-reaction-list">${rows}</div><footer class="modal-foot public-reaction-foot">${!loading&&reactions.some(r=>r.status!=='done')?'<button id="retry-reactions">重试未完成的回应</button>':''}<button class="primary" id="leave-reactions">${loading?'先合上':'继续调查'}</button></footer>`,'public-reactions');
+ modal('众人的反应',`<div class="public-item">${propIcon(clue.id,'evidence')}<div><strong>${esc(clue.title)}</strong><p>${esc(clue.text)}</p></div></div><div class="public-reaction-list">${rows}</div><footer class="modal-foot public-reaction-foot">${!loading&&reactions.some(r=>r.status!=='done')?'<button id="retry-reactions">重试未完成的回应</button>':''}<button class="primary" id="leave-reactions">${loading?'先合上':'继续调查'}</button></footer>`,'public-reactions');
  $('overlay').querySelector('.eyebrow').textContent=loading?'厅堂 · 公开物品':'厅堂 · 公开记录';
  $('leave-reactions').onclick=closeModal;
  $('retry-reactions')?.addEventListener('click',()=>publishClue(id,true));

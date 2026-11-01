@@ -27,6 +27,7 @@ export function makeEvidenceProp(scene,spec){
   case 'footprints':for(let i=0;i<4;i++)ball((i%2-.5)*.35,.025,(i-1.5)*.4,.16,'#a89b7f',[.65,.05,1.35]);break;
   case 'roots':box(0,0,0,1.1,.05,.75,'#b19d7e');for(let i=0;i<3;i++){const m=box((i-1)*.24,.06,0,.12,.13,.55,'#a7956c');m.rotation.y=(i-1)*.35;ball((i-1)*.25,.27,-.16,.17,'#9bab7f',[.4,1.4,.6]);}break;
   case 'bowl':cylinder(0,0,0,.36,.2,'#c5cebc');cylinder(0,.2,0,.31,.025,'#a2bdc3');break;
+  case 'cup':cylinder(0,0,0,.23,.34,'#c5cebc');cylinder(0,.34,0,.19,.012,'#817e6b');ring(0,.35,0,.22,.025,'#a2bdac');break;
   case 'rag':for(let i=0;i<4;i++){const m=box((i-1.5)*.16,.02*i,0,.27,.06,.7,'#b6b39f');m.rotation.y=.1*i;}box(.15,.25,.16,.16,.012,.23,'#91796e');break;
   case 'hair':for(let i=0;i<8;i++){const m=box((i-4)*.06,.04,0,.028,.028,.65,'#666154');m.rotation.y=i*.09-.3;}break;
   case 'jar':cylinder(0,0,0,.29,.4,color);cylinder(0,.4,0,.31,.07,'#817e6b');box(0,.13,.28,.34,.17,.012,'#e7dfc2');break;

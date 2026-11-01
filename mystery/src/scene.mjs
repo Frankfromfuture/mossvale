@@ -10,6 +10,7 @@ import {RoundedBoxGeometry} from 'three/examples/jsm/geometries/RoundedBoxGeomet
 import {bounds,buildings,rooms,cast,getRoom} from '../shared/layout.mjs';
 import {propLayout} from '../shared/prop-layout.mjs';
 import {makeEvidenceProp} from './evidence-props.mjs';
+import {propIcon} from './prop-icons.mjs';
 import {buildGuestRoom,placeRoomEvidence} from './room-dressing.mjs';
 import {buildSoftWalls} from './soft-walls.mjs';
 import {buildRiver} from './river.mjs';
@@ -214,7 +215,7 @@ export class TownScene{
    if(placement){g.position.set(placement.x,placement.y,placement.z);g.rotation.y=placement.angle;g.scale.x=placement.mirror;g.userData.carrier=placement.carrier;}
    else{const offsetX=spec.y===1.14&&room.id==='old'?-.4:spec.y===1.14&&room.id==='archive'?.4:0;g.position.set(room.x+spec.x+offsetX,spec.y,room.z+spec.z);}
    g.userData.pick={type:'spot',id};this.scene.add(g);
-   const button=document.createElement('button');button.className='prop-hit';button.dataset.prop=id;button.hidden=true;button.type='button';button.innerHTML='<span class="prop-caption"></span>';button.onclick=e=>{e.stopPropagation();this.onPick({type:'spot',id});};button.onpointerenter=button.onfocus=()=>{this.hoverProp=id;this.refreshOutline();};button.onpointerleave=button.onblur=()=>{this.hoverProp=null;this.refreshOutline();};this.labels.append(button);
+   const button=document.createElement('button');button.className='prop-hit';button.dataset.prop=id;button.hidden=true;button.type='button';button.innerHTML=propIcon(id)+'<span class="prop-caption"></span>';button.onclick=e=>{e.stopPropagation();this.onPick({type:'spot',id});};button.onpointerenter=button.onfocus=()=>{this.hoverProp=id;this.refreshOutline();};button.onpointerleave=button.onblur=()=>{this.hoverProp=null;this.refreshOutline();};this.labels.append(button);
    this.props.set(id,{g,button,room:spec.room,bounds:new THREE.Box3().setFromObject(g),active:false,found:false});
   }
  }

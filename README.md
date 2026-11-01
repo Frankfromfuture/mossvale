@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.9.0** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.9.1** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -25,7 +25,7 @@
 
 **用自己的话追问。** 直接输入问题，或用语音开口，询问某人的去向、对某件物品的认识，以及他怎么看待另一个人；拿到新证据后，还可以回头核对先前的说法。人物会依照性格、经历与当前知情作答，也可能回避、记错或反问你。
 
-**在场景中寻找依据。** 走进客房、花园与厅堂，点击描边物件搜证，将线索收进手记，再决定私下向谁出示、何时当众公开。公开物件后，在场人物会分别作出动作或台词反应，你可以接着追问。
+**在场景中寻找依据。** 走进客房、花园与厅堂，点击带有手绘实物图标的描边物件搜证，将线索收进手记，再决定私下向谁出示、何时当众公开。公开物件后，在场人物会分别作出动作或台词反应，你可以接着追问。
 
 **破案时也要保护自己。** 每位主角都有个人目标和保密事项，别人会根据听过的话盘问你；进房、翻找私物和查看本人线索各有许可，强行行动会影响成绩。调查既要核对他人的证词，也要照顾自己的解释和分寸。
 
@@ -39,7 +39,7 @@
 
 人物有不同的衣着、随身物件和声音，会走路、落座、添茶、翻书，也会与其他人闲谈或私下交谈。与你说话时，镜头会推近，眉眼、嘴巴和肢体随对白状态变化；语音播放时，口型跟随声音强弱。
 
-画面采用细铅笔描边、淡色材质与纸页界面，配合圆润家具、流动河水和移轴效果。首页的窗框桌面与山谷分层漂移，探险音乐、轻咔嗒声、气泡音和纸张声为操作提供反馈；音量、音效和震动可在设置中调整。
+50个搜证点各有对应的手绘实物图标，场景、线索页和出示列表使用同一套图案。画面采用细铅笔描边、淡色材质与纸页界面，配合圆润家具、流动河水和移轴效果。首页的窗框桌面与山谷分层漂移，探险音乐、轻咔嗒声、气泡音和纸张声为操作提供反馈；音量、音效和震动可在设置中调整。
 
 桌面和手机浏览器均有对应布局。游戏按浏览器访客保存进度，同一访客下六位主角各有独立槽位，刷新后可继续；目前使用同一浏览器接续调查，跨设备账号同步尚未加入。
 
@@ -104,7 +104,7 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.9.0** · [Full changelog](CHANGELOG.md)
+Current version **0.9.1** · [Full changelog](CHANGELOG.md)
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 
@@ -120,7 +120,7 @@ The current story, 《雾灯未眠》, begins with a night of ghost stories in t
 
 **Ask in your own words.** Type a question or speak aloud. Ask where someone went, what they know about an object, or what they think of another person. Return with new evidence to check an earlier account. Characters answer from their personalities, experiences, and current knowledge; they may evade a question, remember incorrectly, or question you in return.
 
-**Find evidence in the scene.** Enter guest rooms, the garden, and the hall. Click outlined objects to investigate and keep discoveries in your notebook. Decide whom to show a clue privately and when to present it to the group. Each person present can react with a gesture or a line of dialogue, and you can follow up on that reaction.
+**Find evidence in the scene.** Enter guest rooms, the garden, and the hall. Click outlined objects with hand-drawn item icons to investigate and keep discoveries in your notebook. Decide whom to show a clue privately and when to present it to the group. Each person present can react with a gesture or a line of dialogue, and you can follow up on that reaction.
 
 **Solve the case while protecting your own position.** Each protagonist has personal goals and secrets. Others can question you about what they have heard. Entering a room, searching possessions, and examining a person require separate permission; forcing an action affects your score. Your explanations and conduct matter alongside your deductions.
 
@@ -134,7 +134,7 @@ The current story, 《雾灯未眠》, begins with a night of ghost stories in t
 
 Characters have distinct clothing, belongings, and voices. They walk, sit, pour tea, browse books, and talk with one another in public or in private. During a conversation, the camera moves closer and their brows, mouths, and bodies respond to the dialogue state. Spoken lines drive mouth movement from the playing audio.
 
-Fine pencil outlines, soft materials, rounded furniture, flowing water, and a tilt-shift effect give the scene its illustrated look. The home screen separates the window and desk from the distant valley for gentle parallax. Exploration music, light clicks, bubble sounds, and paper sounds provide feedback. Volume, sound effects, and haptics can be adjusted in settings.
+All 50 investigation spots have matching hand-drawn object icons, shared by scene targets, clue pages, and evidence selection. Fine pencil outlines, soft materials, rounded furniture, flowing water, and a tilt-shift effect give the scene its illustrated look. The home screen separates the window and desk from the distant valley for gentle parallax. Exploration music, light clicks, bubble sounds, and paper sounds provide feedback. Volume, sound effects, and haptics can be adjusted in settings.
 
 Desktop and mobile browsers have their own layouts. Progress is saved for each browser visitor, with a separate slot for each of the six protagonists. Refresh and continue in the same browser. Account-based progress across devices is not available yet.
 
