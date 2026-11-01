@@ -1,6 +1,6 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.12`，发布目录为 `20261101-mossvale-0.8.12-v13`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.8.13`，沿用发布目录 `20261101-mossvale-0.8.12-v13`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
@@ -16,7 +16,21 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v13.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。基础发布清单为 `deploy/release-manifest-v13.json`，0.8.13 的网页更新清单另存于 `/srv/mossvale-mystery/backups/about-0.8.13/`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-01 中英文关于浮窗 · 0.8.13
+
+首页“关于 Mossvale”由外部链接改为站内纸页浮窗，可切换中文与 English。正文从根目录 README 的两个语言区块直接打包，包含玩法、场景、设计、技术、启动方式与项目结构；图片随网页提供，打开介绍不依赖 GitHub。GitHub 两处 README 同步补齐英文，游戏目前仍为中文。
+
+一次 Web 构建，两个定向内容与安全检查通过；桌面及 390×844 手机视口验证切换语言、滚动、内框与关闭返回，设置页往返正常，介绍内没有游戏人物跳转，未打开新标签或请求站外资源。
+
+本轮只更新 `dist/game.js`、`dist/start-menu.css`、新增 `dist/art/about/home.png` 和两份包版本文件。后端、存档与服务配置沿用，容器和 Nginx 无需重启；原文件及数据备份在 `/srv/mossvale-mystery/backups/about-0.8.13/`。回退网页时保留玩家存档：
+
+```sh
+sudo -n python3 /srv/mossvale-mystery/backups/about-0.8.13/apply-static.py rollback
+```
+
+本地证据：`mystery/qa/about-bilingual-v1/`。
 
 ## 2026-11-01 纸页窗口内框与操作提示 · 0.8.12
 

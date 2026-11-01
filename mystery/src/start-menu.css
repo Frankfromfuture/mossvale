@@ -36,6 +36,17 @@
 .start-menu-footer{position:absolute;z-index:2;bottom:max(14px,env(safe-area-inset-bottom));left:12px;right:12px;text-align:center}
 .start-menu-version{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;font-size:13px;font-variant-numeric:tabular-nums;color:#394541;text-shadow:0 1px 4px #fff9ed,0 0 8px #fff9ed}
 #about-mossvale{gap:10px}
+.about-modal{display:flex;flex-direction:column;overflow:hidden}
+.about-languages{display:flex;flex-shrink:0;gap:24px;margin:0 0 12px;border-bottom:1px solid #b9b19a}
+.about-languages button{min-height:44px;padding:6px 0;font:inherit;font-size:16px}
+.about-languages button[aria-selected="true"]{font-weight:700;border-bottom:2px solid #796f58}
+.about-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 12px 0;line-height:1.85;font-size:15px}
+.about-scroll:lang(en){font-family:Georgia,'Times New Roman',serif;line-height:1.7}
+.about-scroll p{margin:0 0 16px}.about-scroll h3{font-size:22px;line-height:1.4;margin:28px 0 12px}.about-scroll li{margin:0 0 12px}.about-scroll ul{padding-left:1.4em}
+.about-scroll img{display:block;max-width:100%;height:auto;margin:20px auto}.about-scroll .about-logo{width:240px;margin:0 auto 18px}
+.about-scroll a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}.about-scroll code{font-family:ui-monospace,monospace;font-size:.86em;overflow-wrap:anywhere}.about-scroll pre{padding:12px;background:#e5dfca;overflow:auto}.about-scroll pre code{white-space:pre;overflow-wrap:normal}
+.about-table{max-width:100%;overflow-x:auto;margin:0 0 18px}.about-table table{width:100%;border-collapse:collapse;font-size:14px}.about-table th,.about-table td{padding:8px;text-align:left;vertical-align:top;border:1px solid #b9b19a}.about-table th:first-child{width:25%;min-width:80px}
+@media(max-width:600px){.about-scroll{font-size:14px;padding-right:4px}.about-scroll h3{font-size:20px}.about-scroll .about-logo{width:190px}.about-table table{font-size:13px}}
 .menu-github-icon{display:block;flex:0 0 auto;width:22px;height:22px;fill:currentColor}
 #loading{display:flex;align-items:center;justify-content:center;overflow:hidden;background:#171512;color:#f6f0de;text-align:center}
 #loading img{height:min(var(--app-height,100dvh),190vw);width:auto;max-width:none;flex:none}

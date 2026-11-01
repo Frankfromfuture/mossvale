@@ -7,7 +7,7 @@ const escapePattern=text=>text.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 export function installPersonLinks(root,getPeople,openProfile,{getClues=()=>[],openClue,getReferences=()=>[],openReference}={}){
  let hoverTimer,candidate,lastOpened,scheduled=false;
  const pending=new Set();
- const blocked='button,a,input,textarea,select,option,script,style,svg,[contenteditable],.portrait,.modal-heading,.speaker-badge,.eyebrow';
+ const blocked='button,a,input,textarea,select,option,script,style,svg,[contenteditable],[data-static-reading],.portrait,.modal-heading,.speaker-badge,.eyebrow';
  function linkText(container){
   if(!root.contains(container))return;
   const people=getPeople(),lookup=new Map();

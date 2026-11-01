@@ -4,9 +4,16 @@
 
 # 青苔镇 Mossvale
 
-当前版本 **0.8.12** · [完整更新记录](CHANGELOG.md)
+[中文](#中文) · [English](#english)
+
+<!-- mossvale:zh -->
+## 中文
+
+当前版本 **0.8.13** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
+
+介绍提供中英文，当前游戏内容与对话界面为中文。
 
 **[进入测试版 · www.iambrizo.com/mossvale](https://www.iambrizo.com/mossvale/)**
 
@@ -91,3 +98,96 @@ npm start
 ## 版本维护
 
 每次请求完成后更新版本号与一句话改动记录：主要功能和玩法升级递增次版本，小修复、界面微调和文档更新递增补丁版本。包版本、README、[CHANGELOG](CHANGELOG.md)、Git 标签与 Release 同步维护，执行规则保存在 [mystery/AGENTS.md](mystery/AGENTS.md)。
+
+<!-- mossvale:en -->
+## English
+
+Current version **0.8.13** · [Full changelog](CHANGELOG.md)
+
+Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
+
+This introduction is available in Chinese and English. The playable story and dialogue interface are currently in Chinese.
+
+**[Play the preview · www.iambrizo.com/mossvale](https://www.iambrizo.com/mossvale/)**
+
+The current story, 《雾灯未眠》, begins with a night of ghost stories in the mountains. When the final candle goes out, six people each hide something. They sit together again at daybreak, but nobody wants to speak first about what they saw. You need to find out what happened—and decide what to say when someone questions you.
+
+![Mossvale home screen](mystery/docs/images/home.png)
+
+## What you can do
+
+**Ask in your own words.** Type a question or speak aloud. Ask where someone went, what they know about an object, or what they think of another person. Return with new evidence to check an earlier account. Characters answer from their personalities, experiences, and current knowledge; they may evade a question, remember incorrectly, or question you in return.
+
+**Find evidence in the scene.** Enter guest rooms, the garden, and the hall. Click outlined objects to investigate and keep discoveries in your notebook. Decide whom to show a clue privately and when to present it to the group. Each person present can react with a gesture or a line of dialogue, and you can follow up on that reaction.
+
+**Solve the case while protecting your own position.** Each protagonist has personal goals and secrets. Others can question you about what they have heard. Entering a room, searching possessions, and examining a person require separate permission; forcing an action affects your score. Your explanations and conduct matter alongside your deductions.
+
+**Revisit the same night as someone else.** Six protagonists have different opening memories, starting knowledge, main goals, and personal stories. Begin as 白川澄; other characters unlock through your highest completed investigation score. Another viewpoint gives you information you previously had to uncover, along with different questions and decisions.
+
+**Investigate at your own pace.** Each run starts with 360 action points. Conversation and first-time searches use points; walking, reading, and waiting do not. The investigation score covers case reasoning, protection of secrets, credibility, conversational conduct, respect for investigation rules, and efficiency. You can inspect the reasons for deductions.
+
+## Life in the scene
+
+Characters have distinct clothing, belongings, and voices. They walk, sit, pour tea, browse books, and talk with one another in public or in private. During a conversation, the camera moves closer and their brows, mouths, and bodies respond to the dialogue state. Spoken lines drive mouth movement from the playing audio.
+
+Fine pencil outlines, soft materials, rounded furniture, flowing water, and a tilt-shift effect give the scene its illustrated look. The home screen separates the window and desk from the distant valley for gentle parallax. Exploration music, light clicks, bubble sounds, and paper sounds provide feedback. Volume, sound effects, and haptics can be adjusted in settings.
+
+Desktop and mobile browsers have their own layouts. Progress is saved for each browser visitor, with a separate slot for each of the six protagonists. Refresh and continue in the same browser. Account-based progress across devices is not available yet.
+
+## Design and ideas
+
+Mossvale places free conversation inside an investigation governed by evidence. Players choose their own questions. Server-side rules manage what each person knows, clue unlocks, scoring, and the conditions for closing the case; AI expresses the available information through each character's replies and actions.
+
+- People know different things. Personal experience, misunderstandings, evidence shown, and statements actually heard are recorded separately. Private conversations enter only the relevant listeners' contexts. Accounts can differ, and the player has to compare them.
+- Asking and answering both move the investigation. NPCs can question the player during conversation or searches. Public evidence brings reactions from those present, giving the player further questions to pursue.
+- Role-playing has personal consequences. The six protagonists share one case and setting but differ in starting information, secrets, and personal decisions. A new role changes what you want to ask and what you are willing to reveal.
+- Rules connect generated dialogue to progress. Replies carry references to known facts and are checked before display. Scoring uses the player's actual words, while request IDs prevent retries from counting the same action twice. Conversation, retries, and saved progress stay tied to the same investigation.
+
+## Technology behind the game
+
+| Area | Implementation |
+| --- | --- |
+| 3D scene | Three.js and WebGL render characters, buildings, furniture, and the river; procedural materials, outlines, and tilt-shift post-processing create the illustrated look |
+| Characters and movement | Shared wall and furniture obstacles support pathfinding; scene state drives walking, seating, idle actions, expressions, and conversation cameras |
+| Character dialogue | DeepSeek receives a character's personality, known facts, evidence seen, and conversation context; replies include fact references and reach the page sentence by sentence through SSE after validation |
+| Voice | Qwen provides speech recognition and streaming synthesis, with character-name hotwords and fixed voices; WebSocket carries audio and the browser plays streamed PCM segments |
+| Gameplay and saves | A Node.js service manages investigations, permissions, questions, scoring, and endings; JSON saves are separated by visitor and character slot, with backups for older save migrations |
+| Interface and build | Native JavaScript modules, CSS, responsive SVG, and a bundled Kai font provide the paper and dialogue interfaces; esbuild bundles the frontend |
+
+Character performance and reply evaluation use separate contexts. A performance request uses what that character currently knows. An evaluation request uses the player's words to assess disclosures, contradictions, and answers to questions. Model keys are read on the server; the browser receives the content needed to play.
+
+Further details are in [Investigation and scoring](mystery/docs/investigation.md), [Six protagonists](mystery/docs/six-protagonists.md), and [Start menu and character unlocks](mystery/docs/start-menu.md). These implementation documents are currently in Chinese. See the [deployment record](mystery/deploy/README.md) for what each release put online.
+
+## Run locally
+
+Use Node.js 22 or later. From the repository root, run:
+
+```sh
+npm run setup
+npm run build
+npm start
+```
+
+Then open [http://127.0.0.1:4331/](http://127.0.0.1:4331/).
+
+Character dialogue uses DeepSeek and reads its key from `DEEPSEEK_API_KEY`. Set `DEEPSEEK_BASE_URL` and `DEEPSEEK_MODEL` to override the endpoint and model. Speech recognition and synthesis use Qwen, configured with `DASHSCOPE_API_KEY`. Supply environment variables through the launch environment; the application does not automatically load a `.env` file.
+
+On macOS, the launcher can also read an existing local Brizo configuration. Keys remain on the server. Local saves are stored in `mystery/.data/`.
+
+## Repository layout
+
+| Directory | Contents |
+| --- | --- |
+| `mystery/src/` | 3D scenes, character animation, and interaction UI |
+| `mystery/server/` | Investigation rules, character saves, AI dialogue, and voice services |
+| `mystery/shared/` | Layout and rules shared by frontend and backend |
+| `mystery/public/` | Production logos, scene images, fonts, and audio |
+| `mystery/art/` | Art sources, generation prompts, and source assets |
+| `mystery/docs/` | Gameplay and implementation notes |
+| `mystery/deploy/` | Deployment tools and release records |
+
+Root npm commands forward to `mystery/`. The repository now maintains the AI mystery game. Earlier 2D, 3D, and WeChat AI-town projects are archived locally, and earlier versions remain in Git history. Player saves, local verification data, and the archive file stay on the local machine.
+
+## Version maintenance
+
+Each completed request updates the version and adds a one-sentence changelog entry. Major gameplay or feature changes increment the minor version; fixes, visual adjustments, and documentation updates increment the patch version. Package versions, README, [CHANGELOG](CHANGELOG.md), Git tags, and Releases are kept together. The working rules are in [mystery/AGENTS.md](mystery/AGENTS.md).
