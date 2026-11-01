@@ -13,8 +13,8 @@ function flowTexture(){
  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;return texture;
 }
 
-export function buildRiver(scene,{enhanced=false,surfaceMaterial=null}={}){
- const curve=new THREE.CatmullRomCurve3([[-45,58],[-39,34],[-34,8],[-34,-19],[-22,-32],[2,-34],[30,-33],[55,-43]].map(([x,z])=>new THREE.Vector3(x,0,z)));
+export function buildRiver(scene,{enhanced=false,surfaceMaterial=null,offset=[0,0]}={}){
+ const curve=new THREE.CatmullRomCurve3([[-45,58],[-39,34],[-34,8],[-34,-19],[-22,-32],[2,-34],[30,-33],[55,-43]].map(([x,z])=>new THREE.Vector3(x+offset[0],0,z+offset[1])));
  const samples=256,centerline=curve.getSpacedPoints(samples),length=curve.getLength(),edges=centerline.map((p,i)=>{
   const s=i/samples*length,dir=curve.getTangentAt(i/samples),normal=new THREE.Vector2(dir.z,-dir.x).normalize();
   return {p,s,normal,left:2.65+.40*noise(s/7,12)+.18*noise(s/1.9,31),right:2.65+.43*noise(s/8,53)+.19*noise(s/2.3,82)};

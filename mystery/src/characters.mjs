@@ -65,12 +65,39 @@ export function createCharacter(scene,id,options={}){
  ell(head,.015,-.062,.316,.038,.061,.045,look.skin);
  face.mouth=new THREE.Group();face.mouth.position.set(0,-.185,.31);head.add(face.mouth);line(face.mouth,[[-.065,0,-.006],[.012,-.011,.01],[.074,.004,-.011]],'#99775f',.01);face.openMouth=ell(head,0,-.191,.316,.052,.003,.014,'#76594e');face.openMouth.visible=false;
  if(options.modern){
-  patch(torso,[[-.22,.6],[-.04,.44],[-.12,.22],[-.27,.49]],'#d9d2bc');patch(torso,[[.22,.6],[.04,.44],[.12,.22],[.27,.49]],'#c9c1ad');
-  if(options.look.look==='glasses')for(const side of [-1,1])mesh(new THREE.TorusGeometry(.091,.012,6,24),ink,head,side*.128,.025,.337);
-  if(['long','bob','ponytail'].includes(options.look.look)){for(const side of [-1,1])ell(head,side*.28,-.05,-.06,.095,options.look.look==='long'?.49:.28,.25,look.hair);if(options.look.look==='ponytail')ell(head,0,-.12,-.37,.14,.44,.14,look.hair);}
-  if(options.look.look==='cane'){const stick=mesh(new THREE.CylinderGeometry(.025,.025,1.2,8),'#544d43',body,.44,.5,.13);ell(body,.44,1.11,.13,.085,.035,.05,'#b5ac91');}
-  if(options.look.look==='stubble')for(const side of [-1,1])for(let i=0;i<5;i++){const x=side*(.07+i*.035),y=-.22;line(head,[[x,y,depthAt(x,y)+.003],[x,y-.022,depthAt(x,y-.022)+.003]],look.hair,.007);}
+  const shirt=look.shirt||'#e6dcc3';box(torso,0,.34,.212,.32,.53,.035,shirt);
+  const collar=look.outfit!=='knit';
+  if(collar){patch(torso,[[-.14,.62],[0,.46],[-.1,.31]],shirt);patch(torso,[[.14,.62],[0,.46],[.1,.31]],shirt);}
+  if(['suit','blazer','jacket'].includes(look.outfit))for(const side of [-1,1])patch(torso,[[side*.25,.61],[side*.06,.39],[side*.16,.12],[side*.27,.43]],look.coat);
+  if(look.outfit==='knit')for(const y of [.18,.28,.38])line(torso,[[-.14,y,.236],[.14,y,.236]],'#626a50',.007);
+  if(look.outfit==='cardigan'){for(const side of [-1,1])line(torso,[[side*.18,.58,.236],[side*.12,-.08,.237]],look.coat,.025);for(const y of [.15,0])ell(torso,.06,y,.24,.015,.015,.01,'#b4a58a');}
+  if(look.tie)patch(torso,[[0,.47],[-.046,.37],[0,.05],[.046,.37]],look.tie);
+  if(look.glasses){for(const side of [-1,1]){
+   if(look.glasses==='square')line(head,[[side*.035,.1,.34],[side*.22,.1,.33],[side*.22,-.052,.33],[side*.035,-.052,.34],[side*.035,.1,.34]],ink,.011);
+   else{const rim=mesh(new THREE.TorusGeometry(.095,.012,6,24),ink,head,side*.128,.025,.337);rim.scale.y=look.glasses==='sun'?.79:.95;if(look.glasses==='sun')ell(head,side*.128,.025,.338,.088,.071,.013,'#42463e');}
+   line(head,[[side*.22,.045,.333],[side*.325,.015,.1]],ink,.01);
+  }line(head,[[-.035,.035,.34],[0,.047,.35],[.035,.035,.34]],ink,.01);}
+  if(look.look==='cane'){mesh(new THREE.CylinderGeometry(.025,.025,1.18,8),'#544d43',body,.39,.5,.17);line(body,[[.39,1.06,.17],[.39,1.19,.17],[.48,1.24,.17],[.54,1.18,.17]],'#b6a379',.032);}
+  if(look.stubble)for(const side of [-1,1])for(let i=0;i<6;i++){const x=side*(.055+i*.033),y=-.21-i*.008;line(head,[[x,y,depthAt(x,y)+.002],[x+side*.005,y-.021,depthAt(x+side*.005,y-.021)+.002]],look.hair,.005);}
+  if(look.moustache)for(const side of [-1,1])line(head,[[side*.015,-.12,depthAt(side*.015,-.12)+.008],[side*.07,-.14,depthAt(side*.07,-.14)+.008],[side*.11,-.13,depthAt(side*.11,-.13)+.005]],look.hair,.016);
+  if(look.earrings)for(const side of [-1,1]){ell(head,side*.335,-.137,.07,.028,.028,.024,'#dfc49a');if(look.earrings==='drop')ell(head,side*.335,-.19,.07,.023,.04,.02,'#ece1c5');}
+  if(look.book){box(elbows[0],0,-.18,.12,.3,.4,.065,'#625b4e');box(elbows[0],.015,-.18,.158,.25,.35,.015,'#e9dec4');}
+  if(look.ageLines)for(const y of [.16,.22])line(head,[[-.13,y,depthAt(-.13,y)+.002],[0,y+.01,depthAt(0,y+.01)+.002],[.13,y,depthAt(.13,y)+.002]],'#b89b80',.005);
+  torso.scale.x=look.shoulders||1;
  }
+ // The shared rig keeps each modern character's silhouette visible at map scale.
+ if(options.modern){
+  const style=look.hairStyle;
+  if(style!=='receding')mesh(new THREE.SphereGeometry(.35,18,12,0,Math.PI*2,0,style==='crew'?1.05:1.35),look.hair,head,0,.08,-.03).scale.set(1,style==='crew'?.86:1,1.03);
+  if(['bob','waves','curly','ponytail','receding'].includes(style))for(const side of [-1,1]){
+   ell(head,side*.29,style==='receding'?.06:-.055,-.08,.085,style==='bob'?.3:style==='receding'?.23:.38,.23,look.hair);
+   if(['waves','curly'].includes(style))for(let j=0;j<5;j++){const lock=ell(head,side*(.28+Math.sin(j*1.6)*.035),.21-j*.15,-.06,.105,.14,.2,look.hair);lock.rotation.z=side*.25*Math.sin(j);}
+  }
+  if(style==='ponytail')ell(head,-.12,-.18,-.35,.15,.4,.14,look.hair);
+  if(style==='receding'){ell(head,0,.26,-.19,.28,.12,.2,look.hair);}
+  else if(style!=='crew')for(let i=0;i<4;i++){const lock=ell(head,-.23+i*.13,.26-Math.sin(i*.8)*.035,.16,.09,.14,.1,look.hair);lock.rotation.z=['side','swept','bob','ponytail'].includes(style)?.65:-.4+i*.2;}
+  if(look.greyTemples)for(const side of [-1,1])ell(head,side*.3,.085,.03,.025,.14,.1,'#a09e8c');
+ }else{
  // Hair cap is an actual back/side shell, leaving the forehead and face clear.
  mesh(new THREE.SphereGeometry(.35,18,12,0,Math.PI*2,0,1.35),look.hair,head,0,.08,-.03).scale.set(1,1,1.03);
  if(id==='kato'){ell(head,0,.28,-.04,.31,.15,.29,look.hair);for(const x of [-.16,-.02,.12])line(head,[[x,.34,.17],[x+.035,.42,0],[x+.04,.35,-.21]],'#65594a',.01);}
@@ -78,6 +105,7 @@ export function createCharacter(scene,id,options={}){
  else if(id==='emi'){const wave=ell(head,-.11,.26,.16,.22,.12,.13,look.hair);wave.rotation.z=.28;ell(head,.25,.1,.06,.09,.23,.17,look.hair);}
  else for(let i=0;i<4;i++){const lock=ell(head,-.23+i*.13,.24-Math.sin(i*.8)*.035,.17,.09,.16,.11,look.hair);lock.rotation.z=id==='ishikawa'?.55:-.35+i*.12;}
  if(id==='player'||id==='ishikawa')for(const side of [-1,1])ell(head,side*.29,-.03,-.04,.09,.27,.25,look.hair);
+ }
  if(id==='player'){
   for(const side of [-1,1]){const rim=mesh(new THREE.TorusGeometry(.096,.012,6,24),ink,head,side*.128,.025,.337);rim.scale.y=.9;line(head,[[side*.22,.045,.333],[side*.325,.015,.1]],ink,.01);}
   line(head,[[-.03,.028,.34],[0,.045,.35],[.03,.028,.34]],ink,.009);
@@ -141,7 +169,7 @@ export function animateCharacter(rig,dt,speed=0,gesture='idle'){
  const {body,torso,head,legs,knees,arms,elbows,look,id}=rig;rig.time+=dt;rig.cadence=mix(rig.cadence||0,Math.min(2.1,speed/(look.stride*2)),8,dt);rig.phase+=rig.cadence*Math.PI*2*dt;rig.blend=mix(rig.blend,Math.min(1,speed/.7),9,dt);
  const t=rig.time,p=rig.phase,w=rig.blend,idle=1-w,swing=Math.sin(p),breath=Math.sin(t*1.7)*.006;
  body.position.y=.27+Math.abs(swing)*.018*w;torso.position.y=.88+breath;torso.rotation.z=swing*.035*w;
- torso.rotation.x=id==='jiang'?.075:id==='kato'?-.035:.015;
+ torso.rotation.x=id==='jiang'?.075:id==='kato'?-.035:id==='aiyijun'?.045:.015;
  head.rotation.y=Math.sin(t*.45)*.1*idle;head.rotation.x=(id==='emi'?.06:0)+(gesture==='listen'?Math.sin(t*3)*.035:Math.sin(t*.9)*.012)*idle;
  for(let i=0;i<2;i++){const sign=i?1:-1,armSwing=-sign*Math.sin(p-.16);legs[i].rotation.x=sign*swing*.43*w;knees[i].rotation.x=Math.max(0,-sign*swing)*.48*w;arms[i].rotation.set(armSwing*.38*w,0,sign*(.055+.025*w));elbows[i].rotation.set(-.14-Math.max(0,-armSwing)*.18*w,0,0);}
  const poseArm=(i,x,z,elbow)=>{arms[i].rotation.x=THREE.MathUtils.lerp(arms[i].rotation.x,x,idle);arms[i].rotation.z=THREE.MathUtils.lerp(arms[i].rotation.z,z,idle);elbows[i].rotation.x=THREE.MathUtils.lerp(elbows[i].rotation.x,elbow,idle);};
@@ -149,6 +177,9 @@ export function animateCharacter(rig,dt,speed=0,gesture='idle'){
  if(id==='miyazaki')fold(.32);
  if(id==='emi')fold(.63);
  if(id==='ishikawa'){arms[0].rotation.x=-.45+swing*.13*w;elbows[0].rotation.x=-.85+.1*w;arms[0].rotation.z=-.16;poseArm(1,-.5,.28,-.8+Math.sin(t*3)*.07);head.rotation.x+=.12*idle;}
+ if(look.book){arms[0].rotation.x=-.45+swing*.09*w;elbows[0].rotation.x=-.85;arms[0].rotation.z=-.16;}
+ if(id==='franklin')poseArm(1,-.12,.035,-.1);
+ if(['hongxue','cuiyuan'].includes(id)&&!look.book)fold(.25);
  head.rotation.z=0;
  if(!rig.inConversation&&gesture!=='talk'){
   if(id==='jiang'&&t%15>11){poseArm(1,-1.7,.3,-.8);head.rotation.z=Math.sin(t*3)*.025*idle;}

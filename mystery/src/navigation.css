@@ -155,3 +155,5 @@ button.person-name-link:hover,button.clue-name-link:hover,button.reference-name-
 .reference-body blockquote{margin:10px 0;padding:8px 12px;border-left:2px solid #b7ad92;background:#eee7d744}
 .reference-body h3{font-size:14px;margin:16px 0 8px}
 .ambient-bubble :is(.person-name-link,.clue-name-link,.reference-name-link){pointer-events:auto}
+
+.people-ribbon.many-people{justify-content:flex-start;overflow-x:auto;overflow-y:hidden;touch-action:pan-x;overscroll-behavior-x:contain;scrollbar-width:none}.people-ribbon.many-people::-webkit-scrollbar{display:none}

@@ -1,3 +1,4 @@
+import {generateCaseAmbient,commitCaseAmbient} from './suspect7/social.mjs';
 import {hallActivity} from '../shared/hall-activities.mjs';
 import {playerId} from '../shared/player.mjs';
 import crypto from 'node:crypto';
@@ -25,6 +26,7 @@ function validated(raw,actor){
  return {actor,action,speech:raw.speech.trim(),gesture};
 }
 export async function generateAmbient(s,generate,random=Math.random){
+ if(s.scriptId==='suspect7')return generateCaseAmbient(s,generate,random);
  const choices=availableInteractions(s).filter(e=>e.id!==s.ambientLog?.at(-1)?.template);
  if(!choices.length)return null;
  const option=choices[Math.floor(random()*choices.length)],scope=option.scope||'public';
@@ -39,6 +41,7 @@ export async function generateAmbient(s,generate,random=Math.random){
  return event;
 }
 export function commitAmbient(s,event){
+ if(s.scriptId==='suspect7')return commitCaseAmbient(s,event);
  if(!event||s.room!=='hall'||!event.pair.every(id=>s.positions[id]==='hall')||event.pair.includes(s.chatSetting?.actor))return false;
  const publicWitnesses=cast.filter(p=>s.positions[p.id]==='hall').map(p=>p.id),listeners=event.scope==='private'?event.pair:publicWitnesses;
  for(const line of event.lines){

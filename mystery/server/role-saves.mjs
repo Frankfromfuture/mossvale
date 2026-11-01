@@ -27,7 +27,7 @@ export function bestCompletedScore(book){
 export function rememberBestScore(book){book.books.hanyu.bestScore=bestCompletedScore(book);const b=book.books.suspect7;if(Object.values(b.slots).some(s=>s.ending))b.unlocked=true;}
 const valid=(book,id)=>book.activeScript==='suspect7'?routes.some(r=>r.id===id):validRole(id);
 export const roleUnlocked=(book,id)=>valid(book,id)&&(book.activeScript==='suspect7'?(id==='andy'||book.books.suspect7.unlocked||Object.values(book.books.suspect7.slots).some(s=>s.ending)):(id==='player'||bestCompletedScore(book)>=unlockScores[id]));
-const roleChoices=book=>{const b=current(book);return book.activeScript==='suspect7'?routes.map(r=>({...r,portraitUrl:`art/suspect7/${r.id}.svg`,locked:!roleUnlocked(book,r.id),saved:!!b.slots[r.id],finished:!!b.slots[r.id]?.ending})):roleCatalog.map(({id,name,portrait})=>({id,name,portrait,unlockScore:unlockScores[id],locked:!roleUnlocked(book,id),saved:!!b.slots[id],finished:!!b.slots[id]?.ending}));};
+const roleChoices=book=>{const b=current(book);return book.activeScript==='suspect7'?routes.map(r=>({...r,portraitUrl:`art/suspect7/v2/portrait-${r.id}.png`,locked:!roleUnlocked(book,r.id),saved:!!b.slots[r.id],finished:!!b.slots[r.id]?.ending})):roleCatalog.map(({id,name,portrait})=>({id,name,portrait,unlockScore:unlockScores[id],locked:!roleUnlocked(book,id),saved:!!b.slots[id],finished:!!b.slots[id]?.ending}));};
 export function continuationRole(book){const b=current(book);return roleUnlocked(book,b.active)&&activeGame(book)?b.active:roleChoices(book).find(p=>p.saved&&!p.locked)?.id||null;}
 function menuFields(book,ai){
  const id=continuationRole(book),b=current(book),s=id?b.slots[id]:null,p=book.activeScript==='suspect7'?person(s?.playerId||id):roleCatalog.find(p=>p.id===id);

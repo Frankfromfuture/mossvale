@@ -1,5 +1,6 @@
 export function actionPointsHud(v){
  if(!v)return '';
+ if(v.progress)return `<div class="action-points status-metric" role="status" aria-label="第${v.progress.current}章，共${v.progress.total}章"><span>${v.progress.label}</span><strong>${v.progress.current}<small> / ${v.progress.total}</small></strong></div>`;
  const used=v.pointsSpent??v.minutes??0,remaining=Math.max(0,v.budget-used);
  const label=`剩余行动点 ${remaining} / ${v.budget}${used>v.budget?`（超额${used-v.budget}点）`:''}`;
  return `<div class="action-points status-metric ${remaining<=30?'late':''}" title="${label}" role="status" aria-label="${label}"><span>行动点数</span><strong>${remaining}<small> / ${v.budget}</small></strong></div>`;
@@ -16,7 +17,7 @@ export function leadHud(state,esc){
  return state.lead?`<button class="investigation-lead guidance-line" id="current-lead"><span>提示 · ${esc(state.lead.title)}</span><span class="goal-chevron" aria-hidden="true">›</span></button>`:'';
 }
 export function rulesContent(v,esc){
- return `<div class="score-rules-list">${v.scores.map(r=>`<p><strong>${r.name} ${r.value}/${r.max}</strong><span>${esc(r.rule)}</span></p>`).join('')}<p class="score-note">同一秘密只扣一次；每项最低为零。扣分以实际说过的话和做过的事为依据。结案时主动交代经历不追加扣分。</p></div>`;
+ return `<div class="score-rules-list">${v.scores.map(r=>`<p><strong>${r.name} ${r.value}/${r.max}</strong><span>${esc(r.rule)}</span></p>`).join('')}<p class="score-note">${esc(v.ruleNote||'同一秘密只扣一次；每项最低为零。扣分以实际说过的话和做过的事为依据。结案时主动交代经历不追加扣分。')}</p></div>`;
 }
 export function scoreHud(v,esc){
  if(!v)return '';

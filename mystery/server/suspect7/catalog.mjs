@@ -27,14 +27,14 @@ const spatialSource=source=>({...source,adaptation:true,note:'单层空间改编
 const spatialEvidence=new Set(['exit','stairs','toys','injury','spare-ball','toolbox','key','measure','keypad','console','monitor','passage','phone-check']);
 const E=(id,title,text,chapter,room,source,kind='observation',extra={})=>({id,title,text,chapter,room,source:spatialEvidence.has(id)?spatialSource(source):source,kind,...extra});
 export const evidence=[
- E('exit','紧闭的大门','门无法推开，外面没有回应。外墙没有可开启的窗户，房间围着餐厅、客厅与两侧长廊相连。',1,'landing',clue(15,17)),
+ E('exit','紧闭的院门','院门无法推开，外面没有回应。西侧庭廊和内庭都在高墙以内。房间外墙没有可开启的窗户，只能沿屋内与庭院之间的通路检查其他出口。',1,'garden',clue(15,17)),
  E('phone','餐厅里的专用手机','六人的私人手机都不见了。桌上仅剩一部专用手机，只能等待它响起。屏幕上的时间暂记为“手机显示”，尚未与独立来源核对。',1,'dining',role('安迪',2,3)),
  E('kitchen','没有后门的厨房','厨房和储物间里没有找到另一条出口。炊具齐全，午宴却没开始。',1,'kitchen',clue(15)),
- E('stairs','前厅与两条长廊','前厅通往东西两侧长廊。东廊与客厅、餐厅之间是实墙，出入东廊必须经过休息室门前。西廊后段有一扇带钥匙孔的车库门。',1,'landing',clue(15,17)),
+ E('stairs','前厅与庭廊','前厅通往西侧庭廊和东侧长廊。东廊与客厅、餐厅之间是实墙，出入东廊必须经过休息室门前。西廊后段有一扇带钥匙孔的车库门。',1,'landing',clue(15,17)),
  E('toys','活动室的玩具','这里摆着健身器材和充气撞球一类的大型玩具。活动室外形规整，没有窗户。',2,'activity',clue(17)),
  E('lighter','红雪的打火机','把同一件物品的不同描述分别记下：红雪称它是红色；安迪的供述称它是灰色。观察颜色的差别本身没有指认任何人。',2,'lounge',role('红雪',3), 'testimony'),
  E('carpet','教堂地毯','教堂铺着红色地毯。安迪的个人描述记为灰色。关门后，外面的脚步声听不清了。',2,'chapel',role('安迪',5),'observation',{perspectiveText:'你把地毯记作灰色；其他人的描述仍需分别保存。'}),
- E('injury','陈信的伤口记录','陈信遭细长锐器刺伤。后侧储藏室翻倒的柜子发出过闷响。这里记录的是袭击案，尚未证明它与温泉死者由同一人所为。',4,'attic',role('陈信',13)),
+ E('injury','陈信的伤口记录','陈信胸部遭细长锐器贯穿，伤口未伤及心肺和主要血管。后侧储藏室翻倒的柜子发出过闷响。这里记录的是袭击案，尚未证明它与温泉死者由同一人所为。',4,'attic',role('陈信',13)),
  E('cane','富兰克林的手杖','手杖结构可容纳细长剑刃。与陈信的伤口对照，形态相容；单凭结构仍需核对谁曾持用，以及其行踪说法。',4,'study',src('剧本/主持人/主持人.pdf',6)),
  E('body','移到车库的遗体','遗体从温泉移到车库。颈部有深割伤，右手食指缺去一截，为新伤，缺失的指节没有找到；皮肤有烫伤、肿胀与皱缩，面貌难以辨认。有人称死者是洪青，身份仍待复核。非常规环境下，仅凭尸体现象难以准确确定死亡时刻。',4,'garage',clue(1)),
  E('temperature','暖室控制旋钮','现场设备显示109°C，室内有温度旋钮。数值作为本案现场记录保存；死者身份和死亡时刻还需其他材料。',4,'pool',clue(1)),

@@ -1,12 +1,12 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.12.0** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.13.0** · [完整版本记录](../CHANGELOG.md)
 
 人物会按话题召回旧对话，保留自己的回答与承诺，案件记录与闲谈分开提供；记忆以原话与实际听众为依据。
 
 第一部《雾灯未眠》包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档；新增五场可跳过、重看的手绘幕间，按已知进度提供操作入口。50个搜证点各配手绘实物图标，用于线索详情、物件介绍和出示菜单。
 
-本地新增《第7号嫌疑人》，提供六章调查、六条双视角路线、十一位人物和独立剧本存档。首次结案开放全部路线，剧情推进由证据节点控制。详情见 [接入说明](docs/suspect7/README.md)。线上暂仍为0.10.1。
+本地新增《第7号嫌疑人》，提供六章调查、六条双视角路线、十一位人物和独立剧本存档。首次结案开放全部路线，剧情推进由证据节点控制。详情见 [接入说明](docs/suspect7/README.md)。两部现共用全部界面与场景操作，第二部补齐人物、物件手绘图及可朗读的章节漫画。线上暂仍为0.10.1。
 
 [在线测试](https://www.iambrizo.com/mossvale/) · [项目介绍与启动方式](../README.md)
 
@@ -16,7 +16,7 @@
 
 ## English
 
-Current version **0.12.0** · [Full changelog](../CHANGELOG.md)
+Current version **0.13.0** · [Full changelog](../CHANGELOG.md)
 
 Characters retrieve relevant earlier exchanges and retain their own answers and promises. Case records and casual chatter have separate context budgets, grounded in original quotes and actual listeners.
 
@@ -28,4 +28,4 @@ Run `npm ci`, `npm run build`, and `npm start` from this directory, or use the c
 
 `src/` contains the frontend, `server/` the backend, `shared/` the shared rules, and `public/` the production assets. Gameplay and implementation notes are in `docs/`; deployment and rollback records are in `deploy/README.md`.
 
-**The Seventh Suspect** is available locally in 0.12.0: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. The hosted demo remains on 0.10.1. See the [implementation notes](docs/suspect7/README.md).
+**The Seventh Suspect** is available locally in 0.13.0: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. Both stories share the interface and scene controls. The second story includes illustrated portraits and objects, narrated chapter comics and individual character voice directions. The hosted demo remains on 0.10.1. See the [implementation notes](docs/suspect7/README.md).

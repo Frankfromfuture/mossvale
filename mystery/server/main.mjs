@@ -55,7 +55,7 @@ const server=http.createServer(async(req,res)=>{
    assertPlayable(archive);
    if(u.pathname==='/api/ambient'){
     const now=Date.now(),remaining=(ambientNext.get(id)||0)-now;
-    if(s.scriptId==='suspect7'||remaining>0||ambientPending.has(id)||locks.has(id)||s.room!=='hall'||!s.started||s.ending||s.investigation?.challenge||s.briefing&&!s.briefing.complete){send(res,200,{event:null,cooldownMs:Math.max(remaining,15000)});return;}
+    if(remaining>0||ambientPending.has(id)||locks.has(id)||s.room!==(s.scriptId==='suspect7'?(s.chapterId>=5?'meeting':'dining'):'hall')||!s.started||s.ending||s.investigation?.challenge||s.briefing&&!s.briefing.complete){send(res,200,{event:null,cooldownMs:Math.max(remaining,15000)});return;}
     ambientPending.add(id);ambientNext.set(id,now+85000+Math.random()*35000);
     try{
      const revision=s.revision,event=await generateAmbient(structuredClone(s),status().ready?generate:null),currentArchive=await load(id),current=activeGame(currentArchive);

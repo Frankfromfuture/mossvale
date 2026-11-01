@@ -45,13 +45,13 @@ export function animateEmotion(rig,dt,gesture){
  const a=rig.acting||={weight:0,speech:0,arm:0,spread:0,elbow:0,lean:0,tilt:0,beat:0};
  a.weight=ease(a.weight,weight,6,dt);a.speech=ease(a.speech,expression?.speaking?1:0,8,dt);
  for(const key of ['arm','spread','elbow','lean','tilt','beat'])a[key]=ease(a[key],pose[key],6,dt);
- const idle=1-rig.blend,amount=a.weight*idle,personality=({emi:.62,miyazaki:.78,ishikawa:.72})[rig.id]||1;
+ const idle=1-rig.blend,amount=a.weight*idle,personality=({emi:.62,miyazaki:.78,ishikawa:.72,hongxue:.6,chenxin:.68,cuiyuan:.72,aiyijun:.68,vivian:1.1})[rig.id]||1;
  const beat=Math.sin(rig.time*3.3+rig.face.offset),emphasis=Math.max(0,beat)*a.beat*a.speech;
  rig.head.rotation.x+=(a.lean+beat*.045*a.speech)*amount;rig.head.rotation.z+=a.tilt*amount;
  rig.torso.rotation.x+=a.lean*.5*amount;rig.torso.rotation.z+=Math.sin(rig.time*1.8+rig.face.offset)*.018*a.speech*amount;
  if(gesture==='sip'||rig.task)return;
  for(let i=0;i<2;i++){
-  if(rig.id==='ishikawa'&&i===0)continue; // Keep the notebook supported; the pen hand can gesture.
+  if((rig.id==='ishikawa'||rig.look.book)&&i===0)continue; // Keep the notebook supported; the pen hand can gesture.
   const side=i?1:-1,strength=amount*personality*(i?1:.55);
   rig.arms[i].rotation.x+=(a.arm-emphasis)*strength;
   rig.arms[i].rotation.z+=side*a.spread*strength;

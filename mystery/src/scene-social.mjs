@@ -10,15 +10,16 @@ export class SceneSocial{
   this.bubble=scene.label('',new THREE.Vector3(),'ambient-bubble natural-text',null);this.bubble.el.hidden=true;
   this.bubble.el.setAttribute('role','status');this.bubble.el.setAttribute('aria-live','polite');
  }
+ activity(event){return this.scene.definition?.activity?this.scene.definition.activity(event):hallActivity(event);}
  setState(state){
   const signature=[state.slotToken,state.playerId,state.room,state.phase,!!state.ending,JSON.stringify(state.chatSetting),...state.people.map(p=>p.id+':'+p.location)].join('|');
   if(signature!==this.signature){this.cancel();this.queue=[];this.signature=signature;this.wait=3+Math.random()*3;this.participation.clear();this.round=0;}
   this.options=state.interactions||[];
  }
  setPaused(value){this.paused=value;if(value)this.bubble.el.hidden=true;}
- enqueue(event){if(event&&this.scene.current?.room==='hall'&&event.pair.every(id=>this.scene.actors.get(id)?.g.visible)&&!event.pair.includes(this.scene.current.chatSetting?.actor)){this.queue=[event];}}
+ enqueue(event){if(event&&this.scene.current?.room===this.scene.publicRoom()&&event.pair.every(id=>this.scene.actors.get(id)?.g.visible)&&!event.pair.includes(this.scene.current.chatSetting?.actor)){this.queue=[event];}}
  cancel(){
-  if(this.current)for(const id of this.current.pair){const a=this.scene.actors.get(id);a.gesture='idle';a.rig.task=null;a.rig.gazeYaw=0;a.label.el.textContent=a.name;delete a.label.el.dataset.activity;if(a.pathKind==='social'){a.path=[];if(a.g.visible&&this.scene.current?.room==='hall')this.scene.sitActor(id,homeSeat(id).id,false,'social');}}
+  if(this.current)for(const id of this.current.pair){const a=this.scene.actors.get(id);a.gesture='idle';a.rig.task=null;a.rig.gazeYaw=0;a.label.el.textContent=a.name;delete a.label.el.dataset.activity;if(a.pathKind==='social'){a.path=[];if(a.g.visible&&this.scene.current?.room===this.scene.publicRoom())this.scene.sitActor(id,this.scene.homeSeat(id).id,false,'social');}}
   this.current=null;this.bubble.el.hidden=true;this.scene.host.dataset.social='idle';
  }
  localEvent(){
@@ -26,15 +27,15 @@ export class SceneSocial{
   const score=e=>Math.max(...e.pair.map(id=>this.participation.get(id)||0)),oldest=Math.min(...choices.map(score)),rested=choices.filter(e=>score(e)===oldest);
   const option=rested[Math.floor(Math.random()*rested.length)];if(!option)return null;
   const scope=option.scope||'public',silent=scope==='public'&&Math.random()<.25;
-  const station=hallActivity(option);
-  return {id:'local-'+Date.now(),template:option.id,station:option.station,pair:option.pair,scope,zone:scope==='private'?(this.scene.current.chatSetting?.zone==='left'?'right':option.zone||'left'):'table',activity:option.activity,source:'local',lines:option.pair.map((id,i)=>({actor:id,action:station?.actions[i]||idleActions[id],speech:scope==='private'||silent?'':option.lines.find(l=>l[0]===id)?.[1]||'',gesture:station?.gestures[i]||(silent?'glance':i?'nod':'talk')}))};
+  const station=this.activity(option);
+  return {id:'local-'+Date.now(),template:option.id,station:option.station,pair:option.pair,scope,zone:scope==='private'?(this.scene.current.chatSetting?.zone==='left'?'right':option.zone||'left'):'table',activity:option.activity,source:'local',lines:option.pair.map((id,i)=>({actor:id,action:station?.actions[i]||idleActions[id]||'抬眼看向对方',speech:scope==='private'||silent?'':option.lines.find(l=>l[0]===id)?.[1]||'',gesture:station?.gestures[i]||(silent?'glance':i?'nod':'talk')}))};
  }
  start(){
-  const event=this.queue.shift()||this.localEvent();if(!event)return;this.current=event;this.lastTemplate=event.template;this.stage='approach';this.elapsed=0;this.line=-1;this.station=hallActivity(event);this.round++;
+  const event=this.queue.shift()||this.localEvent();if(!event)return;this.current=event;this.lastTemplate=event.template;this.stage='approach';this.elapsed=0;this.line=-1;this.station=this.activity(event);this.round++;
   for(const [i,id]of event.pair.entries()){
    const a=this.scene.actors.get(id);this.participation.set(id,this.round);
-   if(this.station)this.scene.setActorPath(id,this.station.spots[i],'hall','social');
-   else{const seat=event.scope==='private'?cornerSeats(event.zone)[i]:homeSeat(id);this.scene.sitActor(id,seat.id,false,'social');}
+   if(this.station)this.scene.setActorPath(id,this.station.spots[i],this.scene.publicRoom(),'social');
+   else{const seat=event.scope==='private'?this.scene.cornerSeats(event.zone)[i]:this.scene.homeSeat(id);this.scene.sitActor(id,seat.id,false,'social');}
    a.label.el.dataset.activity=event.scope==='private'?'低声交谈':event.activity;
    a.label.el.textContent=a.name+' · '+(event.scope==='private'?'低声交谈':event.activity);
   }
@@ -42,7 +43,7 @@ export class SceneSocial{
  }
  returnHome(){
   this.bubble.el.hidden=true;this.stage='return';this.elapsed=0;
-  for(const id of this.current.pair){const actor=this.scene.actors.get(id);actor.gesture='idle';actor.rig.gazeYaw=0;this.scene.sitActor(id,homeSeat(id).id,false,'social');}
+  for(const id of this.current.pair){const actor=this.scene.actors.get(id);actor.gesture='idle';actor.rig.gazeYaw=0;this.scene.sitActor(id,this.scene.homeSeat(id).id,false,'social');}
  }
  glance(dt){
   this.lookWait-=dt;if(this.lookWait>0)return;this.lookWait=5+Math.random()*6;

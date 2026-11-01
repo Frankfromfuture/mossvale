@@ -1,0 +1,112 @@
+[
+  {
+    "file": "public/art/suspect7/v2/call-screen.png",
+    "bytes": 3064906,
+    "sha256": "30f76ceab653d22a6c3e95359e1473d86e59e58af94c73b51a5322385c9971d0"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-1.png",
+    "bytes": 3481413,
+    "sha256": "d46a6acc5b1d77b75ebef25f08ef3678d65e44e6621948cffb8ab8fe8e693a9b"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-2.png",
+    "bytes": 3233271,
+    "sha256": "97d6175c375d043c594fafce22b0dff45e745dfd3667b0c6498241647f1136ec"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-3.png",
+    "bytes": 3402294,
+    "sha256": "b21f097d4a28eafe26b274e8905a5cff121f88eebfa7e7e70aed6cc288672b22"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-4.png",
+    "bytes": 2956732,
+    "sha256": "7e694c35ef487d41a00cad36803f8550b68d449d244904f0c3e0ca20cc7d68e8"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-5.png",
+    "bytes": 3121138,
+    "sha256": "63f3b776804a95e6943e08e0a2101d0027bb41a9ed1894ad74d1ea9cddbb08da"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-chapter-6.png",
+    "bytes": 3443982,
+    "sha256": "b079bbace51d63c50db06b73cdfbcfef044205245837fba78ab74965c9d0b65c"
+  },
+  {
+    "file": "public/art/suspect7/v2/comic-ending.png",
+    "bytes": 3270987,
+    "sha256": "a9200fe052fd5b8f2810f6d7b6a3744959d525d6798aa89fa6de5bfb3b7ff582"
+  },
+  {
+    "file": "public/art/suspect7/v2/cover.png",
+    "bytes": 3700750,
+    "sha256": "3c81c1b76813120ef5982815805c6b4a5cf9adf5eb353ba4324d05ca7d5b7aac"
+  },
+  {
+    "file": "public/art/suspect7/v2/objects-a.png",
+    "bytes": 2163997,
+    "sha256": "121da50d2ad842308789630eb16daf03b038c05ece10cc6d3f735d03d429de21"
+  },
+  {
+    "file": "public/art/suspect7/v2/objects-b.png",
+    "bytes": 2322788,
+    "sha256": "0a25754cd41d6ab44b9724fdf95b059068ea3eb1789c00ad081c5bb3844462cf"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-aiyijun.png",
+    "bytes": 2903487,
+    "sha256": "fb6f0e4376b1de0d2190d3f8a6a1c545a6fbb9bb749be2f1aceda5e1a8106c9e"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-andy.png",
+    "bytes": 2921747,
+    "sha256": "e298ac496b49b6d81a4fc113c71b39e2a782991add87691a0a2ab267e344c7c3"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-chenxin.png",
+    "bytes": 3263856,
+    "sha256": "0bf2f6f0f9dc9788f0d287fc875caecc9a6c7e812c3bd91708fff264dec84af1"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-cuiyuan.png",
+    "bytes": 3009188,
+    "sha256": "7e3890cf9ffb97677ee3a85d8cda9c58ab3fe7efe6f29b19037de858ba17b508"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-franklin.png",
+    "bytes": 3045711,
+    "sha256": "ce4857dc6fc230eb09e37da65de61c115c192265a678ccb54dc99a0d333a74d8"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-hongxue.png",
+    "bytes": 3019998,
+    "sha256": "ff2c91122e342968d1437a970e7834b180614bc08c15d3dd030233e16fa39059"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-licha.png",
+    "bytes": 3078104,
+    "sha256": "014f682cbb501b016efbd1bac996776a707405b77d828d9b97c97531b0eaeac1"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-raven.png",
+    "bytes": 2971494,
+    "sha256": "87a705fd44de1f8908798e6fb83aeb89a7c57e85cbcb505a7b8477c5ffd5a48f"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-vivian.png",
+    "bytes": 3051408,
+    "sha256": "1b432be4258dbda208f8b004d52ad26e8ba4c520ae4ffbefb93b63f834eb0475"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-wuquan.png",
+    "bytes": 3232560,
+    "sha256": "edccb187d542cafe980a79dcb323d1ede76aeebd05b5c59a0bf21917adc6a691"
+  },
+  {
+    "file": "public/art/suspect7/v2/portrait-xiaoguo.png",
+    "bytes": 2890546,
+    "sha256": "aca2ba61f237bdfb76ebb156997d234ae673e74fc8711eedf0294fb20d5d84ba"
+  }
+]

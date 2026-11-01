@@ -1,6 +1,6 @@
 /* Reading surfaces share the dialogue's bundled Kai face and keep their paper art. */
-:is(.storybook,.notebook,.person-sheet,.clue-modal),
-:is(.storybook,.notebook,.person-sheet,.clue-modal) * {font-family:var(--dialogue-font)!important;}
+:is(.storybook,.notebook,.person-sheet,.clue-modal,.case-reading),
+:is(.storybook,.notebook,.person-sheet,.clue-modal,.case-reading) * {font-family:var(--dialogue-font)!important;}
 
 .people-ribbon {left:max(18px,env(safe-area-inset-left));right:auto;transform:none;justify-content:flex-start;}
 

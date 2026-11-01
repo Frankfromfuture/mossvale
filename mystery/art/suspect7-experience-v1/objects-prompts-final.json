@@ -1,0 +1,12 @@
+[
+  {
+    "id": "objects-a",
+    "source": "/Users/frankfan/.codex/generated_images/01a196c5-ef8f-79e3-8a52-729fa15209a3/exec-20dc6338-260e-446e-a4c4-74eb26154be4.png",
+    "prompt": "Edit this sprite atlas with exactly ONE localized correction. In row 5 column 1, the numeric door keypad currently shows five black display slots: change this upper display to EXACTLY SEVEN small empty black rectangular slots arranged in one horizontal row. Keep its numeric keys 1–9 in a 3x3 arrangement. Preserve the entire 5x5 cell layout, all remaining objects, their positions, sizes, artwork, transparency, paper-free transparent background, and all other details exactly. Do not add labels or reveal any code. Output same square atlas."
+  },
+  {
+    "id": "objects-b",
+    "source": "/Users/frankfan/.codex/generated_images/01a196c5-ef8f-79e3-8a52-729fa15209a3/exec-77a3cc2d-79e5-48bf-9825-24e687904205.png",
+    "prompt": "Edit Image1, preserving its exact 5x5 sprite atlas layout, transparency and every unmentioned object. Make only four accuracy corrections: (A) row2 column2, the personal-history folder, change the little generic woman portrait thumbnail to an indistinct middle-aged MAN thumbnail, no name. (B) row3 column5, wristwatch in evidence envelope: make the clock face blank and obscured by a pale reflection so NO hands or time can be read. Likewise remove hands and legible time from the small clock symbol on row4 column4 phone report. (C) row5 column1 gray lighter: replace it with the EXACT silhouette/design of Image2 row2 column1 RED lighter, but render its body neutral GRAY. Keep the same exposed silver ignition head, body shape and angle. (D) row5 column2 gray folded carpet: use the EXACT folded shape and floral ornament of Image2 row2 column2 red carpet, recolored gray. Do not copy any other objects from Image2. Preserve all remaining 21 cells perfectly. No labels or numbers added."
+  }
+]

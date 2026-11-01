@@ -12,5 +12,21 @@ export const people=[
  {id:'xiaoguo',name:'萧过',role:'洪青的姻亲、律师',coat:'#7b8c82',hair:'#494437',skin:'#dbb798',height:1.03,look:'glasses',style:'熟悉家事，起初维护亲人，面对反证愿意重新核查。'},
  {id:'aiyijun',name:'艾义军',role:'退休律师、劫案死者家属',coat:'#8a8b7c',hair:'#aaa69a',skin:'#d8b89b',height:.97,look:'bald',style:'年长而清醒，语速稍缓，谈到儿子仍坚持核对事实。'}
 ];
+
+// Public art direction: age cues, clothing and resting features, never case secrets.
+const appearances={
+ andy:{coat:'#aa8759',hairStyle:'tousled',outfit:'knit',shirt:'#566047',glasses:'round',eye:[.128,.026,.028,.039,-.025],brow:[.133,.15,.015,.03]},
+ franklin:{coat:'#777868',hairStyle:'curly',outfit:'suit',shirt:'#ebe2cc',tie:'#51493f',glasses:'sun',moustache:true,eye:[.13,.023,.029,.027,.03],brow:[.14,.135,.019,.08]},
+ hongxue:{coat:'#586577',hairStyle:'bob',outfit:'blazer',shirt:'#eee3cc',earrings:'pearl',eye:[.132,.03,.028,.025,.09],brow:[.137,.15,.011,.05]},
+ vivian:{coat:'#a493b0',hairStyle:'waves',outfit:'cardigan',shirt:'#eee2cc',earrings:'drop',eye:[.135,.026,.033,.038,-.06],brow:[.14,.155,.012,-.04]},
+ chenxin:{coat:'#747866',hairStyle:'crew',outfit:'jacket',shirt:'#44483e',eye:[.126,.017,.03,.022,.08],brow:[.134,.135,.022,.11],shoulders:1.1},
+ licha:{coat:'#998166',hairStyle:'swept',outfit:'jacket',shirt:'#ece1c9',greyTemples:true,stubble:true,eye:[.13,.015,.029,.022,.03],brow:[.14,.137,.019,.07]},
+ wuquan:{coat:'#a38a60',hairStyle:'tousled',outfit:'jacket',shirt:'#67705c',stubble:true,book:true,eye:[.137,.012,.028,.03,-.1],brow:[.142,.135,.019,-.02]},
+ raven:{coat:'#697e92',hairStyle:'side',outfit:'suit',shirt:'#e8e1ce',tie:'#555347',book:true,eye:[.124,.023,.031,.03,.05],brow:[.13,.145,.016,.04]},
+ cuiyuan:{coat:'#b5a17b',hairStyle:'ponytail',outfit:'blazer',shirt:'#f0e6d1',book:true,eye:[.13,.029,.028,.033,-.04],brow:[.138,.152,.011,-.025]},
+ xiaoguo:{coat:'#8b9a83',hairStyle:'side',outfit:'suit',shirt:'#eee4cf',tie:'#82705d',glasses:'square',eye:[.126,.026,.027,.027,.04],brow:[.134,.147,.014,.06]},
+ aiyijun:{coat:'#8a907b',hairStyle:'receding',outfit:'cardigan',shirt:'#e8ddc6',ageLines:true,eye:[.137,.01,.028,.023,-.08],brow:[.144,.135,.017,-.07]}
+};
+for(const p of people){const a=appearances[p.id];Object.assign(p,a,{description:p.role+'；'+p.style,features:{eye:a.eye,brow:[...a.brow,[[-.06,-.004],[0,.012],[.063,-.003]]]}});delete p.eye;delete p.brow;}
 export const person=id=>people.find(p=>p.id===id);
 export const routes=[['andy','wuquan'],['franklin','raven'],['hongxue','cuiyuan'],['vivian','xiaoguo'],['chenxin','aiyijun'],['licha','licha']].map(([id,investigator])=>({id,investigator,name:person(id).name+' → '+person(investigator).name}));

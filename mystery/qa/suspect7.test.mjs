@@ -34,7 +34,7 @@ test('AI boundaries: listeners, retractions, older quotes, failure atomicity and
  assert(game.actorContext(s,'hongxue','你听到了什么').conversation.some(l=>l.text.includes('孙强告诉')));
  for(let i=0;i<30;i++)s.chatLog.push({actor:'andy',text:'今日闲谈'+i,audience:['andy','franklin'],viewpoint:'andy',chapter:2,kind:'testimony'});
  assert(game.actorContext(s,'franklin','孙强告诉你的细节').recollections.some(l=>l.quote.includes('孙强')));
- s.chapterId=5;s.playerId='wuquan';s.room='meeting';await game.converse(s,{actor:'hongxue',message:'私下说一句',requestId:randomUUID()},async()=>({speech:'我愿意把刚才的说明留在记录里。',factIds:[]}));assert.equal(game.actorContext(s,'franklin','刚才她说什么').conversation.length,0);
+ s.chapterId=5;s.playerId='wuquan';s.room='meeting';act(s,'private-corner',{actor:'hongxue'});await game.converse(s,{actor:'hongxue',message:'私下说一句',requestId:randomUUID()},async()=>({speech:'我愿意把刚才的说明留在记录里。',factIds:[]}));assert.equal(game.actorContext(s,'franklin','刚才她说什么').conversation.length,0);
  const before=structuredClone(s);await assert.rejects(game.converse(s,{actor:'franklin',message:'错误引用',requestId:randomUUID()},async()=>({speech:'这是一个回答。',factIds:['future-secret']})));assert.deepEqual(s,before);
 });
 
@@ -48,5 +48,5 @@ test('required evidence and sources are complete; direct reveal is separate from
  assert.equal(evidence.filter(e=>e.request).length,4);assert.equal(canonicalFacts.find(f=>f.id==='theory-normal').kind,'provisional');
  const s=game.createGame();act(s,'hint',{level:1});assert.equal(s.reveals.length,0);act(s,'hint',{level:3});assert.deepEqual(s.reveals,[1]);
  const id=randomUUID();game.act(s,{type:'notes',text:'retry',requestId:id});assert.throws(()=>game.act(s,{type:'notes',text:'changed',requestId:id}));assert.equal(s.notes,'retry');
- const inFolder=await readdir(new URL('../.data/',import.meta.url));let checked=0;for(const name of inFolder.filter(n=>n.endsWith('.json'))){const raw=JSON.parse(await readFile(new URL('../.data/'+name,import.meta.url),'utf8'));const snapshot=JSON.stringify(raw);const b=migrateArchive(raw);menuView(b);assert.equal(JSON.stringify(raw),snapshot);checked++;}assert(checked>0);
+ const raw={format:'six-roles-v1',active:'player',slots:{player:firstGame('player')},tokens:{player:'fixture-token'},menuToken:'fixture-menu',bestScore:0};const snapshot=JSON.stringify(raw);menuView(migrateArchive(raw));assert.equal(JSON.stringify(raw),snapshot);
 });

@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.12.0** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.13.0** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -19,11 +19,13 @@
 
 第一部《雾灯未眠》从一场山中怪谈开始。最后一支蜡烛熄灭，六个人各自藏起了一件事；天亮后重新围坐，却谁也不愿先说自己看见了什么。你要弄清昨夜发生的事，也要想好，别人问起你时该怎样回答。
 
-本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮安迪—吴全结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。在线测试站暂仍为0.10.1。
+本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮安迪—吴全结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。两部共用菜单、对话特写、纸页和场景操作。第二部加入十一位人物头像、物件插图、可朗读的开场与章节漫画；别墅有庭院、主副屋、河流与路径，未开放屋舍用屋顶遮盖。在线测试站暂仍为0.10.1。
 
 ![青苔镇首页](mystery/docs/images/home.png)
 
 ## 走进故事，可以做些什么
+
+下文的行动点、许可处罚和分数解锁适用于《雾灯未眠》。《第7号嫌疑人》按六章调查推进，阅读与修改猜测不扣分，首次结案即开放其余路线。
 
 **用自己的话追问。** 直接输入问题，或用语音开口，询问某人的去向、对某件物品的认识，以及他怎么看待另一个人；拿到新证据后，还可以回头核对先前的说法。人物会依照性格、经历与当前知情作答，也可能回避、记错或反问你。
 
@@ -107,9 +109,9 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.12.0** · [Full changelog](CHANGELOG.md)
+Current version **0.13.0** · [Full changelog](CHANGELOG.md)
 
-Version 0.12.0 adds a second local story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing Andy → Wu Quan unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. The hosted demo remains on 0.10.1.
+Version 0.13.0 adds a second local story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing Andy → Wu Quan unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Roofs cover rooms that are not yet open. The hosted demo remains on 0.10.1.
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 
@@ -122,6 +124,8 @@ The current story, 《雾灯未眠》, begins with a night of ghost stories in t
 ![Mossvale home screen](mystery/docs/images/home.png)
 
 ## What you can do
+
+The action points, permission penalties and score-based unlocks below apply to the first story. The Seventh Suspect progresses through six chapters; reading and revised hypotheses carry no penalty, and any first ending unlocks the other routes.
 
 **Ask in your own words.** Type a question or speak aloud. Ask where someone went, what they know about an object, or what they think of another person. Return with new evidence to check an earlier account. Characters answer from their personalities, experiences, and current knowledge; they may evade a question, remember incorrectly, or question you in return.
 

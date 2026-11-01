@@ -56,8 +56,9 @@ const distantFocusShader={
  }`
 };
 export class TownScene{
- constructor(container,onPick){
-  this.comic=new URLSearchParams(location.search).get('look')!=='volume';this.toonRamp=this.comic?makeToonRamp():null;this.scenery=new URLSearchParams(location.search).get('scenery')!=='classic';this.surfaceMaterial=createSurfaceMaterials(this.toonRamp);this.contacts=this.scenery?createContactShadows():null;
+ constructor(container,onPick,definition=null){
+  this.definition=definition;this.layoutBounds=definition?.bounds||bounds;this.layoutRooms=definition?.rooms||rooms;this.layoutCast=definition?.cast||cast;this.layoutBuildings=definition?.buildings||buildings;this.seats=definition?.seats||hallSeats;
+  this.comic=new URLSearchParams(location.search).get('look')!=='volume';this.toonRamp=this.comic?makeToonRamp():null;this.scenery=new URLSearchParams(location.search).get('scenery')!=='classic';this.surfaceMaterial=createSurfaceMaterials(this.toonRamp);this.contacts=this.scenery?createContactShadows(definition?.buildings):null;
   this.host=container;this.onPick=onPick;this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#d6dcc8');this.scene.fog=new THREE.Fog('#d6dcc8',165,320);
   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,2));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;container.append(this.renderer.domElement);
   this.camera=new THREE.OrthographicCamera(-20,20,20,-20,.1,600);this.camera.position.set(70,95,100);this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enableDamping=true;this.controls.dampingFactor=.12;this.controls.enableRotate=false;this.controls.minZoom=.2;this.controls.maxZoom=6;this.controls.screenSpacePanning=true;this.controls.target.set(0,0,-10);this.controls.mouseButtons.LEFT=THREE.MOUSE.PAN;this.controls.touches.ONE=THREE.TOUCH.PAN;this.controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;
@@ -71,7 +72,17 @@ export class TownScene{
   const canvas=this.renderer.domElement;
   canvas.addEventListener('pointerdown',e=>{this.pointerStart=[e.clientX,e.clientY];});
   canvas.addEventListener('pointerup',e=>{if(!this.pointerStart||Math.hypot(e.clientX-this.pointerStart[0],e.clientY-this.pointerStart[1])>7)return;const rect=canvas.getBoundingClientRect();this.mouse.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);this.ray.setFromCamera(this.mouse,this.camera);const hits=this.ray.intersectObjects(this.clickable,true).filter(h=>{let o=h.object;while(o){if(!o.visible)return false;o=o.parent;}return true;});if(hits.length){let o=hits[0].object;while(o&&!o.userData.pick)o=o.parent;if(o?.userData.pick){if(o.userData.pick.type==='room'&&o.userData.pick.id===this.current?.room)this.walkInside(hits[0].point);else this.onPick(o.userData.pick);}}else{const point=new THREE.Vector3();if(this.ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),-.12),point))this.walkInside(point);}});
-  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(container);this.resize();this.frame=this.frame.bind(this);requestAnimationFrame(this.frame);
+  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(container);this.resize();this.frame=this.frame.bind(this);this.raf=requestAnimationFrame(this.frame);
+ }
+
+ getRoom(id){return this.layoutRooms.find(r=>r.id===id);}
+ publicRoom(){return this.definition?.publicRoom||'hall';}
+ homeSeat(id){return this.definition?this.seats.find(s=>s.id==='home-'+id):homeSeat(id);}
+ cornerSeats(zone){return this.definition?this.seats.filter(s=>s.zone===zone):cornerSeats(zone);}
+ destroy(){
+  this.suspended=true;cancelAnimationFrame(this.raf);this.observer.disconnect();this.conversationCamera.reset();this.controls.dispose();
+  const geometries=new Set(),materials=new Set(),textures=new Set();this.scene.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])if(m){materials.add(m);for(const value of Object.values(m))if(value?.isTexture)textures.add(value);}});
+  for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures)t.dispose();this.composer.dispose();this.renderer.dispose();this.renderer.domElement.remove();this.labels.remove();
  }
  mat(color,surface='paper'){if(this.scenery&&surface!=='paper')return this.surfaceMaterial(color,surface);if(!this.materials.has(color)){const tex=document.createElement('canvas');tex.width=tex.height=64;const ctx=tex.getContext('2d'),r=grain();ctx.fillStyle=color;ctx.fillRect(0,0,64,64);for(let i=0;i<180;i++){ctx.fillStyle=i%2?'rgba(255,250,231,.17)':'rgba(61,62,47,.05)';ctx.fillRect(r()*64,r()*64,1+r()*3,.5+r());}const map=new THREE.CanvasTexture(tex);map.colorSpace=THREE.SRGBColorSpace;map.wrapS=map.wrapT=THREE.RepeatWrapping;this.materials.set(color,new THREE.MeshToonMaterial({color:0xffffff,map,gradientMap:this.toonRamp}));}return this.materials.get(color);}
  box(x,y,z,w,h,d,color,parent=this.scene,outline=true,radius=0,surface='paper'){const roundedHeight=Math.max(h,2*radius),geometry=radius?new RoundedBoxGeometry(w,roundedHeight,d,3,radius):new THREE.BoxGeometry(w,h,d);if(radius&&roundedHeight!==h)geometry.scale(1,h/roundedHeight,1);if(this.scenery&&surface!=='paper')surfaceUVs(geometry,surface,w,h,d);const mesh=new THREE.Mesh(geometry,this.mat(color,surface));mesh.userData.surface=surface;mesh.position.set(x,y+h/2,z);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);if(this.captureObstacles&&y+h>.34&&y<2.25)this.obstacleMeshes.push(mesh);if(outline){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:this.comic?0x000000:ink,transparent:true,opacity:.55}));mesh.add(lines);}return mesh;}
@@ -86,8 +97,9 @@ export class TownScene{
   for(let i=0;i<30000;i++){ctx.strokeStyle=i%3===0?'#b9c49d':i%3===1?'#d5d9b8':'#c0c99f';ctx.lineWidth=.6+r()*1.4;const x=r()*size,y=r()*size;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+2+r()*5,y-2-r()*6);ctx.stroke();}
   const gt=new THREE.CanvasTexture(groundCanvas);gt.colorSpace=THREE.SRGBColorSpace;gt.wrapS=gt.wrapT=THREE.RepeatWrapping;gt.repeat.set(2,2);const gm=new THREE.Mesh(new THREE.PlaneGeometry(420,420),new THREE.MeshToonMaterial({map:gt,gradientMap:this.toonRamp}));gm.rotation.x=-Math.PI/2;gm.position.y=.06;gm.receiveShadow=true;this.scene.add(gm);this.landscape={ground:gm};
   this.buildDistantLandscape();
+  if(this.definition){this.definition.ground(this);return;}
   const path=(x,z,w,d)=>this.box(x,.07,z,w,.025,d,'#e0d8bd',this.scene,false,0,'stone');
-  const courtyard=getRoom('courtyard'),garden=getRoom('garden'),gate=getRoom('gate');
+  const courtyard=this.getRoom('courtyard'),garden=this.getRoom('garden'),gate=this.getRoom('gate');
   path(0,7,2.8,22);path(-9,2,2,12);path(9,2,2,12);path(0,8,20,2);path(0,14.5,16,1.5);path(0,-4,22,2);path(-9,-7.5,2,9);path(9,-7.5,2,9);path(-13,-11,10,2);path(13,-11,10,2);path(13,9,10,2);path(16,10,2,4);
   this.box(courtyard.x,.1,courtyard.z,courtyard.w,.045,courtyard.d,'#ddd4b8',this.scene,false);
   for(let x=courtyard.x-courtyard.w/2+1;x<courtyard.x+courtyard.w/2;x+=2)for(let z=courtyard.z-courtyard.d/2+.5;z<courtyard.z+courtyard.d/2;z+=1)this.box(x,.15,z,1.92,.015,.92,(x+z)%4?'#e5ddc8':'#ded6bf',this.scene,false);
@@ -99,11 +111,11 @@ export class TownScene{
   for(const x of [-2.3,2.3])this.box(x,.1,gate.z,.35,3,.35,'#8f8b78');this.box(0,2.8,gate.z,5.7,.35,.55,'#7c8e7b');
  }
  buildDistantLandscape(){
-  const stream=buildRiver(this.scene,{enhanced:this.scenery,surfaceMaterial:this.surfaceMaterial}),centerline=stream.centerline;this.landscape.stream=stream;this.landscape.river=stream.water;
+  const stream=buildRiver(this.scene,{enhanced:this.scenery,surfaceMaterial:this.surfaceMaterial,offset:this.definition?[-10,-9]:[0,0]}),centerline=stream.centerline;this.landscape.stream=stream;this.landscape.river=stream.water;
   const random=grain(6492),trees=[],riverPoints=centerline.filter((_,i)=>i%4===0);
   for(let attempts=0;trees.length<165&&attempts<3500;attempts++){
    const x=(random()-.5)*140,z=(random()-.5)*126;
-   if(Math.abs(x)<29&&Math.abs(z)<25)continue;
+   if(this.definition?x>this.layoutBounds.minX-4&&x<this.layoutBounds.maxX+4&&z>this.layoutBounds.minZ-4&&z<this.layoutBounds.maxZ+4:Math.abs(x)<29&&Math.abs(z)<25)continue;
    if(riverPoints.some(p=>Math.hypot(p.x-x,p.z-z)<7))continue;
    trees.push({x,z,height:2.2+random()*3.3,broad:random()<.34,turn:random()*Math.PI*2});
   }
@@ -128,7 +140,8 @@ export class TownScene{
   else add(start,end,.15,2.7);
  }
  buildArchitecture(){
-  for(const b of buildings){const root=new THREE.Group();this.scene.add(root);this.roundBox(b.x,.1,b.z,b.w,.12,b.d,'#b9a68a',root,.13,'stone');this.box(b.x,.23,b.z,b.w-.3,.025,b.d-.3,'#e0cfab',root,false,0,'wood');for(let z=b.z-b.d/2+.7;z<b.z+b.d/2;z+=.85)this.box(b.x,.255,z,b.w-.4,.006,.018,'#c5b795',root,false);
+  if(this.definition){this.definition.architecture(this);return;}
+  for(const b of this.layoutBuildings){const root=new THREE.Group();this.scene.add(root);this.roundBox(b.x,.1,b.z,b.w,.12,b.d,'#b9a68a',root,.13,'stone');this.box(b.x,.23,b.z,b.w-.3,.025,b.d-.3,'#e0cfab',root,false,0,'wood');for(let z=b.z-b.d/2+.7;z<b.z+b.d/2;z+=.85)this.box(b.x,.255,z,b.w-.4,.006,.018,'#c5b795',root,false);
    const walls=new THREE.Group();root.add(walls);const left=b.x-b.w/2,right=b.x+b.w/2,north=b.z-b.d/2,south=b.z+b.d/2;
    this.wall(walls,'x',north,left,right,null,b.color);this.wall(walls,'x',south,left,right,['west','east'].includes(b.id)?null:b.id==='old'?14:b.x,b.color);this.wall(walls,'z',left,north,south,['east','hall'].includes(b.id)?-4:null,b.color);this.wall(walls,'z',right,north,south,['west','hall'].includes(b.id)?-4:null,b.color);
    if(['west','east'].includes(b.id)){for(const z of [-5,-3]){this.wall(walls,'x',z,left,b.x,b.x-3,b.color);this.wall(walls,'x',z,b.x,right,b.x+3,b.color);}for(const [a,c]of [[north,-5],[-3,south]])this.wall(walls,'z',b.x,a,c,null,b.color);}
@@ -140,7 +153,7 @@ export class TownScene{
    if(r.owner)buildGuestRoom(this,r,g);
   }
   const hall=this.interiors.get('hall');this.table(0,-11,5.2,2.3,hall);for(const x of [-1.7,0,1.7]){this.box(x,1.12,-11,.32,.1,.32,palette.cream,hall);}this.table(-5.4,-14,2,1,hall);this.table(5.4,-14,2,1,hall);this.roundBox(-6,.3,-7,2,.7,1.1,'#a4b5a0',hall,.23,'cloth');this.roundBox(-6,1,-7.4,2,.6,.25,'#a4b5a0',hall,.12,'cloth');this.roundBox(6,.3,-7,1.6,1.8,.5,palette.wood,hall,.085,'wood');for(let j=0;j<3;j++)for(let i=0;i<6;i++)this.box(5.4+i*.22,.6+j*.46,-6.7,.16,.32,.23,['#a4b5a0','#c9b18e','#b5c6c8'][i%3],hall,false);
-  for(const seat of hallSeats)this.chair(seat.x,seat.z,seat.angle,hall,seat.id);
+  for(const seat of this.seats)this.chair(seat.x,seat.z,seat.angle,hall,seat.id);
   for(const x of [-5,5]){this.table(x,-4.7,1.5,.7,hall);this.box(x,.29,-1.2,3,.025,2.8,'#c3cbb1',hall,false,0,'cloth');}
   // Low screens mark private corners without sealing them into extra rooms.
   for(const x of [-2.5,2.5])this.box(x,.28,-3.3,.14,1.15,2.2,'#b2bca1',hall,true,0,'cloth');
@@ -148,7 +161,7 @@ export class TownScene{
   this.hallLife=buildHallLife(this,hall);
   const kitchen=this.interiors.get('kitchen');this.roundBox(-18,.3,-16.8,3.5,.8,.8,palette.wood,kitchen,.12,'wood');this.roundBox(-19,.3,-13.5,1.2,1,1.2,'#b4bbaf',kitchen,.14,'stone');this.table(-16.5,-14,1.8,1.2,kitchen);
   const shrine=this.interiors.get('shrine');this.roundBox(16,.3,-16.9,6,.65,1,palette.wood,shrine,.10,'wood');this.box(16,.3,-14,3,.035,2,'#b7c6b5',shrine,false,0,'cloth');
-  for(const id of ['old','archive','storage']){const g=this.interiors.get(id),r=getRoom(id);this.table(r.x+(id==='old'?-.4:id==='archive'?.4:0),r.z,Math.min(2,r.w-1),1,g);}
+  for(const id of ['old','archive','storage']){const g=this.interiors.get(id),r=this.getRoom(id);this.table(r.x+(id==='old'?-.4:id==='archive'?.4:0),r.z,Math.min(2,r.w-1),1,g);}
   for(const r of destinations){const a=placeAnchor(r),label=this.label(placeName(r),new THREE.Vector3(a.x,a.y,a.z),'room-label',{type:'room',id:r.id});label.el.dataset.destination=r.id;label.el.setAttribute('aria-label','前往'+placeName(r));this.placeLabels.set(r.id,label);}
  }
  table(x,z,w,d,g,color=palette.wood){this.roundBox(x,1,z,w,.12,d,color,g,.11,'wood');for(const dx of [-w/2+.15,w/2-.15])for(const dz of [-d/2+.15,d/2-.15])this.box(x+dx,.28,z+dz,.12,.72,.12,'#9f8d73',g,false,0,'wood');}
@@ -157,23 +170,23 @@ export class TownScene{
   this.scene.updateMatrixWorld(true);
   const obstacles=[...this.wallObstacles,...this.obstacleMeshes.map(mesh=>{const b=new THREE.Box3().setFromObject(mesh);let parent=mesh,id;while(parent){if(parent.userData.seatId){id=parent.userData.seatId;break;}parent=parent.parent;}return {id,minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z};})];
   for(const {bounds:b}of this.props.values())if(b.min.y<.6&&b.max.y>.55&&b.max.y-b.min.y>.25)obstacles.push({minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z});
-  this.navigation=new NavigationWorld(obstacles);this.host.dataset.navigation='furniture-walls';
+  this.navigation=new NavigationWorld(obstacles,this.layoutBounds);this.host.dataset.navigation='furniture-walls';
  }
- buildPeople(){for(const a of cast){
-  const rig=createCharacter(this,a.id),g=rig.root;g.userData.pick={type:'person',id:a.id};this.scene.add(g);this.clickable.push(g);
+ buildPeople(){for(const a of this.layoutCast){
+  const rig=createCharacter(this,a.id,this.definition?.characterOptions?.(a.id)||{}),g=rig.root;g.userData.pick={type:'person',id:a.id};this.scene.add(g);this.clickable.push(g);
   const pos=this.navigation.nearest({x:a.seat[0],z:a.seat[1]},this.actorObstacles());g.position.set(pos.x,0,pos.z);g.rotation.y=.35;
   const label=this.label(a.name,new THREE.Vector3(),'person-label '+(a.id===playerId(this.current)?'you':''),{type:'person',id:a.id});
   this.actors.set(a.id,{g,rig,label,name:a.name,base:a.seat,path:[],speed:0,gesture:'idle',blocked:0});
  }}
  // Seated bodies fit the 0.7m chair; the chair itself remains a static obstacle.
  actorObstacles(except){return [...this.actors.entries()].filter(([id,a])=>id!==except&&a.g.visible).map(([id,a])=>({id,x:a.g.position.x,z:a.g.position.z,radius:a.seat?.35:actorRadius}));}
- roomArea(id){const r=getRoom(id);return {minX:r.x-r.w/2+.55,maxX:r.x+r.w/2-.55,minZ:r.z-r.d/2+.55,maxZ:r.z+r.d/2-.55};}
+ roomArea(id){const r=this.getRoom(id);return {minX:r.x-r.w/2+.55,maxX:r.x+r.w/2-.55,minZ:r.z-r.d/2+.55,maxZ:r.z+r.d/2-.55};}
  moving(actor){return !!(actor.path.length||actor.dock||actor.plan||actor.targetSeat);}
  sitActor(id,seatId,instant=false,kind='social'){
-  const actor=this.actors.get(id),seat=hallSeats.find(s=>s.id===seatId);if(!seat||[...this.actors.values()].some(a=>a!==actor&&a.g.visible&&(a.seat?.id===seatId||a.targetSeat?.id===seatId)))return false;
+  const actor=this.actors.get(id),seat=this.seats.find(s=>s.id===seatId);if(!seat||[...this.actors.values()].some(a=>a!==actor&&a.g.visible&&(a.seat?.id===seatId||a.targetSeat?.id===seatId)))return false;
   if(actor.seat?.id===seatId)return true;
   if(instant){actor.g.position.set(seat.x,0,seat.z);actor.g.rotation.y=seat.angle;actor.seat=seat;actor.rig.sit=1;actor.rig.sitTarget=1;actor.path=[];actor.dock=null;actor.plan=null;return true;}
-  this.setActorPath(id,seat.approach,'hall',kind);actor.targetSeat=seat;return true;
+  this.setActorPath(id,seat.approach,this.publicRoom(),kind);actor.targetSeat=seat;return true;
  }
  setActorPath(id,target,room=null,kind='walk'){
   const actor=this.actors.get(id);actor.targetSeat=null;actor.pathKind=kind;actor.destination={x:target.x,z:target.z};actor.area=room?this.roomArea(room):null;actor.blocked=0;
@@ -210,7 +223,8 @@ export class TownScene{
   if(!actor.seat&&!actor.dock)actor.rig.sitTarget=0;animateCharacter(actor.rig,dt,travelled/dt,this.conversation===id?(actor.rig.voiceSpeaking||actor.rig.speakingUntil>actor.rig.time?'talk':'listen'):actor.gesture);
  }
  buildEvidence(){
-  for(const [id,spec]of Object.entries(propLayout)){const room=getRoom(spec.room),placement=placeRoomEvidence(room,spec,id),g=makeEvidenceProp(this,placement?{...spec,color:placement.color}:spec);
+  if(this.definition){this.definition.evidence(this);return;}
+  for(const [id,spec]of Object.entries(propLayout)){const room=this.getRoom(spec.room),placement=placeRoomEvidence(room,spec,id),g=makeEvidenceProp(this,placement?{...spec,color:placement.color}:spec);
    if(placement){g.position.set(placement.x,placement.y,placement.z);g.rotation.y=placement.angle;g.scale.x=placement.mirror;g.userData.carrier=placement.carrier;}
    else{const offsetX=spec.y===1.14&&room.id==='old'?-.4:spec.y===1.14&&room.id==='archive'?.4:0;g.position.set(room.x+spec.x+offsetX,spec.y,room.z+spec.z);}
    g.userData.pick={type:'spot',id};this.scene.add(g);
@@ -220,13 +234,13 @@ export class TownScene{
  }
  resize(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.composer?.setSize(w,h);this.distantPass?.uniforms.resolution.value.copy(this.renderer.getDrawingBufferSize(new THREE.Vector2()));this.camera.left=-18*w/h;this.camera.right=18*w/h;this.camera.top=18;this.camera.bottom=-18;this.camera.updateProjectionMatrix();if(this.current&&!this.conversationCamera?.saved)this.focus(this.current.room,this.overview);}
  focus(id,overview=false){
-  const r=getRoom(id)||getRoom('hall');this.overview=overview;const w=this.host.clientWidth,h=this.host.clientHeight,mobile=w<600;
+  const r=this.getRoom(id)||this.getRoom(this.publicRoom());this.overview=overview;const w=this.host.clientWidth,h=this.host.clientHeight,mobile=w<600;
   this.camera.updateMatrixWorld();const right=new THREE.Vector3(1,0,0).applyQuaternion(this.camera.quaternion),up=new THREE.Vector3(0,1,0).applyQuaternion(this.camera.quaternion);
   const top=mobile?205:h<540?90:125,bottom=75,availableH=Math.max(h*.45,h-top-bottom);
   const fit=(rw,rd)=>{const spanX=Math.abs(right.x)*rw+Math.abs(right.z)*rd,spanY=Math.abs(up.x)*rw+Math.abs(up.z)*rd+Math.abs(up.y)*3.4;return Math.min(5.2,(36*w/h*(mobile?.88:.78))/spanX,36*(availableH/h)/spanY);};
-  this.controls.minZoom=fit(bounds.maxX-bounds.minX+4,bounds.maxZ-bounds.minZ+4);
+  this.controls.minZoom=fit(this.layoutBounds.maxX-this.layoutBounds.minX+4,this.layoutBounds.maxZ-this.layoutBounds.minZ+4);
   this.targetZoom=overview?this.controls.minZoom:fit(r.w+1.3,r.d+1.3);
-  if(!overview&&r.building&&r.id!=='hall')this.targetZoom=Math.min(5.2,this.targetZoom*(mobile?1.45:1.15));
+  if(!overview&&r.building&&r.id!==this.publicRoom())this.targetZoom=Math.min(5.2,this.targetZoom*(mobile?1.45:1.15));
   this.targetZoom=Math.max(this.controls.minZoom,this.targetZoom);this.camera.zoom=Math.max(this.controls.minZoom,this.camera.zoom);this.camera.updateProjectionMatrix();this.distantPass.enabled=this.comic||overview;
   this.focusTarget=new THREE.Vector3(overview?0:r.x,1.15,overview?0:r.z).addScaledVector(up,overview?0:(top-bottom)/2/h*36/this.targetZoom);
   this.host.dataset.view=overview?'overview':'room';this.host.dataset.room=id;this.refreshLabels();this.refreshOutline();
@@ -262,11 +276,12 @@ export class TownScene{
   if(paused||thinking||voiceEnded)rig.speakingUntil=0;
  }
  captureMap(){return captureSceneMap(this);}
- refreshLabels(){if(!this.current)return;for(const [id,label]of this.placeLabels){label.el.hidden=false;label.el.dataset.current=String(id===this.current.room);label.el.title=placeName(getRoom(id))+(this.current.rooms.find(r=>r.id===id)?.accessible?' · 点击前往':' · 先征求进房同意');}}
+ refreshLabels(){if(!this.current)return;for(const [id,label]of this.placeLabels){label.el.hidden=false;label.el.dataset.current=String(id===this.current.room);label.el.title=placeName(this.getRoom(id))+(this.current.rooms.find(r=>r.id===id)?.accessible?' · 点击前往':' · 先征求进房同意');}}
  syncWalls(){
-  const p=this.actors.get(playerId(this.current)).g.position,inside=buildings.find(b=>Math.abs(p.x-b.x)<b.w/2&&Math.abs(p.z-b.z)<b.d/2)?.id||null;
+  const p=this.actors.get(playerId(this.current))?.g.position;if(!p)return;const inside=this.layoutBuildings.find(b=>Math.abs(p.x-b.x)<b.w/2&&Math.abs(p.z-b.z)<b.d/2)?.id||null;
   if(this.insideBuilding===inside)return;this.insideBuilding=inside;
   for(const [id,sh]of this.shells)if(sh.walls)sh.walls.traverse(o=>{if(o.isMesh||o.isLineSegments){if(!o.userData.ownMaterial){const base=o.material;o.material=base.clone();o.material.onBeforeCompile=base.onBeforeCompile;o.material.customProgramCacheKey=base.customProgramCacheKey;o.userData.ownMaterial=true;}o.material.transparent=id===inside||o.isLineSegments;o.material.opacity=id===inside?(o.isLineSegments?.14:.28):(o.isLineSegments?.55:1);o.material.depthWrite=id!==inside;}});
+  this.definition?.syncRoofs?.(this,inside);
   this.host.dataset.wallOpacity=inside?'0.28':'1';this.host.dataset.insideBuilding=inside||'outside';
  }
  update(state,route=null){const switched=this.current?.slotToken!==state.slotToken;const previous=switched?null:this.current;if(switched){this.clearEntryReaction();this.entryReactionsSeen.clear();this.setConversation(null);this.conversationCamera.reset();this.social.cancel();this.travelRoom=null;for(const a of this.actors.values()){a.path=[];a.seat=null;a.targetSeat=null;a.dock=null;a.plan=null;}}this.current=state;this.host.dataset.playerId=playerId(state);for(const [id,a]of this.actors)a.label.el.classList.toggle('you',id===playerId(state));
@@ -276,23 +291,23 @@ export class TownScene{
   // journey through real door gaps, rather than teleporting to the last leg.
   const arrivalTargets=[];
   for(const p of state.people){
-   const a=this.actors.get(p.id),wasVisible=a.g.visible,visible=p.location===state.room;a.g.visible=visible;a.label.el.hidden=!visible;
+   const a=this.actors.get(p.id);if(!a)continue;const wasVisible=a.g.visible,visible=p.location===state.room;a.g.visible=visible;a.label.el.hidden=!visible;
    if(!visible){a.path=[];a.seat=null;a.dock=null;a.plan=null;a.targetSeat=null;a.rig.sitTarget=0;continue;}
-   const r=getRoom(p.location),pos=p.location==='hall'?cast.find(c=>c.id===p.id).seat:[r.x+(p.portrait%2?.8:-.8),r.z+.6];
+   const r=this.getRoom(p.location),pos=p.location===this.publicRoom()?this.layoutCast.find(c=>c.id===p.id).seat:[r.x+(p.portrait%2?.8:-.8),r.z+.6];
    const changed=!previous||previous.room!==state.room||previous.people.find(q=>q.id===p.id)?.location!==p.location;
    if(changed){
-    if(!previous&&p.location==='hall'){this.sitActor(p.id,homeSeat(p.id).id,true);continue;}
+    if(!previous&&p.location===this.publicRoom()){this.sitActor(p.id,this.homeSeat(p.id).id,true);continue;}
     const destination=this.navigation.nearest({x:pos[0],z:pos[1]},[...this.actorObstacles(p.id),...arrivalTargets],this.roomArea(p.location));
     if(!destination)continue;
     arrivalTargets.push({...destination,id:p.id,radius:actorRadius});
     if(previous&&(p.id===playerId(this.current)||wasVisible)&&(a.seat||a.dock||this.navigation.free(a.g.position))){this.setActorPath(p.id,destination,p.location,'travel');if(p.id===playerId(this.current)&&previous.room!==state.room)this.travelRoom=state.room;}
-    else{a.path=[];a.g.position.set(destination.x,0,destination.z);if(p.location==='hall')this.sitActor(p.id,homeSeat(p.id).id,true);}
-    if(previous&&p.location==='hall')this.sitActor(p.id,homeSeat(p.id).id,false,'travel');
+    else{a.path=[];a.g.position.set(destination.x,0,destination.z);if(p.location===this.publicRoom())this.sitActor(p.id,this.homeSeat(p.id).id,true);}
+    if(previous&&p.location===this.publicRoom())this.sitActor(p.id,this.homeSeat(p.id).id,false,'travel');
    }
   }
-  if(state.room==='hall'&&JSON.stringify(previous?.chatSetting)!==JSON.stringify(state.chatSetting)){
-   if(state.chatSetting?.scope==='private'){const seats=cornerSeats(state.chatSetting.zone);for(const [id,a]of this.actors)if(![playerId(this.current),state.chatSetting.actor].includes(id)&&[a.seat?.zone,a.targetSeat?.zone,a.dock?.seat.zone].includes(state.chatSetting.zone))this.sitActor(id,homeSeat(id).id,false,'conversation');this.sitActor(playerId(this.current),seats[0].id,false,'conversation');this.sitActor(state.chatSetting.actor,seats[1].id,false,'conversation');}
-   else if(previous?.chatSetting){for(const id of [playerId(this.current),previous.chatSetting.actor])if(this.actors.get(id)?.g.visible)this.sitActor(id,homeSeat(id).id,false,'conversation');}
+  if(state.room===this.publicRoom()&&JSON.stringify(previous?.chatSetting)!==JSON.stringify(state.chatSetting)){
+   if(state.chatSetting?.scope==='private'){const seats=this.cornerSeats(state.chatSetting.zone);for(const [id,a]of this.actors)if(![playerId(this.current),state.chatSetting.actor].includes(id)&&[a.seat?.zone,a.targetSeat?.zone,a.dock?.seat.zone].includes(state.chatSetting.zone))this.sitActor(id,this.homeSeat(id).id,false,'conversation');this.sitActor(playerId(this.current),seats[0].id,false,'conversation');this.sitActor(state.chatSetting.actor,seats[1].id,false,'conversation');}
+   else if(previous?.chatSetting){for(const id of [playerId(this.current),previous.chatSetting.actor])if(this.actors.get(id)?.g.visible)this.sitActor(id,this.homeSeat(id).id,false,'conversation');}
   }
   if(!previous||previous.room!==state.room)this.focus(state.room);
   this.contacts?.updateActors(this.actors);this.syncWalls();this.social.setState(state);this.setSpots(state);this.refreshLabels();this.sun.intensity=state.phase?(this.comic?.95:1.05):(this.comic?1.35:1.65);const haze=state.phase?'#c9caba':'#d6dcc8';this.scene.background.set(haze);this.scene.fog.color.set(haze);this.distantPass.uniforms.haze.value.set(haze);
@@ -312,14 +327,14 @@ export class TownScene{
   // A tap on a table stops at its edge; an empty destination gets a clear path.
   this.setActorPath(playerId(this.current),point,this.current.room);
  }
- frame(t){requestAnimationFrame(this.frame);if(this.suspended||document.hidden||t-this.last<1000/40)return;const dt=Math.min((t-this.last)/1000,.05);this.last=t;this.landscape.stream.update(dt);
+ frame(t){this.raf=requestAnimationFrame(this.frame);if(this.suspended||document.hidden||t-this.last<1000/40)return;const dt=Math.min((t-this.last)/1000,.05);this.last=t;this.landscape.stream?.update(dt);
   const entryHold=this.entrySpeech?.started&&this.entrySpeech.hold>0&&this.entryBubble.inView;
   if(this.travelRoom&&!entryHold){const player=this.actors.get(playerId(this.current));if(this.moving(player)){
    const up=new THREE.Vector3(0,1,0).applyQuaternion(this.camera.quaternion),h=this.host.clientHeight,top=this.host.clientWidth<600?205:h<540?90:125;
    this.targetZoom=Math.min(this.targetZoom,1.6);this.focusTarget=player.g.position.clone().add(new THREE.Vector3(0,1.15,0)).addScaledVector(up,(top-75)/2/h*36/this.targetZoom);
   }else{const room=this.travelRoom;this.travelRoom=null;this.focus(room);this.onTravelComplete?.(room);}}
   if(this.focusTarget&&!this.conversationCamera.saved){const delta=this.focusTarget.clone().sub(this.controls.target).multiplyScalar(.12);this.controls.target.add(delta);this.camera.position.add(delta);this.camera.zoom+=(this.targetZoom-this.camera.zoom)*.13;this.camera.updateProjectionMatrix();if(delta.length()<.002&&Math.abs(this.camera.zoom-this.targetZoom)<.005)this.focusTarget=null;}
-  this.social.tick(dt);for(const [id,actor]of this.actors)if(actor.g.visible){if(entryHold)animateCharacter(actor.rig,dt,0,id===this.entrySpeech.actor?'talk':'idle');else this.moveActor(id,actor,dt);}this.contacts?.updateActors(this.actors);this.syncWalls();const cinematic=this.conversationCamera.tick(dt);if(!cinematic)this.controls.update();this.camera.zoom=Math.max(this.controls.minZoom,this.camera.zoom);const target=this.controls.target,clampedX=cinematic?target.x:THREE.MathUtils.clamp(target.x,bounds.minX,bounds.maxX),clampedZ=cinematic?target.z:THREE.MathUtils.clamp(target.z,bounds.minZ,bounds.maxZ);this.camera.position.x+=clampedX-target.x;this.camera.position.z+=clampedZ-target.z;target.x=clampedX;target.z=clampedZ;this.camera.updateProjectionMatrix();this.composer.render();this.host.dataset.zoom=this.camera.zoom.toFixed(3);const w=this.host.clientWidth,h=this.host.clientHeight;
+  this.social.tick(dt);for(const [id,actor]of this.actors)if(actor.g.visible){if(entryHold)animateCharacter(actor.rig,dt,0,id===this.entrySpeech.actor?'talk':'idle');else this.moveActor(id,actor,dt);}this.contacts?.updateActors(this.actors);this.syncWalls();const cinematic=this.conversationCamera.tick(dt);if(!cinematic)this.controls.update();this.camera.zoom=Math.max(this.controls.minZoom,this.camera.zoom);const target=this.controls.target,clampedX=cinematic?target.x:THREE.MathUtils.clamp(target.x,this.layoutBounds.minX,this.layoutBounds.maxX),clampedZ=cinematic?target.z:THREE.MathUtils.clamp(target.z,this.layoutBounds.minZ,this.layoutBounds.maxZ);this.camera.position.x+=clampedX-target.x;this.camera.position.z+=clampedZ-target.z;target.x=clampedX;target.z=clampedZ;this.camera.updateProjectionMatrix();this.composer.render();this.host.dataset.zoom=this.camera.zoom.toFixed(3);const w=this.host.clientWidth,h=this.host.clientHeight;
   const project=(label,above=false)=>{if(label.el.hidden)return;const p=label.world.clone().project(this.camera);label.el.style.transform=`translate(${(p.x+1)*w/2}px,${(-p.y+1)*h/2}px) translate(-50%,${above?'-100%':'-50%'})${above?' translateY(-4px)':''}`;label.el.style.visibility=p.z<1&&p.x>-1.1&&p.x<1.1&&p.y>-1.1&&p.y<1.1?'visible':'hidden';};
   placeSpeechBubble(this,this.social.bubble,this.actors.get(this.social.bubble.actor));this.drawEntryReaction(dt);
   for(const a of this.actors.values()){a.label.world.copy(a.g.position).add(new THREE.Vector3(0,2.65-(a.rig.sit||0)*.3,0));project(a.label,true);if(this.social.bubble.inView&&this.social.bubble.actor===a.rig.id||this.entrySpeech&&this.entryBubble.inView&&this.entrySpeech.actor===a.rig.id)a.label.el.style.visibility='hidden';}for(const label of this.placeLabels.values())project(label);for(const p of this.props.values()){p.button.hidden=!p.active||this.overview;if(p.button.hidden)continue;const min=new THREE.Vector2(Infinity,Infinity),max=new THREE.Vector2(-Infinity,-Infinity);for(const x of [p.bounds.min.x,p.bounds.max.x])for(const y of [p.bounds.min.y,p.bounds.max.y])for(const z of [p.bounds.min.z,p.bounds.max.z]){const q=new THREE.Vector3(x,y,z).project(this.camera);const sx=(q.x+1)*w/2,sy=(-q.y+1)*h/2;min.x=Math.min(min.x,sx);min.y=Math.min(min.y,sy);max.x=Math.max(max.x,sx);max.y=Math.max(max.y,sy);}const bw=Math.max(40,max.x-min.x+6),bh=Math.max(40,max.y-min.y+6);p.button.style.width=bw+'px';p.button.style.height=bh+'px';p.button.style.transform=`translate(${(min.x+max.x)/2}px,${(min.y+max.y)/2}px) translate(-50%,-50%)`;p.button.style.visibility=max.x>0&&min.x<w&&max.y>0&&min.y<h?'visible':'hidden';}
