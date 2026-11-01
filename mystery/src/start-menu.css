@@ -32,10 +32,11 @@
 .start-menu .modal-heading h2{margin:0;line-height:0;letter-spacing:0}
 .start-menu-logo{display:block;width:min(480px,100%);height:auto;max-height:clamp(80px,calc(var(--app-height,100dvh) - 390px),320px);object-fit:contain;margin:0 auto;pointer-events:none;user-select:none}
 .start-menu-tagline{margin:0 0 32px;font-size:18px;line-height:1.6;letter-spacing:1px;white-space:nowrap;color:#394541;text-shadow:0 1px 5px #fff9ed,0 0 10px #fff9ed}
-.start-menu-actions{display:flex;flex-direction:column;align-items:flex-start;width:calc(100% - 48px);max-width:440px;gap:10px;margin:0 0 0 48px;text-align:left}
+.start-menu-actions{display:flex;flex-direction:column;align-items:center;width:100%;max-width:440px;gap:10px;margin:0 auto;text-align:center}
 .start-menu-footer{position:absolute;z-index:2;bottom:max(14px,env(safe-area-inset-bottom));left:12px;right:12px;text-align:center}
 .start-menu-version{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;font-size:13px;font-variant-numeric:tabular-nums;color:#394541;text-shadow:0 1px 4px #fff9ed,0 0 8px #fff9ed}
 #about-mossvale{gap:10px}
+#about-mossvale .menu-github-icon{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%)}
 .about-modal{display:flex;flex-direction:column;overflow:hidden}
 .about-languages{display:flex;flex-shrink:0;gap:24px;margin:0 0 12px;border-bottom:1px solid #b9b19a}
 .about-languages button{min-height:44px;padding:6px 0;font:inherit;font-size:16px}
@@ -50,7 +51,7 @@
 .menu-github-icon{display:block;flex:0 0 auto;width:22px;height:22px;fill:currentColor}
 #loading{display:flex;align-items:center;justify-content:center;overflow:hidden;background:#171512;color:#f6f0de;text-align:center}
 #loading img{height:min(var(--app-height,100dvh),190vw);width:auto;max-width:none;flex:none}
-.start-menu-button{position:relative;display:flex;align-items:center;justify-content:flex-start;max-width:100%;min-height:50px;padding:8px 0;font-size:25px;font-weight:400;line-height:1.35;letter-spacing:2px;text-align:left;white-space:nowrap;text-decoration:none;text-underline-offset:7px;text-decoration-thickness:1.5px;border:0;border-radius:0;background:transparent;color:#343934;box-shadow:none;text-shadow:0 1px 5px #fff9ed,0 0 10px #fff9ed;transition:color .15s}
+.start-menu-button{position:relative;display:flex;align-items:center;justify-content:center;max-width:100%;min-height:50px;padding:8px 0;font-size:25px;font-weight:700;line-height:1.35;letter-spacing:2px;text-align:center;white-space:nowrap;text-decoration:none;text-underline-offset:7px;text-decoration-thickness:1.5px;border:0;border-radius:0;background:transparent;color:#343934;box-shadow:none;text-shadow:0 1px 5px #fff9ed,0 0 10px #fff9ed;transition:color .15s}
 .start-menu-button.continue-case{letter-spacing:.5px}
 .start-menu-button.primary{background:transparent;color:#343934;box-shadow:none}
 .start-menu-button:not(:disabled):hover,.start-menu-button:focus-visible{background:transparent;transform:none;box-shadow:none;text-decoration:underline;outline:none}
@@ -100,7 +101,7 @@
  .menu-active .paper-modal.script-picker,.menu-active .paper-modal.role-picker{max-height:calc(var(--app-height,100dvh) - 24px);padding:18px 17px}
  .menu-active .paper-modal.start-menu{max-height:calc(var(--app-height,100dvh) - 120px);padding:0}
  .start-menu-tagline{font-size:clamp(12px,3.6vw,16px);letter-spacing:.5px}
- .start-menu-actions{width:calc(100% - 20px);max-width:340px;gap:8px;margin-left:20px}
+ .start-menu-actions{width:100%;max-width:340px;gap:8px;margin:0 auto}
  .start-menu-version{font-size:12px}
  .menu-github-icon{width:20px;height:20px}
  .script-page{max-height:calc(var(--app-height,100dvh) - 180px)}

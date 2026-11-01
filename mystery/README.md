@@ -1,6 +1,6 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.8.13** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.8.14** · [完整版本记录](../CHANGELOG.md)
 
 当前剧本为《雾灯未眠》，包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档。
 
@@ -12,7 +12,7 @@
 
 ## English
 
-Current version **0.8.13** · [Full changelog](../CHANGELOG.md)
+Current version **0.8.14** · [Full changelog](../CHANGELOG.md)
 
 The current story, 《雾灯未眠》, includes six playable protagonists, scene investigation, AI dialogue, voice, and separate saves for each character. The game is currently in Chinese; the [project introduction](../README.md#english) is available in Chinese and English and also appears in the in-game About window.
 
