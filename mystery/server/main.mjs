@@ -15,7 +15,7 @@ const cookiePath=process.env.MYSTERY_COOKIE_PATH||'/';
 if(!/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(cookiePath))throw new Error('Invalid cookie path');
 const cookieSecurity=process.env.MYSTERY_SECURE_COOKIE==='1'?'; Secure':'';
 await mkdir(data,{recursive:true});
-if(process.env.DEEPSEEK_API_KEY)configure(async()=>({apiKey:process.env.DEEPSEEK_API_KEY,baseUrl:process.env.DEEPSEEK_BASE_URL||'https://api.deepseek.com',model:process.env.DEEPSEEK_MODEL||'deepseek-chat'}));
+if(process.env.DEEPSEEK_API_KEY)configure(async()=>({apiKey:process.env.DEEPSEEK_API_KEY,baseUrl:process.env.DEEPSEEK_BASE_URL||'https://api.deepseek.com',model:process.env.DEEPSEEK_MODEL||'deepseek-v4-flash'}));
 const legacyFiles=new Set(),locks=new Set(),cache=new Map(),loads=new Map(),ambientPending=new Set(),ambientNext=new Map();
 const save=async(id,s)=>{rememberBestScore(s);const file=path.join(data,id+'.json'),tmp=file+'.tmp';if(legacyFiles.has(id)){try{await copyFile(file,file+'.before-six-roles-v1',1);}catch(e){if(e.code!=='EEXIST')throw e;}legacyFiles.delete(id);}await writeFile(tmp,JSON.stringify(s),{mode:0o600});await rename(tmp,file);cache.set(id,s);};
 const load=async id=>{

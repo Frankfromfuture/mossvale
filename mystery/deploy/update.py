@@ -15,17 +15,17 @@ import time
 import urllib.request
 
 BASE = Path('/srv/mossvale-mystery')
-NAME = '20261101-mossvale-0.9.0-v14'
-PREVIOUS = BASE/'releases'/'20261101-mossvale-0.8.12-v13'
+NAME = '20261101-mossvale-0.10.1-v15'
+PREVIOUS = BASE/'releases'/'20261101-mossvale-0.9.0-v14'
 RELEASE = BASE/'releases'/NAME
 ARCHIVE = Path('/tmp/mystery-'+NAME+'.tgz')
 CURRENT = BASE/'current'
 DATA = BASE/'data'
 PREFLIGHT_DATA = BASE/('preflight-data-'+NAME)
 MAIN = 'mossvale-mystery'
-CHECK = 'mossvale-mystery-check-v14'
-OLD = 'mossvale-mystery-before-v14'
-MANIFEST = 'deploy/release-manifest-v14.json'
+CHECK = 'mossvale-mystery-check-v15'
+OLD = 'mossvale-mystery-before-v15'
+MANIFEST = 'deploy/release-manifest-v15.json'
 BACKUP = BASE/'backups'/('before-'+NAME+'.tgz')
 LIVE = Path('/srv/brizo-sync/current/services/device-sync/deploy/nginx.conf')
 NGINX_PREVIOUS_HASH = '32143d62eab3f572a6183b915ba6fcb6350604db562badfd9933edd05eb96e9e'
@@ -43,7 +43,11 @@ def check_compatible_archives():
 
 
 def run(*args):
-    return subprocess.check_output(args, stderr=subprocess.STDOUT).decode().strip()
+    try:
+        return subprocess.check_output(args, stderr=subprocess.STDOUT).decode().strip()
+    except subprocess.CalledProcessError as error:
+        print(error.output.decode(errors='replace')[-6000:], file=sys.stderr)
+        raise
 
 
 def digest(data):
@@ -138,6 +142,11 @@ if phase == 'prepare':
         check_nginx()
         if any(PREFLIGHT_DATA.iterdir()):
             raise RuntimeError('Preflight unexpectedly wrote a save')
+        smoke = None
+        if '--deepseek-smoke' in sys.argv:
+            smoke = json.loads(run('docker', 'exec', CHECK, 'node', '/app/deploy/check-deepseek.mjs'))
+            if not smoke.get('passed') or any(PREFLIGHT_DATA.iterdir()):
+                raise RuntimeError('DeepSeek smoke check failed or left a test save')
         run('docker', 'rm', '-f', CHECK)
         for p in DATA.glob('*.json'):
             if len(p.stem) == 32 and all(c in '0123456789abcdef' for c in p.stem):
@@ -154,7 +163,7 @@ if phase == 'prepare':
         passed = True
         record('preflight', {'passed': True, 'release': str(RELEASE),
                              'assetHashesMatch': True, 'providerReady': ready['ai']['ready'],
-                             'saveCompatibility': compat, 'modelCalls': 0})
+                             'saveCompatibility': compat, 'deepseekSmoke': smoke, 'modelCalls': smoke['modelCalls'] if smoke else 0})
     finally:
         subprocess.run(['docker', 'rm', '-f', CHECK], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if PREFLIGHT_DATA.exists():
@@ -208,7 +217,7 @@ elif phase == 'rollback':
     check_nginx()
     check_compatible_archives()
     run('docker', 'stop', '--time', '25', MAIN)
-    run('docker', 'rename', MAIN, 'mossvale-mystery-after-v13')
+    run('docker', 'rename', MAIN, 'mossvale-mystery-after-v15')
     run('docker', 'rename', OLD, MAIN)
     run('docker', 'start', MAIN)
     health(8796)

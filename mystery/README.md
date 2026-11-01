@@ -1,6 +1,6 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.10.0**（本地 / local） · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.10.1** · [完整版本记录](../CHANGELOG.md)
 
 人物会按话题召回旧对话，保留自己的回答与承诺，案件记录与闲谈分开提供；记忆以原话与实际听众为依据。
 
@@ -14,7 +14,7 @@
 
 ## English
 
-Current version **0.10.0**（本地 / local） · [Full changelog](../CHANGELOG.md)
+Current version **0.10.1** · [Full changelog](../CHANGELOG.md)
 
 Characters retrieve relevant earlier exchanges and retain their own answers and promises. Case records and casual chatter have separate context budgets, grounded in original quotes and actual listeners.
 
