@@ -10,10 +10,15 @@
 
 本地 0.8.16 按试听反馈，仅将神谷朔语速从 `1.026` 调至 `1.08`，参数提高约 5.3%。同句新样音为 7.01 秒，上一交谈版为 7.38 秒；复用上一版音频作对照，本轮只合成一次。音色、音高、发声指令及其他人物设置保持，线上配置未替换。新样音在 `qa/miyazaki-rate-v1/slightly-faster.wav`。
 
+本地 0.8.17 根据下一轮试听反馈，只更新神谷朔的发声指令：句内起伏和语义重音更鲜明，每句最后两三个字渐弱、尾字轻收，问句在句中表达上扬。语速保持 `1.08`。同句一次真实合成得到 7.16 秒样音，供用户试听，不据此断言主观效果；其他配置与线上版本保持。样音位于 `qa/miyazaki-prosody-v1/more-expression-soft-endings.wav`。
+
 ## English
+
 
 Kamiya's public character profile describes a young shrine priest, while his old voice direction described an older man. Local version 0.8.15 corrects that mismatch and gives him an individual conversational direction. The voice ID, rate, pitch, and the other five characters' settings stay the same.
 
 Two samples use the same line and synthesis settings, with only the speaking direction changed. Both requests returned complete audio; perceived improvement still needs listening. Production voice settings have not been updated in this iteration.
 
 Local version 0.8.16 raises only Kamiya's rate from `1.026` to `1.08`, about 5.3%. One new sample of the same line lasts 7.01 seconds, compared with the earlier conversational sample's 7.38 seconds. All other voice settings remain unchanged; production has not been updated.
+
+Local version 0.8.17 requests clearer variation and emphasis within sentences, with a gradual reduction in volume over the last two or three words and a light final syllable. The rate stays at `1.08`. One real synthesis produced a 7.16-second sample for listening; other settings and production remain unchanged.

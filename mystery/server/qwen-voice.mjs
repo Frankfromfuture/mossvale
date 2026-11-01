@@ -6,7 +6,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import WebSocket,{WebSocketServer} from 'ws';
 export const characterVoices={
- miyazaki:{voice:'longnan_v3.1',name:'龙楠',rate:1.08,delivery:'用普通话，像在桌边对面前的一个人接话，音量适中，口吻平常。语句随意思自然连起来，停顿短而松弛；疑问带轻微探询，句尾收得轻，节奏有细小变化。',style:'年轻成年男性，待客温和、有礼，声音清朗。谈到疑点会犹豫一下再继续，保持日常交谈的分寸。'},
+ miyazaki:{voice:'longnan_v3.1',name:'龙楠',rate:1.08,delivery:'用普通话，像坐在桌边对面前的一个人自然接话。句中高低起伏更鲜明一点，重要的词轻轻点出；安慰时柔和，疑问时轻扬，解释到转折处稍停，节奏有松有紧。每句话最后两三个字逐渐减轻音量，尾字短、轻、自然地收住。问句的上扬放在句中，最后一个字仍轻收。整体保持日常说话的音量与亲近感。',style:'年轻成年男性，待客温和、有礼，声音清朗。谈到疑点会犹豫一下再继续，保持日常交谈的分寸。'},
  jiang:{voice:'longsanshu_v3.1',name:'龙三叔',rate:1.0925,pitch:.94,style:'六十岁左右的年长男声，中低声区，厚实温和，带轻微沙哑和岁月感。话语里有关切，疑问带一点探询，重要的事实说得笃定，气息舒展。'},
  ishikawa:{voice:'longtian_v3.1',name:'龙天',rate:1.121,style:'成年男性，思路清楚，边回想边自然接话；解释时流畅，遇到疑点略有迟疑，关键处重音清楚。'},
  kato:{voice:'longxiaocheng_v3.1',name:'龙小诚',rate:1.121,pitch:.92,style:'五六十岁的年长男声，低沉粗厚，带一点沙哑，干脆爽直。说事实有底气，反问稍有力度，关心对方时语气放软，词句连贯。'},

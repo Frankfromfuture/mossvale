@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.8.16**（本地 / local） · [完整更新记录](CHANGELOG.md)
+当前版本 **0.8.17**（本地 / local） · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -102,7 +102,7 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.8.16**（本地 / local） · [Full changelog](CHANGELOG.md)
+Current version **0.8.17**（本地 / local） · [Full changelog](CHANGELOG.md)
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 
