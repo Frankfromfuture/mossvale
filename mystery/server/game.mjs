@@ -169,7 +169,7 @@ function performAct(s,a){
  }else if(a.type==='notes'){
   need(typeof a.text==='string'&&a.text.length<=5000,'手记最多写五千字。');s.notes=a.text;s.revision++;return {};
  }else if(a.type==='hint'){
-  result.message=s.investigation.challenge?`对方正在追问：${s.investigation.challenge.focus}`:!has(s,'body')?'昨夜的火光来自花园。先看铜炉。':!has(s,'recipe')?'雾岛的书桌上有一本不太像小说的册子。':!has(s,'mask')?'配方的材料分散在大殿、厨房和白川的行囊中。':!has(s,'revealed')?playerId(s)==='jiang'?'拿着做好的面具，回想熟悉的手艺，再召集大家。':'把做成的面具给森川介看，再召集大家。':!has(s,'memory-ring')?'森川介也许认得那枚蛇形戒指。':!has(s,'cloth')?'杂务间有清扫现场留下的东西。':caseProgress(s).missing[0]||'线索已齐，回厅堂召集大家，核对行凶的先后。';return result;
+  const lead=nextLead(s);result.message=[lead.text,...(lead.steps||[])].join('\n');return result;
  }else if(a.type==='accuse'){
   need(s.room==='hall','回到厅堂后再说明推断。');need(cast.every(p=>s.positions[p.id]==='hall'),'请先召集大家，在厅堂一同核对最终推断。');need(caseProgress(s).ready,'还缺关键证据：'+caseProgress(s).missing[0]);
   spend(s,1);if(!Object.entries(solution).every(([k,v])=>a[k]===v)){result.message='这份推断还解释不了所有证据。检查行凶的先后，以及每次面对的究竟是谁。';return result;}

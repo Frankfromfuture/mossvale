@@ -125,3 +125,4 @@
 
 .role-picker #close-modal[hidden]{display:none}
 
+.lead-steps{padding-left:1.5em;line-height:1.85}.lead-steps li{padding-left:.25em;margin:9px 0}.lead-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.lead-actions button{min-height:44px}.lead-help{border-top:1px solid #b9b19a;padding-top:12px}.lead-help summary{cursor:pointer;min-height:44px;display:flex;align-items:center;text-decoration:underline;text-underline-offset:4px}.lead-help p{font-size:13px;line-height:1.8}.lead-help button{font:inherit;padding:0;text-decoration:underline;text-underline-offset:3px;color:inherit}

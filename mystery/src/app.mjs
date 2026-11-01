@@ -87,8 +87,17 @@ async function action(a,{quiet=false}={}){
 }
 function showLead(){
  if(state.briefing?.current){showOpening();return;}
- const lead=state.lead;modal('接下来做什么',`<h3>${esc(lead.title)}</h3><p>${esc(lead.text)}</p><p class="score-note">你负责整理口述与核对物证。原话可以存疑，结论要有证据。</p><button id="follow-lead" class="primary">${lead.action==='garden'?'去花园':lead.action==='gather'?'回厅堂':'翻看手记'}</button>`,'lead-modal');
- $('follow-lead').onclick=()=>{closeModal();if(lead.action==='garden')travel('garden');else if(lead.action==='gather'){if(!lockedQuestion())action({type:'gather'});}else book();};
+ const lead=state.lead,needsHall=lead.requiresHall&&(state.room!=='hall'||state.people.some(p=>!p.near));
+ modal('接下来做什么',`<h3>${esc(lead.title)}</h3><p>${esc(lead.text)}</p>${lead.steps?.length?`<ol class="lead-steps">${lead.steps.map(step=>`<li>${esc(step)}</li>`).join('')}</ol>`:''}<div class="lead-actions"><button id="follow-lead" class="primary">${needsHall?'请大家回厅堂，再'+esc(lead.label):esc(lead.label||'翻看手记')}</button></div><details class="lead-help"><summary>公开、出示、搜查的入口在哪？</summary><p><button data-lead-tab="clues">手记 → 线索</button>：选一条线索，点正文下方「在厅堂公开」，看大家的反应；有疑问点「追问」。已有反应会保留，可随时重看。</p><p>点顶部人物头像 → 对话下方「出示」：选已有线索，再输入想问的话。</p><p>点人物头像 → 对话下方「搜查」：申请许可后进屋，点有描边的物件。</p><p><button data-lead-tab="case">手记 → 推断</button>：核实与说明推断的入口都在这里，随调查进度开放。</p><p>自己的目标在「我」；其他人的支线在<button data-lead-tab="sidequests">手记 → 支线</button>。</p></details>`,'lead-modal');
+ const openBook=(tab,clue)=>{bookTab=tab;bookFilter='全部';if(clue)selectedClue=clue;book();};
+ $('follow-lead').onclick=async()=>{
+  if(needsHall){if(lockedQuestion())return;const r=await action({type:'gather'},{quiet:true});if(r.error)return;}
+  if(lead.action==='garden'){closeModal();travel('garden');}
+  else if(lead.action==='conversation')startConversation(lead.actor);
+  else if(lead.action==='self')showSelf();
+  else openBook(lead.tab||'clues',lead.clue);
+ };
+ $('overlay').querySelectorAll('[data-lead-tab]').forEach(button=>button.onclick=()=>openBook(button.dataset.leadTab));
 }
 function showOpening(){
  const b=state.briefing,line=b?.current;if(!line){closeModal(true);return;}
