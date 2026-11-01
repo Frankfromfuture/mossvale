@@ -1,0 +1,32 @@
+{
+  "version": "0.12.0",
+  "formalBuilds": 1,
+  "productionRestarts": 1,
+  "postBuildCorrections": [
+    "room seating and furniture, overview fit: 3 class methods verified against source",
+    "map SVG height and stroke: public/dist CSS identical"
+  ],
+  "rules": [
+    "6 routes completed with canonical ending",
+    "chapter and secret geometry boundaries",
+    "rooms and physical props reachable through door navigation, including NPC obstacles",
+    "legacy first-story slot/token roundtrip"
+  ],
+  "browserPassed": true,
+  "browserErrors": 0,
+  "originalDataFiles": 17,
+  "originalDataChanges": [],
+  "productionAssets": [
+    {
+      "file": "game.js",
+      "sha256": "a3fddcb4b1123b0b378c141412f8e4835c3852491f1c18407858b524509b77ec"
+    },
+    {
+      "file": "suspect7.css",
+      "sha256": "8acce43cc1f5575ca573809e9dfb4fed5984e476ccf3925f4518529f49faa45a"
+    }
+  ],
+  "realModelCalls": 0,
+  "realVoiceCalls": 0,
+  "cloudDeployment": false
+}

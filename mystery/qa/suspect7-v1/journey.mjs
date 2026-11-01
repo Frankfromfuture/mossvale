@@ -3,7 +3,7 @@ import {randomUUID} from 'node:crypto';
 export async function journey(send,{stopAt=7,checkpoint=async()=>{}}={}){
  const a=async(type,rest={})=>send({type,...rest,requestId:randomUUID()}),move=room=>a('move',{room}),inspect=async(room,ids)=>{await move(room);for(const id of ids)await a('inspect',{id});};
  await a('begin');await a('hypothesis',{text:'我提前怀疑陈信，但现在还没有足够的证据。'});await a('notes',{text:'玩家旁注：先核实身份，再核实时间。'});
- await inspect('dining',['exit','phone']);await inspect('kitchen',['kitchen']);await inspect('landing',['stairs']);await move('dining');await a('play-call',{id:'call1'});await a('advance');await checkpoint(2);if(stopAt===2)return;
+ await inspect('dining',['phone']);await inspect('kitchen',['kitchen']);await inspect('landing',['exit','stairs']);await move('dining');await a('play-call',{id:'call1'});await a('advance');await checkpoint(2);if(stopAt===2)return;
  for(const id of ['andy','franklin','hongxue','vivian','chenxin','licha'])await a('account',{id:id+'-old'});
  await inspect('lounge',['lighter']);await inspect('activity',['toys']);await inspect('chapel',['carpet']);await a('confession');await a('hypothesis',{text:'正门劫匪与地下停车场接应者是两拨人。'});await a('advance');await checkpoint(3);if(stopAt===3)return;
  await a('play-call',{id:'call2'});await a('compare-calls',{first:'responds',second:'continuous'});await move('chapel');await a('vote',{choice:'abstain'});await a('advance');await checkpoint(4);if(stopAt===4)return;

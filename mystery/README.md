@@ -1,6 +1,6 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.11.0** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.12.0** · [完整版本记录](../CHANGELOG.md)
 
 人物会按话题召回旧对话，保留自己的回答与承诺，案件记录与闲谈分开提供；记忆以原话与实际听众为依据。
 
@@ -16,7 +16,7 @@
 
 ## English
 
-Current version **0.11.0** · [Full changelog](../CHANGELOG.md)
+Current version **0.12.0** · [Full changelog](../CHANGELOG.md)
 
 Characters retrieve relevant earlier exchanges and retain their own answers and promises. Case records and casual chatter have separate context budgets, grounded in original quotes and actual listeners.
 
@@ -28,4 +28,4 @@ Run `npm ci`, `npm run build`, and `npm start` from this directory, or use the c
 
 `src/` contains the frontend, `server/` the backend, `shared/` the shared rules, and `public/` the production assets. Gameplay and implementation notes are in `docs/`; deployment and rollback records are in `deploy/README.md`.
 
-**The Seventh Suspect** is available locally in 0.11.0: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. The hosted demo remains on 0.10.1. See the [implementation notes](docs/suspect7/README.md).
+**The Seventh Suspect** is available locally in 0.12.0: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. The hosted demo remains on 0.10.1. See the [implementation notes](docs/suspect7/README.md).

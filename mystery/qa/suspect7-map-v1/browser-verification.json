@@ -1,0 +1,40 @@
+{
+  "steps": [
+    "Desktop: physical phone pick, kitchen → foyer → rest room walking, same canvas, closed secret projection, refreshed room retained",
+    "390×844: linked room navigation, exterior/interior measurement, keypad unlock, secret-room visit, sealed passage display, map scrolling/frame, no horizontal overflow",
+    "Investigation: activity room becomes meeting room, police-open passage connects secret room with pool, whole-building overview",
+    "First-case regression: original map opens, legacy notes retained; independent slot/token roundtrip also passed in targeted unit check",
+    "SVG style correction: 390×844 and desktop map dimensions, readable labels, physical-ratio diagram, SVG-room click walks to destination, long-page frame remains 10px"
+  ],
+  "errors": [],
+  "realModelCalls": 0,
+  "realVoiceCalls": 0,
+  "screenshots": [
+    "output/playwright/suspect7-map-v1/01-desktop-room.png",
+    "output/playwright/suspect7-map-v1/02-desktop-map.png",
+    "output/playwright/suspect7-map-v1/03-mobile-measure.png",
+    "output/playwright/suspect7-map-v1/04-mobile-map.png",
+    "output/playwright/suspect7-map-v1/05-mobile-overview.png",
+    "output/playwright/suspect7-map-v1/06-full-building.png",
+    "output/playwright/suspect7-map-v1/07-pool.png",
+    "output/playwright/suspect7-map-v1/08-first-case-map.png",
+    "output/playwright/suspect7-map-v1/09-mobile-plan-fixed.png",
+    "output/playwright/suspect7-map-v1/10-mobile-measure-fixed.png",
+    "output/playwright/suspect7-map-v1/11-desktop-plan-fixed.png"
+  ],
+  "passed": true,
+  "mapDimensions": {
+    "mobile": {
+      "x": 33,
+      "y": 205.1875,
+      "width": 321,
+      "height": 321
+    },
+    "desktop": {
+      "x": 242,
+      "y": 208.59375,
+      "width": 786,
+      "height": 510
+    }
+  }
+}
