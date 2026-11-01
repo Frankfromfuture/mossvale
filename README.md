@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.9.2** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.10.0**（本地 / local） · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -47,6 +47,7 @@
 
 青苔镇把自由对话放在有证据约束的调查中。玩家可以自行组织问题，人物的可知事实、线索解锁、计分和结案条件由服务端规则管理，AI 负责将当前信息表达成人物的回答与动作。
 
+- 对话会接着旧事往下说：除近期消息外，人物会按当前问题取回相关旧原话，也保留自己说过的回答与承诺；案件记录与日常闲谈使用独立的上下文空间，旧话始终带着说话人与实际听众。
 - 每个人知道的事不同：人物的亲历、误解、已见证据和实际听闻分开记录，私谈只进入相应听众的上下文，同一件事可以得到不同说法，玩家需要自己核对。
 - 问与答都会推动局面：NPC 会根据对话和搜证反问玩家，公开证据也会引出在场人物的反应，玩家需要随谈话调整调查方向。
 - 角色扮演进入个人目标：六主角共用案件与场景，各自的初始信息、秘密和个人决定不同，重玩时会改变你想问的问题和愿意说出的内容。
@@ -104,7 +105,7 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.9.2** · [Full changelog](CHANGELOG.md)
+Current version **0.10.0**（本地 / local） · [Full changelog](CHANGELOG.md)
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 
@@ -142,6 +143,7 @@ Desktop and mobile browsers have their own layouts. Progress is saved for each b
 
 Mossvale places free conversation inside an investigation governed by evidence. Players choose their own questions. Server-side rules manage what each person knows, clue unlocks, scoring, and the conditions for closing the case; AI expresses the available information through each character's replies and actions.
 
+- Conversations can return to earlier exchanges. Characters retrieve relevant old quotes alongside recent messages and retain their own answers and promises. Case records and everyday chatter have separate context budgets; records retain their speaker and actual audience.
 - People know different things. Personal experience, misunderstandings, evidence shown, and statements actually heard are recorded separately. Private conversations enter only the relevant listeners' contexts. Accounts can differ, and the player has to compare them.
 - Asking and answering both move the investigation. NPCs can question the player during conversation or searches. Public evidence brings reactions from those present, giving the player further questions to pursue.
 - Role-playing has personal consequences. The six protagonists share one case and setting but differ in starting information, secrets, and personal decisions. A new role changes what you want to ask and what you are willing to reveal.

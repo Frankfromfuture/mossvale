@@ -1,6 +1,8 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.9.2** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.10.0**（本地 / local） · [完整版本记录](../CHANGELOG.md)
+
+人物会按话题召回旧对话，保留自己的回答与承诺，案件记录与闲谈分开提供；记忆以原话与实际听众为依据。
 
 当前剧本为《雾灯未眠》，包含六位可扮演的主角、场景搜证、AI 对话、语音和分角色存档；新增五场可跳过、重看的手绘幕间，按已知进度提供操作入口。50个搜证点各配手绘实物图标，用于线索详情、物件介绍和出示菜单。
 
@@ -12,7 +14,9 @@
 
 ## English
 
-Current version **0.9.2** · [Full changelog](../CHANGELOG.md)
+Current version **0.10.0**（本地 / local） · [Full changelog](../CHANGELOG.md)
+
+Characters retrieve relevant earlier exchanges and retain their own answers and promises. Case records and casual chatter have separate context budgets, grounded in original quotes and actual listeners.
 
 The current story, 《雾灯未眠》, includes six playable protagonists, scene investigation, AI dialogue, voice, and separate saves for each character. Five illustrated interludes unlock with progress, can be skipped or replayed, and link to useful action screens. All 50 investigation spots share matching hand-drawn object icons in clue details, object descriptions, and evidence menus. The game is currently in Chinese; the [project introduction](../README.md#english) is available in Chinese and English and also appears in the in-game About window.
 

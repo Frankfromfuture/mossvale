@@ -5,6 +5,7 @@ import {cast,getRoom} from '../shared/layout.mjs';
 import {clueById} from './scenario.mjs';
 import {conductPenalties} from '../shared/investigation-rules.mjs';
 import {inquiryContext,validateInquiry,recordInquiry} from './repeated-inquiry.mjs';
+import {ensureNpcMemory,statementMemory} from './npc-memory.mjs';
 
 export const scoreRules=[
  {id:'deduction',name:'案件推理',max:30,rule:'发现遗骸、核实身份、核对机关和现场各得5分，正确结案得10分。'},
@@ -39,14 +40,14 @@ export function ensureInvestigation(s,fresh=false){
  upgradeMemory(s);return v;
 }
 function upgradeMemory(s){
- const v=s.investigation;if(v.memoryVersion===2)return;
+ const v=s.investigation;if(v.memoryVersion===2){ensureNpcMemory(s);return;}
  v.explanations||=[];const older=[];
  // Old direct conversations establish knowledge only for the actual speaker.
  for(const [actor,history] of Object.entries(s.chats||{}))for(const line of history){
   if(line.who!==playerId(s)||!line.text||v.statements.some(w=>w.text===line.text&&w.audience.includes(actor)))continue;
   older.push({id:`word-${++v.sequence}`,text:line.text,audience:[actor],kind:'statement',turn:0,legacy:true});
  }
- v.statements.unshift(...older);v.memoryVersion=2;
+ v.statements.unshift(...older);v.memoryVersion=2;ensureNpcMemory(s);
 }
 export const subjects={night:'百物语散场后的行踪',purpose:'来访与调查的目的',rules:'如何取得搜查许可',jade:'关心玉珏的缘由',asano:'打听真野的立场',family:'来访与家人的关系'};
 const topicSubject=id=>({'host-purpose':'purpose','host-night':'night','keeper-night':'night','keeper-rules':'rules','writer-night':'night','merchant-jade':'jade','merchant-asano':'asano','merchant-purpose':'purpose','emi-asano':'asano','emi-family':'family','emi-intent':'purpose'}[id]|| (id.endsWith('-night')?'night':id.endsWith('-purpose')?'purpose':null));
@@ -211,7 +212,7 @@ export function reviewContext(s,actor,message){
  const known=v.statements.filter(x=>x.audience.includes(actor)&&x.kind==='statement'),remembered=new Set(explanationMemory(s,actor).map(e=>e.statementId));
  return {kind:'player-review',message,inquiries:inquiryContext(s,actor),challenge:v.challenge?{question:v.challenge.text,focus:v.challenge.focus,round:v.challenge.round}:null,
   playerName:playerPerson(s).name,secrets:roleSecrets(s).map(({id,title,text})=>({id,title,text})),
-  subjects,explanations:explanationMemory(s,actor),previous:[...new Map([...known.filter(w=>remembered.has(w.id)),...known.slice(-35)].map(w=>[w.id,w])).values()].map(({id,text})=>({id,text})),
+  subjects,explanations:explanationMemory(s,actor),previous:[...new Map([...known.filter(w=>remembered.has(w.id)),...statementMemory(s,actor,message)].map(w=>[w.id,w])).values()].map(({id,text})=>({id,text})),
   evidence:[...new Set([...(s.presented[actor]||[]),...s.public])].map(id=>({id,title:clueById(id).title,text:clueById(id).text})),audience};
 }
 export function validateReview(s,ctx,raw){

@@ -4,6 +4,7 @@ import {presentNames} from '../shared/story-names.mjs';
 import {roleStory,validRole,roleDefinition,selfView,roleReason,completePersonalGoal} from './roles.mjs';
 import {caseProgress,caseEnding,witnessedEvidence} from './case-story.mjs';
 import {interludesFor} from './interludes.mjs';
+import {npcMemoryContext,statementMemory,rememberNpcReply} from './npc-memory.mjs';
 import {finishSideQuest} from './side-quests.mjs';
 import {ensureInvestigation,investigationView,guardAction,canEnter,trespass,inspectionGate,grantPermission,forcePersonal,spend,listeners,exposeCard,reviewContext,validateReview,settleReview,maybeChallenge,maybeSearchChallenge,concede,explanationMemory,recordStatement} from './investigation.mjs';
 import {openingStatements,openingFor,openingView,nextLead,organizerRole} from './opening.mjs';
@@ -73,6 +74,7 @@ function performAct(s,a){
  else if(a.type==='briefing-next'){
   need(s.briefing&&!s.briefing.complete,'开场口述已经结束。');need(a.index===s.briefing.next,'口述已翻页，请继续当前一页。');
   const line=openingFor(s)[s.briefing.next];s.briefing.records.push({...line});
+  if(line.actor!==playerId(s))rememberNpcReply(s,{key:`opening-${s.briefing.next}`,actor:line.actor,speech:line.text,audience:cast.map(p=>p.id),kind:'opening'});
   if(line.actor===playerId(s)){recordStatement(s,line.text,cast.map(p=>p.id));spend(s,1);}
   else for(const p of cast)s.heard[p.id].push({source:own(line.actor).name,text:line.text,kind:'reported'});
   log(s,`${own(line.actor).name}：${line.text}`,cast.map(p=>p.id),'public');
@@ -162,6 +164,7 @@ function performAct(s,a){
   spend(s,1);const audience=listeners(s,a.actor),message=`关于「${completion.result.title}」，我们把已经核实的部分说清楚。`;
   (s.chats[a.actor]||=[]).push({who:playerId(s),text:message},{who:a.actor,text:completion.result.speech,mode:'sidequest'});
   recordStatement(s,message,audience);
+  rememberNpcReply(s,{key:`sidequest-${a.actor}`,actor:a.actor,question:message,speech:completion.result.speech,audience,kind:'sidequest'});
   for(const id of audience){s.heard[id]||=[];s.heard[id].push({source:own(a.actor).name,text:completion.result.speech,kind:'reported'});s.heard[id]=s.heard[id].slice(-50);}
   log(s,`${own(a.actor).name}的支线「${completion.result.title}」已收尾。`,[playerId(s)]);
   result.sideQuestResult=completion.result;
@@ -189,7 +192,8 @@ export function dialogueContext(s,actor,message){
  if(actor==='ishikawa'&&facts.some(f=>f.id==='comb-truth')){const old=facts.findIndex(f=>f.id==='comb');if(old>=0)facts.splice(old,1);}
  const resolved=s.sideQuests?.completed?.[actor];if(resolved&&actor==='miyazaki'){for(let i=facts.length-1;i>=0;i--)if(['doubt','family'].includes(facts[i].id))facts.splice(i,1);}
  if(resolved)facts.push({id:'sidequest-resolution',text:resolved.summary+' 你已经说过：'+resolved.speech});
- return {actor,name:own(actor).name,style:p.style,aim:resolved?'保持已经作出的交代，回应剩余问题，不再否认已核实的事实。':p.aim,playerId:playerId(s),playerName:playerPerson(s).name,playerRole:roleReason(s),explanations:explanationMemory(s,actor),playerStatements:s.investigation.statements.filter(w=>w.audience.includes(actor)&&w.kind==='statement').slice(-35).map(({id,text})=>({id,text})),impression:s.investigation.impressions[actor],place:getRoom(s.room).name,private:s.room!=='hall'||s.chatSetting?.actor===actor,facts:facts.map(({id,text})=>({id,text})),shown:[...seen].map(id=>({title:clueById(id).title,text:clueById(id).text})),heard:s.heard[actor].slice(-10),conversation:(s.chats[actor]||[]).slice(-10),message};
+ const memory=npcMemoryContext(s,actor,message,facts.map(f=>f.id));
+ return {actor,name:own(actor).name,style:p.style,aim:resolved?'保持已经作出的交代，回应剩余问题，不再否认已核实的事实。':p.aim,playerId:playerId(s),playerName:playerPerson(s).name,playerRole:roleReason(s),explanations:explanationMemory(s,actor),playerStatements:statementMemory(s,actor,message),impression:s.investigation.impressions[actor],place:getRoom(s.room).name,private:s.room!=='hall'||s.chatSetting?.actor===actor,facts:facts.map(({id,text})=>({id,text})),shown:[...seen].map(id=>({title:clueById(id).title,text:clueById(id).text})),...memory,conversation:(s.chats[actor]||[]).slice(-10),message};
 }
 export function validateReply(ctx,reply){
  need(reply&&typeof reply.speech==='string'&&reply.speech.trim()&&reply.speech.length<=650,'这句话没说完整，请再试一次。',502);
@@ -227,12 +231,13 @@ export async function shareEvidence(s,{id,retryFailed=false},generate){
   const recallsPast=/(?:我|以前|从前|当时|昨夜|之前|那时).{0,30}(?:见过|看见过|见到过|发现过|听说过|听过|用过|记得|想起|看见|见到)/.test(raw.speech);
   const action=raw.action.trim(),speech=recallsPast?'':raw.speech.trim(),text=`（${action}）${speech}`;
   validateReply(ctx,{speech:text,factIds:raw.factIds});
-  return {actor:target.actor,status:'done',action,speech,text,usage:raw.usage};
+  return {actor:target.actor,status:'done',action,speech,text,factIds:raw.factIds,usage:raw.usage};
  }));
  for(let i=0;i<results.length;i++){
   const target=targets[i],result=results[i];
   if(result.status==='rejected'){target.status='failed';continue;}
-  const {usage,...reaction}=result.value;Object.assign(target,reaction);
+  const {usage,factIds,...reaction}=result.value;Object.assign(target,reaction);
+  rememberNpcReply(s,{key:`${round.id}-${target.actor}`,actor:target.actor,speech:reaction.text,audience:witnesses,factIds,kind:'reaction'});
   for(const actor of witnesses){s.heard[actor].push({source:own(target.actor).name,text:reaction.text,kind:'reported'});s.heard[actor]=s.heard[actor].slice(-50);}
   log(s,`${own(target.actor).name}：${reaction.text}`,witnesses,'public');
   s.usage.input+=usage?.prompt_tokens||0;s.usage.output+=usage?.completion_tokens||0;
@@ -251,7 +256,7 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
  need(!q||(q.actor===actor&&q.id===challengeId),'先回应当前人物的盘问。');
  need(!challengeId||q?.id===challengeId,'这轮盘问已经结束，请继续交谈。');
  need(!resolution||['concede','dismiss'].includes(resolution),'回应方式无效。');
- const start=Date.now();let speech,resumeActor,mode='deepseek',models=0;
+ const start=Date.now();let speech,resumeActor,mode='deepseek',models=0,factIds=[];
  const audience=q?.audience||listeners(s,actor);
  if(resolution){
   need(together(s,actor),'先回应眼前的盘问。');const result=concede(s,actor,challengeId,resolution);message=result.message;speech=result.speech;resumeActor=result.resumeActor;mode='consequence';
@@ -285,7 +290,7 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
   }}:undefined;
   const repeated=review.inquiry?.count>=3;
   const raw=await generate({...ctx,explanations:[...ctx.explanations,...currentExplanations],challenge,delivery,casualQuestion:variation[1]%4===0,repeatedInquiry:repeated?{count:review.inquiry.count}:null},partial),reply=validateReply(ctx,raw);
-  speech=reply.speech;
+  speech=reply.speech;factIds=reply.factIds;
   const outcome=settleReview(s,actor,message,audience,review,requestId);resumeActor=outcome.resumeActor;
   s.usage.input+=(raw.usage?.prompt_tokens||0)+(rawReview.usage?.prompt_tokens||0);s.usage.output+=(raw.usage?.completion_tokens||0)+(rawReview.usage?.completion_tokens||0);models=2;
   // Start the next question only after this ordinary reply is committed below.
@@ -293,6 +298,7 @@ export async function converse(s,{actor,message,requestId,challengeId,resolution
  }
  onSpeech?.(speech);
  const history=s.chats[actor]||=[];history.push({who:playerId(s),text:message},{who:actor,text:speech});
+ rememberNpcReply(s,{key:requestId,actor,question:message,speech,audience,factIds});
  if(q&&!s.investigation.challenge){
   const transition=`${own(actor).name}的反问${resolution?'暂告一段落':'已回应清楚'}。${q.source==='search'?'可以继续查看刚才的物件了。':q.resumeActor!==actor?`你转回${own(q.resumeActor).name}，继续刚才的谈话。`:'可以接着谈了。'}`;
   history.push({who:'narrator',text:transition});
