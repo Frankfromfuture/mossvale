@@ -1,8 +1,8 @@
 # 青苔镇 Mossvale · AI 剧本杀
 
-当前版本 **0.14.0** · [完整版本记录](../CHANGELOG.md)
+当前版本 **0.15.0** · [完整版本记录](../CHANGELOG.md)
 
-0.14.0本地增加客厅与案情室陈设及双人活动：客厅三人小聚，喝水、翻书、摆棋、照看盆栽；案情室饮水、书写、整理便笺和文具。人物按家具寻路，用完物件后回座。在线测试站仍为0.13.2。
+0.15.0把《第7号嫌疑人》的问询接进了剧情：先听人物说法，追问来源和细节，再拿着物证回来核对。辩解、改口与交代会随实际问答收入手记；比对桌改为左右摆放物件或口供，摆好后回到人物面前继续问。保留0.14.0的客厅与案情室陈设、双人活动。
 
 人物会按话题召回旧对话，保留自己的回答与承诺，案件记录与闲谈分开提供；记忆以原话与实际听众为依据。
 
@@ -18,9 +18,9 @@
 
 ## English
 
-Current version **0.14.0** · [Full changelog](../CHANGELOG.md)
+Current version **0.15.0** · [Full changelog](../CHANGELOG.md)
 
-Local 0.14.0 adds lounge and briefing-room furnishings and paired NPC activity. Three companions join lounge breaks for tea, magazines, chess and plants. The briefing room supports water breaks, writing and tidying stationery. Characters walk around furniture and return to their seats. The hosted demo remains on 0.13.2.
+Version 0.15.0 lets conversations advance The Seventh Suspect: hear an account, ask where it came from, investigate, then return with evidence. Actual replies become the testimony record, and contradictions need a follow-up before a confession. The comparison desk now holds two objects or testimony slips side by side and takes the player back into conversation. Lounge furnishings and paired NPC activities from 0.14.0 are included.
 
 Characters retrieve relevant earlier exchanges and retain their own answers and promises. Case records and casual chatter have separate context budgets, grounded in original quotes and actual listeners.
 
@@ -32,4 +32,4 @@ Run `npm ci`, `npm run build`, and `npm start` from this directory, or use the c
 
 `src/` contains the frontend, `server/` the backend, `shared/` the shared rules, and `public/` the production assets. Gameplay and implementation notes are in `docs/`; deployment and rollback records are in `deploy/README.md`.
 
-**The Seventh Suspect** is available in 0.13.2: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. Both stories share the interface and scene controls. The second story includes illustrated portraits and objects, narrated chapter comics and individual character voice directions. Each initial character has an eight-page first-person illustrated prologue introducing their past and reason for attending; later chapters and the investigator handoff use connected narrative prose. Role selection shows only the initial name. The hosted demo remains on 0.13.2. See the [implementation notes](docs/suspect7/README.md).
+**The Seventh Suspect** is available in 0.13.2: six chapters, six routes with a perspective change, eleven characters, and separate script saves. Any completed first route unlocks the remaining routes. Both stories share the interface and scene controls. The second story includes illustrated portraits and objects, narrated chapter comics and individual character voice directions. Each initial character has an eight-page first-person illustrated prologue introducing their past and reason for attending; later chapters and the investigator handoff use connected narrative prose. Role selection shows only the initial name. The hosted demo is on 0.15.0. See the [implementation notes](docs/suspect7/README.md).

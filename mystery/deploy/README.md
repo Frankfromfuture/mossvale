@@ -1,11 +1,11 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.13.2`，发布目录 `20261102-mossvale-0.13.2-v16`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.15.0`，发布目录 `20261102-mossvale-0.15.0-v17`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261102-mossvale-0.13.2-v16` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261102-mossvale-0.15.0-v17` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
@@ -17,6 +17,16 @@
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
 发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v16.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-02 对话推进调查与物件比对（0.15.0）
+
+发布 `20261102-mossvale-0.15.0-v17`，合并0.14.0的别墅陈设与人物活动。第二部的口供、目击、身份对质和终章复核可由自由问询与追问推进；比对桌改为左右摆物件与口供，准备问题后返回人物交谈。
+
+167项发布文件及静态资源校验通过；24份旧档副本的14个槽位保留原有线索、记录、笔记与进度。云端30项原数据文件的内容及修改时间保持，Nginx和其他容器保持，未新建线上测试访客。切换前备份为 `/srv/mossvale-mystery/backups/before-20261102-mossvale-0.15.0-v17.tgz`，上一版容器 `mossvale-mystery-before-v17` 与v16目录保留。
+
+六条新路线通过内存问询流程验收；桌面与390×844内嵌手机检查物件比对、交谈草稿与连续追问，390×464检查键盘高度。隔离云端模型验收最终六轮通过，共12次DeepSeek调用，另有8次用于定位并校准追问置信度门槛；没有Qwen调用。模型测试档已清理。一次正式Web构建，随后只同步英文版本说明文字；4331实际切换一次，最终PTY启动服务与本地、线上资源一致。证据位于 `qa/dialogue-investigation-v1/`。
+
+回退使用当前版本 `deploy/update.py rollback`；旧程序识别`scripts-v2`，当前存档保留。其他应用与代理配置不参与切换。
 
 ## 2026-11-02 第二部与第一人称连环画前情 · 0.13.2
 

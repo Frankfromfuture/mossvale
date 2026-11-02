@@ -9,9 +9,9 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.14.0** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.15.0** · [完整更新记录](CHANGELOG.md)
 
-0.14.0本地补充了客厅和案情室的日常陈设。进入客厅时有三位人物过来休息，可在茶台、书刊桌、棋盘和盆栽旁活动；案情室里的人物会喝水、试笔、整理便笺和文具，再回座。新增闲话只谈眼前的物件，搜证与正式公开材料仍走原有入口。
+0.15.0把《第7号嫌疑人》的问询接进了剧情：先听人物说法，追问来源和细节，再拿着物证回来核对。辩解、改口与交代会随实际问答收入手记；比对桌改为左右摆放物件或口供，摆好后回到人物面前继续问。保留0.14.0的客厅与案情室陈设、双人活动。
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -111,11 +111,11 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.14.0** · [Full changelog](CHANGELOG.md)
+Current version **0.15.0** · [Full changelog](CHANGELOG.md)
 
-Local version 0.14.0 adds everyday furnishings and NPC activity to the lounge and briefing room. Three companions join lounge breaks to use the tea stand, magazines, chessboard and plants. The briefing room supports drinking water, writing and tidying stationery, with characters returning to their seats afterward. Ambient exchanges concern the objects at hand; evidence and public disclosures retain their existing controls.
+Version 0.15.0 lets conversations advance The Seventh Suspect: hear an account, ask where it came from, investigate, then return with evidence. Actual replies become the testimony record, and contradictions need a follow-up before a confession. The comparison desk now holds two objects or testimony slips side by side and takes the player back into conversation. Lounge furnishings and paired NPC activities from 0.14.0 are included.
 
-Version 0.13.2 adds a second story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing the first Andy route unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Each initial character has an eight-page first-person illustrated prologue covering their background, connection to Hong Qing and reason for attending. Chapter transitions and the investigator handoff continue the narrative; role selection displays only the initial character’s name. Roofs cover rooms that are not yet open. The hosted demo remains on 0.13.2.
+Version 0.13.2 adds a second story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing the first Andy route unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Each initial character has an eight-page first-person illustrated prologue covering their background, connection to Hong Qing and reason for attending. Chapter transitions and the investigator handoff continue the narrative; role selection displays only the initial character’s name. Roofs cover rooms that are not yet open. The hosted demo is on 0.15.0.
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 

@@ -1,4 +1,5 @@
 import {personalNarrative} from './narrative.mjs';
+import {newDialogue,dialogueOf,strictChapter,inquiryView,reviewContext,planInquiry,commitInquiry,materialText,eligibleFactIds,comparisonQuestion,accountQuestion} from './inquiries.mjs';
 import {sharedPresentation} from './presentation.mjs';
 import {casePositions,casePublicRoom} from './social.mjs';
 import {selectRelevant} from '../npc-memory.mjs';
@@ -18,22 +19,22 @@ const publicRoom=casePublicRoom;
 const audienceFor=(s,actor)=>currentRoom(s)==='lounge'||s.chatSetting?.scope==='private'&&s.chatSetting.actor===actor?[s.playerId,actor]:[s.playerId,...visibleActors(s).filter(p=>positions(s)[p.id]===currentRoom(s)).map(p=>p.id)];
 export function createGame(routeId='andy'){
  need(routes.some(r=>r.id===routeId),'没有这条路线。');
- return {scriptId:'suspect7',version:2,routeId,playerId:routeId,chapterId:1,viewpointMode:'testimony',started:false,room:'dining',revision:0,found:[],flags:{},records:[],notes:'',chapters:[],chatLog:[],chats:{},positions:{},hypotheses:[],oldAnswers:{},hints:{},reveals:[],seen:{},ending:null};
+ return {scriptId:'suspect7',version:3,dialogue:newDialogue(),routeId,playerId:routeId,chapterId:1,viewpointMode:'testimony',started:false,room:'dining',revision:0,found:[],flags:{},records:[],notes:'',chapters:[],chatLog:[],chats:{},positions:{},hypotheses:[],oldAnswers:{},hints:{},reveals:[],seen:{},ending:null};
 }
 function visibleActors(s){return (s.chapterId>=5?people:people.slice(0,6)).filter(p=>p.id!==s.playerId);}
 const positions=casePositions;
 function quoteVisible(s,q){return q.chapter<=s.chapterId&&found(s,q.id);}
-function visibleEvidence(s){return s.found.map(byId).filter(Boolean).map(e=>({...e,text:e.id==='carpet'&&s.playerId==='andy'?e.perspectiveText:e.text,perspectiveText:undefined}));}
+function visibleEvidence(s){return s.found.map(byId).filter(Boolean).map(e=>({...e,text:e.id==='carpet'&&s.playerId==='andy'?e.perspectiveText:materialText(s,e.id),perspectiveText:undefined}));}
 const privateIds=s=>s.chapterId<5?[s.routeId+'-private']:[];
 const step=(label,done)=>({label,done:!!done});
 export function requirements(s){
- const f=id=>found(s,id),b=k=>s.flags[k];
- if(s.chapterId===1)return [step('查看大门、手机、厨房和前厅', ['exit','phone','kitchen','stairs'].every(f)),step('听完第一次来电',b('call1'))];
+ const f=id=>found(s,id),b=k=>s.flags[k],strict=strictChapter(s);
+ if(s.chapterId===1)return [...(strict?[step('向陈信问清来路，向李察核对失联经过',(s.playerId==='chenxin'||b('arrival-chen'))&&(s.playerId==='licha'||b('arrival-licha')))]:[]),step('查看大门、手机、厨房和前厅', ['exit','phone','kitchen','stairs'].every(f)),step('听完第一次来电',b('call1'))];
  if(s.chapterId===2)return [step('记录六人的旧案说法',people.slice(0,6).every(p=>f(p.id+'-old'))),step('到教堂阅读自己的供述',b('confession')),step('留下对两拨劫匪的判断',b('old-outline'))];
  if(s.chapterId===3)return [step('重看第二次来电并比较回应',b('calls-compared')),step('到教堂投票',b('voted'))];
- if(s.chapterId===4)return [step('检查伤口、手杖、温泉与书房', ['injury','cane','body','pool-items','outlet','measure','photo','paternity','keypad','spare-ball','toolbox'].every(f)),step('进入密室并检查设备', ['console','relay','camera','paint','pump','monitor','autodial','passage'].every(f)),step('在纸面复原运输顺序',b('reconstructed')),step('记下一份待核查的假说',b('villa-theory'))];
- if(s.chapterId===5)return [step('领取五位调查者的材料', ['wuquan','raven','cuiyuan','xiaoguo','aiyijun'].every(id=>f(id+'-file'))),step('核查白色调查资料', ['robbery-file','hong-record','cable','blood','phone-check','no-gas'].every(f)),step('提交阶段判断或注明证据不足',b('provisional'))];
- return [step('取得四项独立复核', ['dental','departure','clock-check','chen-link'].every(f)),step('完成陈信的双证据追问',b('chen-confession')),step('提交最终结案',s.ending)];
+ if(s.chapterId===4)return [...(strict?[step('问清东廊目击与陈信的第一次离席',['franklin-shadow','hongxue-shadow','chenxin-time'].every(f))]:[]),step('检查伤口、手杖、温泉与书房', ['injury','cane','body','pool-items','outlet','measure','photo','paternity','keypad','spare-ball','toolbox'].every(f)),step('进入密室并检查设备', ['console','relay','camera','paint','pump','monitor','autodial','passage'].every(f)),step('在纸面复原运输顺序',b('reconstructed')),step('记下一份待核查的假说',b('villa-theory'))];
+ if(s.chapterId===5)return [step('向调查者问清资料来源，整理自己的材料', ['wuquan','raven','cuiyuan','xiaoguo','aiyijun'].every(id=>f(id+'-file'))),step('核查白色调查资料', ['robbery-file','hong-record','cable','blood','phone-check','no-gas'].every(f)),...(strict?[step('当面追问旧案中的身份、袭击与玉的去向',['sun-confirmed','ghost-confirmed','assault-confirmed','jade-confirmed'].every(b))]:[]),step('说出阶段判断，或说明还有哪些疑点',b('provisional'))];
+ return [step('取得四项独立复核', ['dental','departure','clock-check','chen-link'].every(f)),...(strict?[step('向薇薇安核清张佳与周婕的身份',b('vivian-cleared'))]:[]),step('当面追问陈信隐去的经过',b('chen-confession')),step('提交最终结案',s.ending)];
 }
 function progress(s){const req=requirements(s);return {checks:req,ready:req.every(r=>r.done),next:req.find(r=>!r.done)?.label|| (s.chapterId<6?'可以继续下一章':'调查已完成')};}
 const projectionQuestions=xs=>xs.map(({answer,...q})=>q);
@@ -41,13 +42,13 @@ export function view(s,ai={}){
  const roomId=currentRoom(s),chapter=chapters[s.chapterId-1],room=roomDefs.find(r=>r.id===roomId),all=accessible(s),activePeople=visibleActors(s),spatial=spatialView(s);
  const mapSpots=evidence.filter(e=>e.chapter<=s.chapterId&&!e.request&&all.some(r=>r.id===evidenceRoom(s,e))).map((e,i)=>({id:e.id,label:e.title,found:found(s,e.id),kind:propKind(e.id),room:evidenceRoom(s,e),...propPosition(e,evidence.filter(v=>v.room===e.room&&v.chapter<=s.chapterId&&!v.request).indexOf(e))}));
  const spots=mapSpots.filter(e=>e.room===roomId);
- const accounts=statements.filter(q=>q.chapter<=s.chapterId&&q.id!=='jade-confession').map(q=>({id:q.id,actor:q.actor,title:q.title,read:found(s,q.id)}));
+ const accounts=statements.filter(q=>q.chapter<=s.chapterId&&q.id!=='jade-confession').map(q=>({id:q.id,actor:q.actor,title:q.title,read:found(s,q.id),own:q.actor===s.playerId}));
  s.positions=positions(s);
  return sharedPresentation({scriptId:'suspect7',routeId:s.routeId,playerId:s.playerId,perspectiveActorId:s.playerId,viewpointMode:s.viewpointMode,chapterId:s.chapterId,chapter,started:s.started,revision:s.revision,room:roomId,
   self:{...person(s.playerId),...personalNarrative(s),private:s.chapterId<5?biographies[s.routeId].private.replaceAll('你','我'):null},
   people:activePeople.map(p=>({...p,location:s.positions[p.id],near:s.positions[p.id]===roomId})),places:all.map(r=>({id:r.id,name:r.name})),
   scene:{...room,...spatial,spots,mapSpots},spatialAdaptation:'房间按单层布局改编，案发时间沿用供述记录。',
-  evidence:visibleEvidence(s),accounts,flags:{...s.flags},voteTally:s.voteTally||null,progress:progress(s),records:s.records.map(r=>r.evidence&&byId(r.evidence)?{...r,text:r.evidence==='carpet'&&r.viewpoint==='andy'?byId(r.evidence).perspectiveText:byId(r.evidence).text,source:byId(r.evidence).source}:r.private&&biographies[r.actor]?{...r,text:biographies[r.actor].confession}:r),notes:s.notes,hypotheses:s.hypotheses,chapterHistory:s.chapters,
+  evidence:visibleEvidence(s),accounts,dialogue:inquiryView(s),flags:{...s.flags},voteTally:s.voteTally||null,progress:progress(s),records:s.records.map(r=>r.evidence&&byId(r.evidence)?{...r,text:r.evidence==='carpet'&&r.viewpoint==='andy'?byId(r.evidence).perspectiveText:materialText(s,r.evidence),source:byId(r.evidence).source}:r.private&&biographies[r.actor]?{...r,text:biographies[r.actor].confession}:r),notes:s.notes,hypotheses:s.hypotheses,chapterHistory:s.chapters,
   testimonyBoundary:s.chapterId<5?'你正在进入'+person(s.routeId).name+'对那一天的供述。未交代的行动留白，人物说法仍待核实。':'前一角色的私人记忆留在玩家旁注；对质使用当前调查已经取得的材料。',
   conversations:s.chatLog.filter(l=>l.viewpoint===s.playerId&&l.chapter>= (s.chapterId>=5?5:1)),
   calls:Object.values(calls).filter(c=>c.chapter<=s.chapterId),
@@ -66,6 +67,7 @@ const remember=(s,id)=>{const q=byId(id);add(s,id);if(!s.records.some(r=>r.evide
 export function act(s,input){
  need(input&&typeof input.type==='string','请选一项操作。');
  if(input.requestId){need(validRequest(input.requestId),'请求编号无效。');if(own(s.seen,input.requestId)){need(s.seen[input.requestId].fingerprint===fingerprint(input),'请求编号已用于另一项操作。');return {cached:true,...s.seen[input.requestId].result};}}
+ s.dialogue||=newDialogue(s.started?s.chapterId:0);
  let result={};
  switch(input.type){
   case 'start':
@@ -78,10 +80,10 @@ export function act(s,input){
   case 'public-talk':s.chatSetting=null;break;
   case 'present':{need(found(s,input.id),'先取得这份材料。');need(visibleActors(s).some(p=>p.id===input.actor)&&positions(s)[input.actor]===currentRoom(s),'先到对方身边。');s.shown||={};s.shown[input.actor]||=[];if(!s.shown[input.actor].includes(input.id))s.shown[input.actor].push(input.id);addRecord(s,'向'+person(input.actor).name+'出示「'+byId(input.id).title+'」。','observation',{audience:audienceFor(s,input.actor),shown:input.id,actor:input.actor});break;}
   case 'inspect':{const e=evidence.find(e=>e.id===input.id);need(e&&e.chapter<=s.chapterId&&!e.request&&evidenceRoom(s,e)===currentRoom(s)&&accessible(s).some(r=>r.id===currentRoom(s)),'先到相应地点检查这件物品。');remember(s,e.id);result={clue:e.id};break;}
-  case 'account':{const q=statements.find(q=>q.id===input.id);need(q&&q.chapter<=s.chapterId&&q.id!=='jade-confession','这份供述还未取得。');need(s.chapterId>=5||['dining','lounge','chapel'].includes(s.room),'回到公共空间听取供述。');remember(s,q.id);result={clue:q.id};break;}
-  case 'confession':allow(s,2);need(s.chapterId<5&&s.room==='chapel','先到教堂阅读自己的供述。');if(!s.flags.confession)addRecord(s,biographies[s.routeId].confession,'testimony',{actor:s.routeId,audience:[s.routeId],private:true});s.flags.confession=true;result={message:biographies[s.routeId].confession};break;
+  case 'account':{const q=statements.find(q=>q.id===input.id);need(q&&q.chapter<=s.chapterId&&q.id!=='jade-confession','这份供述还未取得。');if(strictChapter(s)&&q.actor!==s.playerId&&!found(s,q.id)){result={ask:accountQuestion(s,q.id)};break;}need(s.chapterId>=5||['dining','lounge','chapel'].includes(s.room),'回到公共空间听取供述。');remember(s,q.id);result={clue:q.id};break;}
+  case 'confession':allow(s,2);need(s.chapterId<5&&s.room==='chapel','先到教堂阅读自己的供述。');if(!s.flags.confession)addRecord(s,biographies[s.routeId].confession,'testimony',{actor:s.routeId,audience:[s.routeId],private:true});s.flags.confession=true;remember(s,s.routeId+'-old');result={message:biographies[s.routeId].confession};break;
   case 'play-call':{const call=Object.values(calls).find(c=>c.id===input.id);need(call&&call.chapter<=s.chapterId,'这通来电尚未发生。');need(s.room==='dining'||s.flags[call.id],'先回餐厅接听来电。');if(!s.flags[call.id]){s.flags[call.id]=true;addRecord(s,call.frames.map(f=>f.speaker+'：'+f.text).join('\n'),'observation',{call:call.id,audience:people.slice(0,6).map(p=>p.id)});}break;}
-  case 'compare-calls':allow(s,3);need(s.flags.call1&&s.flags.call2,'先听完两次来电。');need(input.first==='responds'&&input.second==='continuous','把每次来电如何回应插话分别记下，再比较。');s.flags['calls-compared']=true;addRecord(s,'第一次回应了现场插话，第二次连续宣读。实时声音与录音的区别值得继续核查。','hypothesis');break;
+  case 'compare-calls':allow(s,3);need(s.flags.call1&&s.flags.call2,'先听完两次来电。');if(strictChapter(s)){result={ask:{actor:s.playerId==='licha'?'hongxue':'licha',message:'两次电话接住现场插话的方式不同，第二次是不是预先录好的？'}};break;}need(input.first==='responds'&&input.second==='continuous','把每次来电如何回应插话分别记下，再比较。');s.flags['calls-compared']=true;addRecord(s,'第一次回应了现场插话，第二次连续宣读。实时声音与录音的区别值得继续核查。','hypothesis');break;
   case 'vote':allow(s,3);need(s.chapterId===3&&s.room==='chapel','在第三章的教堂投票。');need(s.flags['calls-compared'],'先比较两次来电。');need(['yes','no','abstain'].includes(input.choice),'请选一项投票意见。');if(!s.flags.voted){s.flags.voted=true;s.vote=input.choice;const ballots={andy:'no',franklin:'yes',hongxue:'no',vivian:'yes',chenxin:'no',licha:'no'};ballots[s.routeId]=input.choice;s.voteTally={yes:0,no:0,abstain:0};for(const choice of Object.values(ballots))s.voteTally[choice]++;addRecord(s,`匿名计票：该死${s.voteTally.yes}票，不该死${s.voteTally.no}票，弃权${s.voteTally.abstain}票。`,'observation',{audience:people.slice(0,6).map(p=>p.id)});addRecord(s,'你选择了'+({yes:'“该死”',no:'“不该死”',abstain:'弃权，拒绝用投票决定生死'}[input.choice])+'。其他纸条混在一起，只公布意见，不据此改动已发生的案件。','testimony',{actor:s.playerId,audience:[s.playerId]});}result={message:`匿名计票：该死${s.voteTally.yes}，不该死${s.voteTally.no}，弃权${s.voteTally.abstain}。`+(s.vote==='yes'?'纸条收进盒中。红雪没有抬头。':s.vote==='no'?'纸条收进盒中。李察说：“先把事实查清楚。”':'你把空白纸条折好，留下了自己的反对。')};break;
   case 'unlock':allow(s,4);need(s.room==='attic'&&found(s,'photo')&&found(s,'keypad'),'先检查后侧储藏室输入器与书房照片。');need(String(input.code)==='9426936','键盘没有响应。七位数字与照片背面的名字有什么关系？');s.flags.unlocked=true;addRecord(s,'晓雯 → XIAOWEN → 九键9426936。柜后门锁打开。');result={message:'门锁轻响。后侧储藏室密室已开放。'};break;
   case 'measure':allow(s,4);need(found(s,'measure'),'先在书房找到卷尺并记录尺寸。');s.flags.measured=true;addRecord(s,'你比对了外缘与室内尺寸。后侧储藏室外墙基线还向北延伸8米，室内北墙却提前结束；柜后的区域需要继续检查。','hypothesis');break;
@@ -89,12 +91,12 @@ export function act(s,input){
   case 'hypothesis':{need(typeof input.text==='string'&&input.text.trim().length>=2&&input.text.length<=2500,'写下至少两字的判断或疑问。');const entry={id:randomUUID(),chapter:s.chapterId,viewpoint:s.playerId,text:input.text.trim(),kind:'hypothesis',status:'待核实'};s.hypotheses.push(entry);if(s.chapterId===2)s.flags['old-outline']=true;if(s.chapterId===4)s.flags['villa-theory']=true;break;}
   case 'withdraw':{const h=s.hypotheses.find(h=>h.id===input.id);need(h,'没有这项假说。');h.status='已撤回';break;}
   case 'notes':need(typeof input.text==='string'&&input.text.length<=12000,'旁注最多12000字。');s.notes=input.text;break;
-  case 'report':{allow(s,6);const report=view(s).reports.find(r=>r.id===input.id);need(report&&report.basis.every(id=>found(s,id)),'先取得申请所需的现场或供述依据。');need(typeof input.question==='string'&&input.question.trim().length>=2,'写下希望核查的问题。');const e=evidence.find(e=>e.request===report.id);remember(s,e.id);addRecord(s,'申请复核：'+input.question.trim().slice(0,500),'hypothesis',{request:report.id});result={clue:e.id};break;}
-  case 'compare':{const q=byId(input.quote),e=byId(input.evidence);need(q&&e&&q.id!==e.id&&found(s,q.id)&&found(s,e.id),'选择两份已经取得的不同材料。');const c=confrontations.find(c=>c.quote===q.id&&c.evidence===e.id);if(c&&s.chapterId>=c.chapter){need(c.requires.every(id=>found(s,id)),'这次追问还需要：'+c.requires.filter(id=>!found(s,id)).map(id=>byId(id).title).join('、'));if(!s.flags[c.unlock]){s.flags[c.unlock]=true;addRecord(s,c.result,'verified',{actor:c.actor,evidencePair:[q.id,e.id],audience:[s.playerId,c.actor]});if(c.id==='jade')remember(s,'jade-confession');}result={message:c.result};}else{addRecord(s,'并排核对：'+q.title+' / '+e.title,'hypothesis',{evidencePair:[q.id,e.id]});result={message:'两份材料已并排留档。它们的联系仍由你判断。'};}break;}
+  case 'report':{allow(s,6);if(strictChapter(s)){const t=Object.values(inquiryView(s).byActor).flat().find(t=>t.id==='report:'+input.id);need(t,'先向调查者问清材料来源。');result={ask:{actor:t.actor,message:t.prompt,inquiry:t.id}};break;}const report=view(s).reports.find(r=>r.id===input.id);need(report&&report.basis.every(id=>found(s,id)),'先取得申请所需的现场或供述依据。');need(typeof input.question==='string'&&input.question.trim().length>=2,'写下希望核查的问题。');const e=evidence.find(e=>e.request===report.id);remember(s,e.id);addRecord(s,'申请复核：'+input.question.trim().slice(0,500),'hypothesis',{request:report.id});result={clue:e.id};break;}
+  case 'compare':{const q=byId(input.quote),e=byId(input.evidence);need(q&&e&&q.id!==e.id&&found(s,q.id)&&found(s,e.id),'选择两份已经取得的不同材料。');if(strictChapter(s)){const actor=[input.actor,q.actor,e.actor,...visibleActors(s).map(p=>p.id)].find(id=>visibleActors(s).some(p=>p.id===id));result={ask:comparisonQuestion(s,q.id,e.id,actor)};break;}const c=confrontations.find(c=>c.quote===q.id&&c.evidence===e.id);if(c&&s.chapterId>=c.chapter){need(c.requires.every(id=>found(s,id)),'这次追问还需要：'+c.requires.filter(id=>!found(s,id)).map(id=>byId(id).title).join('、'));if(!s.flags[c.unlock]){s.flags[c.unlock]=true;addRecord(s,c.result,'verified',{actor:c.actor,evidencePair:[q.id,e.id],audience:[s.playerId,c.actor]});if(c.id==='jade')remember(s,'jade-confession');}result={message:c.result};}else{addRecord(s,'并排核对：'+q.title+' / '+e.title,'hypothesis',{evidencePair:[q.id,e.id]});result={message:'两份材料已并排留档。它们的联系仍由你判断。'};}break;}
   case 'provisional':{allow(s,5);need(s.chapterId===5,'阶段判断在第五章提交。');validateAnswers(questions.old,input.answers);s.oldAnswers={...input.answers};need(['insufficient','vivian-theory','other'].includes(input.status),'为阶段推论选择状态。');s.flags.provisional=true;s.provisional={status:input.status,text:String(input.text||'仍有身份或时间疑点').slice(0,2500)};addRecord(s,input.status==='vivian-theory'?'暂存推论：薇薇安可能是周婕，在14:30—15:20杀死被认作洪青的死者。两项身份与时间均待核实。':s.provisional.text,'hypothesis');break;}
-  case 'advance':{need(s.chapterId<6,'已到终章。');need(progress(s).ready,'还需要：'+progress(s).next);s.chapters.push({chapter:s.chapterId,title:chapters[s.chapterId-1].title,judgment:s.hypotheses.filter(h=>h.chapter===s.chapterId).at(-1)?.text||s.provisional?.text||'已保存当章记录。',next:chapters[s.chapterId].next});s.chapterId++;s.room=s.chapterId===4?'attic':s.chapterId>=5?'meeting':'dining';if(s.chapterId===4){for(const id of ['franklin-shadow','hongxue-shadow','chenxin-time'])remember(s,id);addRecord(s,'后侧储藏室传来惨叫与柜子倒地的闷响。发现陈信受伤后，众人转入现场检查。','observation');}if(s.chapterId===5){s.playerId=routes.find(r=>r.id===s.routeId).investigator;s.viewpointMode='investigation';s.chats={};s.shown={};s.chatSetting=null;s.positions=positions(s);addRecord(s,'警方破门。两天后，活动室改为临时案情室，检修通道的门禁已由警方解除。调查者开始核对六份供述。此前的私人独白留在玩家旁注，不自动成为调查者知道的事实。');}s.lastHint=null;break;}
+  case 'advance':{need(s.chapterId<6,'已到终章。');need(progress(s).ready,'还需要：'+progress(s).next);s.chapters.push({chapter:s.chapterId,title:chapters[s.chapterId-1].title,judgment:s.hypotheses.filter(h=>h.chapter===s.chapterId).at(-1)?.text||s.provisional?.text||'已保存当章记录。',next:chapters[s.chapterId].next});s.chapterId++;s.room=s.chapterId===4?'attic':s.chapterId>=5?'meeting':'dining';if(s.chapterId===4){for(const id of ['franklin-shadow','hongxue-shadow','chenxin-time'])if(!strictChapter(s)||byId(id).actor===s.playerId)remember(s,id);addRecord(s,'后侧储藏室传来惨叫与柜子倒地的闷响。发现陈信受伤后，众人转入现场检查。','observation');}if(s.chapterId===5){s.playerId=routes.find(r=>r.id===s.routeId).investigator;s.viewpointMode='investigation';s.chats={};s.shown={};s.chatSetting=null;s.positions=positions(s);addRecord(s,'警方破门。两天后，活动室改为临时案情室，检修通道的门禁已由警方解除。调查者开始核对六份供述。此前的私人独白留在玩家旁注，不自动成为调查者知道的事实。');}s.lastHint=null;break;}
   case 'hint':{const level=Math.max(1,Math.min(3,Number(input.level)||1));s.hints[s.chapterId]=Math.max(s.hints[s.chapterId]||0,level);s.lastHint=hint(s,level);if(level===3&&!s.reveals.includes(s.chapterId))s.reveals.push(s.chapterId);result={message:s.lastHint};break;}
-  case 'final':{allow(s,6);need(!s.ending,'结案记录已保存。');need(['dental','departure','clock-check','chen-link'].every(id=>found(s,id))&&s.flags['chen-confession'],'先取得独立复核，完成陈信对质。');validateAnswers(questions.old,input.oldAnswers);validateAnswers(questions.final,input.answers);need(input.chains&&chainQuestions.every(q=>found(s,input.chains[q.id])),'为每项证据连接选一份已取得的材料。');const old=questions.old.map(q=>({title:q.title,chosen:input.oldAnswers[q.id],answer:q.answer,points:input.oldAnswers[q.id]===q.answer?10:0}));const main=questions.final.map(q=>({title:q.title,chosen:input.answers[q.id],answer:q.answer,points:input.answers[q.id]===q.answer?10:0}));const chains=chainQuestions.map(q=>({title:q.title,chosen:byId(input.chains[q.id]).title,answer:byId(q.answer).title,points:input.chains[q.id]===q.answer?5:0}));s.ending={score:[...old,...main,...chains].reduce((v,q)=>v+q.points,0),old,main,chains,reveals:[...s.reveals],closure:biographies[s.routeId].closure,epilogue:epilogue(s),choice:input.choice==='disclose'?'你留下了完整交代。':'你保留私人旁注，已核实的案件证据照常留档。'};s.oldAnswers={...input.oldAnswers};addRecord(s,'终章结案已保存。六条路线全部开放。','verified');break;}
+  case 'final':{allow(s,6);need(!s.ending,'结案记录已保存。');need(['dental','departure','clock-check','chen-link'].every(id=>found(s,id))&&s.flags['chen-confession']&&(!strictChapter(s)||s.flags['vivian-cleared']),'先取得独立复核，向薇薇安核清身份，再完成陈信对质。');validateAnswers(questions.old,input.oldAnswers);validateAnswers(questions.final,input.answers);need(input.chains&&chainQuestions.every(q=>found(s,input.chains[q.id])),'为每项证据连接选一份已取得的材料。');const old=questions.old.map(q=>({title:q.title,chosen:input.oldAnswers[q.id],answer:q.answer,points:input.oldAnswers[q.id]===q.answer?10:0}));const main=questions.final.map(q=>({title:q.title,chosen:input.answers[q.id],answer:q.answer,points:input.answers[q.id]===q.answer?10:0}));const chains=chainQuestions.map(q=>({title:q.title,chosen:byId(input.chains[q.id]).title,answer:byId(q.answer).title,points:input.chains[q.id]===q.answer?5:0}));s.ending={score:[...old,...main,...chains].reduce((v,q)=>v+q.points,0),old,main,chains,reveals:[...s.reveals],closure:biographies[s.routeId].closure,epilogue:epilogue(s),choice:input.choice==='disclose'?'你留下了完整交代。':'你保留私人旁注，已核实的案件证据照常留档。'};s.oldAnswers={...input.oldAnswers};addRecord(s,'终章结案已保存。六条路线全部开放。','verified');break;}
   default:throw Error('没有这项调查操作。');
  }
  s.revision++;s.positions=positions(s);
@@ -103,6 +105,7 @@ export function act(s,input){
 function validateAnswers(defs,answers){need(answers&&defs.every(q=>q.options.includes(answers[q.id])),'请为每项判断选择答案；证据不够时可选“证据不足”。');}
 function hint(s,level){
  const target=progress(s).next;
+ const t=strictChapter(s)&&inquiryView(s).lead;if(t&&level<3)return '去找'+person(t.actor).name+'，'+(t.stage?'追问刚才没讲清的一点：':'从这个问题问起：')+t.prompt+' 也可以换成自己的问法。';
  if(level===1)return '下一项可操作的调查：'+target+'。地点、原话和已取得证据都保存在调查手记。';
  if(level===2)return ({1:'餐厅看手机，厨房查出口，再到前厅检查长廊、内庭检查院门。回到餐厅接来电。',2:'公共空间可逐份听取旧案原话。自己的供述要到教堂阅读；把对两拨劫匪的疑问写入假说。',3:'先接第二次来电。比较对方是否停下来回答插话，再到教堂投票。',4:'书房照片背面是“晓雯”。把拼音映射到九键字母；密室设备检查完，再把撞球运输步骤排好。',5:'会议室领取资料；调查者原话从“供述”领取。阶段判断可以填证据不足。',6:'会议室查看红色调查资料，再提出身份、离站、校时和陈信关联四项复核申请。双证据追问选择一份原话和一份反证。'})[s.chapterId];
  return ({1:'先查大门、专用手机、厨房和前厅，再播放第一次来电。',2:'两拨劫匪由洪青分别安排；六份旧案原话、自身供述和一条假说齐备后推进。',3:'第一次会回应现场插话，第二次连续宣读；投票选择不会改变案件事实。',4:'密码9426936。运输顺序：装载→封口→充气→沿检修通道推送→释放。找到密室全部设备后留下假说。',5:'孙强冒名富兰克林；安迪是鬼手；孙强袭击陈信；红雪把玉藏在周雪墓中。阶段推论仍有身份和时间疑点。',6:'陈信杀死洪羽瑞，洪青已离开。作案窗口为第一次去教堂12:45—13:15；动机与合作、卧底处境及经济压力有关。牙科、校时、张佳身份和暗道结构分别支持四项证据连接。'})[s.chapterId];
@@ -120,12 +123,12 @@ export function actorContext(s,actor,message,shown=[]){
  need(positions(s)[actor]===currentRoom(s),s.chapterId>=5?'到案情会议室与对方交谈。':'回到餐厅公开交谈。');
  need(typeof message==='string'&&message.trim()&&message.length<=1500,'请写下不超过1500字的问题。');
  need(Array.isArray(shown)&&shown.length<=2&&shown.every(id=>found(s,id)),'只可出示当前已经取得的材料。');
- const p=person(actor),facts=statements.filter(q=>q.actor===actor&&q.chapter<=s.chapterId&&(q.id!=='jade-confession'||s.flags['jade-confirmed'])).map(q=>({id:q.id,text:q.text}));
+ const p=person(actor),known=new Set(eligibleFactIds(s,actor)),facts=statements.filter(q=>q.actor===actor&&q.chapter<=s.chapterId&&(!strictChapter(s)||known.has(q.id))&&(q.id!=='jade-confession'||s.flags['jade-confirmed'])).map(q=>({id:q.id,text:q.text}));
  facts.push({id:'public-role',text:p.role});
  for(const c of confrontations.filter(c=>c.actor===actor&&s.flags[c.unlock])){const previous=facts.find(f=>f.id===c.quote);if(previous)previous.text='这段旧供述已被撤回或纠正：'+previous.text+'。当前回答以核实记录为准。';facts.push({id:'confession-'+c.id,text:c.result});}
  const available=s.chatLog.filter(l=>l.audience.includes(actor)&&l.audience.includes(s.playerId)&&l.viewpoint===s.playerId&&(s.chapterId<5||l.chapter>=5));
  const memories=available.slice(-18),old=selectRelevant(available.slice(0,-18),message,{limit:6,budget:4000,text:l=>l.text}).map(l=>({speaker:person(l.actor)?.name||l.actor,quote:l.text,kind:l.kind,commitment:/我会|答应|说好|我愿意/.test(l.text)}));
- return {name:p.name,actor,style:p.style,aim:'回答当前问题，维护尚未撤回的供述；已被证据推翻的部分如实改口。',playerId:s.playerId,playerName:person(s.playerId).name,playerRole:s.chapterId<5?'共同被困者，在供述片段内核对经过。':'调查者，根据已经取得的材料核对供述。',facts,shown:shown.map(id=>{const e=byId(id);return {id,title:e.title,text:e.text,kind:e.kind};}),heard:[],conversation:memories.map(l=>({who:l.actor,text:l.text})),recollections:old,casualQuestion:false,message};
+ return {name:p.name,actor,style:p.style,aim:'回答当前问题，维护尚未撤回的供述；已被证据推翻的部分如实改口。',playerId:s.playerId,playerName:person(s.playerId).name,playerRole:s.chapterId<5?'共同被困者，在供述片段内核对经过。':'调查者，根据已经取得的材料核对供述。',facts,shown:shown.map(id=>{const e=byId(id);return {id,title:e.title,text:materialText(s,id),kind:e.kind};}),heard:[],conversation:memories.map(l=>({who:l.actor,text:l.text})),recollections:old,casualQuestion:false,message};
 }
 function validateCaseReply(s,actor,context,reply,allowSilence=false){
  need(typeof reply.speech==='string'&&(allowSilence||reply.speech.trim())&&reply.speech.length<=900,'这次回复不完整，请重试。');
@@ -135,12 +138,32 @@ function validateCaseReply(s,actor,context,reply,allowSilence=false){
 }
 export async function converse(s,input,generate,options={}){
  if(input.requestId){need(validRequest(input.requestId),'请求编号无效。');if(own(s.seen,input.requestId)){need(s.seen[input.requestId].fingerprint===fingerprint(input),'请求编号已用于另一项操作。');return {cached:true,...s.seen[input.requestId].result};}}
- const context=actorContext(s,input.actor,input.message,input.shown||(s.shown?.[input.actor]||[]).slice(-2));
- const reply=await generate(context);validateCaseReply(s,input.actor,context,reply);
- const audience=audienceFor(s,input.actor);
- const line=(actor,text)=>({id:randomUUID(),actor,text,chapter:s.chapterId,viewpoint:s.playerId,audience:[...audience],kind:'testimony'});
- const asked=line(s.playerId,input.message),answered={...line(input.actor,reply.speech),factIds:reply.factIds};s.chatLog.push(asked,answered);s.chats[input.actor]||=[];s.chats[input.actor].push({who:s.playerId,text:input.message},{who:input.actor,text:reply.speech});s.revision++;
- const result={speech:reply.speech,actor:input.actor};if(input.requestId){s.seen[input.requestId]={fingerprint:fingerprint(input),result};}options.onSpeech?.(reply.speech);return result;
+ const shown=input.shown||(s.shown?.[input.actor]||[]).slice(-2);
+ // Validate the actor, audience and materials before any model request.
+ actorContext(s,input.actor,input.message,shown);
+ const draft=structuredClone(s);draft.dialogue||=newDialogue(s.started?s.chapterId:0);
+ let plan=null,reviews=0;
+ if(strictChapter(draft)){
+  const review=reviewContext(draft,input,shown);
+  if(review.candidates.length){const result=await generate(review);reviews++;plan=planInquiry(draft,input,shown,result);draft.dialogue.lastReview={actor:input.actor,topicId:result.topicId,intent:result.intent,quote:result.quote,confidence:result.confidence,accepted:!!plan};}
+ }
+ if(plan?.step===2&&plan.topic.confrontation)draft.flags[plan.topic.confrontation.unlock]=true;
+ if(plan?.step===2&&plan.topic.kind==='report')remember(draft,plan.topic.result);
+ const context=actorContext(draft,input.actor,input.message,shown);
+ if(plan){
+  context.facts=context.facts.filter(f=>f.id!==plan.factId);context.facts.push({id:plan.factId,text:plan.text});
+  context.caseTurn={factId:plan.factId,stage:plan.missing?'unresolved':plan.step===2?'disclose':'clarify',subject:plan.topic.title,allowQuestion:plan.step<2};
+ }
+ const reply=await generate(context);validateCaseReply(draft,input.actor,context,reply);
+ if(plan)need(reply.factIds.includes(plan.factId),'这次回答没有交代刚才追问的要点，输入已保留，请重试。');
+ const audience=audienceFor(draft,input.actor),turnId=randomUUID();
+ if(shown.length){draft.shown||={};draft.shown[input.actor]=[...shown];addRecord(draft,'向'+person(input.actor).name+'摆出'+shown.map(id=>'「'+byId(id).title+'」').join('与')+'。','observation',{actor:input.actor,audience,shown:[...shown],turnId});}
+ const discoveries=commitInquiry(draft,plan,{speech:reply.speech,actor:input.actor,audience,turnId,question:input.message,remember:id=>remember(draft,id),record:(text,kind,extra)=>addRecord(draft,text,kind,extra)});
+ const line=(actor,text)=>({id:randomUUID(),actor,text,chapter:draft.chapterId,viewpoint:draft.playerId,audience:[...audience],kind:'testimony'});
+ const asked=line(draft.playerId,input.message),answered={...line(input.actor,reply.speech),factIds:reply.factIds,discoveries};draft.chatLog.push(asked,answered);draft.chats[input.actor]||=[];draft.chats[input.actor].push({who:draft.playerId,text:input.message},{who:input.actor,text:reply.speech,discoveries});draft.revision++;
+ draft.dialogue.usage||={reviews:0,replies:0};draft.dialogue.usage.reviews+=reviews;draft.dialogue.usage.replies++;
+ const result={speech:reply.speech,actor:input.actor,discoveries};if(input.requestId)draft.seen[input.requestId]={fingerprint:fingerprint(input),result};
+ Object.assign(s,draft);options.onSpeech?.(reply.speech);return result;
 }
 
 export async function shareEvidence(s,{id,retryFailed=false},generate){

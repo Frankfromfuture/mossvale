@@ -129,7 +129,7 @@ export const confrontations=[
  {id:'ghost',actor:'andy',quote:'andy-old',evidence:'raven-file',chapter:5,title:'鬼手的残信',result:'残信的生活背景与安迪经历对应；吴全的记录也显示安迪仍在找玉。安迪承认自己就是鬼手，截玉之后失去意识。',requires:['wuquan-file','xiaoguo-file'],unlock:'ghost-confirmed'},
  {id:'assault',actor:'franklin',quote:'franklin-shadow',evidence:'hongxue-shadow',chapter:5,title:'东廊里的黑影',result:'富兰克林声称黑影经过休息室门前，红雪却一直站在那里，没有看见人。书房门到前厅必须经过那处门槛，检修通道也不通东廊。结合手杖剑和伤口，孙强袭击陈信的经过得到确认；它与温泉命案仍需分别判断。',requires:['cane','injury','passage'],unlock:'assault-confirmed'},
  {id:'jade',actor:'hongxue',quote:'hongxue-old',evidence:'wuquan-file',chapter:5,title:'仍在找玉的鬼手',result:'鬼手仍在寻玉，与“他带走并保有玉”的说法矛盾。崔媛转交了红雪的自首交代：玉留在周雪墓中。',requires:['cuiyuan-file'],unlock:'jade-confirmed'},
- {id:'vivian',actor:'vivian',quote:'vivian-old',evidence:'vivian-record',chapter:5,title:'张佳与周婕',result:'薇薇安确认自己是张佳，编造孙强的故事是为了保护她以为的绑匪朋友。她与周婕不是同一个人，旧推论的身份前提不成立。',requires:['cuiyuan-file'],unlock:'vivian-cleared'},
+ {id:'vivian',actor:'vivian',quote:'vivian-old',evidence:'vivian-record',chapter:6,title:'张佳与周婕',result:'薇薇安确认自己是张佳，编造孙强的故事是为了保护她以为的绑匪朋友。她与周婕不是同一个人，旧推论的身份前提不成立。',requires:['cuiyuan-file'],unlock:'vivian-cleared'},
  {id:'chen',actor:'chenxin',quote:'chenxin-time',evidence:'clock-check',chapter:6,title:'被留下的空白',result:'身份复核、离站记录、设备权限与校时检查相互对照后，陈信补充了供述空白：他与洪青合作，在第一次去教堂的12:45—13:15窗口杀死洪羽瑞，之后转运、清理并修改手机时间，删除有关记录。他需要钱，也急于结束卧底处境。12点后见到洪青，以及正要进密室才遇袭，都是掩盖行动的说法。',requires:['dental','departure','chen-after-noon','chen-link','console','relay','paint','blood','passage','autodial'],unlock:'chen-confession'}
 ];
 export const questions={old:[

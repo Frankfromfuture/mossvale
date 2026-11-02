@@ -1,7 +1,7 @@
 import test,{before} from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import {createGame,act,view} from '../server/suspect7/game.mjs';
+import {createGame as newGame,act,view} from '../server/suspect7/game.mjs';
 import {TownScene} from '../src/scene.mjs';
 import {villaContent} from '../src/suspect7-content.mjs';
 import {roomAt} from '../shared/suspect7/spatial.mjs';
@@ -37,3 +37,6 @@ test('continuous doors and collision paths reach every room and every physical e
   scene.scene.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
  }
 });
+
+// These pre-dialogue fixtures retain the original action-based investigation.
+function createGame(...args){const s=newGame(...args);s.dialogue.legacyThrough=6;return s;}

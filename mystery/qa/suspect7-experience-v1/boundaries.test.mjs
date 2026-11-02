@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createGame,act,view,shareEvidence,actorContext} from '../../server/suspect7/game.mjs';
+import {createGame as newGame,act,view,shareEvidence,actorContext} from '../../server/suspect7/game.mjs';
 import {generateAmbient,commitAmbient} from '../../server/ambient.mjs';
 import {createInterludeQueue} from '../../src/interludes.mjs';
 import {journey} from '../suspect7-v1/journey.mjs';
@@ -14,3 +14,6 @@ test('illustrations and chapters follow current knowledge, including color testi
 test('shared public reactions and ambient memory use actual listeners and retry only failures',async()=>{
  const s=createGame();act(s,{type:'begin'});act(s,{type:'inspect',id:'phone'});let calls=0;await shareEvidence(s,{id:'phone'},async c=>{calls++;assert.equal(c.kind,'public-reaction');return {action:'看了一眼手机',speech:'先把这件事记下来。',factIds:[]}});assert.equal(calls,5);assert(s.publicReactions.phone.reactions.every(r=>r.status==='done'));await shareEvidence(s,{id:'phone'},()=>{throw Error('duplicate')});assert(actorContext(s,'hongxue','刚才大家说了什么').conversation.some(l=>l.text.includes('记下来')));act(s,{type:'private-corner',actor:'hongxue'});const event=await generateAmbient(s,null);assert(!event.pair.includes('hongxue'));assert(commitAmbient(s,event));const last=s.chatLog.at(-1);assert(!last.audience.includes('hongxue'));assert(!last.audience.includes('andy'));
 });
+
+// These pre-dialogue fixtures retain the original action-based investigation.
+function createGame(...args){const s=newGame(...args);s.dialogue.legacyThrough=6;return s;}

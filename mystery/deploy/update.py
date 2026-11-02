@@ -15,17 +15,17 @@ import time
 import urllib.request
 
 BASE = Path('/srv/mossvale-mystery')
-NAME = '20261102-mossvale-0.13.2-v16'
-PREVIOUS = BASE/'releases'/'20261101-mossvale-0.10.1-v15'
+NAME = '20261102-mossvale-0.15.0-v17'
+PREVIOUS = BASE/'releases'/'20261102-mossvale-0.13.2-v16'
 RELEASE = BASE/'releases'/NAME
 ARCHIVE = Path('/tmp/mystery-'+NAME+'.tgz')
 CURRENT = BASE/'current'
 DATA = BASE/'data'
 PREFLIGHT_DATA = BASE/('preflight-data-'+NAME)
 MAIN = 'mossvale-mystery'
-CHECK = 'mossvale-mystery-check-v16'
-OLD = 'mossvale-mystery-before-v16'
-MANIFEST = 'deploy/release-manifest-v16.json'
+CHECK = 'mossvale-mystery-check-v17'
+OLD = 'mossvale-mystery-before-v17'
+MANIFEST = 'deploy/release-manifest-v17.json'
 BACKUP = BASE/'backups'/('before-'+NAME+'.tgz')
 LIVE = Path('/srv/brizo-sync/current/services/device-sync/deploy/nginx.conf')
 NGINX_PREVIOUS_HASH = '32143d62eab3f572a6183b915ba6fcb6350604db562badfd9933edd05eb96e9e'
@@ -38,7 +38,7 @@ def check_nginx():
 
 def check_compatible_archives():
     for p in DATA.glob('*.json'):
-        if json.loads(p.read_text()).get('format') not in (None, 'six-roles-v1'):
+        if json.loads(p.read_text()).get('format') not in (None, 'six-roles-v1', 'scripts-v2'):
             raise RuntimeError('Unknown save format; preserve data before switching releases')
 
 
@@ -217,7 +217,7 @@ elif phase == 'rollback':
     check_nginx()
     check_compatible_archives()
     run('docker', 'stop', '--time', '25', MAIN)
-    run('docker', 'rename', MAIN, 'mossvale-mystery-after-v16')
+    run('docker', 'rename', MAIN, 'mossvale-mystery-after-v17')
     run('docker', 'rename', OLD, MAIN)
     run('docker', 'start', MAIN)
     health(8796)

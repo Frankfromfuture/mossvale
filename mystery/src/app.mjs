@@ -37,7 +37,8 @@ const publicRoomName=()=>state?.publicRoomName||'厅堂';
 // Each visit starts with automatic reply reading; settings can mute this visit.
 localStorage.setItem('mystery-read','1');
 let state,selected=null,busy=false,lastReply='',lastMode='',bookTab='clues',storyPage=0,storyTurning=false,bookFilter='全部',selectedClue=null,modalName=null,toastTimer,retry=null,voice=true,draft='';
-let actionPending=false,actionRetry=null,pendingConversation=null,liveReply=null,sideGoalsOpen=false;
+let materialArtSerial=0;
+let actionPending=false,actionRetry=null,pendingConversation=null,liveReply=null,sideGoalsOpen=false,pendingCaseQuestion=null;
 let disconnectMap,disconnectDialogueFrame,profileId=null,profileTrail=[];
 const interludeQueue=createInterludeQueue(localStorage);
 let currentInterlude=null;
@@ -76,7 +77,7 @@ function storageKey(key){return key+':'+(state?.slotToken||'lobby');}
 function apply(s,route){
  if(s.roleSelection){menuState=s;inStartMenu=true;renderHud();showMainMenu();return;}
  const before=state,switched=!state?.self||state.slotToken!==s.slotToken;
- if(switched){speech.stop();selected=null;pendingConversation=null;retry=null;actionRetry=null;liveReply=null;profileTrail=[];clearDialogue();const old=state;state=s;draft=localStorage.getItem(storageKey('mystery-draft'))||'';if(!old&&s.playerId==='player'&&!draft)draft=localStorage.getItem('mystery-draft')||'';}
+ if(switched){pendingCaseQuestion=null;speech.stop();selected=null;pendingConversation=null;retry=null;actionRetry=null;liveReply=null;profileTrail=[];clearDialogue();const old=state;state=s;draft=localStorage.getItem(storageKey('mystery-draft'))||'';if(!old&&s.playerId==='player'&&!draft)draft=localStorage.getItem('mystery-draft')||'';}
 
  const previousActor=selected;
  const previous=switched?null:before?.investigation,oldQuestion=previous?.challenge,newQuestion=s.investigation?.challenge;
@@ -187,10 +188,17 @@ async function travel(id,force=false){
  closeDialogue();closeModal();await action({type:'travel',room:id,force});
 }
 function openConversation(id){
- speech.stop();selected=id;
+ speech.stop();selected=id;if(pendingCaseQuestion?.actor!==id)pendingCaseQuestion=null;
+ if(pendingCaseQuestion?.actor===id){draft=pendingCaseQuestion.message;localStorage.setItem(storageKey('mystery-draft'),draft);}
  feedback.play('bubble');
  lastReply=(state.chats[id]||[]).filter(x=>x.who===id).at(-1)?.text||({miyazaki:'早餐还温着。你昨夜……也没睡好吗？',jiang:'你也觉得今天早上不对劲？',player:'你想先核对哪一段？',ishikawa:'有事想问我？',kato:'大家怎么都盯着我？',emi:'我有点冷。你坐过来，好吗？'}[id])||state.people.find(p=>p.id===id)?.greeting||'你想先核对哪一件事？';
- lastMode='';renderHud();renderDialogue();
+ lastMode='';renderHud();renderDialogue();if(pendingCaseQuestion?.actor===id)$('chat-input')?.focus({preventScroll:true});
+}
+async function prepareCaseQuestion(question){
+ if(busy||actionPending||!question?.actor)return;
+ pendingCaseQuestion={...question,slotToken:state.slotToken};draft=question.message||'';
+ localStorage.setItem(storageKey('mystery-draft'),draft);
+ await startConversation(question.actor);
 }
 function finishPendingConversation(){
  const visit=pendingConversation;if(inStartMenu||!visit||scene?.travelRoom||scene?.entrySpeech||modalName||busy)return;
@@ -280,11 +288,12 @@ function chatBubbles(person,messages){
    return `<p class="dialogue-transition" role="note">${esc(line.text)}${links?`<span class="challenge-secrets">要保密：${links}</span>`:''}</p>`;
   }
   const mine=line.who===playerId(state),speaker=mine?player:person;
-  return `<article class="chat-row ${mine?'mine':'theirs'} ${line.pending?'pending':''} ${line.live?'live-reply':''}" ${line.live?'id="live-reply"':''} aria-label="${esc(speaker.name)}说"><button class="chat-avatar" data-chat-profile="${speaker.id}" aria-label="查看${speaker.name}的札记">${portrait(speaker)}</button><div class="chat-bubble"><p class="speech">${speechMarkup(line.text)}</p>${line.live?`<small class="reply-state ${line.failed?'interrupted':''}">${line.failed?'回复中断。':line.text?'正在回应…':'想一想…'}</small>${line.failed?'<button type="button" class="retry-reply" id="retry-reply">重试这句话</button>':''}`:''}</div></article>`;
+  return `<article class="chat-row ${mine?'mine':'theirs'} ${line.pending?'pending':''} ${line.live?'live-reply':''}" ${line.live?'id="live-reply"':''} aria-label="${esc(speaker.name)}说"><button class="chat-avatar" data-chat-profile="${speaker.id}" aria-label="查看${speaker.name}的札记">${portrait(speaker)}</button><div class="chat-bubble"><p class="speech">${speechMarkup(line.text)}</p>${line.discoveries?.length?`<div class="case-chat-discoveries">${line.discoveries.map(d=>d.id?`<button type="button" data-chat-clue="${esc(d.id)}">记下 · ${esc(d.title)}</button>`:`<small>记下 · ${esc(d.title)}</small>`).join('')}</div>`:''}${line.live?`<small class="reply-state ${line.failed?'interrupted':''}">${line.failed?'回复中断。':line.text?'正在回应…':'想一想…'}</small>${line.failed?'<button type="button" class="retry-reply" id="retry-reply">重试这句话</button>':''}`:''}</div></article>`;
  }).join('');
 }
 function renderDialogue(){
  if(inStartMenu){clearDialogue();return;}if(!selected)return;const question=state.investigation?.challenge?.actor===selected?state.investigation.challenge:null;const p=state.people.find(x=>x.id===selected);
+ const caseMaterials=isVilla()?((pendingCaseQuestion?.actor===selected?pendingCaseQuestion.shown:null)||state.shown?.[selected]||[]).slice(-2):[];
  const messages=(state.chats[selected]||[]).filter(line=>line.who===playerId(state)||line.who===selected||line.who==='narrator');
  const live=liveReply?.actor===selected&&retry?.requestId===liveReply.requestId?liveReply:null;
  const pending=(busy||live?.failed)&&retry?.actor===selected;
@@ -297,6 +306,7 @@ function renderDialogue(){
   <svg class="dialogue-frame" aria-hidden="true" focusable="false"></svg>
   <header class="dialogue-header"><button class="speaker-portrait" id="speaker-profile" aria-label="查看${p.name}的人物资料">${portrait(p)}</button><span class="speaker-badge">${speakerBadge}<strong>${p.name}</strong></span><span class="dialogue-place">${state.room===publicRoom()?(state.chatSetting?.actor===selected?'窗边 · 私下交谈':publicRoomName()+' · 公开交谈'):(state.rooms.find(r=>r.id===state.room)?.name||'房间')+' · 私下交谈'}</span><div class="voice-tools" role="group" aria-label="语音工具"><span id="voice-status" role="status" aria-live="polite"></span><button type="button" class="mic-button" id="mic" aria-label="语音输入" title="语音输入：转文字后点说出">${dialogueGlyph('voice')}</button><button type="button" id="replay-voice" aria-label="重听人物回答" title="重听人物回答">${dialogueGlyph('replay')}</button><button type="button" id="voice-conversation" aria-label="语音对话" title="语音对话" aria-pressed="false">${dialogueGlyph('listen')}</button></div><button class="close-dialogue" aria-label="${question?'结束反问，可信度扣3分':'关闭对话'}" title="${question?'结束反问，可信度扣3分':'关闭对话'}">${icon('close')}</button></header>
   <div class="dialogue-thread" id="dialogue-thread" data-revision="${revision}" role="log" aria-label="与${p.name}的对话" aria-live="polite" aria-relevant="additions text" tabindex="0">${chatBubbles(p,shown)}</div>
+  ${isVilla()?`<div class="case-question-context">${caseMaterials.length?`<p class="case-shown-pair">摆在面前：${caseMaterials.map(id=>esc(state.clues.find(c=>c.id===id)?.title||'材料')).join(' · ')}</p>`:''}<details class="case-question-ideas"><summary>想接着问……</summary>${(state.dialogue?.byActor?.[selected]||[]).map(t=>`<button type="button" data-case-question="${esc(t.id)}" ${busy?'disabled':''}>${esc(t.prompt)}</button>`).join('')||'<p>可以问问刚才那句话，也可以拿一件材料给他看。</p>'}</details></div>`:''}
   <form id="chat-form"><textarea id="chat-input" rows="1" maxlength="800" aria-label="想问的话" placeholder="${question?'回应对方的盘问…':'想问些什么？'}" ${busy?'disabled':''}>${esc(busy?'':draft)}</textarea><button class="send-button" type="submit" ${busy?'disabled':''} aria-label="发送" title="说出这句话"><span>说出</span>${dialogueGlyph('say')}</button></form>
   <nav class="dialogue-actions" aria-label="交谈行动"><button id="show-evidence" title="出示线索" aria-label="出示线索">${dialogueGlyph('evidence')}<span>出示</span></button>${question?challengeBanner(question,esc):`<button id="search-room" title="搜查客房" aria-label="搜查客房">${dialogueGlyph('search')}<span>搜查</span></button><button id="private-talk" title="${state.room===publicRoom()?(state.chatSetting?.actor===selected?'回桌边公开交谈':'去角落私谈'):'回到'+publicRoomName()}" aria-label="${state.room===publicRoom()?(state.chatSetting?.actor===selected?'回桌边公开交谈':'去角落私谈'):'回到'+publicRoomName()}">${dialogueGlyph('private')}<span>${state.room===publicRoom()?(state.chatSetting?.actor===selected?'回桌边':'私谈'):'回'+publicRoomName()}</span></button><button id="ask-person" title="向当前人物问起其他人" aria-label="向当前人物问起其他人">${dialogueGlyph('people')}<span>问人</span></button>`}<button id="person-notes" title="查看人物札记" aria-label="查看人物札记">${dialogueGlyph('notes')}<span>札记</span></button></nav>
  </section>`;
@@ -304,6 +314,8 @@ function renderDialogue(){
  $('voice-conversation').onclick=()=>speech.toggleConversation();
  $('replay-voice').onclick=()=>{if(speech.snapshot().speaking){speech.stop();return;}speech.stop();speech.reply(lastReply,selected,{force:true});};
  $('retry-reply')?.addEventListener('click',()=>{if(retry)sendChat(retry.resolution,retry.message===draft.trim()?undefined:retry.message);});
+ $('dialogue').querySelectorAll('[data-case-question]').forEach(b=>b.onclick=()=>{const t=state.dialogue.byActor[selected].find(t=>t.id===b.dataset.caseQuestion);if(t){speech.stop();draft=t.prompt;localStorage.setItem(storageKey('mystery-draft'),draft);$('chat-input').value=draft;fitChatInput();$('chat-input').focus();}});
+ $('dialogue').querySelectorAll('[data-chat-clue]').forEach(b=>b.onclick=()=>showClue(b.dataset.chatClue));
  $('speaker-profile').onclick=$('person-notes').onclick=()=>showPersonProfile(selected);
  $('dialogue').querySelectorAll('[data-self-secret]').forEach(link=>link.onclick=e=>{e.preventDefault();showSelf({focusSecret:link.dataset.selfSecret});});
  $('show-evidence').onclick=()=>evidencePicker();$('search-room')?.addEventListener('click',searchPermissions);$('private-talk')?.addEventListener('click',()=>action({type:state.room===publicRoom()?(state.chatSetting?.actor===selected?'public-talk':'private-corner'):'gather',actor:selected}));$('ask-person')?.addEventListener('click',personQuestionPicker);$('dialogue').querySelectorAll('.dialogue-actions button').forEach(b=>b.disabled=busy||!!question&&!['show-evidence','person-notes'].includes(b.id));
@@ -333,7 +345,7 @@ async function sendChat(resolution,questionText){
  if(busy||actionPending||!selected||!resolution&&!(directQuestion?questionText:draft).trim())return;
  feedback.play('bubble');
  const question=state.investigation?.challenge,message=resolution==='dismiss'?'这个问题先到这里，我要继续调查。':resolution?'这件事我有所隐瞒，现在还不愿把它说出来。':(directQuestion?questionText:draft).trim(),actor=selected;
- if(!retry||retry.actor!==actor||retry.message!==message||retry.resolution!==resolution)retry={actor,message,requestId:crypto.randomUUID(),challengeId:question?.id,resolution};
+ if(!retry||retry.actor!==actor||retry.message!==message||retry.resolution!==resolution)retry={actor,message,requestId:crypto.randomUUID(),challengeId:question?.id,resolution,...(isVilla()&&pendingCaseQuestion?.actor===actor&&pendingCaseQuestion.slotToken===state.slotToken?{shown:pendingCaseQuestion.shown,inquiry:pendingCaseQuestion.inquiry}: {})};
  const voiceTurn=speech.beforeSend();liveReply={actor,requestId:retry.requestId,text:'',failed:false};busy=true;renderDialogue();
  try{
   const r=await streamChat({...retry,slotToken:state.slotToken},text=>{
@@ -343,7 +355,7 @@ async function sendChat(resolution,questionText){
    row.querySelector('.speech').innerHTML=speechMarkup(text);row.querySelector('.reply-state').textContent='正在回应…';
    if(follow)thread.scrollTop=thread.scrollHeight;
   });
-  lastReply=r.speech;lastMode='';draft=directQuestion?originalDraft:'';if(draft)localStorage.setItem(storageKey('mystery-draft'),draft);else localStorage.removeItem(storageKey('mystery-draft'));retry=null;liveReply=null;busy=false;apply(r.state);speech.reply(r.speech,actor,{turn:voiceTurn});
+  lastReply=r.speech;lastMode='';draft=directQuestion?originalDraft:'';if(draft)localStorage.setItem(storageKey('mystery-draft'),draft);else localStorage.removeItem(storageKey('mystery-draft'));retry=null;pendingCaseQuestion=null;liveReply=null;busy=false;apply(r.state);speech.reply(r.speech,actor,{turn:voiceTurn});
  }catch(e){busy=false;liveReply.failed=true;speech.failed();renderDialogue();toast(e.name==='TimeoutError'?'回复等待超时，输入已保留，可以重试。':e.message);}
 }
 function syncCharacterPerformance(){
@@ -443,7 +455,7 @@ setInterval(()=>{
 
 async function inspect(id){const r=await action({type:'inspect',id});return r;}
 function clueDetails(c){return `<div class="evidence-detail"><span class="evidence-stamp">${c.kind}</span><div class="clue-drawing">${clueArt(c)}</div><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="paper-rule"></div><small>${c.source?.adaptation?'改编新增 · '+esc(c.source.note):'已收进调查手记。'}</small></div>`;}
-function clueArt(c,cls=''){if(c.imageRegion){const r=c.imageRegion;return `<svg class="ui-icon prop-icon ${esc(cls)}" viewBox="${r.x} ${r.y} ${r.size} ${r.size}" aria-hidden="true"><image href="${esc(r.url)}" width="${r.atlasSize}" height="${r.atlasSize}"/></svg>`;}return c.imageUrl?`<img class="prop-icon illustrated-clue ${esc(cls)}" src="${esc(c.imageUrl)}" alt="${esc(c.title)}">`:propIcon(c.id,c.kind==='证词'?'gather':'book');}
+function clueArt(c,cls=''){if(c.imageRegion){const r=c.imageRegion;return `<svg class="ui-icon prop-icon ${esc(cls)}" viewBox="${r.x} ${r.y} ${r.width||r.size} ${r.height||r.size}" aria-hidden="true"><defs><clipPath id="material-crop-${++materialArtSerial}"><rect x="${r.x}" y="${r.y}" width="${r.width||r.size}" height="${r.height||r.size}"/></clipPath></defs><image href="${esc(r.url)}" width="${r.atlasSize}" height="${r.atlasSize}" clip-path="url(#material-crop-${materialArtSerial})"/></svg>`;}return c.imageUrl?`<img class="prop-icon illustrated-clue ${esc(cls)}" src="${esc(c.imageUrl)}" alt="${esc(c.title)}">`:propIcon(c.id,c.kind==='证词'?'gather':'book');}
 function showClue(id){const c=state.clues.find(c=>c.id===id);if(!c)return;modal('记下一条线索',clueDetails(c)+`<div class="modal-foot">${selected?'<button class="primary" id="present-now">出示给'+state.people.find(p=>p.id===selected).name+'</button>':'<button class="primary" id="keep-clue">收进手记 '+icon('check')+'</button>'}<button id="open-book">翻看手记</button></div>`,'clue-modal');if(isVilla()){$('open-book').insertAdjacentHTML('beforebegin',caseTools.clueActions(id));}$('keep-clue')?.addEventListener('click',closeModal);$('present-now')?.addEventListener('click',async()=>{await action({type:'present',actor:selected,id},{quiet:true});draft=`这${c.kind==='证词'?'段话':'件东西'}，你怎么解释？`;closeModal();renderDialogue();toast('线索已出示，可以接着问。');});$('open-book').onclick=()=>{selectedClue=id;book();};}
 function evidencePicker(){modal('拿什么问？',`<p class="compact-description">出示后，你可以用自己的话追问。</p><div class="evidence-picker">${state.clues.map(c=>`<button data-present="${c.id}"><span>${clueArt(c)}</span><strong>${esc(c.title)}</strong><small>${c.kind}</small></button>`).join('')}</div>`,'picker-modal');$('overlay').querySelectorAll('[data-present]').forEach(b=>b.onclick=async()=>{const id=b.dataset.present;const r=await action({type:'present',actor:selected,id},{quiet:true});if(!r?.error){draft=`关于「${state.clues.find(c=>c.id===id).title}」，你知道些什么？`;closeModal();renderDialogue();toast(r.message||'线索已出示。');}});}
 function personQuestionPicker(){
@@ -602,7 +614,7 @@ document.addEventListener('focusout',()=>requestAnimationFrame(syncViewport));
 syncViewport();
 installPersonLinks($('app'),profilePeople,showPersonProfile,{getClues:()=>state?.clues||[],openClue:openClueMention,getReferences:()=>referenceEntries(state),openReference:openReferenceMention});
 $('app').addEventListener('click',event=>{const avatar=event.target.closest('[data-chat-profile]');if(avatar){event.preventDefault();showPersonProfile(avatar.dataset.chatProfile);}});
-caseTools=new CaseTools({overlay:$('overlay'),state:()=>state,busy:()=>busy||actionPending,voice:speech,notice:toast,art:clueArt,action,modal,close:()=>closeModal(true),clue:showClue,book:tab=>{bookTab=tab;book();},exit:openStartMenu});
+caseTools=new CaseTools({overlay:$('overlay'),state:()=>state,busy:()=>busy||actionPending,voice:speech,notice:toast,art:clueArt,portrait,ask:prepareCaseQuestion,action,modal,close:()=>closeModal(true),clue:showClue,book:tab=>{bookTab=tab;book();},exit:openStartMenu});
 function bindNarration(page){
  const foot=$('overlay').querySelector('.story-navigation,.interlude-navigation');if(!foot)return;
  foot.insertAdjacentHTML('afterbegin','<button id="read-story" type="button" aria-label="朗读这一页">'+dialogueGlyph('replay')+'<span>朗读</span></button>');

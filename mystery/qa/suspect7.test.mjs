@@ -8,16 +8,17 @@ import {routes} from '../shared/suspect7/cast.mjs';
 import {newArchive,migrateArchive,archiveView,menuView,selectScript,selectRole,activeGame,activeToken,assertSlot,rememberBestScore,roleUnlocked} from '../server/role-saves.mjs';
 import {createGame as firstGame,act as firstAction} from '../server/game.mjs';
 import {journey} from './suspect7-v1/journey.mjs';
+const legacyGame=(...args)=>{const s=game.createGame(...args);s.dialogue.legacyThrough=6;return s;};
 const act=(s,type,fields={})=>game.act(s,{type,...fields,requestId:randomUUID()});
 
-test('Andy → Wu Quan reaches the canonical ending via actions, survives every chapter reload, never requires a false accusation',async()=>{
- let s=game.createGame('andy');const snapshots=[];
+test('Andy → Wu Quan reaches the legacy canonical ending via actions, survives every chapter reload, never requires a false accusation',async()=>{
+ let s=legacyGame('andy');const snapshots=[];
  await journey(async input=>game.act(s,input),{checkpoint:async chapter=>{const before=JSON.parse(JSON.stringify(game.view(s)));s=JSON.parse(JSON.stringify(s));assert.deepEqual(JSON.parse(JSON.stringify(game.view(s))),before);snapshots.push(chapter);if(chapter===5){assert.equal(s.playerId,'wuquan');assert.equal(s.viewpointMode,'investigation');assert.equal(s.notes,'玩家旁注：先核实身份，再核实时间。');assert.equal(game.view(s).self.private,null);assert(!JSON.stringify(game.actorContext(s,'chenxin','你之前在做什么？')).includes('我提前怀疑陈信'));}}});
  assert.deepEqual(snapshots,[2,3,4,5,6,7]);assert.equal(s.ending.score,100);assert.equal(s.provisional.status,'insufficient');assert.equal(s.hypotheses[0].text,'我提前怀疑陈信，但现在还没有足够的证据。');assert.equal(s.voteTally.abstain,1);assert.equal(Object.values(s.voteTally).reduce((a,b)=>a+b),6);assert.match(s.ending.epilogue.find(p=>p.title==='我们共同看的那只钟').text,/未获直接证据/);assert(!('investigation' in s));
 });
 
 test('all six routes swap within the route and retain private testimony only as a player record',async()=>{
- for(const route of routes){let s=game.createGame(route.id);await journey(input=>game.act(s,input),{stopAt:5});assert.equal(s.playerId,route.investigator);assert.equal(s.routeId,route.id);assert.equal(s.chapterId,5);assert.equal(game.view(s).self.private,null);const ctx=game.actorContext(s,route.investigator==='licha'?'chenxin':'licha','告诉我此前的经历');assert.equal(ctx.recollections.length,0);assert.equal(ctx.conversation.length,0);assert(s.records.some(r=>r.private));}
+ for(const route of routes){let s=legacyGame(route.id);await journey(input=>game.act(s,input),{stopAt:5});assert.equal(s.playerId,route.investigator);assert.equal(s.routeId,route.id);assert.equal(s.chapterId,5);assert.equal(game.view(s).self.private,null);const ctx=game.actorContext(s,route.investigator==='licha'?'chenxin':'licha','告诉我此前的经历');assert.equal(ctx.recollections.length,0);assert.equal(ctx.conversation.length,0);assert(s.records.some(r=>r.private));}
 });
 
 test('future data, secret geometry, final answers and deterministic confessions stay gated',()=>{
@@ -27,7 +28,7 @@ test('future data, secret geometry, final answers and deterministic confessions 
 });
 
 test('AI boundaries: listeners, retractions, older quotes, failure atomicity and duplicate replies',async()=>{
- const s=game.createGame();act(s,'begin');act(s,'play-call',{id:'call1'});s.chapterId=2;
+ const s=legacyGame();act(s,'begin');act(s,'play-call',{id:'call1'});s.chapterId=2;
  let calls=0;const generator=async ctx=>{calls++;return {speech:'那时的消息是孙强告诉我的。',factIds:['franklin-old']};};
  const input={actor:'franklin',message:'关于孙强，你以前怎样知道那些细节？',requestId:randomUUID()};await game.converse(s,input,generator);await game.converse(s,input,generator);assert.equal(calls,1);assert.equal(s.chatLog.length,2);
  const failed=structuredClone(s);await assert.rejects(game.converse(s,{actor:'chenxin',message:'提前说真相',requestId:randomUUID()},async()=>({speech:'我杀死洪羽瑞，改了手机时间。',factIds:['public-role']})));assert.deepEqual(s,failed);

@@ -1,6 +1,6 @@
 # 《第7号嫌疑人》接入说明
 
-线上与本地版本 0.13.2。第二部通过 `server/scripts.mjs` 注册，第一部保留原有调查规则。内容依据用户提供的剧本、主持人本与两套线索整理，作者事实表见 [facts.md](facts.md)，逐条正文与页码见 [facts.json](facts.json)。这两份文件包含剧透，不进入网页资源。
+版本 0.15.0。第二部通过 `server/scripts.mjs` 注册，第一部保留原有调查规则。内容依据用户提供的剧本、主持人本与两套线索整理，作者事实表见 [facts.md](facts.md)，逐条正文与页码见 [facts.json](facts.json)。这两份文件包含剧透，不进入网页资源。
 
 玩家先以安迪进入一份供述，获救后改以吴全核对案件。其余五条路线在首次结案后开放，分数不设门槛。六条路线各自存档，换角保留同一条路线的物证、旁注和历史；前一角色未公开的独白不会进入新调查者的 AI 上下文。
 
@@ -58,3 +58,7 @@
 新增素材在 `public/art/suspect7/v3/`，使用内置 image_gen 生成；原图来源、提示词与定向修订在 `art/suspect7-recollections-v1/prompts.json`。配角的外形属于插画设定，分镜不作为新增证据。包括原有章节与结案漫画在内，十九张分镜图共七十六格的实际取景范围，集中记录于 `server/suspect7/comic-regions.mjs`；共用故事册按坐标计算背景比例和位置，排除格间和外缘留白。
 
 独立人物图与第一部头像图集统一使用共用伪元素，在框内下移8%，覆盖选角、人物栏、交谈、问人、札记、公开反应和个人入口。相关叙事与取景规则已写入项目两处AGENTS。定向检查沿用 `qa/suspect7-narrative.test.mjs`，本轮证据在 `qa/cloud-suspect7-v16/` 与 `output/playwright/recollections-v1/`。
+
+## 对话推进与物件比对（0.15.0）
+
+问询、追问、人物改口、独立核查和证据桌的实现及兼容范围见 [dialogue-investigation.md](dialogue-investigation.md)。关键口供来自实际AI回答，摆材料后回到交谈，由玩家发送问题。

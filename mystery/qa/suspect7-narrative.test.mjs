@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createGame,view,act} from '../server/suspect7/game.mjs';
+import {createGame as newGame,view,act} from '../server/suspect7/game.mjs';
 import {routes,person} from '../shared/suspect7/cast.mjs';
 import {newArchive,selectScript,menuView} from '../server/role-saves.mjs';
 import {journey} from './suspect7-v1/journey.mjs';
@@ -68,3 +68,6 @@ test('six recollections introduce their own background, then hand over without r
   assert(closed.pages[0].paragraphs.join('').includes('洪羽瑞'));
  }
 });
+
+// These pre-dialogue fixtures retain the original action-based investigation.
+function createGame(...args){const s=newGame(...args);s.dialogue.legacyThrough=6;return s;}
