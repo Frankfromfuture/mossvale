@@ -9,7 +9,9 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.13.2** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.14.0** · [完整更新记录](CHANGELOG.md)
+
+0.14.0本地补充了客厅和案情室的日常陈设。进入客厅时有三位人物过来休息，可在茶台、书刊桌、棋盘和盆栽旁活动；案情室里的人物会喝水、试笔、整理便笺和文具，再回座。新增闲话只谈眼前的物件，搜证与正式公开材料仍走原有入口。
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -19,7 +21,7 @@
 
 第一部《雾灯未眠》从一场山中怪谈开始。最后一支蜡烛熄灭，六个人各自藏起了一件事；天亮后重新围坐，却谁也不愿先说自己看见了什么。你要弄清昨夜发生的事，也要想好，别人问起你时该怎样回答。
 
-本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。两部共用菜单、对话特写、纸页和场景操作。第二部加入十一位人物头像、物件插图、可朗读的开场与章节漫画；每位主角有八页第一人称前情与经历连环画，先交代身世、与洪青的关系和赴宴目的，后续章节接着讲述事情的来由。别墅有庭院、主副屋、河流与路径，未开放屋舍用屋顶遮盖。在线测试站已同步本版。
+本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。两部共用菜单、对话特写、纸页和场景操作。第二部加入十一位人物头像、物件插图、可朗读的开场与章节漫画；每位主角有八页第一人称前情与经历连环画，先交代身世、与洪青的关系和赴宴目的，后续章节接着讲述事情的来由。别墅有庭院、主副屋、河流与路径，未开放屋舍用屋顶遮盖。在线测试站仍为0.13.2。
 
 ![青苔镇首页](mystery/docs/images/home.png)
 
@@ -109,9 +111,11 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.13.2** · [Full changelog](CHANGELOG.md)
+Current version **0.14.0** · [Full changelog](CHANGELOG.md)
 
-Version 0.13.2 adds a second story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing the first Andy route unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Each initial character has an eight-page first-person illustrated prologue covering their background, connection to Hong Qing and reason for attending. Chapter transitions and the investigator handoff continue the narrative; role selection displays only the initial character’s name. Roofs cover rooms that are not yet open. The hosted demo runs this version.
+Local version 0.14.0 adds everyday furnishings and NPC activity to the lounge and briefing room. Three companions join lounge breaks to use the tea stand, magazines, chessboard and plants. The briefing room supports drinking water, writing and tidying stationery, with characters returning to their seats afterward. Ambient exchanges concern the objects at hand; evidence and public disclosures retain their existing controls.
+
+Version 0.13.2 adds a second story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing the first Andy route unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Each initial character has an eight-page first-person illustrated prologue covering their background, connection to Hong Qing and reason for attending. Chapter transitions and the investigator handoff continue the narrative; role selection displays only the initial character’s name. Roofs cover rooms that are not yet open. The hosted demo remains on 0.13.2.
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 

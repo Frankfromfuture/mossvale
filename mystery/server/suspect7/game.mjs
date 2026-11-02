@@ -1,5 +1,6 @@
 import {personalNarrative} from './narrative.mjs';
 import {sharedPresentation} from './presentation.mjs';
+import {casePositions,casePublicRoom} from './social.mjs';
 import {selectRelevant} from '../npc-memory.mjs';
 import {roomDefs,visibleRooms,spatialView,currentRoom,evidenceRoom,propPosition} from './layout.mjs';
 import {randomUUID} from 'node:crypto';
@@ -13,14 +14,14 @@ const found=(s,id)=>s.found.includes(id);
 const add=(s,id)=>{if(!found(s,id))s.found.push(id);};
 const addRecord=(s,text,kind='observation',extra={})=>s.records.push({id:randomUUID(),chapter:s.chapterId,viewpoint:s.playerId,kind,text,...extra});
 const accessible=s=>visibleRooms(s).filter(r=>r.walkable);
-const publicRoom=s=>s.chapterId>=5?'meeting':'dining';
-const audienceFor=(s,actor)=>s.chatSetting?.scope==='private'&&s.chatSetting.actor===actor?[s.playerId,actor]:[s.playerId,...visibleActors(s).filter(p=>positions(s)[p.id]===currentRoom(s)).map(p=>p.id)];
+const publicRoom=casePublicRoom;
+const audienceFor=(s,actor)=>currentRoom(s)==='lounge'||s.chatSetting?.scope==='private'&&s.chatSetting.actor===actor?[s.playerId,actor]:[s.playerId,...visibleActors(s).filter(p=>positions(s)[p.id]===currentRoom(s)).map(p=>p.id)];
 export function createGame(routeId='andy'){
  need(routes.some(r=>r.id===routeId),'没有这条路线。');
  return {scriptId:'suspect7',version:2,routeId,playerId:routeId,chapterId:1,viewpointMode:'testimony',started:false,room:'dining',revision:0,found:[],flags:{},records:[],notes:'',chapters:[],chatLog:[],chats:{},positions:{},hypotheses:[],oldAnswers:{},hints:{},reveals:[],seen:{},ending:null};
 }
 function visibleActors(s){return (s.chapterId>=5?people:people.slice(0,6)).filter(p=>p.id!==s.playerId);}
-function positions(s){const place=publicRoom(s);return Object.fromEntries(visibleActors(s).map(p=>[p.id,place]));}
+const positions=casePositions;
 function quoteVisible(s,q){return q.chapter<=s.chapterId&&found(s,q.id);}
 function visibleEvidence(s){return s.found.map(byId).filter(Boolean).map(e=>({...e,text:e.id==='carpet'&&s.playerId==='andy'?e.perspectiveText:e.text,perspectiveText:undefined}));}
 const privateIds=s=>s.chapterId<5?[s.routeId+'-private']:[];

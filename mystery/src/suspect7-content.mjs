@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {wallSegments,sceneBounds} from '../shared/suspect7/spatial.mjs';
 import {people} from '../shared/suspect7/cast.mjs';
+import {villaStations} from '../shared/suspect7/activities.mjs';
+import {buildVillaLife} from './villa-life.mjs';
 
 // Case content only. Rendering, camera, navigation and actor control belong to TownScene.
 class VillaDressing{
@@ -11,7 +13,7 @@ class VillaDressing{
  sphere(parent,x,y,z,rx,ry,rz,c){return this.town.ball(x,y,z,1,c,parent,[rx,ry,rz]);}
  cylinder(parent,x,y,z,r,h,c){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,12),this.mat(c));m.position.set(x,y,z);m.castShadow=true;parent.add(m);return m;}
  decorate(r){const x=r.x,z=r.z,d=r.decor;
-  if(d==='sofa'){this.box(x,.35,z,3,.45,1.2,'#919f8b',this.world,'cloth',true);this.box(x,.65,z-.5,3,.7,.22,'#89957f');this.box(x,.4,z+1.5,1.5,.12,.8,'#ae987c',this.world,'wood',true);}
+  if(d==='sofa'&&r.id!=='lounge'){this.box(x,.35,z,3,.45,1.2,'#919f8b',this.world,'cloth',true);this.box(x,.65,z-.5,3,.7,.22,'#89957f');this.box(x,.4,z+1.5,1.5,.12,.8,'#ae987c',this.world,'wood',true);}
   if(d==='bed'){this.box(x,.2,z,2,.45,3,'#948a71',this.world,'wood',true);this.box(x,.65,z,1.9,.15,2.9,'#d9d7bf',this.world,'cloth');this.box(x,.8,z-1,1.5,.17,.6,'#e9e3ce',this.world,'cloth');}
   if(d==='chapel'){this.box(x,.28,z,2.6,.025,r.d-1,this.red('#953f3b'),this.world,'cloth');for(const dx of [-2,2])for(const dz of [-1,1]){this.box(x+dx,.45,z+dz,1.25,.15,.55,'#a38c6a',this.world,'wood',true);this.box(x+dx,.5,z+dz-.23,1.25,.65,.12,'#8e7e63');}this.box(x,1.3,z-r.d/2+.15,.15,1.3,.15,'#766b54');this.box(x,2.05,z-r.d/2+.15,.8,.13,.15,'#766b54');}
   if(d==='pool'){this.box(x,.12,z,4,.2,4,'#a6b5ad',this.world,'stone',true);this.box(x,.33,z,3.6,.02,3.6,'#8caaa6');for(const dx of [-2,2])this.box(x+dx,.12,z,.17,.3,4,'#c1c7b3',this.world,'stone');}
@@ -24,7 +26,7 @@ class VillaDressing{
   if(d==='corridor'){for(let t=z-r.d/2+3;t<z+r.d/2;t+=7){if((this.town.definition.doors||[]).some(p=>Math.hypot(p.x-(x-r.w/2+.25),p.z-t)<2.4))continue;this.box(x-r.w/2+.25,.4,t,.2,.1,1.2,'#b0b69e');}}
   if(d==='garage'){this.box(x,.3,z,2,.6,3.3,'#9caa9c',this.world,'stone',true);this.box(x,.9,z-.3,1.8,.7,1.7,'#bac5b4');}
   if(d==='bed'){this.box(x-3.4,.72,z+2,1.8,.12,1,'#ad997b',this.world,'wood',true);this.box(x-3.4,.85,z+1.8,.8,.55,.09,'#596b61');this.box(x-2,0,z-3.4,2,1.8,.8,'#b6a58a',this.world,'wood',true);}
-  if(r.id==='lounge'){this.box(x,.11,z,7,.02,5,'#c3cbb1',this.world,'cloth');this.box(x+4.8,.2,z-5,2.5,.55,.7,'#aa987a',this.world,'wood',true);this.box(x+4.8,.8,z-5,2.4,1.3,.12,'#4e6056');for(const dx of [-4.8,4.8]){this.box(x+dx,.35,z+4,1.2,.45,1.2,'#9aa78d',this.world,'cloth',true);this.box(x+dx,.7,z+3.5,1.2,.55,.2,'#89997f');}}
+  if(r.id==='lounge')this.box(x,.28,z,8,.025,6,'#c3cbb1',this.world,'cloth');
   if(r.id==='dining'){for(const t of [-.8,0,.8])this.cylinder(this.world,x-5,1.16,z-2+t,.18,.08,'#eee8d5');}
   if(['table','sofa','bed','study'].includes(d)){this.cylinder(this.world,x+r.w/2-1,.35,z+r.d/2-1,.3,.6,'#b4a78a');this.sphere(this.world,x+r.w/2-1,.85,z+r.d/2-1,.45,.55,.4,'#92a181');}
   if(d==='washroom'){this.box(x,.5,z,1,.15,.7,'#d7dbcc');this.cylinder(this.world,x,.6,z,.3,.08,'#f0e9d6');}
@@ -59,13 +61,13 @@ function random(seed){return ()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0
 const seat=(id,x,z,angle,zone,owner=null)=>({id,x,z,angle,zone,owner,approach:{x:x+Math.sin(angle)*.97,z:z+Math.cos(angle)*.97}});
 export function villaContent(state){
  const rooms=state.scene.rooms.map(r=>({...r,building:r.outdoor?null:r.id})),known=new Set(rooms.map(r=>r.id));
- const publicRoom=state.publicRoom,discussion=rooms.find(r=>r.id===publicRoom),cast=state.people.map(p=>({...p}));
- const seats=cast.map((p,i)=>{const side=i%2?-1:1,row=Math.floor(i/2),z=discussion.z-(Math.ceil(cast.length/2)-1)*.825+row*1.65;return seat('home-'+p.id,discussion.x+side*3.5,z,side>0?-Math.PI/2:Math.PI/2,'table',p.id);});
+ const publicRoom=state.room==='lounge'?'lounge':state.publicRoom,discussion=rooms.find(r=>r.id===publicRoom),cast=state.people.map(p=>({...p})),visitors=cast.filter(p=>p.location===publicRoom);
+ const seats=cast.map((p,i)=>{const index=publicRoom==='lounge'?Math.max(0,visitors.findIndex(v=>v.id===p.id)):i,side=index%2?-1:1,row=Math.floor(index/2),z=publicRoom==='lounge'?discussion.z-1.5+row*3:discussion.z-(Math.ceil(cast.length/2)-1)*(cast.length>6?.7:.825)+row*(cast.length>6?1.4:1.65);return seat('home-'+p.id,discussion.x+side*(publicRoom==='lounge'?2.8:3.5),z,side>0?-Math.PI/2:Math.PI/2,'table',p.id);});
  for(const [zone,side] of [['left',-1],['right',1]])for(let i=0;i<2;i++)seats.push(seat(zone+'-'+i,discussion.x+side*(discussion.w/2-1.4),discussion.z+discussion.d/2-2.5-i*1.7,side>0?-Math.PI/2:Math.PI/2,zone));
  for(const p of cast){const at=seats.find(s=>s.owner===p.id);p.seat=[at.x,at.z];}
- const stations={reading:{name:'边桌',at:{x:discussion.x-5,z:discussion.z-2},spots:[{x:discussion.x-6.1,z:discussion.z-2},{x:discussion.x-5,z:discussion.z-.6}],gestures:['write','glance'],actions:['在空白页上记了几笔','低头看着桌上的纸']},plants:{name:'盆栽旁',at:{x:discussion.x+discussion.w/2-1,z:discussion.z+discussion.d/2-1},spots:[{x:discussion.x+discussion.w/2-2.1,z:discussion.z+discussion.d/2-1},{x:discussion.x+discussion.w/2-1,z:discussion.z+discussion.d/2-2.2}],gestures:['glance','tend'],actions:['站起身，舒展了一下肩膀','轻轻拨开垂下的叶子']}};
+ const stations=villaStations(discussion);
  const exteriors=state.scene.exteriors||[],bounds=sceneBounds([...rooms,...exteriors],3),buildings=rooms.filter(r=>!r.outdoor);
- return {id:'suspect7',key:JSON.stringify([state.slotToken,state.scene.layoutVersion,rooms.map(r=>r.id),state.scene.mapSpots.map(p=>p.id)]),rooms,cast,seats,bounds,buildings,doors:state.scene.doors,publicRoom,redAsGrey:state.playerId==='andy',activity:event=>stations[event?.station]||null,
+ return {id:'suspect7',key:JSON.stringify([state.slotToken,state.scene.layoutVersion,publicRoom,rooms.map(r=>r.id),state.scene.mapSpots.map(p=>p.id)]),rooms,cast,seats,bounds,buildings,doors:state.scene.doors,publicRoom,redAsGrey:state.playerId==='andy',activity:event=>stations[event?.station]||null,
   characterOptions:id=>{const p=people.find(p=>p.id===id),i=people.indexOf(p);return {modern:true,offset:i*.71,look:{stride:.6,speed:1.4,trousers:'#59665f',shoes:'#514f45',...p},features:p.features||{eye:[.128,.022,.028,.029,-.03],brow:[.136,.14,.014,0,[[-.06,0],[0,.012],[.06,-.006]]]}};},
   ground:town=>{
    // Seeded placement keeps trees and furniture in place after a reload.
@@ -87,9 +89,12 @@ export function villaContent(state){
     const floor=new THREE.Mesh(new THREE.PlaneGeometry(r.w-.18,r.d-.18),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.set(r.x,.27,r.z);floor.userData.pick={type:'room',id:r.id};root.add(floor);if(r.walkable)town.clickable.push(floor);
     if(!r.outdoor){const walls=new THREE.Group();root.add(walls);walls.userData.wallSegments=[];for(const w of wallSegments([r],state.scene.doors)){town.box(w.x,.27,w.z,w.w,2.7,w.d,'#d9d9c3',walls,false,0,'plaster');walls.userData.wallSegments.push({...w,y:.27,h:2.7});}town.shells.set(r.id,{root,walls});}
     const dressing=new VillaDressing(town,root);dressing.decorate(r);
-    if(r.id===publicRoom){town.table(r.x-5,r.z-2,1.3,2,root);for(let i=0;i<3;i++)town.box(r.x-5,1.13+i*.014,r.z-2,.6,.012,.8,'#e8dfc5',root,false);town.table(r.x,r.z,3.6,cast.length>6?9.3:8.5,root);for(const s of seats)town.chair(s.x,s.z,s.angle,root,s.id);for(const s of seats.filter(s=>s.owner)){const side=s.x>r.x?1:-1;dressing.cylinder(root,r.x+side*1.25,1.15,s.z,.18,.035,'#eee4cc');}town.roundBox(r.x+r.w/2-1.5,.28,r.z-3,.8,1.6,.45,'#ae9b7b',root,.08,'wood');}
+    if(r.id===publicRoom&&r.id!=='lounge'){town.table(r.x-5,r.z-2,1.3,2,root);town.table(r.x,r.z,3.6,cast.length>6?7.8:8.5,root);for(const s of seats)town.chair(s.x,s.z,s.angle,root,s.id);for(const s of seats.filter(s=>s.owner)){const side=s.x>r.x?1:-1;dressing.cylinder(root,r.x+side*1.25,1.15,s.z,.18,.035,'#eee4cc');}}
+    if(r.id==='lounge'){const seated=new Set();for(const s of seats.filter(s=>s.owner&&visitors.some(p=>p.id===s.owner))){if(publicRoom!=='lounge')break;const key=s.x+','+s.z;if(!seated.has(key)){town.chair(s.x,s.z,s.angle,root,s.id);seated.add(key);}}if(publicRoom!=='lounge')for(let i=0;i<4;i++){const side=i%2?-1:1;town.chair(r.x+side*2.8,r.z-1.5+Math.floor(i/2)*3,side>0?-Math.PI/2:Math.PI/2,root);}}
     // The original dining furniture remains when the investigation moves west.
     if(r.id==='dining'&&publicRoom!=='dining'){town.table(r.x,r.z,3.6,8.5,root);town.table(r.x-5,r.z-2,1.3,2,root);for(let i=0;i<6;i++){const side=i%2?-1:1;town.chair(r.x+side*3.5,r.z-1.65+Math.floor(i/2)*1.65,side>0?-Math.PI/2:Math.PI/2,root);}}
+    if(r.id==='meeting'&&publicRoom!=='meeting'){town.table(r.x,r.z,3.6,7.8,root);town.table(r.x-5,r.z-2,1.3,2,root);for(let i=0;i<11;i++){const side=i%2?-1:1;town.chair(r.x+side*3.5,r.z-3.5+Math.floor(i/2)*1.4,side>0?-Math.PI/2:Math.PI/2,root);}}
+    if(['lounge','meeting','dining'].includes(r.id))buildVillaLife(town,r,root);
     if(!r.outdoor&&!['corridor','passage','pool','attic'].includes(r.decor)){
      const rand=random([...r.id].reduce((n,c)=>n+c.charCodeAt(0),187));
      for(const side of [-1,1]){const x=r.x+side*(r.w/2-1),z=r.z-r.d/2+1.1;if(state.scene.doors.some(p=>Math.hypot(p.x-x,p.z-z)<2.4))continue;town.roundBox(x,.28,z,.8,.65,.65,'#b4a387',root,.1,'wood');if(rand()>.3){dressing.cylinder(root,x,1,z,.17,.26,'#c3b08e');town.ball(x,1.3,z,.3,'#8c9e7b',root,[1,1.2,1]);}else for(let i=0;i<3;i++)town.box(x,.94+i*.08,z,.45,.06,.3,['#a2ae97','#bca184','#d5c9aa'][i],root,false);}
