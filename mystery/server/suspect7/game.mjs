@@ -43,7 +43,7 @@ export function view(s,ai={}){
  const accounts=statements.filter(q=>q.chapter<=s.chapterId&&q.id!=='jade-confession').map(q=>({id:q.id,actor:q.actor,title:q.title,read:found(s,q.id)}));
  s.positions=positions(s);
  return sharedPresentation({scriptId:'suspect7',routeId:s.routeId,playerId:s.playerId,perspectiveActorId:s.playerId,viewpointMode:s.viewpointMode,chapterId:s.chapterId,chapter,started:s.started,revision:s.revision,room:roomId,
-  self:{...person(s.playerId),...personalNarrative(s),private:s.chapterId<5?biographies[s.routeId].private:null},
+  self:{...person(s.playerId),...personalNarrative(s),private:s.chapterId<5?biographies[s.routeId].private.replaceAll('你','我'):null},
   people:activePeople.map(p=>({...p,location:s.positions[p.id],near:s.positions[p.id]===roomId})),places:all.map(r=>({id:r.id,name:r.name})),
   scene:{...room,...spatial,spots,mapSpots},spatialAdaptation:'房间按单层布局改编，案发时间沿用供述记录。',
   evidence:visibleEvidence(s),accounts,flags:{...s.flags},voteTally:s.voteTally||null,progress:progress(s),records:s.records.map(r=>r.evidence&&byId(r.evidence)?{...r,text:r.evidence==='carpet'&&r.viewpoint==='andy'?byId(r.evidence).perspectiveText:byId(r.evidence).text,source:byId(r.evidence).source}:r.private&&biographies[r.actor]?{...r,text:biographies[r.actor].confession}:r),notes:s.notes,hypotheses:s.hypotheses,chapterHistory:s.chapters,

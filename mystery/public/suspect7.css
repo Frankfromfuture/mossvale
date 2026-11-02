@@ -1,5 +1,4 @@
 /* Case content lives in the shared paper, notebook and dialogue components. */
-.portrait.portrait-image{object-fit:cover;object-position:50% 50%;background-image:none}
 .illustrated-clue{object-fit:contain;mix-blend-mode:multiply}
 .case-content{min-height:0;overflow:auto;overscroll-behavior:contain;line-height:1.85}
 .case-content>button,.case-actions>button{min-height:44px;margin:5px 12px 5px 0;padding:6px 2px;border-bottom:1px solid #9b967e}

@@ -1,11 +1,11 @@
 # 青苔镇 Mossvale 云端发布
 
-当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.10.1`，发布目录 `20261101-mossvale-0.10.1-v15`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
+当前入口为 [青苔镇 Mossvale](https://www.iambrizo.com/mossvale/)，版本为 `0.13.2`，发布目录 `20261102-mossvale-0.13.2-v16`。旧入口 `/mystery/` 自动跳转，并将原浏览器的剧本杀会话接续到新地址。
 
 | 项目 | 位置 |
 | --- | --- |
 | 容器 | `mossvale-mystery`，随服务器启动 |
-| 当前发布目录 | `/srv/mossvale-mystery/releases/20261101-mossvale-0.10.1-v15` |
+| 当前发布目录 | `/srv/mossvale-mystery/releases/20261102-mossvale-0.13.2-v16` |
 | 首发目录 | `/srv/mossvale-mystery/releases/20261029-mystery-v1` |
 | 当前版本 | `/srv/mossvale-mystery/current` |
 | 独立存档 | `/srv/mossvale-mystery/data` |
@@ -16,7 +16,17 @@
 
 域名下的 `/mossvale/` 及语音 WebSocket 代理指向剧本杀服务。旧 `/mystery/` 入口负责跳转，原 API 和资源代理保留，已打开的旧页面可以继续使用。配置检查通过后仅热重载 Nginx，其他服务未重启。静态资源及 API 使用相对路径，同时支持本地根目录与线上子目录。会话使用限定 `/mossvale/` 的 Secure、HttpOnly、SameSite=Strict Cookie。关闭浏览器后再打开可接续进度；更换浏览器或清除 Cookie 会进入另一份存档，目前没有账号同步。
 
-发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v15.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+发布包包含 `dist`、`server`、`shared`、部署脚本，以及锁定版本的纯 JavaScript `ws` 依赖和包清单。本机 `.data`、开发依赖和模型配置均未上传；Three.js 许可随网页保留。当前发布清单为 `deploy/release-manifest-v16.json`；验收记录保存在服务器备份目录及本地 `mystery/qa/`，不随公开仓库上传。
+
+## 2026-11-02 第二部与第一人称连环画前情 · 0.13.2
+
+将0.11.0—0.13.2已完成的《第7号嫌疑人》合并上线：六章调查、六条路线、单层别墅、共用界面与人物互动、手绘素材、章节漫画及六位主角各八页的第一人称前情、十二组人物介绍连环画与统一头像取景。选角只显示初始人物姓名，换角时再介绍调查者的背景和来由。
+
+本次同步站内关于页的上线说明，统一构建一次，不重启本地服务。云端先核对发布文件，并以原存档的只读隔离副本检查旧格式映射到 `scripts-v2` 后的角色槽位、菜单、分数和调查状态；切换前备份数据，只切换剧本杀容器。模型和语音沿用现有配置，不作真实调用验收。
+
+目录 `20261102-mossvale-0.13.2-v16`；备份 `/srv/mossvale-mystery/backups/before-20261102-mossvale-0.13.2-v16.tgz`；上一版容器 `mossvale-mystery-before-v16`。新服务首次写入旧档前，另存 `.before-scripts-v2` 副本。v15不识别多剧本存档：回退脚本发现已经写入的 `scripts-v2` 时会停止，保留全部进度，避免旧程序误读；尚无新格式写入时，可执行 `sudo -n python3 /srv/mossvale-mystery/current/deploy/update.py rollback`。
+
+发布证据在 `mystery/qa/cloud-suspect7-v16/`。
 
 ## 2026-11-01 DeepSeek 记忆引用与合并发布 · 0.10.1
 

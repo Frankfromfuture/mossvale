@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
-import {newArchive,selectRole} from '../server/role-saves.mjs';
+import {newArchive,selectRole,activeGame,activeToken} from '../server/role-saves.mjs';
 import {dialogueContext} from '../server/game.mjs';
 import {recordStatement} from '../server/investigation.mjs';
 import {rememberNpcReply} from '../server/npc-memory.mjs';
@@ -16,7 +16,7 @@ const cases=[
 const report={passed:false,modelCalls:0,cases:[]},files=[];
 try{
  for(const scenario of cases){
-  const id=randomBytes(16).toString('hex'),book=newArchive();selectRole(book,'player');const game=book.slots.player;game.started=true;game.found.push('body');game.investigation.cooldown=10000;
+  const id=randomBytes(16).toString('hex'),book=newArchive();selectRole(book,'player');const game=activeGame(book);game.started=true;game.found.push('body');game.investigation.cooldown=10000;
   const question='昨夜是谁去检查蜡烛？',speech='昨夜我想去检查蜡烛，宫司让我休息，由他去。';
   recordStatement(game,question,['jiang']);game.chats.jiang=[{who:'player',text:question},{who:'jiang',text:speech}];
   rememberNpcReply(game,{key:'deepseek-smoke-memory',actor:'jiang',question,speech,audience:['player','jiang'],factIds:['night']});
@@ -27,7 +27,7 @@ try{
   }
   const file='/app-data/'+id+'.json';await fs.writeFile(file,JSON.stringify(book),{mode:0o600});files.push(file);
   const headers={cookie:'mystery_sid='+id,'content-type':'application/json',accept:'text/event-stream'},start=performance.now();let firstSpeechMs,done;
-  const response=await fetch('http://127.0.0.1:8797/api/chat',{method:'POST',headers,body:JSON.stringify({slotToken:book.tokens.player,actor:scenario.actor,message:scenario.message,requestId:'deepseek-smoke-'+scenario.id})});
+  const response=await fetch('http://127.0.0.1:8797/api/chat',{method:'POST',headers,body:JSON.stringify({slotToken:activeToken(book),actor:scenario.actor,message:scenario.message,requestId:'deepseek-smoke-'+scenario.id})});
   for await(const event of readEvents(response)){const data=JSON.parse(event.data);if(event.event==='error')throw Error(scenario.id+': '+data.error);if(event.event==='speech')firstSpeechMs??=Math.round(performance.now()-start);if(event.event==='done')done=data;}
   assert.ok(done?.speech);assert.equal(done.state.usage.calls,2);report.modelCalls+=2;
   const passed=scenario.check(done.speech);report.cases.push({id:scenario.id,expected:scenario.expected,speech:done.speech,passed,firstSpeechMs,elapsedMs:Math.round(performance.now()-start)});assert.ok(passed,scenario.id);

@@ -6,7 +6,8 @@
 :root .portrait:not(.portrait-unknown) {position:relative;overflow:hidden;aspect-ratio:1;background-color:#ece4cd;background-image:none;border:1.5px solid #726f5e;border-radius:48% 44% 46% 43%;box-shadow:1px 2px 0 #5f655238;}
 .person-tab .portrait {width:68.4px;height:68.4px;transition:box-shadow .18s ease,border-color .18s ease;}
 /* Keep each atlas cell at its original scale; move the bust down inside the frame. */
-:root .portrait:not(.portrait-unknown):before {content:'';position:absolute;inset:6% 0 -6%;background-image:url('art/portraits.png');background-size:300% 200%;background-position:calc(var(--col) * 50%) calc(var(--row) * 100%);background-repeat:no-repeat;pointer-events:none;}
+:root .portrait:not(.portrait-unknown):before {content:'';position:absolute;inset:8% 0 -8%;background-image:url('art/portraits.png');background-size:300% 200%;background-position:calc(var(--col) * 50%) calc(var(--row) * 100%);background-repeat:no-repeat;pointer-events:none;}
+:root .portrait.portrait-image:before {background-image:var(--portrait-image);background-size:100% 100%;background-position:center;}
 .person-tab:focus-visible .portrait {border-color:#d1b777;box-shadow:0 0 0 2px #fff3cbcc,0 0 12px 4px #ffe4a4a6,0 0 24px 7px #f4d68b4d;}
 @media(hover:hover) {
  .person-tab:hover .portrait {border-color:#d1b777;box-shadow:0 0 0 2px #fff3cbcc,0 0 12px 4px #ffe4a4a6,0 0 24px 7px #f4d68b4d;}

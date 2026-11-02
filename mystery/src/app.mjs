@@ -26,7 +26,7 @@ import {createInterludeQueue} from './interludes.mjs';
 import {mapContent,positionMapPins} from './location-map.mjs';
 import {rooms,cast,getRoom} from '../shared/layout.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const portrait=(a,cls='')=>a.portraitUrl?`<img class="portrait portrait-image ${cls}" src="${esc(a.portraitUrl)}" alt="${esc(a.name)}">`:a.portrait==null?`<span class="portrait portrait-unknown ${cls}" role="img" aria-label="${esc(a.name)}的资料">${icon('book')}</span>`:`<span class="portrait ${cls}" style="--col:${a.portrait%3};--row:${Math.floor(a.portrait/3)}" role="img" aria-label="${esc(a.name)}的头像"></span>`;
+const portrait=(a,cls='')=>a.portraitUrl?`<span class="portrait portrait-image ${cls}" style="--portrait-image:url('${esc(a.portraitUrl)}')" role="img" aria-label="${esc(a.name)}的头像"></span>`:a.portrait==null?`<span class="portrait portrait-unknown ${cls}" role="img" aria-label="${esc(a.name)}的资料">${icon('book')}</span>`:`<span class="portrait ${cls}" style="--col:${a.portrait%3};--row:${Math.floor(a.portrait/3)}" role="img" aria-label="${esc(a.name)}的头像"></span>`;
 const menuScenery=bindMenuScenery($('overlay'));
 bindPaperFrame($('overlay'));
 const introReady=($('loading').querySelector('img')?.decode().catch(()=>{})||Promise.resolve()).then(()=>new Promise(resolve=>setTimeout(resolve,900)));
@@ -606,7 +606,7 @@ caseTools=new CaseTools({overlay:$('overlay'),state:()=>state,busy:()=>busy||act
 function bindNarration(page){
  const foot=$('overlay').querySelector('.story-navigation,.interlude-navigation');if(!foot)return;
  foot.insertAdjacentHTML('afterbegin','<button id="read-story" type="button" aria-label="朗读这一页">'+dialogueGlyph('replay')+'<span>朗读</span></button>');
- const read=()=>{speech.stop();narrationActor=isVilla()?'narrator7':'narrator';speech.reply([page.title,...page.paragraphs,page.quote||''].join('。'),narrationActor,{force:true});};
+ const read=()=>{speech.stop();narrationActor=page.narrator||(isVilla()?'narrator7':'narrator');speech.reply([page.title,...page.paragraphs,page.quote||''].join('。'),narrationActor,{force:true});};
  $('read-story').onclick=()=>speech.snapshot().speaking?speech.stop():read();if(voice&&speech.snapshot().outputAvailable)read();
 }
 try{[menuState]=await Promise.all([api('menu'),introReady]);showMainMenu();$('loading').remove();}catch(e){$('loading').textContent='暂时没能翻开手记。刷新页面重试。';console.error(e);}
