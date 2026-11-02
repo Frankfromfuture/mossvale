@@ -9,7 +9,7 @@
 <!-- mossvale:zh -->
 ## 中文
 
-当前版本 **0.13.0** · [完整更新记录](CHANGELOG.md)
+当前版本 **0.13.1** · [完整更新记录](CHANGELOG.md)
 
 青苔镇是一款由 AI 扮演人物的单人剧本杀。你走进一处手绘风格的 3D 场景，成为故事中的一个人：带着自己的经历和秘密，询问其他人、寻找物证、核对口供，再作出推断。
 
@@ -19,7 +19,7 @@
 
 第一部《雾灯未眠》从一场山中怪谈开始。最后一支蜡烛熄灭，六个人各自藏起了一件事；天亮后重新围坐，却谁也不愿先说自己看见了什么。你要弄清昨夜发生的事，也要想好，别人问起你时该怎样回答。
 
-本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮安迪—吴全结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。两部共用菜单、对话特写、纸页和场景操作。第二部加入十一位人物头像、物件插图、可朗读的开场与章节漫画；别墅有庭院、主副屋、河流与路径，未开放屋舍用屋顶遮盖。在线测试站暂仍为0.10.1。
+本地新增第二部《第7号嫌疑人》：六章现代别墅调查，先进入嫌疑人的供述，获救后换成调查者核对证据。首轮结案后开放其余五条路线，支持独立存档、单层连通地图搜证、双证据追问、分级提示与最终对质。房间沿中央餐厅、客厅和两侧长廊重新布置，点击地点后人物实际走到门内；空间证词和运输复原同步改编。两部共用菜单、对话特写、纸页和场景操作。第二部加入十一位人物头像、物件插图、可朗读的开场与章节漫画；每位主角有八页前情，先交代身世、与洪青的关系和赴宴目的，后续章节接着讲述事情的来由。别墅有庭院、主副屋、河流与路径，未开放屋舍用屋顶遮盖。在线测试站暂仍为0.10.1。
 
 ![青苔镇首页](mystery/docs/images/home.png)
 
@@ -109,9 +109,9 @@ npm start
 <!-- mossvale:en -->
 ## English
 
-Current version **0.13.0** · [Full changelog](CHANGELOG.md)
+Current version **0.13.1** · [Full changelog](CHANGELOG.md)
 
-Version 0.13.0 adds a second local story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing Andy → Wu Quan unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Roofs cover rooms that are not yet open. The hosted demo remains on 0.10.1.
+Version 0.13.1 adds a second local story, **The Seventh Suspect**: six chapters in a modern villa, a change from suspect testimony to investigation, separate route saves, a continuous single-level map, evidence comparison, hints, and a final confrontation. Completing the first Andy route unlocks the other five routes regardless of score. Rooms connect around the dining room, lounge and two corridors. Characters walk through doors, and spatial testimony and transport reconstruction follow the revised layout. Both stories now use the same menus, dialogue close-ups, paper pages and scene controls. The second story has eleven illustrated portraits, object drawings, narrated opening and chapter comics, and a villa with courtyards, connected wings, paths and a river. Each initial character has an eight-page prologue covering their background, connection to Hong Qing and reason for attending. Chapter transitions and the investigator handoff continue the narrative; role selection displays only the initial character’s name. Roofs cover rooms that are not yet open. The hosted demo remains on 0.10.1.
 
 Mossvale is a single-player mystery game with AI characters. Enter a hand-drawn 3D setting as one of the people in the story. Bring your own memories and secrets, question the others, collect physical evidence, compare accounts, and reach your own conclusions.
 

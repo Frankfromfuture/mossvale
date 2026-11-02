@@ -68,3 +68,6 @@
 .ending-modal>.ending {min-height:0;overflow:auto;overscroll-behavior:contain;padding-right:5px;}
 .ending-quests,.ending-quests * {font-family:var(--dialogue-font)!important;}
 @media(max-width:600px){.ending-modal {height:calc(var(--app-height) - 24px);}}
+
+.story-character-image {display:block;width:min(100%,300px);max-height:330px;aspect-ratio:1;object-fit:contain;align-self:center;}
+@media(max-width:600px){.story-character-image{width:180px;max-height:180px;}}

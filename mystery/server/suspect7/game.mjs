@@ -1,3 +1,4 @@
+import {personalNarrative} from './narrative.mjs';
 import {sharedPresentation} from './presentation.mjs';
 import {selectRelevant} from '../npc-memory.mjs';
 import {roomDefs,visibleRooms,spatialView,currentRoom,evidenceRoom,propPosition} from './layout.mjs';
@@ -42,7 +43,7 @@ export function view(s,ai={}){
  const accounts=statements.filter(q=>q.chapter<=s.chapterId&&q.id!=='jade-confession').map(q=>({id:q.id,actor:q.actor,title:q.title,read:found(s,q.id)}));
  s.positions=positions(s);
  return sharedPresentation({scriptId:'suspect7',routeId:s.routeId,playerId:s.playerId,perspectiveActorId:s.playerId,viewpointMode:s.viewpointMode,chapterId:s.chapterId,chapter,started:s.started,revision:s.revision,room:roomId,
-  self:{...person(s.playerId),hook:s.chapterId<5?biographies[s.routeId].hook:'把眼前的供述与可引用的证据分别保存。',history:s.chapterId<5?biographies[s.routeId].past:[statements.find(q=>q.actor===s.playerId)?.text||'你仍以李察的身份参与调查，自己留下的报告也将接受核对。'],private:s.chapterId<5?biographies[s.routeId].private:null},
+  self:{...person(s.playerId),...personalNarrative(s),private:s.chapterId<5?biographies[s.routeId].private:null},
   people:activePeople.map(p=>({...p,location:s.positions[p.id],near:s.positions[p.id]===roomId})),places:all.map(r=>({id:r.id,name:r.name})),
   scene:{...room,...spatial,spots,mapSpots},spatialAdaptation:'房间按单层布局改编，案发时间沿用供述记录。',
   evidence:visibleEvidence(s),accounts,flags:{...s.flags},voteTally:s.voteTally||null,progress:progress(s),records:s.records.map(r=>r.evidence&&byId(r.evidence)?{...r,text:r.evidence==='carpet'&&r.viewpoint==='andy'?byId(r.evidence).perspectiveText:byId(r.evidence).text,source:byId(r.evidence).source}:r.private&&biographies[r.actor]?{...r,text:biographies[r.actor].confession}:r),notes:s.notes,hypotheses:s.hypotheses,chapterHistory:s.chapters,
